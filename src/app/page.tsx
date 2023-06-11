@@ -1,19 +1,14 @@
-import Image from "next/image";
-import { spartan } from "./layout";
+import { createPhoto } from "@/utils/helpers";
+import { HeroHome, GridTwo } from "@/components/home";
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative">
-      <div className="h-screen relative">
-        {/* <Image
-          alt="house in a green field"
-          src="/assets/photos/house_home.webp"
-          fill
-          objectFit="cover"
-        /> */}
-      </div>
-      <h1 className={spartan.className}>Simon Eychenne</h1>
-      <h2> A cool lad</h2>
+    <main className="relative flex flex-col gap-10">
+      <HeroHome />
+      <GridTwo
+        firstPhoto={createPhoto("/assets/photos/house_home.webp")}
+        secondPhoto={createPhoto("/assets/photos/house_home.webp")}
+      />
     </main>
   );
 }

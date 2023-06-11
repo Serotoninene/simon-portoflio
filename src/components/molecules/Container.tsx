@@ -6,5 +6,5 @@ type Props = {
 };
 
 export const Container = ({ children, className }: Props) => {
-  return <div className={`px-10 py-6 ${className}`}>{children}</div>;
+  return <main className={`px-5 py-4 ${className}`}>{children}</main>;
 };

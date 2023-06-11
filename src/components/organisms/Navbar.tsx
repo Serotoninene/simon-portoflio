@@ -1,5 +1,6 @@
 import React from "react";
 import { spartan } from "@/app/layout";
+
 import { Container } from "../molecules/Container";
 import { AnimLink } from "../atoms";
 
@@ -7,9 +8,8 @@ type Props = {};
 
 export const Navbar = (props: Props) => {
   return (
-    <Container className="fixed left-0 right-0 flex justify-between">
-      <h3 className={`${spartan.className} opacity-0`}>Simon Eychennes</h3>
-      <ul className="flex gap-14 font-bold">
+    <Container className="fixed left-0 right-0">
+      <ul className="flex justify-end gap-14 font-semi-bold">
         <li>
           <AnimLink>work</AnimLink>
         </li>
