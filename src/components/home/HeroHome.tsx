@@ -6,7 +6,7 @@ type Props = {};
 
 export const HeroHome = (props: Props) => {
   return (
-    <div className="h-[calc(100dvh-32px)] flex flex-col justify-between gap-6 pt-6 pb-2">
+    <div className="h-[calc(100dvh-32px)] flex flex-col justify-between gap-6 pt-6 pb-6">
       <div className="h-full relative">
         <Image
           alt="house in a green field"
