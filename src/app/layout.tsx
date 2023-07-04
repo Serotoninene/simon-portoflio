@@ -31,7 +31,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={`${inter.className} bg-light`}>
         <Navbar />
-        <Container className="pt-6">{children}</Container>
+        <Container className="pt-8">{children}</Container>
       </body>
     </html>
   );

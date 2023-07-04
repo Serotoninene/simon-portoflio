@@ -1,7 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import { Photo } from "@/types";
-import { AnimPhoto } from "../atoms";
+
 import { PhotoLayout } from "../molecules/PhotoLayout";
 
 type Props = {
@@ -11,8 +10,8 @@ type Props = {
 
 export const GridTwo = ({ firstPhoto, secondPhoto }: Props) => {
   return (
-    <div className="grid sm:grid-cols-3 gap-4 h-[100dvh] py-4">
-      <div className="col-span-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 sm:gap-4 h-[100dvh] py-4">
+      <div className="md:col-span-2">
         <PhotoLayout />
       </div>
       <div>
