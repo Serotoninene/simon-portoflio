@@ -1,5 +1,5 @@
 import { createPhoto } from "@/utils/helpers";
-import { HeroHome, GridTwo, OneWCaption } from "@/components/home";
+import { HeroHome, GridTwo, OneWCaption, GridThree } from "@/components/home";
 
 export default function Home() {
   return (
@@ -16,6 +16,11 @@ export default function Home() {
           <span className="font-bold">pink building</span>.
         </>
       </OneWCaption>
+      <GridThree
+        firstPhoto={createPhoto("/assets/photos/house_home.webp")}
+        secondPhoto={createPhoto("/assets/photos/house_home.webp")}
+        thirdPhoto={createPhoto("/assets/photos/house_home.webp")}
+      />
     </main>
   );
 }

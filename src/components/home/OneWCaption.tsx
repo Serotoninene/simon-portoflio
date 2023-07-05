@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { AnimPhoto, PhotoCaption } from "../atoms";
 import { Photo } from "@/types";
 import { HomeContainer } from "../molecules";

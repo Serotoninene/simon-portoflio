@@ -4,14 +4,13 @@ import { Caption, Photo } from "@/types";
 
 type Props = {
   photo: Photo;
-  caption?: Caption;
 };
 
-export const PhotoLayout = ({ photo, caption }: Props) => {
+export const PhotoLayout = ({ photo }: Props) => {
   return (
     <div className="flex flex-col h-full gap-4">
       <AnimPhoto src={photo.src} alt={photo.alt} />
-      <PhotoCaption {...caption} />
+      <PhotoCaption {...photo.caption} />
     </div>
   );
 };
