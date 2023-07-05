@@ -34,6 +34,11 @@ export default function Home() {
         firstPhoto={createPhoto("/assets/photos/house_home.webp")}
         secondPhoto={createPhoto("/assets/photos/house_home.webp")}
       />
+      <TwoShifted
+        firstPhoto={createPhoto("/assets/photos/house_home.webp")}
+        secondPhoto={createPhoto("/assets/photos/house_home.webp")}
+        inverted
+      />
     </main>
   );
 }

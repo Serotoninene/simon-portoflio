@@ -1,5 +1,6 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import { createAlt } from "@/utils/helpers";
 
 type Props = {
   alt?: string;
@@ -11,7 +12,7 @@ type Props = {
 };
 
 export const AnimPhoto = ({
-  alt = "Phtoo",
+  alt,
   src,
   fit = "cover",
   placeholder = "empty",
@@ -19,7 +20,7 @@ export const AnimPhoto = ({
   sizes,
 }: Props) => {
   const imageProps = {
-    alt: alt,
+    alt: alt ?? createAlt(src),
     src: src,
     sizes: sizes,
     className: `object-${fit || "cover"}`,
