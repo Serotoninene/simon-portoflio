@@ -29,6 +29,7 @@ export default function Home() {
         secondPhoto={createPhoto("/assets/photos/house_home.webp")}
         thirdPhoto={createPhoto("/assets/photos/house_home.webp")}
       />
+
       <OneCentered photo={createPhoto("/assets/photos/house_home.webp")} />
       <OneCentered photo={createPhoto("/assets/photos/house_home.webp")} />
       <TwoShifted
@@ -41,6 +42,12 @@ export default function Home() {
         inverted
       />
       <OneWoCaption photo={createPhoto("/assets/photos/house_home.webp")} />
+      <GridThree
+        firstPhoto={createPhoto("/assets/photos/house_home.webp")}
+        secondPhoto={createPhoto("/assets/photos/house_home.webp")}
+        thirdPhoto={createPhoto("/assets/photos/house_home.webp")}
+        inverted
+      />
     </main>
   );
 }
