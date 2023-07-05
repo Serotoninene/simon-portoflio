@@ -7,6 +7,7 @@ import {
   OneCentered,
   TwoShifted,
 } from "@/components/home";
+import { OneWoCaption } from "@/components/home/OneWoCaption";
 
 export default function Home() {
   return (
@@ -39,6 +40,7 @@ export default function Home() {
         secondPhoto={createPhoto("/assets/photos/house_home.webp")}
         inverted
       />
+      <OneWoCaption photo={createPhoto("/assets/photos/house_home.webp")} />
     </main>
   );
 }
