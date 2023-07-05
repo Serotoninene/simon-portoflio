@@ -1,23 +1,30 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef } from "react";
 import { AnimPhoto, PhotoCaption } from "../atoms";
 import { Photo } from "@/types";
+import { HomeContainer } from "../molecules";
 
 type Props = {
   photo: Photo;
-  text: string;
+  children: JSX.Element;
 };
 
-export const OneWCaption = ({ photo, text }: Props) => {
+export const OneWCaption = ({ photo, children }: Props) => {
   return (
-    <div className="grid grid-cols-3 h-[100dvh] gap-4 py-4">
-      <div className="flex flex-col justify-between">
-        <div className="text-end">Text</div>
-        <PhotoCaption />
-      </div>
+    <HomeContainer>
+      <div className="grid grid-cols-3 h-full gap-6">
+        <div className="flex flex-col justify-between">
+          <div className="flex justify-end pt-10">
+            <div className="text-[40px] text-right w-2/4">{children}</div>
+          </div>
+          <PhotoCaption idx="3" title="GOOGLE MAPS-ING" />
+        </div>
 
-      <div className="col-span-2">
-        <AnimPhoto src="/assets/photos/house_home.webp" alt="house_home" />
+        <div className="col-span-2">
+          <AnimPhoto {...photo} />
+        </div>
       </div>
-    </div>
+    </HomeContainer>
   );
 };

@@ -2,7 +2,6 @@ import { createPhoto } from "@/utils/helpers";
 import { HeroHome, GridTwo, OneWCaption } from "@/components/home";
 
 export default function Home() {
-  console.log("heho");
   return (
     <main className="relative flex flex-col gap-56">
       <HeroHome />
@@ -10,10 +9,13 @@ export default function Home() {
         firstPhoto={createPhoto("/assets/photos/house_home.webp")}
         secondPhoto={createPhoto("/assets/photos/house_home.webp")}
       />
-      <OneWCaption
-        photo={createPhoto("/assets/photos/house_home.webp")}
-        text="test"
-      />
+      <OneWCaption photo={createPhoto("/assets/photos/house_home.webp")}>
+        <>
+          <span className="font-bold">Tourists taking a break from</span> the
+          rain close by the genuine{" "}
+          <span className="font-bold">pink building</span>.
+        </>
+      </OneWCaption>
     </main>
   );
 }
