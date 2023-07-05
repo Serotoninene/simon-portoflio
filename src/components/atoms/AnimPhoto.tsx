@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 type Props = {
-  alt: string;
+  alt?: string;
   src: string;
   fit?: "cover" | "contain";
   placeholder?: "blur" | "empty";
@@ -10,14 +10,21 @@ type Props = {
   sizes?: string;
 };
 
-export const AnimPhoto = (props: Props) => {
+export const AnimPhoto = ({
+  alt = "Phtoo",
+  src,
+  fit = "cover",
+  placeholder = "empty",
+  blurDataURL,
+  sizes,
+}: Props) => {
   const imageProps = {
-    alt: props.alt,
-    src: props.src,
-    sizes: props.sizes,
-    className: `object-${props.fit || "cover"}`,
-    placeholder: props.placeholder,
-    blurDataURL: props.blurDataURL,
+    alt: alt,
+    src: src,
+    sizes: sizes,
+    className: `object-${fit || "cover"}`,
+    placeholder: placeholder,
+    blurDataURL: blurDataURL,
   };
 
   return (

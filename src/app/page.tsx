@@ -5,6 +5,7 @@ import {
   OneWCaption,
   GridThree,
   OneCentered,
+  TwoShifted,
 } from "@/components/home";
 
 export default function Home() {
@@ -28,6 +29,11 @@ export default function Home() {
         thirdPhoto={createPhoto("/assets/photos/house_home.webp")}
       />
       <OneCentered photo={createPhoto("/assets/photos/house_home.webp")} />
+      <OneCentered photo={createPhoto("/assets/photos/house_home.webp")} />
+      <TwoShifted
+        firstPhoto={createPhoto("/assets/photos/house_home.webp")}
+        secondPhoto={createPhoto("/assets/photos/house_home.webp")}
+      />
     </main>
   );
 }

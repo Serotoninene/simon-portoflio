@@ -1,6 +1,6 @@
 export type Photo = {
   src: string;
-  alt: string;
+  alt?: string;
   caption?: Caption;
 };
 
