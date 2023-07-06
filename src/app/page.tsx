@@ -11,7 +11,7 @@ import { OneWoCaption } from "@/components/home/OneWoCaption";
 
 export default function Home() {
   return (
-    <main className="relative flex flex-col gap-56">
+    <main data-scroll-sections className="relative flex flex-col gap-56">
       <HeroHome />
       <GridTwo
         firstPhoto={createPhoto("/assets/photos/house_home.webp")}

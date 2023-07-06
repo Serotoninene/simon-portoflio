@@ -2,7 +2,7 @@ import "./globals.css";
 import { Public_Sans } from "next/font/google";
 import localFont from "next/font/local";
 
-import { Container } from "@/components/molecules";
+import { Container, SmoothScrollContainer } from "@/components/molecules";
 import { Navbar } from "@/components/organisms";
 
 const inter = Public_Sans({ subsets: ["latin"] });
@@ -31,7 +31,9 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={`${inter.className} bg-light`}>
         <Navbar />
-        <Container className="pt-8">{children}</Container>
+        <SmoothScrollContainer>
+          <Container className="pt-8">{children}</Container>
+        </SmoothScrollContainer>
       </body>
     </html>
   );
