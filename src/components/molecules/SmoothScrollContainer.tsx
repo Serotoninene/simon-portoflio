@@ -22,7 +22,7 @@ export const SmoothScrollContainer = ({ children }: Props) => {
       }}
       watch={[path]}
     >
-      <div data-scroll-container ref={containerRef}>
+      <div data-scroll-container ref={containerRef} className="fixed">
         {children}
       </div>
     </LocomotiveScrollProvider>
