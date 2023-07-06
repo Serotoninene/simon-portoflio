@@ -1,11 +1,16 @@
 import "./globals.css";
-import { Poppins } from "next/font/google";
+import { Poppins, Public_Sans } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Container, SmoothScrollContainer } from "@/components/molecules";
 import { Navbar } from "@/components/organisms";
 
 const poppins = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+});
+
+const public_sans = Public_Sans({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
