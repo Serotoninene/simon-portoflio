@@ -18,5 +18,7 @@ export const Container = ({ children, className }: Props) => {
 };
 
 export const HomeContainer = ({ children }: HomeContainerProps) => (
-  <div className="py-6 h-[100dvh]">{children}</div>
+  <div data-scroll data-scroll-speed="6" className="py-6 h-[100dvh]">
+    {children}
+  </div>
 );

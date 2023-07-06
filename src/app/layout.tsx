@@ -1,11 +1,14 @@
 import "./globals.css";
-import { Public_Sans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Container, SmoothScrollContainer } from "@/components/molecules";
 import { Navbar } from "@/components/organisms";
 
-const inter = Public_Sans({ subsets: ["latin"] });
+const poppins = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+});
 
 export const spartan = localFont({
   src: [
@@ -29,7 +32,7 @@ export const metadata = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-light`}>
+      <body className={`${poppins.className} bg-light`}>
         <Navbar />
         <SmoothScrollContainer>
           <Container className="pt-8">{children}</Container>
