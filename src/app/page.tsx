@@ -11,6 +11,7 @@ import { OneWoCaption } from "@/components/home/OneWoCaption";
 
 // TO DO
 // [] Make animations for the vignettes
+// [] Insert Simon's logo as a favicon
 // [] Finish to integrate the maquette
 // [] Make it all responsive
 // [] start working on the layout of the work
