@@ -9,6 +9,12 @@ import {
 } from "@/components/home";
 import { OneWoCaption } from "@/components/home/OneWoCaption";
 
+// TO DO
+// [] Make animations for the vignettes
+// [] Finish to integrate the maquette
+// [] Make it all responsive
+// [] start working on the layout of the work
+
 export default function Home() {
   return (
     <main data-scroll-sections className="relative flex flex-col gap-56">
