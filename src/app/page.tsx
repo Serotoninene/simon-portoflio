@@ -17,42 +17,38 @@ import { OneWoCaption } from "@/components/home/OneWoCaption";
 // [] start working on the layout of the work
 
 export default function Home() {
+  const photo = {
+    ...createPhoto("/assets/photos/house_home.webp"),
+    caption: {
+      idx: "1",
+      title: "MY GARDEN IS COOL",
+      place: "Canary Islands (ES)",
+      date: "2021",
+    },
+  };
+
   return (
     <main data-scroll-sections className="relative flex flex-col gap-56">
       <HeroHome />
-      <GridTwo
-        firstPhoto={createPhoto("/assets/photos/house_home.webp")}
-        secondPhoto={createPhoto("/assets/photos/house_home.webp")}
-      />
-      <OneWCaption photo={createPhoto("/assets/photos/house_home.webp")}>
+      <GridTwo firstPhoto={photo} secondPhoto={photo} />
+      <OneWCaption photo={photo}>
         <>
           <span className="font-bold">Tourists taking a break from</span> the
           rain close by the genuine{" "}
           <span className="font-bold">pink building</span>.
         </>
       </OneWCaption>
-      <GridThree
-        firstPhoto={createPhoto("/assets/photos/house_home.webp")}
-        secondPhoto={createPhoto("/assets/photos/house_home.webp")}
-        thirdPhoto={createPhoto("/assets/photos/house_home.webp")}
-      />
+      <GridThree firstPhoto={photo} secondPhoto={photo} thirdPhoto={photo} />
 
-      <OneCentered photo={createPhoto("/assets/photos/house_home.webp")} />
-      <OneCentered photo={createPhoto("/assets/photos/house_home.webp")} />
-      <TwoShifted
-        firstPhoto={createPhoto("/assets/photos/house_home.webp")}
-        secondPhoto={createPhoto("/assets/photos/house_home.webp")}
-      />
-      <TwoShifted
-        firstPhoto={createPhoto("/assets/photos/house_home.webp")}
-        secondPhoto={createPhoto("/assets/photos/house_home.webp")}
-        inverted
-      />
-      <OneWoCaption photo={createPhoto("/assets/photos/house_home.webp")} />
+      <OneCentered photo={photo} />
+      <OneCentered photo={photo} />
+      <TwoShifted firstPhoto={photo} secondPhoto={photo} />
+      <TwoShifted firstPhoto={photo} secondPhoto={photo} inverted />
+      <OneWoCaption photo={photo} />
       <GridThree
-        firstPhoto={createPhoto("/assets/photos/house_home.webp")}
-        secondPhoto={createPhoto("/assets/photos/house_home.webp")}
-        thirdPhoto={createPhoto("/assets/photos/house_home.webp")}
+        firstPhoto={photo}
+        secondPhoto={photo}
+        thirdPhoto={photo}
         inverted
       />
     </main>

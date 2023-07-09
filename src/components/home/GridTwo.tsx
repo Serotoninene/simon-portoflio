@@ -9,6 +9,8 @@ type Props = {
 };
 
 export const GridTwo = ({ firstPhoto, secondPhoto }: Props) => {
+  console.log(firstPhoto);
+
   return (
     <HomeContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 sm:gap-6 h-full">
