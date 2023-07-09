@@ -16,13 +16,13 @@ type Props = {
 };
 
 const variants = {
-  hidden: { scale: 1.5, y: "200%" },
+  hidden: { scale: 1 },
   visible: {
     scale: 1,
     y: 0,
     transition: {
       ease: ease,
-      duration: 1,
+      duration: 1.5,
     },
   },
 };

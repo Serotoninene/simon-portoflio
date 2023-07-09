@@ -39,7 +39,6 @@ export default function Home() {
         </>
       </OneWCaption>
       <GridThree firstPhoto={photo} secondPhoto={photo} thirdPhoto={photo} />
-
       <OneCentered photo={photo} />
       <OneCentered photo={photo} />
       <TwoShifted firstPhoto={photo} secondPhoto={photo} />
@@ -51,6 +50,18 @@ export default function Home() {
         thirdPhoto={photo}
         inverted
       />
+      <GridThree firstPhoto={photo} secondPhoto={photo} thirdPhoto={photo} />
+      <GridTwo firstPhoto={photo} secondPhoto={photo} />
+      <OneWCaption photo={photo}>
+        <>
+          <span className="font-bold">The couch</span> waits all day for you
+          <span className="font-bold">to come home</span>.
+        </>
+      </OneWCaption>
+      <TwoShifted firstPhoto={photo} secondPhoto={photo} inverted />
+      <TwoShifted firstPhoto={photo} secondPhoto={photo} />
+      <TwoShifted firstPhoto={photo} secondPhoto={photo} inverted />
+      <GridTwo firstPhoto={photo} secondPhoto={photo} />
     </main>
   );
 }
