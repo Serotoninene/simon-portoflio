@@ -4,3 +4,4 @@ export * from "./GridThree";
 export * from "./OneWCaption";
 export * from "./OneCentered";
 export * from "./TwoShifted";
+export * from "./ThreeAlined";

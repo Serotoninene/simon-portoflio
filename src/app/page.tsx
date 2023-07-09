@@ -6,6 +6,7 @@ import {
   GridThree,
   OneCentered,
   TwoShifted,
+  ThreeAlined,
 } from "@/components/home";
 import { OneWoCaption } from "@/components/home/OneWoCaption";
 
@@ -54,7 +55,7 @@ export default function Home() {
       <GridTwo firstPhoto={photo} secondPhoto={photo} />
       <OneWCaption photo={photo}>
         <>
-          <span className="font-bold">The couch</span> waits all day for you
+          <span className="font-bold">The couch</span> waits all day for you{" "}
           <span className="font-bold">to come home</span>.
         </>
       </OneWCaption>
@@ -62,6 +63,7 @@ export default function Home() {
       <TwoShifted firstPhoto={photo} secondPhoto={photo} />
       <TwoShifted firstPhoto={photo} secondPhoto={photo} inverted />
       <GridTwo firstPhoto={photo} secondPhoto={photo} />
+      <ThreeAlined firstPhoto={photo} secondPhoto={photo} thirdPhoto={photo} />
     </main>
   );
 }
