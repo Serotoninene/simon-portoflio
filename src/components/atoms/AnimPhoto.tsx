@@ -48,8 +48,8 @@ export const AnimPhoto = ({
   return (
     <div ref={ref} className="h-full relative overflow-hidden">
       <div
-        // data-scroll
-        // data-scroll-speed="-1.5"
+        data-scroll
+        data-scroll-speed="-1.5"
         className="relative h-full translate-y-10"
       >
         {/* eslint-disable-next-line */}

@@ -15,7 +15,7 @@ interface Props {
   absolute?: boolean;
 }
 
-export const AnimatedLetters = ({
+const AnimatedLetters = ({
   string,
   delay = 0.4,
   ease = [0.6, 0.01, -0.05, 0.95],
@@ -93,3 +93,5 @@ export const AnimatedLetters = ({
     </motion.span>
   );
 };
+
+export default AnimatedLetters;
