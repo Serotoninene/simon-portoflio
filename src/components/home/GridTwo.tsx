@@ -2,6 +2,7 @@ import React from "react";
 import { PhotoLayout } from "../molecules/PhotoLayout";
 import { Photo } from "@/types";
 import { HomeContainer } from "../molecules";
+import { LocomotiveScrollOptions } from "react-locomotive-scroll";
 
 type Props = {
   firstPhoto: Photo;
@@ -9,8 +10,6 @@ type Props = {
 };
 
 export const GridTwo = ({ firstPhoto, secondPhoto }: Props) => {
-  console.log(firstPhoto);
-
   return (
     <HomeContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 sm:gap-6 h-full">

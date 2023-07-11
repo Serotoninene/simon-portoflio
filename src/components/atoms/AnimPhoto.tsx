@@ -2,7 +2,6 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
 import { createAlt } from "@/utils/helpers";
 import { ease } from "@/utils/store";
 
@@ -36,7 +35,6 @@ export const AnimPhoto = ({
   sizes,
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
 
   const imageProps = {
     alt: alt ?? createAlt(src),
@@ -49,16 +47,14 @@ export const AnimPhoto = ({
 
   return (
     <div ref={ref} className="h-full relative overflow-hidden">
-      <motion.div
-        variants={variants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        transition={{ delay: 1, ease: "easeOut", duration: 0.6 }}
+      <div
+        // data-scroll
+        // data-scroll-speed="-1.5"
         className="relative h-full translate-y-10"
       >
         {/* eslint-disable-next-line */}
         <Image fill {...imageProps} />
-      </motion.div>
+      </div>
     </div>
   );
 };

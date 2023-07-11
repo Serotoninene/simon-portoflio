@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 
 import React from "react";
+import { useScroll } from "framer-motion";
 
 type Props = {
   children: React.ReactNode;

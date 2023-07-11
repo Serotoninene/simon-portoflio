@@ -1,6 +1,6 @@
 import React from "react";
 import { AnimPhoto, PhotoCaption } from "../atoms";
-import { Caption, Photo } from "@/types";
+import { Photo } from "@/types";
 
 type Props = {
   photo: Photo;

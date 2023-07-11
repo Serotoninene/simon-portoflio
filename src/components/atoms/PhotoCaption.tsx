@@ -2,8 +2,9 @@
 
 import React, { useRef } from "react";
 import { Caption } from "@/types";
-import AnimatedLetters from "./AnimLetters";
+
 import { useInView } from "framer-motion";
+import { AnimatedWords } from "../atoms";
 
 export const PhotoCaption = ({
   idx = "01",
@@ -19,7 +20,7 @@ export const PhotoCaption = ({
       <h3 className="font-bold text-5xl sm:text-6xl">{idx.padStart(2, "0")}</h3>
       <div className="flex flex-col justify-between pt-0.5 whitespace-nowrap overflow-hidden">
         <h4 className="text-lg text-end sm:text-start sm:text-xl text-ellipsis overflow-hidden">
-          <AnimatedLetters string={title} start={isInView} />.
+          {title ? <AnimatedWords string={title} start={isInView} /> : <></>}
         </h4>
         <p className="pb-0.5 text-end sm:text-start text-ellipsis overflow-hidden">
           {date}, {place}.

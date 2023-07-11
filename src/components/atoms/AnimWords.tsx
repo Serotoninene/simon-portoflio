@@ -15,7 +15,7 @@ interface Props {
   absolute?: boolean;
 }
 
-export const AnimatedLetters = ({
+export const AnimatedWords = ({
   string,
   delay = 0.4,
   ease = [0.6, 0.01, -0.05, 0.95],
@@ -77,18 +77,16 @@ export const AnimatedLetters = ({
       className={`${absolute ? "absolute w-[100px]" : ""}
        overflow-hidden inline-block align-bottom leading-[110%]`}
     >
-      {words?.map((word) => (
-        <span key={word}>
-          {[...word].map((letter, idx) => (
-            <motion.span
-              key={`letter${idx}`}
-              className={`${fontWeight} inline-block`}
-              variants={letterAnim}
-            >
-              {letter}
-            </motion.span>
-          ))}{" "}
-        </span>
+      {words?.map((word, idx) => (
+        <>
+          <motion.span
+            key={`${word}-${idx}`}
+            className={`${fontWeight} inline-block`}
+            variants={letterAnim}
+          >
+            {word}
+          </motion.span>{" "}
+        </>
       ))}
     </motion.span>
   );
