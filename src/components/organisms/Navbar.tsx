@@ -9,7 +9,7 @@ type Props = {};
 export const Navbar = (props: Props) => {
   return (
     <Container className="fixed left-0 right-0">
-      <ul className="flex justify-end gap-14 font-semi-bold">
+      <ul className="hidden sm:flex justify-end gap-14 font-semi-bold">
         <li>
           <AnimLink>work</AnimLink>
         </li>
@@ -19,6 +19,10 @@ export const Navbar = (props: Props) => {
         <li>
           <AnimLink>instagram</AnimLink>
         </li>
+      </ul>
+      <ul className="flex sm:hidden flex-col justify-center items-end h-6 gap-1">
+        <li className="w-5 h-[1px] bg-black rounded"></li>
+        <li className="w-5 h-[1px] bg-black rounded"></li>
       </ul>
     </Container>
   );

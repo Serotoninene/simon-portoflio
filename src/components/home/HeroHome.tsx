@@ -16,7 +16,7 @@ export const HeroHome = (props: Props) => {
           className="object-cover"
         />
       </div>
-      <div className="flex justify-between items-end">
+      <div className="sm:flex justify-between items-end">
         <h2 className="hidden md:block pb-1">
           Hi, here is an overview of <br />
           my personal artistic work.
