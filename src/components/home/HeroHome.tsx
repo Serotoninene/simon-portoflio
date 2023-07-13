@@ -17,12 +17,12 @@ export const HeroHome = (props: Props) => {
         />
       </div>
       <div className="flex justify-between items-end">
-        <h2 className="pb-1">
+        <h2 className="hidden md:block pb-1">
           Hi, here is an overview of <br />
           my personal artistic work.
         </h2>
         <h1
-          className={`${spartan.className} text-[64px] align-bottom leading-none`}
+          className={`${spartan.className} text-end flex-none text-2xl align-bottom leading-none sm:flex-1 sm:text-[64px]`}
         >
           SIMON EYCHENNE
         </h1>
