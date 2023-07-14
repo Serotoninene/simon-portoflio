@@ -2,7 +2,6 @@ import React from "react";
 import { PhotoLayout } from "../molecules/PhotoLayout";
 import { Photo } from "@/types";
 import { HomeContainer } from "../molecules";
-import { LocomotiveScrollOptions } from "react-locomotive-scroll";
 
 type Props = {
   firstPhoto: Photo;

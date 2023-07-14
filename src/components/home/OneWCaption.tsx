@@ -17,18 +17,26 @@ export const OneWCaption = ({ photo, children }: Props) => {
 
   return (
     <HomeContainer>
-      <div className="grid grid-cols-3 h-full gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 h-full gap-6">
         <div className="flex flex-col justify-between">
-          <div className="flex justify-end pt-10">
-            <div ref={ref} className="text-[40px] text-right w-2/4">
+          <div className="flex sm:justify-end sm:pt-10">
+            <div
+              ref={ref}
+              className="text-right text-2xl sm:w-3/4 md:2/4 sm:text-3xl md:text-[40px] md:leading-relaxed"
+            >
               {children}
             </div>
           </div>
-          <PhotoCaption idx="3" title="GOOGLE MAPS-ING" />
+          <div className="hidden sm:block">
+            <PhotoCaption idx="3" title="GOOGLE MAPS-ING" />
+          </div>
         </div>
 
-        <div className="col-span-2">
+        <div className="sm:col-span-2">
           <AnimPhoto {...photo} />
+          <div className="block sm:hidden">
+            <PhotoCaption idx="3" title="GOOGLE MAPS-ING" />
+          </div>
         </div>
       </div>
     </HomeContainer>

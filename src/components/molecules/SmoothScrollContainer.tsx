@@ -1,11 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { usePathname } from "next/navigation";
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
-
-import React from "react";
-import { useScroll } from "framer-motion";
 
 type Props = {
   children: React.ReactNode;
