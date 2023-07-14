@@ -7,6 +7,7 @@ type Props = {
 
 type HomeContainerProps = {
   children: React.ReactNode;
+  fit: boolean;
 };
 
 export const Container = ({ children, className }: Props) => {
@@ -20,8 +21,12 @@ export const Container = ({ children, className }: Props) => {
   );
 };
 
-export const HomeContainer = ({ children }: HomeContainerProps) => (
-  <div data-scroll data-scroll-speed="1" className="py-6 h-[100dvh]">
+export const HomeContainer = ({ children, fit }: HomeContainerProps) => (
+  <div
+    data-scroll
+    data-scroll-speed="1"
+    className={`py-6 ${fit ? "h-auto" : "h-[100dvh]"}`}
+  >
     {children}
   </div>
 );

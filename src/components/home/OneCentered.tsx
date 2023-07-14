@@ -9,7 +9,7 @@ type Props = {
 export const OneCentered = ({ photo }: Props) => {
   return (
     <HomeContainer>
-      <div className="px-9 h-full">
+      <div data-scroll data-scroll-speed="1.2" className="px-9 h-full">
         <PhotoLayout photo={photo} />
       </div>
     </HomeContainer>

@@ -18,28 +18,41 @@ export const GridThree = ({
   inverted,
 }: Props) => {
   return (
-    <HomeContainer>
-      <div className="h-full pt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-11 sm:gap-6">
+    <HomeContainer fit>
+      <div className="pt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 h-full md:grid-cols-11">
         <div
-          className={`col-span-5 flex flex-col gap-6 ${inverted && "order-1"}`}
+          className={`flex flex-col gap-6 md:col-span-5 ${
+            inverted && "order-1"
+          }`}
         >
-          <div data-scroll data-scroll-speed="3" className="h-full ">
+          <div
+            data-scroll
+            data-scroll-speed="3"
+            className="h-[50dvh] sm:h-full"
+          >
             <AnimPhoto src={firstPhoto.src} alt={firstPhoto.alt} />
+            <div className="block sm:hidden mt-4">
+              <PhotoCaption {...firstPhoto?.caption} />
+            </div>
           </div>
 
-          <div data-scroll data-scroll-speed="2" className="h-[125%]">
+          <div
+            data-scroll
+            data-scroll-speed="2"
+            className="h-[100dvh] sm:h-[125%]"
+          >
             <PhotoLayout photo={secondPhoto} />
           </div>
         </div>
-        <div className="col-span-6 flex flex-col gap-12">
+        <div className=" md:col-span-6 flex flex-col gap-12">
           <div
             data-scroll
             data-scroll-speed="1.5"
-            className={inverted ? "flex justify-end " : ""}
+            className={`hidden sm:flex ${inverted ? "justify-end" : ""}`}
           >
             <PhotoCaption {...firstPhoto?.caption} />
           </div>
-          <div data-scroll data-scroll-speed="0.5" className="h-full ">
+          <div data-scroll data-scroll-speed="0.5" className="h-[60dvh]">
             <PhotoLayout photo={thirdPhoto} />
           </div>
         </div>
