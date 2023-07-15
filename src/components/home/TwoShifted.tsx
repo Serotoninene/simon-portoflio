@@ -15,17 +15,19 @@ export const TwoShifted = ({ firstPhoto, secondPhoto, inverted }: Props) => {
         <div
           data-scroll
           data-scroll-speed="3"
-          className={`col-span-5 sm:h-[60%] ${inverted && "order-2"}`}
+          className={`sm:col-span-5 h-[60dvh] sm:h-[60%] ${
+            inverted && "order-2"
+          }`}
         >
           <PhotoLayout photo={firstPhoto} />
         </div>
         <div className={inverted ? "order-1" : ""}></div>
         <div
-          className="col-span-6 flex items-end"
+          className="sm:col-span-6 flex items-end"
           data-scroll
           data-scroll-speed="7"
         >
-          <div className="flex-auto sm:h-4/6">
+          <div className="flex-auto h-[60dvh] sm:h-4/6">
             <PhotoLayout photo={secondPhoto} />
           </div>
         </div>
