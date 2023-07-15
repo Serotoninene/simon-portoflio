@@ -8,10 +8,10 @@ type Props = {};
 
 export const Navbar = (props: Props) => {
   return (
-    <Container className="fixed left-0 right-0">
+    <Container className="fixed left-0 right-0 z-10">
       <ul className="hidden sm:flex justify-end gap-14 font-semi-bold">
         <li>
-          <AnimLink>work</AnimLink>
+          <AnimLink href="/work">work</AnimLink>
         </li>
         <li>
           <AnimLink>about me</AnimLink>

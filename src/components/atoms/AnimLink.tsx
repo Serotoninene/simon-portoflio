@@ -7,5 +7,9 @@ type Props = {
 };
 
 export const AnimLink = ({ children, href = "/" }: Props) => {
-  return <Link href={href}>{children}</Link>;
+  return (
+    <Link href={href} className="cursor-pointer">
+      {children}
+    </Link>
+  );
 };
