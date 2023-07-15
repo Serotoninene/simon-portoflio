@@ -29,7 +29,7 @@ export default function Home() {
   };
 
   return (
-    <main data-scroll-sections className="relative flex flex-col gap-56">
+    <main data-scroll-sections className="relative flex flex-col gap-56 pb-40">
       <HeroHome />
       <GridTwo firstPhoto={photo} secondPhoto={photo} />
       <OneWCaption photo={photo}>

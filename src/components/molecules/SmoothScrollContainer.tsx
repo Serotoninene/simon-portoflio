@@ -17,6 +17,7 @@ export const SmoothScrollContainer = ({ children }: Props) => {
       options={{
         smooth: true,
         multiplier: 0.5,
+        inertia: 0.8,
       }}
       watch={[path]}
     >

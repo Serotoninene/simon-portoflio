@@ -12,10 +12,7 @@ type HomeContainerProps = {
 
 export const Container = ({ children, className }: Props) => {
   return (
-    <div
-      data-scroll-section
-      className={`px-5 sm:px-10 py-4 pb-40 ${className}`}
-    >
+    <div data-scroll-section className={`px-5 sm:px-10 pt-4 ${className}`}>
       {children}
     </div>
   );
