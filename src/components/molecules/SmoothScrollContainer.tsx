@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { usePathname } from "next/navigation";
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
+import { Container } from "./Container";
 
 type Props = {
   children: React.ReactNode;
@@ -10,14 +11,13 @@ type Props = {
 
 export const SmoothScrollContainer = ({ children }: Props) => {
   const path = usePathname();
-  console.log(path);
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <LocomotiveScrollProvider
       options={{
         smooth: true,
-        multiplier: 0.5,
         inertia: 0.8,
       }}
       watch={[path]}
@@ -26,8 +26,13 @@ export const SmoothScrollContainer = ({ children }: Props) => {
         scroll.scrollTo(0, { duration: 0, disableLerp: true })
       } // If you want to reset the scroll position to 0 for example
     >
-      <div data-scroll-container ref={containerRef} className="fixed">
-        {children}
+      <div
+        id="scroll-container"
+        data-scroll-container
+        ref={containerRef}
+        className="fixed"
+      >
+        <Container className="pt-8">{children}</Container>
       </div>
     </LocomotiveScrollProvider>
   );

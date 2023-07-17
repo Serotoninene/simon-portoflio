@@ -39,9 +39,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={`${poppins.className} bg-light`}>
         <Navbar />
-        <SmoothScrollContainer>
-          <Container className="pt-8">{children}</Container>
-        </SmoothScrollContainer>
+        <SmoothScrollContainer>{children}</SmoothScrollContainer>
       </body>
     </html>
   );
