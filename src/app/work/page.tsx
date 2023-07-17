@@ -34,7 +34,12 @@ const Photo = ({ photo, idx, setIdx }: any) => {
 
 export default function Work({}: Props) {
   const [idx, setIdx] = useState(0);
+  const [title, setTitle] = useState("");
   const { scroll } = useLocomotiveScroll();
+
+  useEffect(() => {
+    setTitle(photos[idx]?.capitalizedTitle);
+  }, [idx]);
 
   useEffect(() => {
     if (!scroll) return;
@@ -80,6 +85,16 @@ export default function Work({}: Props) {
     },
   ];
 
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
     <>
       <div className="flex items-end h-full w-full relative">
@@ -89,14 +104,21 @@ export default function Work({}: Props) {
           data-scroll-target="#scroll-container"
           className="flex items-end fixed left-0 top-0 h-[100dvh] py-4 px-10 w-full z-10"
         >
-          <div className="flex justify-between items-center w-full">
-            <AnimatePresence mode="wait">
-              <motion.div className="font-bold">
-                {photos[idx]?.capitalizedTitle}
+          <AnimatePresence mode="popLayout">
+            <div className="flex justify-between items-center w-full">
+              <motion.div
+                key={title}
+                variants={variants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                className="font-bold"
+              >
+                {title}
               </motion.div>
               <div className="text-sm">{photos[idx]?.date}.</div>
-            </AnimatePresence>
-          </div>
+            </div>
+          </AnimatePresence>
         </div>
         <div className="relative flex flex-col gap-6 w-full">
           {photos.map((photo, idx) => (
