@@ -1,11 +1,11 @@
 "use client";
 
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createPhotoTitle } from "@/utils/helpers";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { Scroll } from "react-locomotive-scroll";
 
-import { useInView } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {};
 
@@ -90,8 +90,12 @@ export default function Work({}: Props) {
           className="flex items-end fixed left-0 top-0 h-[100dvh] py-4 px-10 w-full z-10"
         >
           <div className="flex justify-between items-center w-full">
-            <div className="font-bold">{photos[idx]?.capitalizedTitle}</div>
-            <div className="text-sm">{photos[idx]?.date}.</div>
+            <AnimatePresence mode="wait">
+              <motion.div className="font-bold">
+                {photos[idx]?.capitalizedTitle}
+              </motion.div>
+              <div className="text-sm">{photos[idx]?.date}.</div>
+            </AnimatePresence>
           </div>
         </div>
         <div className="relative flex flex-col gap-6 w-full">
