@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { usePathname } from "next/navigation";
+import { Scroll } from "react-locomotive-scroll";
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { Container } from "./Container";
 
@@ -22,9 +23,9 @@ export const SmoothScrollContainer = ({ children }: Props) => {
       }}
       watch={[path]}
       location={path}
-      onLocationChange={(scroll: any) =>
-        scroll.scrollTo(0, { duration: 0, disableLerp: true })
-      } // If you want to reset the scroll position to 0 for example
+      onLocationChange={(scroll: Scroll) => {
+        scroll.scrollTo(0, { duration: 0, disableLerp: true });
+      }}
     >
       <div
         id="scroll-container"
