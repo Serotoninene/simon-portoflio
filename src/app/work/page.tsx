@@ -27,11 +27,11 @@ export default function Work({}: Props) {
         </div>
       </div>
       {/* ACTUAL PHOTOS  */}
-      <div className="flex flex-col gap-6 h-full w-full">
+      <div data-scroll-section className="flex flex-col gap-6 h-full w-full">
         {photos.map((photo, idx) => (
           <div
             key={idx}
-            className="h-full w-full flex flex-none justify-center items-center"
+            className="h-[100dvh] w-full flex flex-none justify-center items-center py-4"
           >
             <img
               alt={photo.alt}

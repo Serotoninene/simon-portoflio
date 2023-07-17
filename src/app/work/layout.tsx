@@ -5,5 +5,5 @@ type Props = {
 };
 
 export default function layout({ children }: Props) {
-  return <div className="h-[calc(100dvh-32px)] pt-8">{children}</div>;
+  return <div className="">{children}</div>;
 }

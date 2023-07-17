@@ -14,7 +14,7 @@ export const PhotoCaption = ({
   date = "2021",
 }: Caption) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { once: true, margin: "20%" });
 
   return (
     <div ref={ref} className="flex justify-between sm:justify-start gap-2">
