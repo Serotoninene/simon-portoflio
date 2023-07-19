@@ -7,13 +7,19 @@ import { Scroll } from "react-locomotive-scroll";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-type Props = {};
+// TO DO
+// [] Make a "menu" layout to see all the images at once on click of a button
+// [] onClick of one photo, back to the usual layout and scroll to the photo
+// [] do the transition between the two layouts
 
 const Photo = ({ photo, idx, setIdx }: any) => {
   const ref = useRef<HTMLDivElement>(null);
 
   // know the aspect ratio of the photo
   const [aspectRatio, setAspectRatio] = useState(1);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
   useEffect(() => {
     const img = new Image();
     img.src = photo.src;
@@ -38,7 +44,7 @@ const Photo = ({ photo, idx, setIdx }: any) => {
   );
 };
 
-export default function Work({}: Props) {
+export default function Work() {
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
   const { scroll } = useLocomotiveScroll();
