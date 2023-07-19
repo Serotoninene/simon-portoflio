@@ -5,7 +5,7 @@ import { createPhotoTitle } from "@/utils/helpers";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { Scroll } from "react-locomotive-scroll";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { Container } from "@/components/molecules";
 
 // TO DO
@@ -13,7 +13,7 @@ import { Container } from "@/components/molecules";
 // [] onClick of one photo, back to the usual layout and scroll to the photo
 // [] do the transition between the two layouts
 
-const Photo = ({ photo, idx, setIdx }: any) => {
+const Photo = ({ photo, idx, setIdx, isOverview }: any) => {
   const ref = useRef<HTMLDivElement>(null);
 
   // know the aspect ratio of the photo
@@ -34,7 +34,9 @@ const Photo = ({ photo, idx, setIdx }: any) => {
       ref={ref}
       data-scroll
       key={idx}
-      className="h-[100dvh] w-full flex flex-none justify-center items-center py-4"
+      className={`${
+        !isOverview ? "h-[100dvh]" : "h-52"
+      } w-full flex flex-none justify-center items-center py-4`}
     >
       <img
         alt={photo.alt}
@@ -48,6 +50,7 @@ const Photo = ({ photo, idx, setIdx }: any) => {
 export default function Work() {
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
+  const [isOverview, setIsOverview] = useState(false);
   const { scroll } = useLocomotiveScroll();
 
   useEffect(() => {
@@ -108,36 +111,60 @@ export default function Work() {
     },
   };
 
+  const handleToggleLayout = () => {
+    setIsOverview((prev) => !prev);
+  };
+
   return (
-    <Container className="pt-0">
-      <div className="flex items-end h-full w-full relative">
-        <div
-          data-scroll
-          data-scroll-sticky
-          data-scroll-target="#scroll-container"
-          className="flex items-end fixed left-0 top-0 h-[100dvh] py-4 px-10 w-full z-10"
-        >
-          <AnimatePresence mode="popLayout">
-            <div className="flex justify-between items-center w-full">
-              <motion.div
-                key={title}
-                variants={variants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                className="font-bold"
-              >
-                {title}
-              </motion.div>
-              <div className="text-sm">{photos[idx]?.date}.</div>
+    <Container>
+      <div
+        data-scroll
+        data-scroll-sticky
+        data-scroll-target="#scroll-container"
+        className="flex items-end fixed left-0 top-0 h-[100dvh] py-4 px-10 w-full z-10"
+      >
+        <AnimatePresence mode="popLayout">
+          <div className="flex justify-between items-center w-full">
+            <motion.div
+              key={title}
+              variants={variants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              className="font-bold"
+            >
+              {title}{" "}
+              <span className="text-sm font-normal">{photos[idx]?.date}.</span>
+            </motion.div>
+            <div className="cursor-pointer" onClick={handleToggleLayout}>
+              See all photos
             </div>
-          </AnimatePresence>
-        </div>
-        <div className="relative flex flex-col gap-6 w-full">
+          </div>
+        </AnimatePresence>
+      </div>
+
+      <div
+        className={`relative flex ${
+          isOverview ? "items-center flex-wrap h-full" : "flex-col"
+        } gap-6 w-full`}
+      >
+        <LayoutGroup>
           {photos.map((photo, idx) => (
-            <Photo key={idx} photo={photo} idx={idx} setIdx={setIdx} />
+            <motion.div
+              layout
+              transition={{ delay: 0.01 * idx, duration: 0.3, ease: "easeOut" }}
+              key={idx}
+              className={`flex-none ${isOverview ? "h-full" : ""}`}
+            >
+              <Photo
+                photo={photo}
+                idx={idx}
+                setIdx={setIdx}
+                isOverview={isOverview}
+              />
+            </motion.div>
           ))}
-        </div>
+        </LayoutGroup>
       </div>
     </Container>
   );
