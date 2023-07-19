@@ -33,7 +33,7 @@ export const SmoothScrollContainer = ({ children }: Props) => {
         ref={containerRef}
         className="fixed"
       >
-        <Container className="pt-8">{children}</Container>
+        {children}
       </div>
     </LocomotiveScrollProvider>
   );

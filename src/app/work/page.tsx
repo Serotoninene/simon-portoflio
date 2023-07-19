@@ -6,6 +6,7 @@ import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { Scroll } from "react-locomotive-scroll";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { Container } from "@/components/molecules";
 
 // TO DO
 // [] Make a "menu" layout to see all the images at once on click of a button
@@ -108,7 +109,7 @@ export default function Work() {
   };
 
   return (
-    <>
+    <Container className="pt-0">
       <div className="flex items-end h-full w-full relative">
         <div
           data-scroll
@@ -138,6 +139,6 @@ export default function Work() {
           ))}
         </div>
       </div>
-    </>
+    </Container>
   );
 }
