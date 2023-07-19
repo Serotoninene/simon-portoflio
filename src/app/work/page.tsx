@@ -11,10 +11,16 @@ type Props = {};
 
 const Photo = ({ photo, idx, setIdx }: any) => {
   const ref = useRef<HTMLDivElement>(null);
-  // const isInView = useInView(ref, { margin: "10%" });
-  // useEffect(() => {
-  //   if (isInView) setIdx(idx);
-  // }, [isInView]);
+
+  // know the aspect ratio of the photo
+  const [aspectRatio, setAspectRatio] = useState(1);
+  useEffect(() => {
+    const img = new Image();
+    img.src = photo.src;
+    img.onload = () => {
+      setAspectRatio(img.width / img.height);
+    };
+  }, [photo.src]);
 
   return (
     <div

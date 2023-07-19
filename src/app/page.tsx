@@ -12,10 +12,10 @@ import { OneWoCaption } from "@/components/home/OneWoCaption";
 
 // TO DO
 // [X] Make animations for the vignettes
-// [] Insert Simon's logo as a favicon
-// [] Finish to integrate the maquette
-// [] Make it all responsive
-// [] start working on the layout of the work
+// [X] Insert Simon's logo as a favicon
+// [X] Finish to integrate the maquette
+// [X] Make it all responsive
+// [X] start working on the layout of the work
 
 export default function Home() {
   const photo = {
