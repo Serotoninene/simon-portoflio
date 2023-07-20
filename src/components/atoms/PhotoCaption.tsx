@@ -14,7 +14,7 @@ export const PhotoCaption = ({
   date = "2021",
 }: Caption) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "20%" });
+  const isInView = useInView(ref, { once: true });
 
   return (
     <div ref={ref} className="flex justify-between sm:justify-start gap-2">
@@ -23,16 +23,17 @@ export const PhotoCaption = ({
           string={idx.padStart(2, "0")}
           start={isInView}
           fontWeight="font-bold"
+          delay={0}
         ></AnimatedLetters>
       </h3>
       <div className="flex flex-col justify-between pt-0.5 whitespace-nowrap overflow-hidden">
         <h4 className="text-lg text-end sm:text-start sm:text-xl text-ellipsis overflow-hidden">
-          <AnimatedWords string={title} start={isInView} delay={0.45} />
+          <AnimatedWords string={title} start={isInView} delay={0.05} />
         </h4>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: isInView ? 1 : 0 }}
-          transition={{ ease: "easeOut", delay: 0.6 }}
+          transition={{ ease: "easeOut", delay: 0.1 }}
           className="pb-0.5 text-end sm:text-start text-ellipsis overflow-hidden"
         >
           {date}, {place}.
