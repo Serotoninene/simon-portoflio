@@ -20,6 +20,18 @@ export const SmoothScrollContainer = ({ children }: Props) => {
       options={{
         smooth: true,
         inertia: 0.8,
+        mobile: {
+          breakpoint: 0,
+          smooth: true,
+          multiplier: 15,
+          class: "is-reveal",
+        },
+        tablet: {
+          breakpoint: 0,
+          smooth: true,
+          multiplier: 1,
+          class: "is-reveal",
+        },
       }}
       watch={[path]}
       location={path}
