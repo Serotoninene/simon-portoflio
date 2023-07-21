@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { createPhotoTitle } from "@/utils/helpers";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { Scroll } from "react-locomotive-scroll";
-import { v4 as uuid } from "uuid";
 
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { Container } from "@/components/molecules";
@@ -16,14 +15,22 @@ import { Container } from "@/components/molecules";
 // [X] when overlay mode -> scroll to 0
 // [] click to a photo -> scroll to the photo
 
-const Photo = ({ photo, setIsOverview, isOverview, scroll }: any) => {
+const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const ref = useRef<HTMLDivElement>(null);
+  const { scroll } = useLocomotiveScroll();
 
-  const handleClick = () => {
-    if (!isOverview) return;
+  // know the aspect ratio of the photo
+  const [aspectRatio, setAspectRatio] = useState(1);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
 
-    setIsOverview(false);
-    scroll.scrollTo(1500, { duration: 0.05 });
+  const handleClick = async () => {
+    // wait for the change of state for the overview before scrolling
+    await setIsOverview(false);
+    scroll.update();
+    scroll.scrollTo(ref.current, {
+      duration: 10,
+    });
   };
 
   useEffect(() => {
@@ -38,6 +45,7 @@ const Photo = ({ photo, setIsOverview, isOverview, scroll }: any) => {
     <div
       ref={ref}
       data-scroll
+      data-scroll-to
       className={`${
         !isOverview ? "h-[100dvh] py-4" : "h-52 cursor-pointer"
       } w-full flex flex-none justify-center items-center pointer-events-auto`}
@@ -55,6 +63,9 @@ const Photo = ({ photo, setIsOverview, isOverview, scroll }: any) => {
 export default function Work() {
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
+  const [scrollToElement, setScrollToElement] = useState<HTMLDivElement | null>(
+    null
+  );
   const [isOverview, setIsOverview] = useState(false);
   const { scroll } = useLocomotiveScroll();
 
@@ -67,78 +78,69 @@ export default function Work() {
 
     scroll.on("scroll", (e: Scroll) => {
       const { scroll, limit } = e;
+      console.log(isOverview ? "overview" : "not overview");
+      console.log("scroll limit :", limit.y);
       setIdx(Math.round((scroll?.y / limit.y) * (photos.length - 1)));
     });
   }, [scroll]);
 
+  // I need to keep the same height even when i go to the overlay state
+  // Only change it when i change the widht of the page but that is way too complicated isn't it ?
+
   const photos = [
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/house_home.webp"),
       date: "2019, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
       date: "2020, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/house_home.webp"),
       date: "2019, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
       date: "2020, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/house_home.webp"),
       date: "2019, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
       date: "2020, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/house_home.webp"),
       date: "2019, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
       date: "2020, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/house_home.webp"),
       date: "2019, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
       date: "2020, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/house_home.webp"),
       date: "2019, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
       date: "2020, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/house_home.webp"),
       date: "2019, Vancouver (CA)",
     },
     {
-      id: uuid(),
       ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
       date: "2020, Vancouver (CA)",
     },
@@ -156,6 +158,7 @@ export default function Work() {
 
   const handleToggleLayout = () => {
     setIsOverview((prev) => !prev);
+    scroll.update();
     scroll.scrollTo("top", { duration: 0.05 });
   };
 
@@ -170,6 +173,7 @@ export default function Work() {
           {photos.map((photo, idx) => (
             <motion.div
               layout
+              layoutId={idx.toString()}
               transition={{ delay: 0.01 * idx, duration: 0.3, ease: "easeOut" }}
               key={idx}
               className={`flex-none ${isOverview ? "h-full" : ""}`}
@@ -178,7 +182,7 @@ export default function Work() {
                 photo={photo}
                 isOverview={isOverview}
                 setIsOverview={setIsOverview}
-                scroll={scroll}
+                setScrollToElement={setScrollToElement}
               />
             </motion.div>
           ))}
