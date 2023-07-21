@@ -7,6 +7,7 @@ import { Scroll } from "react-locomotive-scroll";
 
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { Container } from "@/components/molecules";
+import { ExtendedPhoto, Photo } from "@/types";
 
 // TO DO
 // [] Make a "menu" layout to see all the images at once on click of a button
@@ -14,6 +15,12 @@ import { Container } from "@/components/molecules";
 // [X] do the transition between the two layouts
 // [X] when overlay mode -> scroll to 0
 // [] click to a photo -> scroll to the photo
+
+type LayoutProps = {
+  photos: [ExtendedPhoto];
+  isOverview: boolean;
+  setIsOverview: () => void;
+};
 
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -60,13 +67,56 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   );
 };
 
+const NormalLayout = ({ photos, isOverview, setIsOverview }: LayoutProps) => {
+  return (
+    <div className={`relative flex flex-col gap-6 w-full`}>
+      {photos.map((photo, idx) => (
+        <motion.div
+          layout
+          layoutId={idx.toString()}
+          transition={{ delay: 0.01 * idx, duration: 0.3, ease: "easeOut" }}
+          key={idx}
+          className="flex-none"
+        >
+          <Photo
+            photo={photo}
+            isOverview={isOverview}
+            setIsOverview={setIsOverview}
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+const OverviewLayout = ({ photos, isOverview, setIsOverview }: LayoutProps) => {
+  // set the number of rows according to the number of photos
+  const rowCount = Math.ceil(photos.length / 4);
+
+  return (
+    <div className="grid grid-cols-4 ">
+      {photos.map((photo, idx) => (
+        <motion.div
+          layout
+          layoutId={idx.toString()}
+          transition={{ delay: 0.01 * idx, duration: 0.3, ease: "easeOut" }}
+          key={idx}
+        >
+          <Photo
+            photo={photo}
+            isOverview={isOverview}
+            setIsOverview={setIsOverview}
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
 export default function Work() {
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
-  const [scrollToElement, setScrollToElement] = useState<HTMLDivElement | null>(
-    null
-  );
-  const [isOverview, setIsOverview] = useState(false);
+  const [isOverview, setIsOverview] = useState(true);
   const { scroll } = useLocomotiveScroll();
 
   useEffect(() => {
@@ -78,14 +128,9 @@ export default function Work() {
 
     scroll.on("scroll", (e: Scroll) => {
       const { scroll, limit } = e;
-      console.log(isOverview ? "overview" : "not overview");
-      console.log("scroll limit :", limit.y);
       setIdx(Math.round((scroll?.y / limit.y) * (photos.length - 1)));
     });
   }, [scroll]);
-
-  // I need to keep the same height even when i go to the overlay state
-  // Only change it when i change the widht of the page but that is way too complicated isn't it ?
 
   const photos = [
     {
@@ -164,30 +209,17 @@ export default function Work() {
 
   return (
     <Container>
-      <div
-        className={`relative flex ${
-          isOverview ? "items-center flex-wrap h-full" : "flex-col"
-        } gap-6 w-full`}
-      >
-        <LayoutGroup>
-          {photos.map((photo, idx) => (
-            <motion.div
-              layout
-              layoutId={idx.toString()}
-              transition={{ delay: 0.01 * idx, duration: 0.3, ease: "easeOut" }}
-              key={idx}
-              className={`flex-none ${isOverview ? "h-full" : ""}`}
-            >
-              <Photo
-                photo={photo}
-                isOverview={isOverview}
-                setIsOverview={setIsOverview}
-                setScrollToElement={setScrollToElement}
-              />
-            </motion.div>
-          ))}
-        </LayoutGroup>
-      </div>
+      <LayoutGroup>
+        {isOverview ? (
+          ""
+        ) : (
+          <NormalLayout
+            photos={photos}
+            isOverview={isOverview}
+            setIsOverview={setIsOverview}
+          />
+        )}
+      </LayoutGroup>
 
       <div
         data-scroll

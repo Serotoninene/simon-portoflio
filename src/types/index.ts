@@ -4,6 +4,11 @@ export type Photo = {
   caption?: Caption;
 };
 
+export type ExtendedPhoto = Photo & {
+  date: string;
+  capitalizedTitle: string;
+};
+
 export type Caption = {
   idx?: string;
   title?: string;
