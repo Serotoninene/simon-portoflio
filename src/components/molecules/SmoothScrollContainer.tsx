@@ -12,7 +12,6 @@ type Props = {
 
 export const SmoothScrollContainer = ({ children }: Props) => {
   const path = usePathname();
-
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
