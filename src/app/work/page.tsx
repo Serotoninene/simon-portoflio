@@ -29,7 +29,7 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
     await setIsOverview(false);
     scroll.update();
     scroll.scrollTo(ref.current, {
-      duration: 10,
+      duration: 0.5,
     });
   };
 
@@ -47,8 +47,10 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
       data-scroll
       data-scroll-to
       className={`${
-        !isOverview ? "h-[100dvh] py-4" : "h-52 cursor-pointer"
-      } w-full flex flex-none justify-center items-center pointer-events-auto`}
+        !isOverview
+          ? "h-[100dvh] py-4 items-center"
+          : "h-full cursor-pointer items-start "
+      } w-full flex flex-none justify-center  pointer-events-auto`}
       onClick={handleClick}
     >
       <img
@@ -63,9 +65,7 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
 export default function Work() {
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
-  const [scrollToElement, setScrollToElement] = useState<HTMLDivElement | null>(
-    null
-  );
+
   const [isOverview, setIsOverview] = useState(false);
   const { scroll } = useLocomotiveScroll();
 
@@ -78,14 +78,9 @@ export default function Work() {
 
     scroll.on("scroll", (e: Scroll) => {
       const { scroll, limit } = e;
-      console.log(isOverview ? "overview" : "not overview");
-      console.log("scroll limit :", limit.y);
       setIdx(Math.round((scroll?.y / limit.y) * (photos.length - 1)));
     });
   }, [scroll]);
-
-  // I need to keep the same height even when i go to the overlay state
-  // Only change it when i change the widht of the page but that is way too complicated isn't it ?
 
   const photos = [
     {
@@ -159,30 +154,32 @@ export default function Work() {
   const handleToggleLayout = () => {
     setIsOverview((prev) => !prev);
     scroll.update();
-    scroll.scrollTo("top", { duration: 0.05 });
+    scroll.scrollTo("top", { duration: 0, disableLerp: true });
   };
 
   return (
     <Container>
       <div
-        className={`relative flex ${
-          isOverview ? "items-center flex-wrap h-full" : "flex-col"
+        className={`relative  ${
+          isOverview
+            ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 h-full gap-2"
+            : "flex flex-col"
         } gap-6 w-full`}
       >
         <LayoutGroup>
           {photos.map((photo, idx) => (
             <motion.div
               layout
-              layoutId={idx.toString()}
-              transition={{ delay: 0.01 * idx, duration: 0.3, ease: "easeOut" }}
+              transition={{ delay: 0.005 * idx, ease: "easeOut" }}
               key={idx}
-              className={`flex-none ${isOverview ? "h-full" : ""}`}
+              className={`flex-none ${
+                isOverview ? "flex h-full overflow-hidden " : ""
+              }`}
             >
               <Photo
                 photo={photo}
                 isOverview={isOverview}
                 setIsOverview={setIsOverview}
-                setScrollToElement={setScrollToElement}
               />
             </motion.div>
           ))}
