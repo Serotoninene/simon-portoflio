@@ -1,5 +1,4 @@
 import React from "react";
-import { spartan } from "@/app/layout";
 
 import { Container } from "../molecules/Container";
 import { AnimLink } from "../atoms";
