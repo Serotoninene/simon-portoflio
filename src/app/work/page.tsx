@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import ReactDom from "react-dom";
+
 import { createPhotoTitle } from "@/utils/helpers";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { Scroll } from "react-locomotive-scroll";
 
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { Container } from "@/components/molecules";
-import { ExtendedPhoto, Photo } from "@/types";
 
 // TO DO
 // [X] Make a "menu" layout to see all the images at once on click of a button
@@ -19,12 +18,6 @@ import { ExtendedPhoto, Photo } from "@/types";
 // [] make a menu for mobile
 // [] make an intro animation
 // [] stick the footer properly ...
-
-type LayoutProps = {
-  photos: [ExtendedPhoto];
-  isOverview: boolean;
-  setIsOverview: () => void;
-};
 
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const ref = useRef<HTMLDivElement>(null);
