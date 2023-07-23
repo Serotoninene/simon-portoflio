@@ -2,10 +2,31 @@
 
 import React, { useEffect, useState } from "react";
 
-import { Container } from "../molecules/Container";
 import { AnimLink } from "../atoms";
+import { Container } from "../molecules";
+import { motion } from "framer-motion";
 
 type Props = {};
+
+const containerAnim = {
+  hidden: {
+    transition: {
+      staggerChildren: 0.05,
+      ease: "easeOut",
+    },
+  },
+  shown: {
+    transition: {
+      staggerChildren: 0.05,
+      ease: "easeIn",
+    },
+  },
+};
+
+const linkAnim = {
+  hidden: { y: "-100%" },
+  shown: { y: 0 },
+};
 
 // [] the navbar disappears when scrolling down
 // [] the navbar appears when scrolling up
@@ -28,19 +49,26 @@ export const Navbar = (props: Props) => {
 
     return document.removeEventListener("wheel", handleWheel);
   }, []);
+
   return (
     <Container className="fixed left-0 right-0 z-10">
-      <ul className="hidden sm:flex justify-end gap-14 font-semi-bold">
-        <li>
+      <motion.ul
+        initial="hidden"
+        animate={scrollDir === "down" ? "hidden" : "shown"}
+        exit="hidden"
+        variants={containerAnim}
+        className="hidden overflow-hidden sm:flex justify-end gap-14 font-semi-bold"
+      >
+        <motion.li variants={linkAnim}>
           <AnimLink href="/work">work</AnimLink>
-        </li>
-        <li>
+        </motion.li>
+        <motion.li variants={linkAnim}>
           <AnimLink>about me</AnimLink>
-        </li>
-        <li>
+        </motion.li>
+        <motion.li variants={linkAnim}>
           <AnimLink>instagram</AnimLink>
-        </li>
-      </ul>
+        </motion.li>
+      </motion.ul>
       <ul className="flex sm:hidden flex-col justify-center items-end h-6 gap-1">
         <li className="w-5 h-[1px] bg-black rounded"></li>
         <li className="w-5 h-[1px] bg-black rounded"></li>
