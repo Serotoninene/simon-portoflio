@@ -15,7 +15,7 @@ import { Container } from "@/components/molecules";
 // [X] do the transition between the two layouts
 // [X] when overlay mode -> scroll to 0
 // [X] click to a photo -> scroll to the photo
-// [] Insert all the photos on the homepage
+// [X] Insert all the photos on the homepage
 // [] make a menu for mobile
 // [] make an intro animation
 // [] stick the footer properly ...
@@ -128,60 +128,64 @@ export default function Work() {
 
   const photos = [
     {
-      ...createPhotoTitle("/assets/photos/house_home.webp"),
+      ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
       date: "2019, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+      ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
       date: "2020, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/house_home.webp"),
+      ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
       date: "2019, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+      ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
       date: "2020, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/house_home.webp"),
+      ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
       date: "2019, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
-      date: "2020, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/house_home.webp"),
+      ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
       date: "2019, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+      ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
       date: "2020, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/house_home.webp"),
+      ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
       date: "2019, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+      ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
       date: "2020, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/house_home.webp"),
+      ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
       date: "2019, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
-      date: "2020, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/house_home.webp"),
+      ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
       date: "2019, Vancouver (CA)",
     },
     {
-      ...createPhotoTitle("/assets/photos/MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+      ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
       date: "2020, Vancouver (CA)",
+    },
+    {
+      ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
+      date: "2019, Vancouver (CA)",
+    },
+    {
+      ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+      date: "2020, Vancouver (CA)",
+    },
+    {
+      ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
+      date: "2019, Vancouver (CA)",
     },
   ];
 
