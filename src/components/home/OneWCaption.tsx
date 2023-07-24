@@ -28,14 +28,14 @@ export const OneWCaption = ({ photo, children }: Props) => {
             </div>
           </div>
           <div className="hidden sm:block">
-            <PhotoCaption idx="3" title="GOOGLE MAPS-ING" />
+            <PhotoCaption {...photo.caption} />
           </div>
         </div>
 
         <div className="sm:col-span-2">
           <AnimPhoto {...photo} />
           <div className="block sm:hidden">
-            <PhotoCaption idx="3" title="GOOGLE MAPS-ING" />
+            <PhotoCaption {...photo.caption} />
           </div>
         </div>
       </div>

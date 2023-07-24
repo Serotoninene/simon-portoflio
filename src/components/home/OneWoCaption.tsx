@@ -15,7 +15,7 @@ export const OneWoCaption = ({ photo }: Props) => {
           <AnimPhoto {...photo} />
         </div>
         <div>
-          <PhotoCaption idx="3" title="GOOGLE MAPS-ING" />
+          <PhotoCaption {...photo.caption} />
         </div>
       </div>
     </HomeContainer>
