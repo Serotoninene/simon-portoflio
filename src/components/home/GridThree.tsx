@@ -30,7 +30,7 @@ export const GridThree = ({
             data-scroll-speed="3"
             className="h-[50dvh] sm:h-full"
           >
-            <AnimPhoto src={firstPhoto.src} alt={firstPhoto.alt} />
+            <AnimPhoto src={firstPhoto?.src} alt={firstPhoto?.alt} />
             <div className="block sm:hidden mt-4">
               <PhotoCaption {...firstPhoto?.caption} />
             </div>

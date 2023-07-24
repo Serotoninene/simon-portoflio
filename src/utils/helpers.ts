@@ -7,7 +7,7 @@ export const capitalizeWord = (string: string) => {
 };
 
 export const createPhoto = (src: string) => {
-  const fileName = src.split("/").pop();
+  const fileName = src?.split("/").pop();
   const alt = fileName ? fileName.split(".")[0] : "";
   return {
     src,
@@ -16,7 +16,7 @@ export const createPhoto = (src: string) => {
 };
 
 export const createPhotoTitle = (src: string) => {
-  const fileName = src.split("/").pop();
+  const fileName = src?.split("/").pop();
   const alt = fileName ? fileName.split(".")[0] : "";
   const title = alt.replaceAll("_", " ");
   const capitalizedTitle = capitalizeWord(title);
@@ -24,7 +24,7 @@ export const createPhotoTitle = (src: string) => {
 };
 
 export const createAlt = (src: string) => {
-  const fileName = src.split("/").pop();
+  const fileName = src?.split("/").pop();
   const alt = fileName ? fileName.split(".")[0] : "";
   return alt;
 };

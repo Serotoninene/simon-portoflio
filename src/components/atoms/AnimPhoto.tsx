@@ -38,7 +38,7 @@ export const AnimPhoto = ({
 
   const imageProps = {
     alt: alt ?? createAlt(src),
-    src: src,
+    src: src ?? "/assets/photos/01_MY_GARDEN_IS_COOL.jpeg",
     sizes: sizes,
     className: `object-${fit || "cover"}`,
     placeholder: placeholder,
