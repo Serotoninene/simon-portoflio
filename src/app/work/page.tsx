@@ -15,6 +15,7 @@ import { Container } from "@/components/molecules";
 // [X] do the transition between the two layouts
 // [X] when overlay mode -> scroll to 0
 // [X] click to a photo -> scroll to the photo
+// [] Insert all the photos on the homepage
 // [] make a menu for mobile
 // [] make an intro animation
 // [] stick the footer properly ...
