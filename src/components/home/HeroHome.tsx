@@ -10,7 +10,7 @@ export const HeroHome = (props: Props) => {
       <div className="h-full relative">
         <Image
           alt="house in a green field"
-          src="/assets/photos/house_home.webp"
+          src="/assets/photos/00_ACCUEIL.jpeg"
           fill
           priority
           className="object-cover"
