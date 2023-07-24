@@ -332,7 +332,7 @@ export default function Home() {
   };
   return (
     <Container className="pt-6">
-      <main className="relative flex flex-col gap-56 pb-40">
+      <main className="relative flex flex-col gap-56 pb-6">
         <HeroHome />
         <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
         <OneWCaption photo={photos[2]}>
