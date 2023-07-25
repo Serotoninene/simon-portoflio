@@ -2,13 +2,15 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { createPhotoTitle } from "@/utils/helpers";
+import { createPhotoTitle, loadImage } from "@/utils/helpers";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { Scroll } from "react-locomotive-scroll";
 
 import { AnimatePresence, LayoutGroup, motion, useScroll } from "framer-motion";
 import { Container, SmoothScrollContainer } from "@/components/molecules";
 import { useWindowSize } from "@/utils/hooks";
+// use Image but rename it NextImage
+import Image from "next/image";
 
 // TO DO
 // [X] Make a "menu" layout to see all the images at once on click of a button
@@ -19,7 +21,8 @@ import { useWindowSize } from "@/utils/hooks";
 // [X] Insert all the photos on the homepage
 // [X] only smoothscroll on the home for now
 // [X] stick the footer properly ...
-// [] make the footer change with the scroll
+// [X] make the footer change with the scroll
+// [X] replace all the img by Image on work page
 // [] Make the photos lazy load
 // [] make a menu for mobile
 // [] make the text appear on scroll
@@ -31,12 +34,10 @@ import { useWindowSize } from "@/utils/hooks";
 
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scroll } = useLocomotiveScroll();
+  const { width, height } = useWindowSize();
 
   // know the aspect ratio of the photo
   const [aspectRatio, setAspectRatio] = useState(1);
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
 
   const handleClick = async () => {
     // wait for the change of state for the overview before scrolling
@@ -46,12 +47,14 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   };
 
   useEffect(() => {
-    const img = new Image();
+    const img = loadImage(photo.src);
     img.src = photo.src;
     img.onload = () => {
       setAspectRatio(img.width / img.height);
     };
-  }, [photo.src]);
+  }, [photo.src, width, height]);
+
+  if (!width || !height) return null;
 
   return (
     <div
@@ -61,14 +64,16 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
       className={`${
         !isOverview
           ? "h-[100dvh] py-4 items-center"
-          : "h-full cursor-pointer items-start "
-      } w-full flex flex-none justify-center  pointer-events-auto`}
+          : "h-[64px] cursor-pointer items-start "
+      } w-full flex flex-col flex-none justify-center relative  pointer-events-auto`}
       onClick={handleClick}
     >
-      <img
+      <Image
         alt={photo.alt}
+        width={aspectRatio > 1 ? width : height * aspectRatio - 32}
+        height={aspectRatio > 1 ? 0 : height}
         src={photo.src}
-        className="object-fit max-h-full max-w-full"
+        className=" object-contain object-center"
       />
     </div>
   );

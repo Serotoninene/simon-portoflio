@@ -28,3 +28,9 @@ export const createAlt = (src: string) => {
   const alt = fileName ? fileName.split(".")[0] : "";
   return alt;
 };
+
+export const loadImage = (src: string) => {
+  const img = new Image();
+  img.src = src;
+  return img;
+};
