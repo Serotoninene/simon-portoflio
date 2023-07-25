@@ -10,7 +10,6 @@ import ColorThief from "colorthief";
 
 import { Container } from "@/components/molecules";
 import { useWindowSize } from "@/utils/hooks";
-import { log } from "console";
 
 // use Image but rename it NextImage
 
@@ -96,18 +95,28 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
       } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
       onClick={handleClick}
     >
-      <div ref={childRef} className="overflow-hidden">
-        <div>
+      <div className="overflow-hidden">
+        <motion.div
+          initial={{
+            y: "-100%",
+            opacity: 0,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
+          transition={{ delay: 1, ease: "easeOut" }}
+          ref={childRef}
+        >
           <Image
             alt={photo.alt}
             width={imageSize.width}
             height={imageSize.height}
             placeholder="blur"
             blurDataURL={photo.src}
-            className="opacity-10 "
             src={photo.src}
           />
-        </div>
+        </motion.div>
       </div>
     </div>
   );
