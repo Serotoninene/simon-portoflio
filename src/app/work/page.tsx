@@ -16,9 +16,11 @@ import { Container } from "@/components/molecules";
 // [X] when overlay mode -> scroll to 0
 // [X] click to a photo -> scroll to the photo
 // [X] Insert all the photos on the homepage
+// [] only smoothscroll on the home for now
+// [] stick the footer properly ...
+// [] Make the photos lazy load
 // [] make a menu for mobile
 // [] make an intro animation
-// [] stick the footer properly ...
 
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -80,7 +82,7 @@ const WorkFooter = ({
       data-scroll
       data-scroll-sticky
       data-scroll-target="#scroll-container"
-      className={`flex items-end text-blue-500 fixed left-0 top-0 h-[100dvh] py-4 px-10 w-full ${
+      className={`flex items-end fixed left-0 top-0 h-[100dvh] py-4 px-10 w-full ${
         isOverview ? "pointer-events-none" : "pointer-events-auto"
       }`}
     >
