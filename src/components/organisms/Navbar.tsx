@@ -51,7 +51,7 @@ export const Navbar = (props: Props) => {
   }, []);
 
   return (
-    <Container className="fixed left-0 right-0 z-10">
+    <Container className="fixed left-0 right-0 z-10 pt-4">
       <motion.ul
         initial="hidden"
         animate={scrollDir === "down" ? "hidden" : "shown"}

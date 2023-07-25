@@ -7,7 +7,7 @@ import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { Scroll } from "react-locomotive-scroll";
 
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import { Container } from "@/components/molecules";
+import { Container, SmoothScrollContainer } from "@/components/molecules";
 
 // TO DO
 // [X] Make a "menu" layout to see all the images at once on click of a button
@@ -23,6 +23,8 @@ import { Container } from "@/components/molecules";
 // [] make the text appear on scroll
 // [] make an intro animation
 // [] rearrange the layout on mobile
+// [] remove the number from the title + capitalize the first letter (on work page)
+// [] make the title blend mode (on work page)
 // [] make a custom cursor
 
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
@@ -211,13 +213,14 @@ export default function Work() {
   };
 
   return (
-    <Container>
+    <Container className="pt-0">
       <div
+        data-scroll-section
         className={`relative  ${
           isOverview
             ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 h-full gap-2"
-            : "flex flex-col"
-        } gap-6 w-full`}
+            : "flex flex-col gap-6 sm:gap-8 md:gap-10"
+        } w-full`}
       >
         <LayoutGroup>
           {photos.map((photo, idx) => (

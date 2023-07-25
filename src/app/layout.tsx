@@ -2,7 +2,6 @@ import "./globals.css";
 import { Poppins, Public_Sans } from "next/font/google";
 import localFont from "next/font/local";
 
-import { Container, SmoothScrollContainer } from "@/components/molecules";
 import { Navbar } from "@/components/organisms";
 
 const poppins = Poppins({
@@ -39,7 +38,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={`${poppins.className} bg-light`}>
         <Navbar />
-        <SmoothScrollContainer>{children}</SmoothScrollContainer>
+        {children}
       </body>
     </html>
   );
