@@ -35,6 +35,7 @@ import Image from "next/image";
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const ref = useRef<HTMLDivElement>(null);
   const { width, height } = useWindowSize();
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
 
   // know the aspect ratio of the photo
   const [aspectRatio, setAspectRatio] = useState(1);
@@ -47,12 +48,24 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   };
 
   useEffect(() => {
+    if (!width || !height) return;
     const img = loadImage(photo.src);
     img.src = photo.src;
     img.onload = () => {
       setAspectRatio(img.width / img.height);
     };
-  }, [photo.src, width, height]);
+
+    const windowAspectRatio = width / height;
+
+    setImageSize({
+      width:
+        aspectRatio > 1
+          ? (width / windowAspectRatio) * aspectRatio - 48
+          : height * aspectRatio - 32,
+      height: 400,
+    });
+    // }
+  }, [photo.src, width, height, aspectRatio]);
 
   if (!width || !height) return null;
 
@@ -70,10 +83,10 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
     >
       <Image
         alt={photo.alt}
-        width={
-          aspectRatio > 1 ? width - width * 0.2 : height * aspectRatio - 32
-        }
-        height={aspectRatio > 1 ? height * aspectRatio : height - 32}
+        width={imageSize.width}
+        height={imageSize.height}
+        placeholder="blur"
+        blurDataURL={photo.src}
         src={photo.src}
         className=" object-contain object-center"
       />
