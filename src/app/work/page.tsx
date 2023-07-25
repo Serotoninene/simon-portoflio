@@ -20,7 +20,10 @@ import { Container } from "@/components/molecules";
 // [] stick the footer properly ...
 // [] Make the photos lazy load
 // [] make a menu for mobile
+// [] make the text appear on scroll
 // [] make an intro animation
+// [] rearrange the layout on mobile
+// [] make a custom cursor
 
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const ref = useRef<HTMLDivElement>(null);
