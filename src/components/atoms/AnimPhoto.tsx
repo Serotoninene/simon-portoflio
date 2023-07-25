@@ -38,6 +38,7 @@ export const AnimPhoto = ({
   sizes,
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const imageProps = {
     alt: alt ?? createAlt(src),
@@ -49,14 +50,18 @@ export const AnimPhoto = ({
   };
 
   const handleLoad = () => {
-    if (!ref.current) return;
+    setIsLoaded(true);
   };
 
   useEffect(() => {
     if (ref.current) {
       ref.current.style.backgroundColor = dominantColor ?? "#000000";
+
+      if (isLoaded) {
+        ref.current.style.backgroundColor = "transparent";
+      }
     }
-  }, [ref.current]);
+  }, [ref.current, isLoaded]);
 
   return (
     <div ref={ref} className="h-full relative overflow-hidden bg-[#372823]">
