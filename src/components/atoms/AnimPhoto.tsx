@@ -53,7 +53,7 @@ export const AnimPhoto = ({
         className="relative h-full translate-y-10"
       >
         {/* eslint-disable-next-line */}
-        <Image fill {...imageProps} />
+        <Image fill {...imageProps} placeholder="blur" blurDataURL={src} />
       </div>
     </div>
   );
