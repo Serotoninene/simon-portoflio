@@ -149,7 +149,7 @@ export default function Work() {
     scrollYProgress.on("change", (e: any) => {
       setIdx(Math.round(e * (photos.length - 1)));
     });
-  }, [scrollY]);
+  }, [scrollYProgress]);
 
   const photos = [
     {
