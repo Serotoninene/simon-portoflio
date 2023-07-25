@@ -6,8 +6,9 @@ import { createPhotoTitle } from "@/utils/helpers";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { Scroll } from "react-locomotive-scroll";
 
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion, useScroll } from "framer-motion";
 import { Container, SmoothScrollContainer } from "@/components/molecules";
+import { useWindowSize } from "@/utils/hooks";
 
 // TO DO
 // [X] Make a "menu" layout to see all the images at once on click of a button
@@ -16,8 +17,9 @@ import { Container, SmoothScrollContainer } from "@/components/molecules";
 // [X] when overlay mode -> scroll to 0
 // [X] click to a photo -> scroll to the photo
 // [X] Insert all the photos on the homepage
-// [] only smoothscroll on the home for now
-// [] stick the footer properly ...
+// [X] only smoothscroll on the home for now
+// [X] stick the footer properly ...
+// [] make the footer change with the scroll
 // [] Make the photos lazy load
 // [] make a menu for mobile
 // [] make the text appear on scroll
@@ -39,10 +41,8 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const handleClick = async () => {
     // wait for the change of state for the overview before scrolling
     await setIsOverview(false);
-    scroll.update();
-    scroll.scrollTo(ref.current, {
-      duration: 0.5,
-    });
+    const { top } = ref.current?.getBoundingClientRect() || { top: 0 };
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -118,20 +118,18 @@ export default function Work() {
   const [title, setTitle] = useState("");
 
   const [isOverview, setIsOverview] = useState(false);
-  const { scroll } = useLocomotiveScroll();
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     setTitle(photos[idx]?.capitalizedTitle);
   }, [idx]);
 
   useEffect(() => {
-    if (!scroll) return;
-
-    scroll.on("scroll", (e: Scroll) => {
-      const { scroll, limit } = e;
-      setIdx(Math.round((scroll?.y / limit.y) * (photos.length - 1)));
+    if (!scrollYProgress) return;
+    scrollYProgress.on("change", (e: any) => {
+      setIdx(Math.round(e * (photos.length - 1)));
     });
-  }, [scroll]);
+  }, [scrollY]);
 
   const photos = [
     {
@@ -208,8 +206,7 @@ export default function Work() {
 
   const handleToggleLayout = () => {
     setIsOverview((prev) => !prev);
-    scroll.update();
-    scroll.scrollTo("top", { duration: 0, disableLerp: true });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 interface WindowSize {
   width: number | undefined;
   height: number | undefined;
+  pageHeight: number | undefined;
 }
 
 export function useWindowSize() {
@@ -11,6 +12,7 @@ export function useWindowSize() {
   const [windowSize, setWindowSize] = useState<WindowSize>({
     width: undefined,
     height: undefined,
+    pageHeight: undefined,
   });
 
   useEffect(() => {
@@ -20,6 +22,7 @@ export function useWindowSize() {
       setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight,
+        pageHeight: document.body.scrollHeight,
       });
     }
     // Add event listener
