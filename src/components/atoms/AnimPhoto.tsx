@@ -60,16 +60,8 @@ export const AnimPhoto = ({
     setDominantColor(rgbToHex(color));
   };
 
-  useEffect(() => {
-    if (!dominantColor) return;
-
-    if (ref.current) {
-      ref.current.style.backgroundColor = dominantColor;
-    }
-  }, [dominantColor]);
-
   return (
-    <div ref={ref} className="h-full relative overflow-hidden">
+    <div ref={ref} className="h-full relative overflow-hidden bg-red-400">
       <div
         data-scroll
         data-scroll-speed="-1.5"
