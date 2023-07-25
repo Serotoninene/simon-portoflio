@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { createAlt } from "@/utils/helpers";
+
+import ColorThief from "colorthief";
+
+import { createAlt, rgbToHex } from "@/utils/helpers";
 import { ease } from "@/utils/store";
 
 type Props = {
@@ -35,6 +38,7 @@ export const AnimPhoto = ({
   sizes,
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [dominantColor, setDominantColor] = useState("");
 
   const imageProps = {
     alt: alt ?? createAlt(src),
@@ -45,6 +49,25 @@ export const AnimPhoto = ({
     blurDataURL: blurDataURL,
   };
 
+  const handleLoad = () => {
+    if (!ref.current) return;
+
+    const img = ref.current.querySelector("img");
+    if (!img) return;
+
+    const colorThief = new ColorThief();
+    const color = colorThief.getColor(img);
+    setDominantColor(rgbToHex(color));
+  };
+
+  useEffect(() => {
+    if (!dominantColor) return;
+
+    if (ref.current) {
+      ref.current.style.backgroundColor = dominantColor;
+    }
+  }, [dominantColor]);
+
   return (
     <div ref={ref} className="h-full relative overflow-hidden">
       <div
@@ -53,7 +76,13 @@ export const AnimPhoto = ({
         className="relative h-full translate-y-10"
       >
         {/* eslint-disable-next-line */}
-        <Image fill {...imageProps} placeholder="blur" blurDataURL={src} />
+        <Image
+          onLoad={handleLoad}
+          fill
+          {...imageProps}
+          placeholder="blur"
+          blurDataURL={src}
+        />
       </div>
     </div>
   );
