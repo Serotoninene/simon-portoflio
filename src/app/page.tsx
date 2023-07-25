@@ -11,16 +11,10 @@ import {
 import { OneWoCaption } from "@/components/home/OneWoCaption";
 import { Container, SmoothScrollContainer } from "@/components/molecules";
 
-// TO DO
-// [X] Make animations for the vignettes
-// [X] Insert Simon's logo as a favicon
-// [X] Finish to integrate the maquette
-// [X] Make it all responsive
-// [X] start working on the layout of the work
-
 const photos = [
   {
     ...createPhoto("/assets/photos/01_MY_GARDEN_IS_COOL.jpeg"),
+    dominantColor: "#282515",
     caption: {
       idx: "1",
       title: "MY GARDEN IS COOL",
@@ -30,6 +24,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+    dominantColor: "#a29c9d",
     caption: {
       idx: "2",
       title: "MY HOUSE IS A TRIANGLE",
@@ -40,6 +35,8 @@ const photos = [
 
   {
     ...createPhoto("/assets/photos/03_GOOGLE_MAPS-ING.jpeg"),
+    dominantColor: "#413722",
+
     caption: {
       idx: "3",
       title: "GOOGLE MAPS-ING",
@@ -49,6 +46,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/04_FISHING.jpeg"),
+    dominantColor: "#bdbba3",
     caption: {
       idx: "4",
       title: "FISHING",
@@ -58,6 +56,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/05_LIVING_ON_A_BOAT.jpeg"),
+    dominantColor: "#798d97",
     caption: {
       idx: "5",
       title: "LIVING ON A BOAT",
@@ -67,6 +66,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/06_CROWDED.jpeg"),
+    dominantColor: "#a6b2bc",
     caption: {
       idx: "6",
       title: "CROWDED",
@@ -77,6 +77,7 @@ const photos = [
 
   {
     ...createPhoto("/assets/photos/07_SQUARED.jpeg"),
+    dominantColor: "#917b5d",
     caption: {
       idx: "7",
       title: "SQUARED",
@@ -86,6 +87,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
+    dominantColor: "#c3afa5",
     caption: {
       idx: "8",
       title: "ALL ABOUT CLEANING",
@@ -95,6 +97,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/09_SUPERMARKET.jpeg"),
+    dominantColor: "#9e382f",
     caption: {
       idx: "9",
       title: "SUPERMARKET",
@@ -104,6 +107,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
+    dominantColor: "#a8a4aa",
     caption: {
       idx: "10",
       title: "TIME FOR LAUNDRY",
@@ -113,6 +117,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/11_APERITIF.jpeg"),
+    dominantColor: "#bcb7af",
     caption: {
       idx: "11",
       title: "APERITIF",
@@ -122,6 +127,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/12_AROUND_THE_CORNER.jpeg"),
+    dominantColor: "#ababa7",
     caption: {
       idx: "12",
       title: "AROUND THE CORNER",
@@ -131,6 +137,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/13_TROPICAL_CHURCH.jpeg"),
+    dominantColor: "#aeaab9",
     caption: {
       idx: "13",
       title: "TROPICAL CHURCH",
@@ -140,6 +147,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/14_ROOMS_FOR_ME_&_FOR_MY_CAR.jpeg"),
+    dominantColor: "#cfbaa5",
     caption: {
       idx: "14",
       title: "ROOMS FOR ME & FOR MY CAR",
@@ -149,6 +157,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/15_MONUMENT.jpeg"),
+    dominantColor: "#b6adb0",
     caption: {
       idx: "15",
       title: "MONUMENT",
@@ -158,6 +167,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/16_WHITE_IN_THE_BLUE.jpeg"),
+    dominantColor: "#cabdb7",
     caption: {
       idx: "16",
       title: "WHITE IN THE BLUE",
@@ -167,6 +177,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/17_A_POLAR_CHURCH.jpeg"),
+    dominantColor: "#262b33",
     caption: {
       idx: "17",
       title: "A POLAR CHURCH",
@@ -176,6 +187,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/18_A_SCHOOL_IN_COLOR.jpeg"),
+    dominantColor: "#304d4e",
     caption: {
       idx: "18",
       title: "A SCHOOL IN COLOR",
@@ -185,6 +197,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/19_I_MISSED_THE_TRAIN.jpeg"),
+    dominantColor: "#a39279",
     caption: {
       idx: "19",
       title: "I MISSED THE TRAIN",
@@ -194,6 +207,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/20_LOVE_IN_A_RUBBER_BOAT.jpeg"),
+    dominantColor: "#244631",
     caption: {
       idx: "20",
       title: "LOVE IN A RUBBER BOAT",
@@ -203,6 +217,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/21_LOVE_AT_THE_STREET_CORNER.jpeg"),
+    dominantColor: "#a2a196",
     caption: {
       idx: "21",
       title: "LOVE AT THE STREET CORNER",
@@ -212,6 +227,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/22_HIDING_FROM_THE_SHADOWS.jpeg"),
+    dominantColor: "#d2c6b4",
     caption: {
       idx: "22",
       title: "HIDING FROM THE SHADOWS",
@@ -221,6 +237,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/23_GOING_OUT_FOR_DINNER.jpeg"),
+    dominantColor: "#789aa8",
     caption: {
       idx: "23",
       title: "GOING OUT FOR DINNER",
@@ -230,6 +247,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/24_DOWN_BY_THE_LAKE.jpeg"),
+    dominantColor: "#817250",
     caption: {
       idx: "24",
       title: "DOWN BY THE LAKE",
@@ -239,6 +257,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/25_THROUGH_THE_MIRROR.jpeg"),
+    dominantColor: "#ba9a48",
     caption: {
       idx: "25",
       title: "THROUGH THE MIRROR",
@@ -248,6 +267,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/26_REST_AREA.jpeg"),
+    dominantColor: "#688fa1",
     caption: {
       idx: "26",
       title: "REST AREA",
@@ -257,6 +277,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/27_THE_PERFECT_FAMILY.jpeg"),
+    dominantColor: "#19261d",
     caption: {
       idx: "27",
       title: "THE PERFECT FAMILY",
@@ -266,6 +287,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/28_FUMER_TUE.jpeg"),
+    dominantColor: "#decfc0",
     caption: {
       idx: "28",
       title: "FUMER TUE",
@@ -275,6 +297,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/29_UNE_MAQUETTE.jpeg"),
+    dominantColor: "#2f351c",
     caption: {
       idx: "29",
       title: "UNE MAQUETTE",
@@ -284,6 +307,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/30_DIVING_IN_THE_BLUE.jpeg"),
+    dominantColor: "#c8c9d4",
     caption: {
       idx: "30",
       title: "DIVING IN THE BLUE",
@@ -293,6 +317,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/31_STRANGER.jpeg"),
+    dominantColor: "#422114",
     caption: {
       idx: "31",
       title: "STRANGER",
@@ -302,6 +327,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/32_SHANGLIE.jpeg"),
+    dominantColor: "#9dafa8",
     caption: {
       idx: "32",
       title: "SHANGLIE",
@@ -311,6 +337,7 @@ const photos = [
   },
   {
     ...createPhoto("/assets/photos/33_MA_GRAND-MERE.jpeg"),
+    dominantColor: "#8c543c",
     caption: {
       idx: "33",
       title: "MA GRAND-MERE",
@@ -321,15 +348,6 @@ const photos = [
 ];
 
 export default function Home() {
-  const photo = {
-    ...createPhoto("/assets/photos/house_home.webp"),
-    caption: {
-      idx: "9",
-      title: "MY GARDEN IS COOL",
-      place: "Canary Islands (ES)",
-      date: "2021",
-    },
-  };
   return (
     <SmoothScrollContainer>
       <Container className="pt-6">

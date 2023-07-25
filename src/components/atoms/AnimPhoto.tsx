@@ -3,14 +3,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-import ColorThief from "colorthief";
-
 import { createAlt, rgbToHex } from "@/utils/helpers";
 import { ease } from "@/utils/store";
 
 type Props = {
   alt?: string;
   src: string;
+  dominantColor?: string;
   fit?: "cover" | "contain";
   placeholder?: "blur" | "empty";
   blurDataURL?: string;
@@ -32,13 +31,13 @@ const variants = {
 export const AnimPhoto = ({
   alt,
   src,
+  dominantColor,
   fit = "cover",
   placeholder = "blur",
   blurDataURL = src,
   sizes,
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [dominantColor, setDominantColor] = useState("");
 
   const imageProps = {
     alt: alt ?? createAlt(src),
@@ -51,17 +50,16 @@ export const AnimPhoto = ({
 
   const handleLoad = () => {
     if (!ref.current) return;
-
-    const img = ref.current.querySelector("img");
-    if (!img) return;
-
-    const colorThief = new ColorThief();
-    const color = colorThief.getColor(img);
-    setDominantColor(rgbToHex(color));
   };
 
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.style.backgroundColor = dominantColor ?? "#000000";
+    }
+  }, [ref.current]);
+
   return (
-    <div ref={ref} className="h-full relative overflow-hidden bg-red-400">
+    <div ref={ref} className="h-full relative overflow-hidden bg-[#372823]">
       <div
         data-scroll
         data-scroll-speed="-1.5"

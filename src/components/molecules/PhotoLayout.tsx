@@ -9,7 +9,11 @@ type Props = {
 export const PhotoLayout = ({ photo }: Props) => {
   return (
     <div className="flex flex-col h-full gap-4">
-      <AnimPhoto src={photo?.src} alt={photo?.alt} />
+      <AnimPhoto
+        src={photo?.src}
+        alt={photo?.alt}
+        dominantColor={photo.dominantColor}
+      />
       <PhotoCaption {...photo?.caption} />
     </div>
   );
