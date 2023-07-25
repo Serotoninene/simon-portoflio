@@ -64,14 +64,16 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
       className={`${
         !isOverview
           ? "h-[100dvh] py-4 items-center"
-          : "h-[64px] cursor-pointer items-start "
-      } w-full flex flex-col flex-none justify-center relative  pointer-events-auto`}
+          : "h-full cursor-pointer items-start"
+      } w-full flex flex-col flex-none justify-center relative pointer-events-auto`}
       onClick={handleClick}
     >
       <Image
         alt={photo.alt}
-        width={aspectRatio > 1 ? width : height * aspectRatio - 32}
-        height={aspectRatio > 1 ? 0 : height}
+        width={
+          aspectRatio > 1 ? width - width * 0.2 : height * aspectRatio - 32
+        }
+        height={aspectRatio > 1 ? height * aspectRatio : height - 32}
         src={photo.src}
         className=" object-contain object-center"
       />
