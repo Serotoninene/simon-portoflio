@@ -1,16 +1,18 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
-import { createPhotoTitle, loadImage } from "@/utils/helpers";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
-import { Scroll } from "react-locomotive-scroll";
+import { createPhotoTitle, loadImage, rgbToHex } from "@/utils/helpers";
 
 import { AnimatePresence, LayoutGroup, motion, useScroll } from "framer-motion";
-import { Container, SmoothScrollContainer } from "@/components/molecules";
+import ColorThief from "colorthief";
+
+import { Container } from "@/components/molecules";
 import { useWindowSize } from "@/utils/hooks";
+import { log } from "console";
+
 // use Image but rename it NextImage
-import Image from "next/image";
 
 // TO DO
 // [X] Make a "menu" layout to see all the images at once on click of a button
@@ -34,7 +36,9 @@ import Image from "next/image";
 
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const ref = useRef<HTMLDivElement>(null);
+  const childRef = useRef<HTMLDivElement>(null);
   const { width, height } = useWindowSize();
+  const [dominantColor, setDominantColor] = useState("");
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
 
   // know the aspect ratio of the photo
@@ -48,10 +52,22 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   };
 
   useEffect(() => {
+    if (!dominantColor) return;
+
+    if (childRef.current) {
+      childRef.current.style.backgroundColor = dominantColor;
+    }
+  }, [dominantColor]);
+
+  useEffect(() => {
     if (!width || !height) return;
     const img = loadImage(photo.src);
+    const colorThief = new ColorThief();
+
     img.src = photo.src;
     img.onload = () => {
+      const color = colorThief.getColor(img);
+      setDominantColor(rgbToHex(color));
       setAspectRatio(img.width / img.height);
     };
 
@@ -64,7 +80,6 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
           : height * aspectRatio - 32,
       height: 400,
     });
-    // }
   }, [photo.src, width, height, aspectRatio]);
 
   if (!width || !height) return null;
@@ -78,18 +93,22 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
         !isOverview
           ? "h-[100dvh] py-4 items-center"
           : "h-full cursor-pointer items-start"
-      } w-full flex flex-col flex-none justify-center relative pointer-events-auto`}
+      } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
       onClick={handleClick}
     >
-      <Image
-        alt={photo.alt}
-        width={imageSize.width}
-        height={imageSize.height}
-        placeholder="blur"
-        blurDataURL={photo.src}
-        src={photo.src}
-        className=" object-contain object-center"
-      />
+      <div ref={childRef} className="overflow-hidden">
+        <div>
+          <Image
+            alt={photo.alt}
+            width={imageSize.width}
+            height={imageSize.height}
+            placeholder="blur"
+            blurDataURL={photo.src}
+            className="opacity-10 "
+            src={photo.src}
+          />
+        </div>
+      </div>
     </div>
   );
 };
