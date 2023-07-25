@@ -30,8 +30,8 @@ export const AnimPhoto = ({
   alt,
   src,
   fit = "cover",
-  placeholder = "empty",
-  blurDataURL,
+  placeholder = "blur",
+  blurDataURL = src,
   sizes,
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
