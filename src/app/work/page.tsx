@@ -25,8 +25,8 @@ import { useWindowSize } from "@/utils/hooks";
 // [X] make the footer change with the scroll
 // [X] replace all the img by Image on work page
 // [X] Make the photos lazy load
-// [] make a menu for mobile
-// [] make the text appear on scroll
+// [X] make a menu for mobile
+// [X] make the text appear on scroll
 // [] make an intro animation
 // [] rearrange the layout on mobile
 // [] remove the number from the title + capitalize the first letter (on work page)

@@ -16,9 +16,12 @@ export const createPhoto = (src: string) => {
 };
 
 export const createPhotoTitle = (src: string) => {
-  const fileName = src?.split("/").pop();
+  const fileName = src?.split("/").pop()?.slice(1);
   const alt = fileName ? fileName.split(".")[0] : "";
-  const title = alt.replaceAll("_", " ");
+  const altArray = alt.split("_");
+  altArray.shift();
+  const title = altArray.join(" ");
+
   const capitalizedTitle = capitalizeWord(title);
   return { src, alt, capitalizedTitle };
 };
