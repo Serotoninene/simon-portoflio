@@ -29,7 +29,7 @@ import { useWindowSize } from "@/utils/hooks";
 // [X] make the text appear on scroll
 // [] make an intro animation
 // [] rearrange the layout on mobile
-// [] remove the number from the title + capitalize the first letter (on work page)
+// [X] remove the number from the title + capitalize the first letter (on work page)
 // [] make the title blend mode (on work page)
 // [] make a custom cursor
 
@@ -140,7 +140,7 @@ const WorkFooter = ({
       }`}
     >
       <AnimatePresence mode="popLayout">
-        <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between items-center w-full mix-blend-difference">
           <motion.div
             key={title}
             variants={variants}
