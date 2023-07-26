@@ -46,7 +46,7 @@ export const AnimPhoto = ({
     sizes: sizes,
     className: `object-${fit || "cover"}`,
     placeholder: placeholder,
-    blurDataURL: blurDataURL,
+    blurDataURL: blurDataURL ?? src,
   };
 
   const handleLoad = () => {
@@ -71,13 +71,7 @@ export const AnimPhoto = ({
         className="relative h-full translate-y-10"
       >
         {/* eslint-disable-next-line */}
-        <Image
-          onLoad={handleLoad}
-          fill
-          {...imageProps}
-          placeholder="blur"
-          blurDataURL={src}
-        />
+        <Image onLoad={handleLoad} fill {...imageProps} />
       </div>
     </div>
   );

@@ -28,10 +28,6 @@ const linkAnim = {
   shown: { y: 0 },
 };
 
-// [] the navbar disappears when scrolling down
-// [] the navbar appears when scrolling up
-// [] the animation doesn't trigger when on mobile
-
 export const Navbar = (props: Props) => {
   const [scrollDir, setScrollDir] = useState<"up" | "down">("up");
 
