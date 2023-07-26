@@ -13,6 +13,8 @@ type NavLink = {
 
 type Props = {
   navLinks: NavLink[];
+  isMenuOpen: boolean;
+  setIsMenuOpen: (e: boolean) => void;
 };
 
 const containerAnim = {
@@ -41,11 +43,27 @@ const navLinks = [
   { href: "instagram", title: "instagram" },
 ];
 
-export const Menu = ({ navLinks }: Props) => {
-  return <div>Menu</div>;
+export const Menu = ({ navLinks, isMenuOpen, setIsMenuOpen }: Props) => {
+  return (
+    <motion.div
+      initial={{ y: "-100%" }}
+      animate={{ y: isMenuOpen ? 0 : "-100%" }}
+      transition={{ ease: "easeOut" }}
+      className="fixed sm:hidden top-0 left-0 right-0 bottom-0 bg-light"
+    >
+      <div
+        onClick={() => {
+          setIsMenuOpen(false);
+        }}
+      >
+        Menu
+      </div>
+    </motion.div>
+  );
 };
 
 export const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollDir, setScrollDir] = useState<"up" | "down">("up");
 
   const handleWheel = (e: WheelEvent) => {
@@ -54,6 +72,10 @@ export const Navbar = () => {
     } else {
       setScrollDir("up");
     }
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -79,12 +101,19 @@ export const Navbar = () => {
         ))}
       </motion.ul>
       {/*  burger button */}
-      <ul className="flex sm:hidden flex-col justify-center items-end h-6 gap-1">
+      <ul
+        onClick={toggleMenu}
+        className="flex sm:hidden flex-col justify-center items-end h-6 gap-1"
+      >
         <li className="w-5 h-[1px] bg-black rounded"></li>
         <li className="w-5 h-[1px] bg-black rounded"></li>
       </ul>
       {/* menu for mobile */}
-      <Menu navLinks={navLinks} />
+      <Menu
+        navLinks={navLinks}
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+      />
     </Container>
   );
 };
