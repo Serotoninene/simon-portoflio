@@ -6,7 +6,14 @@ import { AnimLink } from "../atoms";
 import { Container } from "../molecules";
 import { motion } from "framer-motion";
 
-type Props = {};
+type NavLink = {
+  href: string;
+  title: string;
+};
+
+type Props = {
+  navLinks: NavLink[];
+};
 
 const containerAnim = {
   hidden: {
@@ -28,7 +35,17 @@ const linkAnim = {
   shown: { y: 0 },
 };
 
-export const Navbar = (props: Props) => {
+const navLinks = [
+  { href: "/work", title: "work" },
+  { href: "/", title: "home" },
+  { href: "instagram", title: "instagram" },
+];
+
+export const Menu = ({ navLinks }: Props) => {
+  return <div>Menu</div>;
+};
+
+export const Navbar = () => {
   const [scrollDir, setScrollDir] = useState<"up" | "down">("up");
 
   const handleWheel = (e: WheelEvent) => {
@@ -55,20 +72,19 @@ export const Navbar = (props: Props) => {
         variants={containerAnim}
         className="hidden overflow-hidden sm:flex justify-end gap-14 font-semi-bold"
       >
-        <motion.li variants={linkAnim}>
-          <AnimLink href="/work">work</AnimLink>
-        </motion.li>
-        <motion.li variants={linkAnim}>
-          <AnimLink>about me</AnimLink>
-        </motion.li>
-        <motion.li variants={linkAnim}>
-          <AnimLink>instagram</AnimLink>
-        </motion.li>
+        {navLinks.map((navLink, idx) => (
+          <motion.li key={idx} variants={linkAnim}>
+            <AnimLink href={navLink.href}>{navLink.title}</AnimLink>
+          </motion.li>
+        ))}
       </motion.ul>
+      {/*  burger button */}
       <ul className="flex sm:hidden flex-col justify-center items-end h-6 gap-1">
         <li className="w-5 h-[1px] bg-black rounded"></li>
         <li className="w-5 h-[1px] bg-black rounded"></li>
       </ul>
+      {/* menu for mobile */}
+      <Menu navLinks={navLinks} />
     </Container>
   );
 };
