@@ -11,10 +11,6 @@ type HomeContainerProps = {
   fit?: boolean;
 };
 
-type AnimateProps = {
-  children: React.ReactNode;
-};
-
 export const Container = ({ children, className }: Props) => {
   return (
     <div
