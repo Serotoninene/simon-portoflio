@@ -39,10 +39,42 @@ const linkAnim = {
 };
 
 const navLinks = [
-  { href: "/work", title: "work" },
   { href: "/", title: "home" },
+  { href: "/work", title: "work" },
   { href: "instagram", title: "instagram" },
 ];
+
+interface BurgerButtonProps {
+  isMenuOpen: boolean;
+}
+
+const BurgerButton = ({ isMenuOpen }: BurgerButtonProps) => {
+  const burgerButtonAnim = {
+    open: { rotate: 0, y: 0 },
+    close: (custom: number) => ({
+      y: custom * 3,
+      rotate: custom * 45,
+      ease: [0.3, 0.01, -0.05, 0.95],
+    }),
+  };
+
+  return (
+    <div>
+      <motion.div
+        custom={1}
+        variants={burgerButtonAnim}
+        animate={isMenuOpen ? "close" : "open"}
+        className="w-6 h-[2px] mt-1 bg-black"
+      ></motion.div>
+      <motion.div
+        custom={-1}
+        variants={burgerButtonAnim}
+        animate={isMenuOpen ? "close" : "open"}
+        className="w-6 h-[2px] mt-1 bg-black"
+      ></motion.div>
+    </div>
+  );
+};
 
 // [] find a better easing
 
@@ -60,20 +92,27 @@ export const Menu = ({ navLinks, isMenuOpen, setIsMenuOpen }: Props) => {
       transition={{ ease: "easeOut" }}
       className="fixed sm:hidden top-0 left-0 right-0 bottom-0 bg-light"
     >
-      <div
-        onClick={() => {
-          setIsMenuOpen(false);
-        }}
-      >
-        Menu
-      </div>
-      <ul>
-        {navLinks.map((navLink, idx) => (
-          <motion.li key={idx} variants={linkAnim}>
-            <AnimLink href={navLink.href}>{navLink.title}</AnimLink>
-          </motion.li>
-        ))}
-      </ul>
+      <Container className="py-10 flex flex-col justify-between h-full">
+        <div
+          className="cursor-pointer flex justify-end bg-red-100"
+          onClick={() => {
+            setIsMenuOpen(false);
+          }}
+        >
+          <BurgerButton isMenuOpen={true} />
+        </div>
+        <ul className="flex flex-col gap-6">
+          {navLinks.map((navLink, idx) => (
+            <motion.li
+              key={idx}
+              variants={linkAnim}
+              className="text-xl font-bold"
+            >
+              <AnimLink href={navLink.href}>{navLink.title}</AnimLink>
+            </motion.li>
+          ))}
+        </ul>
+      </Container>
     </motion.div>
   );
 };
