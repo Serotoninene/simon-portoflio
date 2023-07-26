@@ -40,7 +40,9 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={`${poppins.className} bg-light`}>
         <Navbar />
-        <AnimateContainer>{children}</AnimateContainer>
+        {/* <AnimateContainer> */}
+        {children}
+        {/* </AnimateContainer> */}
       </body>
     </html>
   );
