@@ -84,7 +84,7 @@ export const AnimPhoto = ({
           onLoad={handleLoad}
           fill
           {...imageProps}
-          className={`transition-opacity object-cover ${
+          className={`transition-opacity duration-500 object-cover ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
         />
