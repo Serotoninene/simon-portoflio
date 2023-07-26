@@ -3,6 +3,8 @@ import { Poppins, Public_Sans } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Navbar } from "@/components/organisms";
+import { AnimatePresence } from "framer-motion";
+import { AnimateContainer } from "@/components/molecules";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -38,7 +40,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={`${poppins.className} bg-light`}>
         <Navbar />
-        {children}
+        <AnimateContainer>{children}</AnimateContainer>
       </body>
     </html>
   );

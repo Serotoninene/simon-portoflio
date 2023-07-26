@@ -3,7 +3,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-import { createAlt, rgbToHex } from "@/utils/helpers";
+import { motion } from "framer-motion";
+
+import { createAlt } from "@/utils/helpers";
 import { ease } from "@/utils/store";
 
 type Props = {
@@ -17,7 +19,7 @@ type Props = {
 };
 
 const variants = {
-  hidden: { scale: 1 },
+  hidden: { scale: 1, y: "100%" },
   visible: {
     scale: 1,
     y: 0,
@@ -64,7 +66,14 @@ export const AnimPhoto = ({
   }, [ref.current, isLoaded]);
 
   return (
-    <div ref={ref} className="h-full relative overflow-hidden bg-[#372823]">
+    <motion.div
+      ref={ref}
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      className="h-full relative overflow-hidden bg-[#372823]"
+    >
       <div
         data-scroll
         data-scroll-speed="-1.5"
@@ -73,6 +82,6 @@ export const AnimPhoto = ({
         {/* eslint-disable-next-line */}
         <Image onLoad={handleLoad} fill {...imageProps} />
       </div>
-    </div>
+    </motion.div>
   );
 };

@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import React from "react";
 
 type Props = {
@@ -8,6 +9,10 @@ type Props = {
 type HomeContainerProps = {
   children: React.ReactNode;
   fit?: boolean;
+};
+
+type AnimateProps = {
+  children: React.ReactNode;
 };
 
 export const Container = ({ children, className }: Props) => {
