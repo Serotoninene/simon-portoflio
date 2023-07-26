@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { AnimLink } from "../atoms";
 import { Container } from "../molecules";
 import { motion } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
 
 type NavLink = {
   href: string;
@@ -43,7 +44,15 @@ const navLinks = [
   { href: "instagram", title: "instagram" },
 ];
 
+// [] find a better easing
+
 export const Menu = ({ navLinks, isMenuOpen, setIsMenuOpen }: Props) => {
+  const path = usePathname();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [path]);
+
   return (
     <motion.div
       initial={{ y: "-100%" }}
@@ -58,6 +67,13 @@ export const Menu = ({ navLinks, isMenuOpen, setIsMenuOpen }: Props) => {
       >
         Menu
       </div>
+      <ul>
+        {navLinks.map((navLink, idx) => (
+          <motion.li key={idx} variants={linkAnim}>
+            <AnimLink href={navLink.href}>{navLink.title}</AnimLink>
+          </motion.li>
+        ))}
+      </ul>
     </motion.div>
   );
 };
