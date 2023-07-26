@@ -342,7 +342,7 @@ const photos = [
       idx: "33",
       title: "MA GRAND-MERE",
       place: "Haute-Garonne (FR)",
-      date: "2023}",
+      date: "2023",
     },
   },
 ];
