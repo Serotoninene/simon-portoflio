@@ -21,14 +21,12 @@ export const GridThree = ({
     <HomeContainer fit>
       <div className="pt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 h-full md:grid-cols-11">
         <div
-          className={`flex flex-col gap-6 md:col-span-5 ${
-            inverted && "order-1"
-          }`}
+          className={`flex flex-col  md:col-span-5 ${inverted && "order-1"}`}
         >
           <div
             data-scroll
-            data-scroll-speed="3"
-            className="h-[50dvh] sm:h-full"
+            data-scroll-speed="2"
+            className="h-[100dvh] sm:h-full"
           >
             <AnimPhoto src={firstPhoto?.src} alt={firstPhoto?.alt} />
             <div className="block sm:hidden mt-4">
@@ -38,21 +36,25 @@ export const GridThree = ({
 
           <div
             data-scroll
-            data-scroll-speed="2"
+            data-scroll-speed="1"
             className="h-[100dvh] sm:h-[125%]"
           >
             <PhotoLayout photo={secondPhoto} />
           </div>
         </div>
-        <div className=" md:col-span-6 flex flex-col gap-12">
+        <div className="sm:h-[100dvh] md:col-span-6 flex flex-col gap-12">
           <div
             data-scroll
-            data-scroll-speed="1.5"
+            data-scroll-speed="1"
             className={`hidden sm:flex ${inverted ? "justify-end" : ""}`}
           >
             <PhotoCaption {...firstPhoto?.caption} />
           </div>
-          <div data-scroll data-scroll-speed="0.5" className="h-[60dvh]">
+          <div
+            data-scroll
+            data-scroll-speed="0.5"
+            className="h-[100dvh] sm:h-full"
+          >
             <PhotoLayout photo={thirdPhoto} />
           </div>
         </div>

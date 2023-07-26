@@ -72,15 +72,22 @@ export const AnimPhoto = ({
       // initial="hidden"
       // animate="visible"
       // exit="hidden"
-      className="h-full relative overflow-hidden bg-[#372823]"
+      className="h-full relative overflow-hidden "
     >
       <div
         data-scroll
-        data-scroll-speed="-1.5"
+        data-scroll-speed="-1.1"
         className="relative h-full translate-y-10"
       >
         {/* eslint-disable-next-line */}
-        <Image onLoad={handleLoad} fill {...imageProps} />
+        <Image
+          onLoad={handleLoad}
+          fill
+          {...imageProps}
+          className={`transition-opacity object-cover ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
       </div>
     </motion.div>
   );
