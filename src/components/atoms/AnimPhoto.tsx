@@ -60,10 +60,6 @@ export const AnimPhoto = ({
   useEffect(() => {
     if (ref.current) {
       ref.current.style.backgroundColor = dominantColor ?? "#000000";
-
-      if (isLoaded) {
-        ref.current.style.backgroundColor = "transparent";
-      }
     }
   }, [ref.current, isLoaded]);
 
