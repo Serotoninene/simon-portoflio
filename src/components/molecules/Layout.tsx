@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 
 import { Navbar } from "@/components/organisms";
 import Head from "next/head";
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -34,6 +36,7 @@ export const metadata = {
 };
 
 export default function Layout({ children }: Props) {
+  const path = usePathname();
   return (
     <div id="App" className={`${poppins.className} bg-light`}>
       <Head>
@@ -48,7 +51,16 @@ export default function Layout({ children }: Props) {
       <header>
         <Navbar />
       </header>
-      <main>{children}</main>
+      {/* <AnimatePresence mode="wait"> */}
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        key={path}
+      >
+        {children}
+      </motion.main>
+      {/* </AnimatePresence> */}
     </div>
   );
 }

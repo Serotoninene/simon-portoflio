@@ -69,9 +69,9 @@ export const AnimPhoto = ({
     <motion.div
       ref={ref}
       variants={variants}
-      // initial="hidden"
-      // animate="visible"
-      // exit="hidden"
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
       className="h-full relative overflow-hidden "
     >
       <div
