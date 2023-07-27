@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { createAlt } from "@/utils/helpers";
 import { ease } from "@/utils/store";
+import { usePathname } from "next/navigation";
 
 type Props = {
   alt?: string;
@@ -41,6 +42,7 @@ export const AnimPhoto = ({
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const path = usePathname();
 
   const imageProps = {
     alt: alt ?? createAlt(src),
@@ -66,29 +68,28 @@ export const AnimPhoto = ({
   }, [ref.current, isLoaded]);
 
   return (
-    <motion.div
-      ref={ref}
-      variants={variants}
-      // initial="hidden"
-      // animate="visible"
-      // exit="hidden"
-      className="h-full relative overflow-hidden "
-    >
-      <div
-        data-scroll
-        data-scroll-speed="-1.1"
-        className="relative h-full translate-y-10"
-      >
-        {/* eslint-disable-next-line */}
-        <Image
-          onLoad={handleLoad}
-          fill
-          {...imageProps}
-          className={`transition-opacity duration-1000 object-cover ${
-            isLoaded ? "opacity-100" : "opacity-0"
-          }`}
-        />
+    <AnimatePresence mode="wait">
+      <div ref={ref} key={path} className="h-full relative overflow-hidden ">
+        <motion.div
+          exit={{ y: "100%" }}
+          transition={{
+            ease: "easeOut",
+          }}
+          data-scroll
+          data-scroll-speed="-1.1"
+          className="relative h-full translate-y-10"
+        >
+          {/* eslint-disable-next-line */}
+          <Image
+            onLoad={handleLoad}
+            fill
+            {...imageProps}
+            className={`transition-opacity duration-1000 object-cover ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        </motion.div>
       </div>
-    </motion.div>
+    </AnimatePresence>
   );
 };

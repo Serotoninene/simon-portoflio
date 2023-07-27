@@ -44,7 +44,7 @@ export const AnimLink = ({ children, href = "/" }: Props) => {
   const words = children?.toString().split(" ");
 
   return (
-    <Link href={href} className="cursor-pointer">
+    <Link href={href} scroll={false} className="cursor-pointer">
       <motion.span
         variants={containerAnim}
         initial="normal"

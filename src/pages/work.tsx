@@ -98,14 +98,12 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
       <div className="overflow-hidden">
         <motion.div
           initial={{
-            y: "-100%",
             opacity: 0,
           }}
           animate={{
-            y: 0,
             opacity: 1,
           }}
-          transition={{ delay: 1, ease: "easeOut" }}
+          transition={{ delay: 0.3, ease: "easeOut" }}
           ref={childRef}
         >
           <Image
@@ -271,6 +269,8 @@ export default function Work() {
           {photos.map((photo, idx) => (
             <motion.div
               layout
+              initial={{ y: "50%" }}
+              animate={{ y: 0 }}
               transition={{ delay: 0.005 * idx, ease: "easeOut" }}
               key={idx}
               className={`flex-none ${
