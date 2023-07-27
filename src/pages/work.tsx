@@ -10,6 +10,7 @@ import ColorThief from "colorthief";
 
 import { Container } from "@/components/molecules";
 import { useWindowSize } from "@/utils/hooks";
+import { usePathname } from "next/navigation";
 
 // use Image but rename it NextImage
 
@@ -34,6 +35,7 @@ import { useWindowSize } from "@/utils/hooks";
 // [] make a custom cursor
 
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
+  const path = usePathname();
   const ref = useRef<HTMLDivElement>(null);
   const childRef = useRef<HTMLDivElement>(null);
   const { width, height } = useWindowSize();
@@ -84,39 +86,43 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   if (!width || !height) return null;
 
   return (
-    <div
-      ref={ref}
-      data-scroll
-      data-scroll-to
-      className={`${
-        !isOverview
-          ? "h-[100dvh] py-4 items-center"
-          : "h-full cursor-pointer items-start"
-      } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
-      onClick={handleClick}
-    >
-      <div className="overflow-hidden">
-        <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{ delay: 0.3, ease: "easeOut" }}
-          ref={childRef}
-        >
-          <Image
-            alt={photo.alt}
-            width={imageSize.width}
-            height={imageSize.height}
-            placeholder="blur"
-            blurDataURL={photo.src}
-            src={photo.src}
-          />
-        </motion.div>
+    <AnimatePresence mode="wait">
+      <div
+        ref={ref}
+        data-scroll
+        data-scroll-to
+        key={path}
+        className={`${
+          !isOverview
+            ? "h-[100dvh] py-4 items-center"
+            : "h-full cursor-pointer items-start"
+        } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
+        onClick={handleClick}
+      >
+        <div className="overflow-hidden">
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{ y: "100%" }}
+            transition={{ delay: 0.5, ease: "easeOut" }}
+            ref={childRef}
+          >
+            <Image
+              alt={photo.alt}
+              width={imageSize.width}
+              height={imageSize.height}
+              placeholder="blur"
+              blurDataURL={photo.src}
+              src={photo.src}
+            />
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 };
 
