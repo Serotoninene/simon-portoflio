@@ -94,7 +94,7 @@ export const Menu = ({ navLinks, isMenuOpen, setIsMenuOpen }: Props) => {
     >
       <Container className="py-10 flex flex-col justify-between h-full">
         <div
-          className="cursor-pointer flex justify-end bg-red-100"
+          className="cursor-pointer flex justify-end"
           onClick={() => {
             setIsMenuOpen(false);
           }}

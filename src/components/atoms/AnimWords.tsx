@@ -2,7 +2,8 @@
 
 import React from "react";
 // Framer Motion
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 interface Props {
   string?: string;
@@ -25,6 +26,7 @@ export const AnimatedWords = ({
   fontWeight = "font-normal",
   absolute,
 }: Props) => {
+  const path = usePathname();
   const containerAnim = {
     hidden: {},
     show: {
@@ -68,26 +70,28 @@ export const AnimatedWords = ({
   const words = string?.split(" ");
 
   return (
-    <motion.span
-      variants={containerAnim}
-      initial="hidden"
-      animate={start ? "show" : "hidden"}
-      exit="exit"
-      key={string}
-      className={`${absolute ? "absolute w-[100px]" : ""}
+    <AnimatePresence mode="wait">
+      <motion.span
+        key={path}
+        variants={containerAnim}
+        initial="hidden"
+        animate={start ? "show" : "hidden"}
+        exit="exit"
+        className={`${absolute ? "absolute w-[100px]" : ""}
        overflow-hidden inline-block align-bottom leading-[110%]`}
-    >
-      {words?.map((word, idx) => (
-        <>
-          <motion.span
-            key={`${word}-${idx}`}
-            className={`${fontWeight} inline-block`}
-            variants={letterAnim}
-          >
-            {word}
-          </motion.span>{" "}
-        </>
-      ))}
-    </motion.span>
+      >
+        {words?.map((word, idx) => (
+          <>
+            <motion.span
+              key={`${word}-${idx}`}
+              className={`${fontWeight} inline-block`}
+              variants={letterAnim}
+            >
+              {word}
+            </motion.span>{" "}
+          </>
+        ))}
+      </motion.span>
+    </AnimatePresence>
   );
 };

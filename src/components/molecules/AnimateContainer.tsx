@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
@@ -8,10 +9,9 @@ type AnimateProps = {
 };
 
 export const AnimateContainer = ({ children }: AnimateProps) => {
-  const path = usePathname();
   return (
-    <AnimatePresence mode="wait">
-      <motion.div key={path}>{children}</motion.div>
-    </AnimatePresence>
+    <div data-barba="wrapper">
+      <div data-barba="container">{children}</div>
+    </div>
   );
 };

@@ -10,6 +10,7 @@ import ColorThief from "colorthief";
 
 import { Container } from "@/components/molecules";
 import { useWindowSize } from "@/utils/hooks";
+import { usePathname } from "next/navigation";
 
 // use Image but rename it NextImage
 
@@ -29,11 +30,12 @@ import { useWindowSize } from "@/utils/hooks";
 // [X] make the text appear on scroll
 // [] make an intro animation
 // [] rearrange the layout on mobile
-// [] remove the number from the title + capitalize the first letter (on work page)
+// [X] remove the number from the title + capitalize the first letter (on work page)
 // [] make the title blend mode (on work page)
 // [] make a custom cursor
 
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
+  const path = usePathname();
   const ref = useRef<HTMLDivElement>(null);
   const childRef = useRef<HTMLDivElement>(null);
   const { width, height } = useWindowSize();
@@ -84,41 +86,43 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   if (!width || !height) return null;
 
   return (
-    <div
-      ref={ref}
-      data-scroll
-      data-scroll-to
-      className={`${
-        !isOverview
-          ? "h-[100dvh] py-4 items-center"
-          : "h-full cursor-pointer items-start"
-      } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
-      onClick={handleClick}
-    >
-      <div className="overflow-hidden">
-        <motion.div
-          initial={{
-            y: "-100%",
-            opacity: 0,
-          }}
-          animate={{
-            y: 0,
-            opacity: 1,
-          }}
-          transition={{ delay: 1, ease: "easeOut" }}
-          ref={childRef}
-        >
-          <Image
-            alt={photo.alt}
-            width={imageSize.width}
-            height={imageSize.height}
-            placeholder="blur"
-            blurDataURL={photo.src}
-            src={photo.src}
-          />
-        </motion.div>
+    <AnimatePresence mode="wait">
+      <div
+        ref={ref}
+        data-scroll
+        data-scroll-to
+        key={path}
+        className={`${
+          !isOverview
+            ? "h-[100dvh] py-4 items-center"
+            : "h-full cursor-pointer items-start"
+        } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
+        onClick={handleClick}
+      >
+        <div className="overflow-hidden">
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{ y: "100%" }}
+            transition={{ delay: 0.5, ease: "easeOut" }}
+            ref={childRef}
+          >
+            <Image
+              alt={photo.alt}
+              width={imageSize.width}
+              height={imageSize.height}
+              placeholder="blur"
+              blurDataURL={photo.src}
+              src={photo.src}
+            />
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 };
 
@@ -140,7 +144,7 @@ const WorkFooter = ({
       }`}
     >
       <AnimatePresence mode="popLayout">
-        <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between items-center w-full mix-blend-difference">
           <motion.div
             key={title}
             variants={variants}
@@ -271,6 +275,8 @@ export default function Work() {
           {photos.map((photo, idx) => (
             <motion.div
               layout
+              initial={{ y: "50%" }}
+              animate={{ y: 0 }}
               transition={{ delay: 0.005 * idx, ease: "easeOut" }}
               key={idx}
               className={`flex-none ${

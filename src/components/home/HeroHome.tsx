@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
+import { spartan } from "../molecules/Layout";
 
-import { spartan } from "@/app/layout";
+// import { spartan } from "@/app/layout";
 type Props = {};
 
 export const HeroHome = (props: Props) => {
