@@ -1,10 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import barba from "@barba/core";
-import { useEffect } from "react";
-import { gsap } from "gsap";
 
 type AnimateProps = {
   children: React.ReactNode;
@@ -26,33 +24,6 @@ type AnimateProps = {
 // };
 
 export const AnimateContainer = ({ children }: AnimateProps) => {
-  const PageTransition = {
-    async leave() {
-      // Code to animate the leaving page, e.g., fading out
-      gsap.to("#body", { duration: 0.5, opacity: 0 });
-    },
-
-    async enter() {
-      // Code to animate the entering page, e.g., fading in
-      gsap.to("#body", { duration: 1, opacity: 0 });
-
-      console.log("Entering page...");
-    },
-  };
-
-  useEffect(() => {
-    if (!barba) return;
-
-    barba.init({
-      transitions: [PageTransition],
-      debug: true,
-    });
-
-    return () => {
-      barba.destroy();
-    };
-  }, [barba]);
-
   return (
     <div data-barba="wrapper">
       <div data-barba="container">{children}</div>
