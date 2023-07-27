@@ -65,22 +65,22 @@ export const AnimPhoto = ({
 
   return (
     <AnimatePresence mode="wait">
-      <div ref={ref} key={path} className="h-full relative overflow-hidden ">
+      <div ref={ref} key={path} className="h-full relative overflow-hidden">
         <motion.div
           exit={{ y: "100%" }}
           transition={{
             ease: "easeOut",
           }}
           data-scroll
-          data-scroll-speed="-1.1"
-          className="relative h-full translate-y-10"
+          data-scroll-speed="-0.5"
+          className="relative h-full  translate-y-10"
         >
           {/* eslint-disable-next-line */}
           <Image
             onLoad={handleLoad}
             fill
             {...imageProps}
-            className={`transition-opacity duration-1000 object-cover ${
+            className={`transition-opacity duration-1000 scale-105 object-cover ${
               isLoaded ? "opacity-100" : "opacity-0"
             }`}
           />
