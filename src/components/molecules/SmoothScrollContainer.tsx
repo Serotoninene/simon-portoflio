@@ -34,9 +34,6 @@ export const SmoothScrollContainer = ({ children }: Props) => {
       }}
       watch={[path]}
       location={path}
-      onLocationChange={(scroll: Scroll) => {
-        scroll.scrollTo(0, { duration: 0, disableLerp: true });
-      }}
     >
       <div
         id="scroll-container"

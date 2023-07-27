@@ -40,7 +40,7 @@ export default function Layout({ children }: Props) {
   return (
     <div id="App" className={`${poppins.className} bg-light`}>
       <Head>
-        <title>Virgile Hasselmann</title>
+        <title>Simon Eychennes</title>
         <meta
           name="description"
           content="Virgile Hasselmann, a video and photo portfolio"
@@ -51,16 +51,9 @@ export default function Layout({ children }: Props) {
       <header>
         <Navbar />
       </header>
-      {/* <AnimatePresence mode="wait"> */}
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        key={path}
-      >
-        {children}
-      </motion.main>
-      {/* </AnimatePresence> */}
+      <AnimatePresence mode="wait">
+        <main key={path}>{children}</main>
+      </AnimatePresence>
     </div>
   );
 }
