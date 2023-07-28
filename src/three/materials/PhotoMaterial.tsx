@@ -63,4 +63,4 @@ export default class PhotodMaterial extends THREE.ShaderMaterial {
     this.uniforms.uTexture.value = v;
   }
 }
-extend({ DistortedMaterial });
+extend({ PhotodMaterial });
