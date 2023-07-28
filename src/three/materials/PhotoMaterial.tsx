@@ -2,24 +2,23 @@ import { extend } from "@react-three/fiber";
 // Three
 import * as THREE from "three";
 // Shaders
-// import vertex from "./vertex.glsl";
-// import fragment from "./fragment.glsl";
+import vertex from "../shaders/HomePhotoShader/vertex.glsl";
+import fragment from "../shaders/HomePhotoShader/fragment.glsl";
 
 export default class PhotodMaterial extends THREE.ShaderMaterial {
   constructor() {
     super({
       uniforms: {
-        uTexture: { value: new THREE.CubeTexture() },
-        uCube: { value: null },
-        uTime: { value: 2 },
+        uTexture: { value: new THREE.Texture() },
+        uTime: { value: 0 },
         uDistortionIntensity: { value: 0.3 },
         uDistortionSpeed: { value: 0.3 },
         uDistortionFrequency: {
           value: 0.2,
         },
       },
-      // vertexShader: vertex,
-      // fragmentShader: fragment,
+      vertexShader: vertex,
+      fragmentShader: fragment,
     });
   }
 
