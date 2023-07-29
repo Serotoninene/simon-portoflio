@@ -95,7 +95,7 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
         className={`${
           !isOverview
             ? "h-[100dvh] py-4 items-center"
-            : "h-full cursor-pointer items-start"
+            : "h-[50dvh] cursor-pointer items-start"
         } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
         onClick={handleClick}
       >
@@ -113,11 +113,13 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
           >
             <Image
               alt={photo.alt}
-              width={imageSize.width}
-              height={imageSize.height}
+              width={!isOverview ? imageSize.width : undefined}
+              height={!isOverview ? imageSize.height : undefined}
               placeholder="blur"
               blurDataURL={photo.src}
+              fill={isOverview}
               src={photo.src}
+              className="object-cover"
             />
           </motion.div>
         </div>
@@ -263,15 +265,16 @@ export default function Work() {
 
   return (
     <Container className="pt-0">
-      <div
-        data-scroll-section
-        className={`relative  ${
-          isOverview
-            ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 h-full gap-2"
-            : "flex flex-col gap-6 sm:gap-8 md:gap-[50dvh]"
-        } w-full`}
-      >
-        <LayoutGroup>
+      <LayoutGroup>
+        <motion.div
+          layout
+          data-scroll-section
+          className={`relative  ${
+            isOverview
+              ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 h-full gap-2"
+              : "flex flex-col gap-6 sm:gap-8 md:gap-[50dvh]"
+          } w-full`}
+        >
           {photos.map((photo, idx) => (
             <motion.div
               layout
@@ -290,8 +293,8 @@ export default function Work() {
               />
             </motion.div>
           ))}
-        </LayoutGroup>
-      </div>
+        </motion.div>
+      </LayoutGroup>
 
       <WorkFooter
         photos={photos}

@@ -9,7 +9,7 @@ import {
   ThreeAlined,
 } from "@/components/home";
 import { OneWoCaption } from "@/components/home/OneWoCaption";
-import { Container, SmoothScrollContainer } from "@/components/molecules";
+import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 
 const photos = [
   {
@@ -349,7 +349,7 @@ const photos = [
 
 export default function Home() {
   return (
-    <SmoothScrollContainer>
+    <LocomotiveScrollContainer>
       <Container className="pt-6">
         <main className="relative flex flex-col gap-56 pb-6">
           <HeroHome />
@@ -412,6 +412,6 @@ export default function Home() {
           />
         </main>
       </Container>
-    </SmoothScrollContainer>
+    </LocomotiveScrollContainer>
   );
 }
