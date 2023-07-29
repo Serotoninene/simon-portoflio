@@ -268,7 +268,7 @@ export default function Work() {
         className={`relative  ${
           isOverview
             ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 h-full gap-2"
-            : "flex flex-col gap-6 sm:gap-8 md:gap-10"
+            : "flex flex-col gap-6 sm:gap-8 md:gap-[50dvh]"
         } w-full`}
       >
         <LayoutGroup>
