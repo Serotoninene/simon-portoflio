@@ -17,8 +17,11 @@ export const PhotoCaption = ({
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div ref={ref} className="flex justify-between sm:justify-start gap-2">
-      <h3 className="text-5xl sm:text-6xl">
+    <div
+      ref={ref}
+      className="flex justify-between items-center sm:justify-start gap-2"
+    >
+      <h3 className="text-5xl whitespace-nowrap sm:text-6xl">
         <AnimatedLetters
           string={idx.padStart(2, "0")}
           start={isInView}
@@ -26,8 +29,8 @@ export const PhotoCaption = ({
           delay={0}
         ></AnimatedLetters>
       </h3>
-      <div className="flex flex-col justify-between pt-0.5 whitespace-nowrap overflow-hidden">
-        <h4 className="text-lg text-end sm:text-start sm:text-xl text-ellipsis overflow-hidden">
+      <div className="flex flex-col justify-between pt-0.5 overflow-hidden">
+        <h4 className="text-lg text-end sm:text-start sm:text-xl overflow-hidden">
           <AnimatedWords string={title} start={isInView} delay={0.05} />
         </h4>
         <motion.p
