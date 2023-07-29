@@ -3,9 +3,11 @@ import Image from "next/image";
 import { spartan } from "../molecules/Layout";
 import { TextureLoader } from "three";
 
-import { Canvas, useFrame, extend, useLoader } from "@react-three/fiber";
+import { Canvas, extend, useLoader } from "@react-three/fiber";
 import { OrbitControls, RoundedBox } from "@react-three/drei";
-import PhotoMaterial from "@/three/shaders/HomePhotoShader/PhotoMaterial" extend({ PhotoMaterial});
+
+import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
+import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 
 // import { spartan } from "@/app/layout";
 type Props = {};
@@ -16,7 +18,13 @@ const Box = () => {
   return (
     <mesh>
       <planeGeometry />
-      <PhotoMaterial uniforms-uTexture-value={texture} />
+      <shaderMaterial
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        uniforms={{
+          uTexture: { value: texture },
+        }}
+      />
     </mesh>
   );
 };

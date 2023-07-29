@@ -22,7 +22,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@shaders/*": ["./src/shaders/*"]
     }
   },
   "include": [
@@ -30,7 +31,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/three/shaders/HomePhotoShader"
+    "shaders/HomePhotoShader"
   ],
   "exclude": ["node_modules"]
 }

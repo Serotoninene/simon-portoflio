@@ -13,5 +13,6 @@ varying float vReflectionFactor;
 
 void main() {    
   vec4 color = texture2D(uTexture, vUv);
-  gl_FragColor = vec4(1.00,0.0,0.0,1.0);
+  gl_FragColor = color;
+  // gl_FragColor = vec4(1.00,0.0,0.0,1.0);
 }
