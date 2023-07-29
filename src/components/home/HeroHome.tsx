@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { spartan } from "../molecules/Layout";
-import { TextureLoader } from "three";
+import * as THREE from "three";
 
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -15,7 +15,10 @@ import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 // [] fix the mesh on the html div
 
 const Box = () => {
-  const texture = useLoader(TextureLoader, "/assets/photos/00_ACCUEIL.jpeg");
+  const texture = useLoader(
+    THREE.TextureLoader,
+    "/assets/photos/00_ACCUEIL.jpeg"
+  );
 
   return (
     <mesh>
@@ -25,6 +28,10 @@ const Box = () => {
         fragmentShader={fragmentShader}
         uniforms={{
           uTexture: { value: texture },
+          uTextureSize: {
+            value: new THREE.Vector2(texture.image.width, texture.image.height),
+          },
+          uQuadSize: { value: new THREE.Vector2(1, 1) },
         }}
       />
     </mesh>
