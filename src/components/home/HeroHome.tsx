@@ -1,18 +1,22 @@
 import React from "react";
 import Image from "next/image";
 import { spartan } from "../molecules/Layout";
+import { TextureLoader } from "three";
 
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame, extend, useLoader } from "@react-three/fiber";
 import { OrbitControls, RoundedBox } from "@react-three/drei";
+import PhotoMaterial from "@/three/shaders/HomePhotoShader/PhotoMaterial" extend({ PhotoMaterial});
 
 // import { spartan } from "@/app/layout";
 type Props = {};
 
 const Box = () => {
+  const texture = useLoader(TextureLoader, "/assets/photos/00_ACCUEIL.jpeg");
+
   return (
     <mesh>
       <planeGeometry />
-      <meshBasicMaterial />
+      <PhotoMaterial uniforms-uTexture-value={texture} />
     </mesh>
   );
 };

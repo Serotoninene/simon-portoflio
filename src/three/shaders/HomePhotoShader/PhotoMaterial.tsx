@@ -2,10 +2,10 @@ import { extend } from "@react-three/fiber";
 // Three
 import * as THREE from "three";
 // Shaders
-import vertex from "../shaders/HomePhotoShader/vertex.glsl";
-import fragment from "../shaders/HomePhotoShader/fragment.glsl";
+import vertex from "./vertex.glsl";
+import fragment from "./fragment.glsl";
 
-export default class PhotodMaterial extends THREE.ShaderMaterial {
+export default class PhotoMaterial extends THREE.ShaderMaterial {
   constructor() {
     super({
       uniforms: {
@@ -62,4 +62,4 @@ export default class PhotodMaterial extends THREE.ShaderMaterial {
     this.uniforms.uTexture.value = v;
   }
 }
-extend({ PhotodMaterial });
+extend({ PhotoMaterial });
