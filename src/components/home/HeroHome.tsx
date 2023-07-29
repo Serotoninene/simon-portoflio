@@ -9,7 +9,7 @@ import { OrbitControls } from "@react-three/drei";
 import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
 import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 
-// [] search for 'type declaration vertexshader glsl'
+// [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
 // [] calculate the camera z position so the units of the canvas match the pixels of the page
 // [] fix the mesh on the html div
