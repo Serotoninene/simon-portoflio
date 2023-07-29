@@ -47,7 +47,7 @@ const Scene = () => {
   );
 };
 
-export const HeroHome = (props: Props) => {
+export const HeroHome = () => {
   return (
     <>
       <div className="h-[100dvh]  z-10 fixed top-0 left-0 right-0">
