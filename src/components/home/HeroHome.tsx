@@ -12,7 +12,7 @@ import { useWindowSize } from "@/utils/hooks";
 
 // [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
-// [] calculate the camera z position so the units of the canvas match the pixels of the page
+// [X] calculate the camera z position so the units of the canvas match the pixels of the page
 // [] fix the mesh on the html div
 
 const Box = () => {
@@ -39,14 +39,13 @@ const Box = () => {
   );
 };
 
-// 1432 height - 652 width
-
 const Scene = () => {
   const { height, width } = useWindowSize();
   const [correctFov, setCorrectFov] = useState(0);
 
   useEffect(() => {
     if (!height || !width) return;
+
     setCorrectFov(((Math.atan(height / 2 / 600) * 180) / Math.PI) * 2);
   }, [height, width]);
 
