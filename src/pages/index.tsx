@@ -353,7 +353,7 @@ export default function Home() {
       <Container className="pt-6">
         <main className="relative flex flex-col gap-56 pb-6">
           <HeroHome />
-          <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
+          {/* <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
           <OneWCaption photo={photos[2]}>
             <>
               <span className="font-bold">Tourists taking a break from</span>{" "}
@@ -409,7 +409,7 @@ export default function Home() {
             firstPhoto={photos[30]}
             secondPhoto={photos[31]}
             thirdPhoto={photos[32]}
-          />
+          /> */}
         </main>
       </Container>
     </LocomotiveScrollContainer>

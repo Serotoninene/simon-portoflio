@@ -1,13 +1,14 @@
-import React from "react";
+import React, { MutableRefObject, useEffect, useState } from "react";
 import Image from "next/image";
 import { spartan } from "../molecules/Layout";
 import * as THREE from "three";
 
 import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, useHelper } from "@react-three/drei";
 
 import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
 import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
+import { useWindowSize } from "@/utils/hooks";
 
 // [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
@@ -21,8 +22,8 @@ const Box = () => {
   );
 
   return (
-    <mesh>
-      <planeGeometry />
+    <mesh position={[0, 0, 0]} scale={new THREE.Vector3(1, 1, 0)}>
+      <planeGeometry args={[652, 652]} />
       <shaderMaterial
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
@@ -38,9 +39,21 @@ const Box = () => {
   );
 };
 
+// 1432 height - 652 width
+
 const Scene = () => {
+  const { height, width } = useWindowSize();
+  const [correctFov, setCorrectFov] = useState(0);
+
+  useEffect(() => {
+    if (!height || !width) return;
+    setCorrectFov(((Math.atan(height / 2 / 600) * 180) / Math.PI) * 2);
+  }, [height, width]);
+
   return (
-    <Canvas>
+    <Canvas
+      camera={{ fov: correctFov, position: [0, 0, 600], near: 10, far: 1000 }}
+    >
       <OrbitControls />
       <Box />
     </Canvas>
