@@ -3,7 +3,7 @@ import Image from "next/image";
 import { spartan } from "../molecules/Layout";
 import * as THREE from "three";
 
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, useHelper } from "@react-three/drei";
 
 import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
@@ -16,15 +16,26 @@ import { useWindowSize } from "@/utils/hooks";
 // [] fix the mesh on the html div
 
 const Box = () => {
+  const shaderMaterial = React.useRef() as MutableRefObject<any>;
+
   const texture = useLoader(
     THREE.TextureLoader,
     "/assets/photos/00_ACCUEIL.jpeg"
   );
 
+  useFrame(({ clock, mouse }) => {
+    const time = clock.getElapsedTime();
+    const x = mouse.x * 0.5;
+    const y = mouse.y * 0.5;
+
+    shaderMaterial.current.uniforms.uMouse.value = mouse;
+  });
+
   return (
     <mesh position={[0, 0, 0]} scale={new THREE.Vector3(1, 1, 0)}>
       <planeGeometry args={[652, 652]} />
       <shaderMaterial
+        ref={shaderMaterial}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={{
@@ -33,6 +44,7 @@ const Box = () => {
             value: new THREE.Vector2(texture.image.width, texture.image.height),
           },
           uQuadSize: { value: new THREE.Vector2(1, 1) },
+          uMouse: { value: new THREE.Vector2(0, 0) },
         }}
       />
     </mesh>
