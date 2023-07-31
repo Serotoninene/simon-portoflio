@@ -33,19 +33,21 @@ const Box = ({ photoData }: BoxProps) => {
     "/assets/photos/00_ACCUEIL.jpeg"
   );
 
+  console.log(photoData);
+
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
-    const x = mouse.x * 0.5;
-    const y = mouse.y * 0.5;
+    const x = mouse.x;
+    const y = mouse.y;
 
     shaderRef.current.uniforms.uMouse.value = mouse;
 
-    geometryRef.current.width = 2 + time;
+    geometryRef.current.width = photoData.width;
   });
 
   return (
     <mesh position={[0, 0, 0]} scale={new THREE.Vector3(1, 1, 0)}>
-      <planeGeometry ref={geometryRef} args={[652, 652]} />
+      <planeGeometry ref={geometryRef} args={[1512, 834]} />
       <shaderMaterial
         ref={shaderRef}
         vertexShader={vertexShader}
