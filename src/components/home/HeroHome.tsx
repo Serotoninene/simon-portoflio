@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useEffect, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { spartan } from "../molecules/Layout";
 import * as THREE from "three";
@@ -15,8 +15,18 @@ import { useWindowSize } from "@/utils/hooks";
 // [X] calculate the camera z position so the units of the canvas match the pixels of the page
 // [] fix the mesh on the html div
 
-const Box = () => {
-  const shaderMaterial = React.useRef() as MutableRefObject<any>;
+type PhotoData = { x: number; y: number; width: number; height: number };
+type SceneProps = {
+  photoData: PhotoData;
+};
+
+type BoxProps = {
+  photoData: PhotoData;
+};
+
+const Box = ({ photoData }: BoxProps) => {
+  const geometryRef = React.useRef() as MutableRefObject<any>;
+  const shaderRef = React.useRef() as MutableRefObject<any>;
 
   const texture = useLoader(
     THREE.TextureLoader,
@@ -28,14 +38,16 @@ const Box = () => {
     const x = mouse.x * 0.5;
     const y = mouse.y * 0.5;
 
-    shaderMaterial.current.uniforms.uMouse.value = mouse;
+    shaderRef.current.uniforms.uMouse.value = mouse;
+
+    geometryRef.current.width = 2 + time;
   });
 
   return (
     <mesh position={[0, 0, 0]} scale={new THREE.Vector3(1, 1, 0)}>
-      <planeGeometry args={[652, 652]} />
+      <planeGeometry ref={geometryRef} args={[652, 652]} />
       <shaderMaterial
-        ref={shaderMaterial}
+        ref={shaderRef}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={{
@@ -51,7 +63,7 @@ const Box = () => {
   );
 };
 
-const Scene = () => {
+const Scene = ({ photoData }: SceneProps) => {
   const { height, width } = useWindowSize();
   const [correctFov, setCorrectFov] = useState(0);
 
@@ -66,19 +78,39 @@ const Scene = () => {
       camera={{ fov: correctFov, position: [0, 0, 600], near: 10, far: 1000 }}
     >
       <OrbitControls />
-      <Box />
+      <Box photoData={photoData} />
     </Canvas>
   );
 };
 
 export const HeroHome = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { height, width } = useWindowSize();
+  const [photoData, setPhotoData] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
+
+  useEffect(() => {
+    if (!height || !width) return;
+
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    const x = rect.left - rect.width / 2;
+    const y = rect.top - rect.height / 2;
+
+    setPhotoData({ x, y, height, width });
+  }, [height, width]);
   return (
     <>
       <div className="h-[100dvh]  z-10 fixed top-0 left-0 right-0">
-        <Scene />
+        <Scene photoData={photoData} />
       </div>
       <div className="h-[calc(100dvh-32px)] flex flex-col justify-between gap-6 pt-10 pb-6">
-        <div className="h-full relative opacity-10">
+        <div ref={ref} className="h-full relative opacity-10 ">
           <Image
             alt="house in a green field"
             src="/assets/photos/00_ACCUEIL.jpeg"
