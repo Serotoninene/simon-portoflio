@@ -41,12 +41,18 @@ const Box = ({ photoData }: BoxProps) => {
     const y = mouse.y;
 
     shaderRef.current.uniforms.uMouse.value = mouse;
+    shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
+      photoData.width,
+      photoData.height
+    );
+
+    console.log(shaderRef.current.uniforms.uQuadSize.value);
   });
 
   return (
     <mesh
       position={[photoData.x, photoData.y, 0]}
-      scale={new THREE.Vector3(1, 1, 0)}
+      // scale={new THREE.Vector3(1, 1, 0)}
     >
       <planeGeometry
         ref={geometryRef}
@@ -61,7 +67,9 @@ const Box = ({ photoData }: BoxProps) => {
           uTextureSize: {
             value: new THREE.Vector2(texture.image.width, texture.image.height),
           },
-          uQuadSize: { value: new THREE.Vector2(1, 1) },
+          uQuadSize: {
+            value: new THREE.Vector2(0, 0),
+          },
           uMouse: { value: new THREE.Vector2(0, 0) },
         }}
       />
@@ -108,7 +116,12 @@ export const HeroHome = () => {
     const x = rect.left - width / 2 + rect.width / 2;
     const y = -rect.top + height / 2 - rect.height / 2;
 
-    setPhotoData({ x, y, height: rect?.height, width: rect.width });
+    setPhotoData({
+      x,
+      y,
+      height: rect?.height,
+      width: rect.width,
+    });
   }, [height, width]);
   return (
     <>
@@ -120,6 +133,10 @@ export const HeroHome = () => {
           <Image
             alt="house in a green field"
             src="/assets/photos/00_ACCUEIL.jpeg"
+            onLoad={(e) => {
+              // get the aspectRatio of the image
+              console.log(e);
+            }}
             fill
             priority
             className="object-cover"
