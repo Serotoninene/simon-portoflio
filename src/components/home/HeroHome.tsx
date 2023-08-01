@@ -44,7 +44,10 @@ const Box = ({ photoData }: BoxProps) => {
   });
 
   return (
-    <mesh position={[0, 0, 0]} scale={new THREE.Vector3(1, 1, 0)}>
+    <mesh
+      position={[photoData.x, photoData.y, 0]}
+      scale={new THREE.Vector3(1, 1, 0)}
+    >
       <planeGeometry
         ref={geometryRef}
         args={[photoData.width, photoData.height]}
@@ -102,8 +105,8 @@ export const HeroHome = () => {
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
 
-    const x = rect.left - rect.width / 2;
-    const y = rect.top - rect.height / 2;
+    const x = rect.left - width / 2 + rect.width / 2;
+    const y = -rect.top + height / 2 - rect.height / 2;
 
     setPhotoData({ x, y, height: rect?.height, width: rect.width });
   }, [height, width]);
