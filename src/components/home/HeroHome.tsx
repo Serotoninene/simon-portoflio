@@ -13,7 +13,9 @@ import { useWindowSize } from "@/utils/hooks";
 // [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
 // [X] calculate the camera z position so the units of the canvas match the pixels of the page
-// [] fix the mesh on the html div
+// [X] fix the mesh on the html div sizes
+// [] fix the mesh on the html div position
+// [] calculate the ratio of the image to the plane
 
 type PhotoData = { x: number; y: number; width: number; height: number };
 type SceneProps = {
@@ -33,21 +35,20 @@ const Box = ({ photoData }: BoxProps) => {
     "/assets/photos/00_ACCUEIL.jpeg"
   );
 
-  console.log(photoData);
-
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
     const x = mouse.x;
     const y = mouse.y;
 
     shaderRef.current.uniforms.uMouse.value = mouse;
-
-    geometryRef.current.width = photoData.width;
   });
 
   return (
     <mesh position={[0, 0, 0]} scale={new THREE.Vector3(1, 1, 0)}>
-      <planeGeometry ref={geometryRef} args={[1512, 834]} />
+      <planeGeometry
+        ref={geometryRef}
+        args={[photoData.width, photoData.height]}
+      />
       <shaderMaterial
         ref={shaderRef}
         vertexShader={vertexShader}
@@ -79,7 +80,7 @@ const Scene = ({ photoData }: SceneProps) => {
     <Canvas
       camera={{ fov: correctFov, position: [0, 0, 600], near: 10, far: 1000 }}
     >
-      <OrbitControls />
+      {/* <OrbitControls /> */}
       <Box photoData={photoData} />
     </Canvas>
   );
@@ -104,7 +105,7 @@ export const HeroHome = () => {
     const x = rect.left - rect.width / 2;
     const y = rect.top - rect.height / 2;
 
-    setPhotoData({ x, y, height, width });
+    setPhotoData({ x, y, height: rect?.height, width: rect.width });
   }, [height, width]);
   return (
     <>
@@ -112,7 +113,7 @@ export const HeroHome = () => {
         <Scene photoData={photoData} />
       </div>
       <div className="h-[calc(100dvh-32px)] flex flex-col justify-between gap-6 pt-10 pb-6">
-        <div ref={ref} className="h-full relative opacity-10 ">
+        <div ref={ref} className="h-full relative opacity-5">
           <Image
             alt="house in a green field"
             src="/assets/photos/00_ACCUEIL.jpeg"
