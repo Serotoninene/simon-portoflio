@@ -51,6 +51,7 @@ const Box = ({ photoData }: BoxProps) => {
       uQuadSize: {
         value: new THREE.Vector2(photoData.width, photoData.height),
       },
+      uProgress: { value: 0 },
       uMouse: { value: new THREE.Vector2(0, 0) },
       uTime: { value: 0 },
     }),
@@ -67,7 +68,7 @@ const Box = ({ photoData }: BoxProps) => {
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
 
-    console.log(mouse.x);
+    // console.log(mouse.x);
 
     shaderRef.current.uniforms.uMouse.value = mouse;
     shaderRef.current.uniforms.uTime.value = time;

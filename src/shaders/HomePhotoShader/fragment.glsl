@@ -6,6 +6,7 @@ uniform sampler2D uTexture;
 uniform vec2 uTextureSize;
 uniform vec2 uQuadSize;
 uniform vec2 uMouse;
+uniform vec2 uProgress;
 
 varying vec2 vUv; 
 
@@ -25,22 +26,6 @@ vec2 getUV(vec2 uv, vec2 textureSize, vec2 quadSize){
   return tempUV;
 }
 
-vec2 getTileUV(vec2 uv, vec2 tiles) {
-  // Calculate the size of each tile
-  vec2 tileSize = vec2(1.0) / tiles;
-
-  // Calculate the tile index based on the UV coordinates
-  vec2 tileIndex = floor(uv * tiles);
-
-  // Calculate the new UV coordinates for the current tile
-  vec2 newUV = fract(uv * tiles);
-
-  // Offset the UV coordinates to the current tile
-  newUV = (newUV - 0.5) * tileSize + (tileIndex + 0.5) * tileSize;
-
-  return newUV;
-}
-
 vec2 bulge(vec2 uv, vec2 center) {
   uv -= center;
 
@@ -56,16 +41,23 @@ vec2 bulge(vec2 uv, vec2 center) {
   return uv;
 }
 
-// (value - minValue) / (maxValue - minValue);
+vec2 getStrength (vec2 uv, vec2 center, float radius) {
+float strength = floor(vUv.x * center.x) / radius * floor(vUv.y * center.y) / radius;
+return vec2(strength);
+}
 
 
 void main() {   
-  vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
-  vec2 bulgedUv = bulge(correctUv, vec2(
-    (uMouse.x + 1.) / 2., 
-    (-1. * uMouse.y + 1.) / 2.
-    ));
+  float mouseX = (uMouse.x - 1.) / 2.;
+  float mouseY = (-1. * uMouse.y + 1.) / 2.;
 
-  vec4 color = texture2D(uTexture, bulgedUv);
+  vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
+  vec2 strengthedUv = getStrength(correctUv, vec2(-10., 10.) , 10.);
+  // vec2 bulgedUv = bulge(correctUv, vec2(
+  //   (uMouse.x + 1.) / 2., 
+  //   (-1. * uMouse.y + 1.) / 2.
+  //   ));
+
+  vec4 color = texture2D(uTexture, strengthedUv);
   gl_FragColor = color;
 }
