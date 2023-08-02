@@ -1,4 +1,4 @@
-precision mediump float;
+precision highp float;
 
 uniform float uTime;  
 uniform float uProgress;
@@ -66,19 +66,26 @@ void main() {
 
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
+  // Bulge with the mouse
+  // vec2 bulgedUv = bulge(correctUv, vec2(
+  //   (uMouse.x + 1.) / 2., 
+  //   (-1. * uMouse.y + 1.) / 2.
+  //   ));
+
+  // bulge with the progress variable
   vec2 bulgedUv = bulge(correctUv, vec2(
-    (uMouse.x + 1.) / 2., 
-    (-1. * uMouse.y + 1.) / 2.
-    ));
+    uProgress/1. - 0.5
+  ));
 
   vec2 pixelatedUv = pixelate(correctUv, vec2(0.005));
 
   vec2 uvDivided = fract(correctUv*vec2(uProgress * 10.));
   vec2 uvDisplaced = correctUv + uvDivided * uProgress - vec2( 0.5, 0.5) * uProgress;
   vec2 uvDisplacedAndBulged = bulge(uvDisplaced, vec2(
-    (uMouse.x + 1.) / 2., 
-    (-1. * uMouse.y + 1.) / 2.
-    ));
+      (uProgress + 1.) / 2., 
+      (-1. * uProgress + 1.) / 2.
+    )
+  );
 
   vec4 color = texture2D(uTexture, correctUv);
 
@@ -87,5 +94,5 @@ void main() {
 
   vec4 bulgedColor = texture2D(uTexture, bulgedUv);
 
-  gl_FragColor = textureDisplaced;
+  gl_FragColor = bulgedColor;
 }

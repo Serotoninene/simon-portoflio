@@ -91,7 +91,7 @@ const Box = ({ photoData }: BoxProps) => {
     <mesh position={[photoData.x, photoData.y, 0]}>
       <planeGeometry
         ref={geometryRef}
-        args={[photoData.width, photoData.height]}
+        args={[photoData.width, photoData.height, 32, 32]}
       />
       <shaderMaterial
         ref={shaderRef}
