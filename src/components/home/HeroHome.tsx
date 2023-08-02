@@ -21,8 +21,8 @@ import { useControls } from "leva";
 // [X] make the image cover the plane without losing its aspect ratio
 // [X] calculate the camera z position so the units of the canvas match the pixels of the page
 // [X] fix the mesh on the html div sizes
-// [] fix the mesh on the html div position
-// [] calculate the ratio of the image to the plane
+// [X] fix the mesh on the html div position
+// [X] calculate the ratio of the image to the plane
 
 type PhotoData = { x: number; y: number; width: number; height: number };
 type SceneProps = {
@@ -39,7 +39,7 @@ const Box = ({ photoData }: BoxProps) => {
   const shaderRef = React.useRef() as MutableRefObject<any>;
 
   const controls = useControls({
-    uProgress: { value: -2, min: -100, max: 100, step: 0.1 },
+    uProgress: { value: 1, min: 0, max: 1, step: 0.1 },
   });
 
   const texture = useLoader(

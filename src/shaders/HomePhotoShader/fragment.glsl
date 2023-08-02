@@ -41,7 +41,9 @@ vec2 bulge(vec2 uv, vec2 center) {
 }
 
 vec2 getStrength (vec2 uv, vec2 center, float radius) {
-  float strength = floor(vUv.x * center.x) / radius * floor(vUv.y * center.y) / radius;
+  float strength = 0.0 ;
+  strength += floor(vUv.x * center.x) / radius * floor(vUv.y * center.y) / radius;
+  strength -= 0.5;
   return vec2(strength);
 }
 
@@ -51,12 +53,13 @@ void main() {
   float mouseY = (-1. * uMouse.y + 1.) / 2.;
 
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
-  vec2 strengthedUv = getStrength(correctUv, vec2(25.) ,uProgress);
+  vec2 strengthedUv = getStrength(correctUv, vec2(1642.9 * uProgress) ,100.);
   // vec2 bulgedUv = bulge(correctUv, vec2(
   //   (uMouse.x + 1.) / 2., 
   //   (-1. * uMouse.y + 1.) / 2.
   //   ));
 
-  vec4 color = texture2D(uTexture, strengthedUv);
-  gl_FragColor = color;
+  vec4 color = texture2D(uTexture, correctUv);
+  vec4 colorStrengthed = texture2D(uTexture, strengthedUv);
+  gl_FragColor = mix(color, colorStrengthed, uProgress);
 }
