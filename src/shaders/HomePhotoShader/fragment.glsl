@@ -6,7 +6,6 @@ uniform sampler2D uTexture;
 uniform vec2 uTextureSize;
 uniform vec2 uQuadSize;
 uniform vec2 uMouse;
-uniform vec2 uProgress;
 
 varying vec2 vUv; 
 
@@ -42,8 +41,8 @@ vec2 bulge(vec2 uv, vec2 center) {
 }
 
 vec2 getStrength (vec2 uv, vec2 center, float radius) {
-float strength = floor(vUv.x * center.x) / radius * floor(vUv.y * center.y) / radius;
-return vec2(strength);
+  float strength = floor(vUv.x * center.x) / radius * floor(vUv.y * center.y) / radius;
+  return vec2(strength);
 }
 
 
@@ -52,7 +51,7 @@ void main() {
   float mouseY = (-1. * uMouse.y + 1.) / 2.;
 
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
-  vec2 strengthedUv = getStrength(correctUv, vec2(-10., 10.) , 10.);
+  vec2 strengthedUv = getStrength(correctUv, vec2(25.) ,uProgress);
   // vec2 bulgedUv = bulge(correctUv, vec2(
   //   (uMouse.x + 1.) / 2., 
   //   (-1. * uMouse.y + 1.) / 2.

@@ -15,6 +15,7 @@ import { OrbitControls, PerspectiveCamera, useHelper } from "@react-three/drei";
 import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
 import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 import { useWindowSize } from "@/utils/hooks";
+import { useControls } from "leva";
 
 // [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
@@ -37,6 +38,10 @@ const Box = ({ photoData }: BoxProps) => {
   const geometryRef = React.useRef() as MutableRefObject<any>;
   const shaderRef = React.useRef() as MutableRefObject<any>;
 
+  const controls = useControls({
+    uProgress: { value: -2, min: -100, max: 100, step: 0.1 },
+  });
+
   const texture = useLoader(
     THREE.TextureLoader,
     "/assets/photos/00_ACCUEIL.jpeg"
@@ -51,7 +56,7 @@ const Box = ({ photoData }: BoxProps) => {
       uQuadSize: {
         value: new THREE.Vector2(photoData.width, photoData.height),
       },
-      uProgress: { value: 0 },
+      uProgress: { value: controls.uProgress },
       uMouse: { value: new THREE.Vector2(0, 0) },
       uTime: { value: 0 },
     }),
@@ -68,10 +73,9 @@ const Box = ({ photoData }: BoxProps) => {
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
 
-    // console.log(mouse.x);
-
     shaderRef.current.uniforms.uMouse.value = mouse;
     shaderRef.current.uniforms.uTime.value = time;
+    shaderRef.current.uniforms.uProgress.value = controls.uProgress;
   });
 
   return (
