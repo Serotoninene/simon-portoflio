@@ -67,7 +67,7 @@ const Box = ({ photoData }: BoxProps) => {
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
 
-    console.log(mouse.y);
+    console.log(mouse.x);
 
     shaderRef.current.uniforms.uMouse.value = mouse;
     shaderRef.current.uniforms.uTime.value = time;

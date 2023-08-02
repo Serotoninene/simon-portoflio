@@ -51,16 +51,20 @@ vec2 bulge(vec2 uv, vec2 center) {
   float strengthAmount = strength / (1.0 + distPow); // Invert bulge and add a minimum of 1)
 
   uv *= strengthAmount; 
-
-  
   uv += center;
 
   return uv;
 }
 
+// (value - minValue) / (maxValue - minValue);
+
+
 void main() {   
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
-  vec2 bulgedUv = bulge(correctUv, uMouse);
+  vec2 bulgedUv = bulge(correctUv, vec2(
+    (uMouse.x + 1.) / 2., 
+    (-1. * uMouse.y + 1.) / 2.
+    ));
 
   vec4 color = texture2D(uTexture, bulgedUv);
   gl_FragColor = color;
