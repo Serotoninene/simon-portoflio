@@ -1,4 +1,10 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React, {
+  MutableRefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import { spartan } from "../molecules/Layout";
 import * as THREE from "three";
@@ -27,6 +33,7 @@ type BoxProps = {
 };
 
 const Box = ({ photoData }: BoxProps) => {
+  const { height, width } = useWindowSize();
   const geometryRef = React.useRef() as MutableRefObject<any>;
   const shaderRef = React.useRef() as MutableRefObject<any>;
 
@@ -35,25 +42,39 @@ const Box = ({ photoData }: BoxProps) => {
     "/assets/photos/00_ACCUEIL.jpeg"
   );
 
+  const uniforms = useMemo(
+    () => ({
+      uTexture: { value: texture },
+      uTextureSize: {
+        value: new THREE.Vector2(texture.image.width, texture.image.height),
+      },
+      uQuadSize: {
+        value: new THREE.Vector2(photoData.width, photoData.height),
+      },
+      uMouse: { value: new THREE.Vector2(0, 0) },
+      uTime: { value: 0 },
+    }),
+    []
+  );
+
+  useEffect(() => {
+    shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
+      photoData.width,
+      photoData.height
+    );
+  }, [width, height]);
+
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
     const x = mouse.x;
     const y = mouse.y;
 
     shaderRef.current.uniforms.uMouse.value = mouse;
-    shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
-      photoData.width,
-      photoData.height
-    );
-
-    console.log(shaderRef.current.uniforms.uQuadSize.value);
+    shaderRef.current.uniforms.uTime.value = time;
   });
 
   return (
-    <mesh
-      position={[photoData.x, photoData.y, 0]}
-      // scale={new THREE.Vector3(1, 1, 0)}
-    >
+    <mesh position={[photoData.x, photoData.y, 0]}>
       <planeGeometry
         ref={geometryRef}
         args={[photoData.width, photoData.height]}
@@ -62,16 +83,7 @@ const Box = ({ photoData }: BoxProps) => {
         ref={shaderRef}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
-        uniforms={{
-          uTexture: { value: texture },
-          uTextureSize: {
-            value: new THREE.Vector2(texture.image.width, texture.image.height),
-          },
-          uQuadSize: {
-            value: new THREE.Vector2(0, 0),
-          },
-          uMouse: { value: new THREE.Vector2(0, 0) },
-        }}
+        uniforms={uniforms}
       />
     </mesh>
   );
@@ -91,7 +103,7 @@ const Scene = ({ photoData }: SceneProps) => {
     <Canvas
       camera={{ fov: correctFov, position: [0, 0, 600], near: 10, far: 1000 }}
     >
-      {/* <OrbitControls /> */}
+      <OrbitControls />
       <Box photoData={photoData} />
     </Canvas>
   );
