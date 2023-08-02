@@ -7,7 +7,20 @@ uniform vec2 uTextureSize;
 uniform vec2 uQuadSize;
 uniform vec2 uMouse;
 
+uniform float uRadius;
+uniform float uIntensity;
+
 varying vec2 vUv; 
+
+const float PI = 3.1415;
+const float angle1 = PI *0.25;
+const float angle2 = -PI *0.75;
+
+mat2 rotate(float a) {
+    float s = sin(a);
+    float c = cos(a);
+    return mat2(c, -s, s, c);
+  }
 
 vec2 getUV(vec2 uv, vec2 textureSize, vec2 quadSize){
   vec2 tempUV = uv - vec2(0.5);
@@ -40,26 +53,33 @@ vec2 bulge(vec2 uv, vec2 center) {
   return uv;
 }
 
-vec2 getStrength (vec2 uv, vec2 center, float radius) {
-  float strength = 0.0 ;
-  strength += floor(vUv.x * center.x) / radius * floor(vUv.y * center.y) / radius;
-  strength -= 0.5;
-  return vec2(strength);
+vec2 pixelate(vec2 uv, vec2 pixelSize) {
+  // vec2 pixelPos = gl_FragCoord.xy;
+  // vec2 gridSize = uQuadSize / uIntensity;
+  vec2 pixelPos = floor(uv / pixelSize) * pixelSize;
+  return pixelPos;
 }
-
 
 void main() {   
   float mouseX = (uMouse.x - 1.) / 2.;
   float mouseY = (-1. * uMouse.y + 1.) / 2.;
 
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
-  vec2 strengthedUv = getStrength(correctUv, vec2(1642.9 * uProgress) ,100.);
+
   // vec2 bulgedUv = bulge(correctUv, vec2(
   //   (uMouse.x + 1.) / 2., 
   //   (-1. * uMouse.y + 1.) / 2.
   //   ));
 
+  vec2 pixelatedUv = pixelate(correctUv, vec2(0.005));
+
+  vec2 uvDivided = fract(correctUv*vec2(uIntensity,uIntensity));
+  vec2 uvDisplaced = correctUv + rotate(PI) * uvDivided * uProgress;
+
   vec4 color = texture2D(uTexture, correctUv);
-  vec4 colorStrengthed = texture2D(uTexture, strengthedUv);
-  gl_FragColor = mix(color, colorStrengthed, uProgress);
+
+  vec4 pixelatedColor = texture2D(uTexture, pixelatedUv);
+  vec4 textureDisplaced = texture2D(uTexture, uvDisplaced);
+
+  gl_FragColor = textureDisplaced;
 }

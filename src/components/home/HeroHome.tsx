@@ -38,8 +38,13 @@ const Box = ({ photoData }: BoxProps) => {
   const geometryRef = React.useRef() as MutableRefObject<any>;
   const shaderRef = React.useRef() as MutableRefObject<any>;
 
-  const controls = useControls({
+  const { uProgress } = useControls("webgl", {
     uProgress: { value: 1, min: 0, max: 1, step: 0.1 },
+  });
+
+  const controls = useControls("params", {
+    uRadius: { value: 0.005, min: 0, max: 0.1, step: 0.001 },
+    uIntensity: { value: 10, min: 0, max: 100, step: 0.1 },
   });
 
   const texture = useLoader(
@@ -56,9 +61,11 @@ const Box = ({ photoData }: BoxProps) => {
       uQuadSize: {
         value: new THREE.Vector2(photoData.width, photoData.height),
       },
-      uProgress: { value: controls.uProgress },
       uMouse: { value: new THREE.Vector2(0, 0) },
       uTime: { value: 0 },
+      uProgress: { value: uProgress },
+      uRadius: { value: controls.uRadius },
+      uIntensity: { value: controls.uIntensity },
     }),
     []
   );
@@ -75,7 +82,9 @@ const Box = ({ photoData }: BoxProps) => {
 
     shaderRef.current.uniforms.uMouse.value = mouse;
     shaderRef.current.uniforms.uTime.value = time;
-    shaderRef.current.uniforms.uProgress.value = controls.uProgress;
+    shaderRef.current.uniforms.uProgress.value = uProgress;
+    shaderRef.current.uniforms.uRadius.value = controls.uRadius;
+    shaderRef.current.uniforms.uIntensity.value = controls.uIntensity;
   });
 
   return (
