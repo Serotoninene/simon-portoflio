@@ -66,8 +66,8 @@ const Box = ({ photoData }: BoxProps) => {
 
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
-    const x = mouse.x;
-    const y = mouse.y;
+
+    console.log(mouse.y);
 
     shaderRef.current.uniforms.uMouse.value = mouse;
     shaderRef.current.uniforms.uTime.value = time;
@@ -103,7 +103,7 @@ const Scene = ({ photoData }: SceneProps) => {
     <Canvas
       camera={{ fov: correctFov, position: [0, 0, 600], near: 10, far: 1000 }}
     >
-      <OrbitControls />
+      {/* <OrbitControls /> */}
       <Box photoData={photoData} />
     </Canvas>
   );
