@@ -17,7 +17,6 @@ import { useWindowSize } from "@/utils/hooks";
 import { useControls } from "leva";
 
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { useInView } from "framer-motion";
 
 // [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
@@ -26,24 +25,10 @@ import { useInView } from "framer-motion";
 // [X] fix the mesh on the html div position
 // [X] calculate the ratio of the image to the plane
 // [X] see how to distort the r g b with my mouse position
-// [] see how to distort the vertex with my mouse position
-
-type PhotoData = {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-};
-type SceneProps = {
-  photoData: PhotoData;
-};
-
-type BoxProps = {
-  photoData: PhotoData;
-};
+// [X] see how to distort the vertex with my mouse position
 
 const Box = () => {
-  const [photoData, setPhotoData] = useState<PhotoData>({
+  const [photoData, setPhotoData] = useState({
     x: 0,
     y: 0,
     width: 0,
@@ -60,18 +45,23 @@ const Box = () => {
   });
 
   const controls = useControls("shader zoom", {
-    uRadius: { value: 0.005, min: 0, max: 10, step: 0.01 },
-    uIntensity: { value: 0.2, min: 0, max: 1, step: 0.01 },
+    uRadius: { value: 0.07, min: 0, max: 1, step: 0.001 },
+    uIntensity: { value: 0.02, min: 0, max: 0.5, step: 0.001 },
   });
 
-  const texture = useLoader(
-    THREE.TextureLoader,
-    "/assets/photos/00_ACCUEIL.jpeg"
-  );
+  const { uIntro } = useControls("intro", {
+    uIntro: { value: 0, min: 0, max: 3, step: 0.01 },
+  });
+
+  const [texture, displacementMap] = useLoader(THREE.TextureLoader, [
+    "/assets/photos/00_ACCUEIL.jpeg",
+    "/assets/disp/disp1.jpg",
+  ]);
 
   const uniforms = useMemo(
     () => ({
       uTexture: { value: texture },
+      uDisplacement: { value: displacementMap },
       uTextureSize: {
         value: new THREE.Vector2(texture.image.width, texture.image.height),
       },
@@ -84,6 +74,7 @@ const Box = () => {
       uProgress: { value: uProgress },
       uRadius: { value: controls.uRadius },
       uIntensity: { value: controls.uIntensity },
+      uIntro: { value: uIntro },
     }),
     []
   );
@@ -131,11 +122,7 @@ const Box = () => {
   }, [width, height]);
 
   return (
-    <mesh
-      ref={meshRef}
-      position={[photoData.x, photoData.y, 0]}
-      // scale={[photoData.width, photoData.height, 1]}
-    >
+    <mesh ref={meshRef} position={[photoData.x, photoData.y, 0]}>
       <planeGeometry
         ref={geometryRef}
         args={[photoData.width, photoData.height, 32, 32]}
@@ -145,7 +132,6 @@ const Box = () => {
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms}
-        // wireframe
       />
     </mesh>
   );

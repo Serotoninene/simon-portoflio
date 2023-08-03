@@ -2,7 +2,9 @@ precision highp float;
 
 uniform float uTime;  
 uniform float uProgress;
+uniform float uIntro;
 uniform sampler2D uTexture;
+uniform sampler2D uDisplacement;
 uniform vec2 uTextureSize;
 uniform vec2 uQuadSize;
 uniform vec2 uMappedMouse;
@@ -14,7 +16,13 @@ varying vec2 vUv;
 
 const float PI = 3.1415;
 const float angle1 = PI *0.25;
-const float angle2 = -PI *0.75;
+		const float angle2 = -PI *0.75;
+
+mat2 getRotM(float angle) {
+      float s = sin(angle);
+      float c = cos(angle);
+      return mat2(c, -s, s, c);
+  }
 
 mat2 rotate(float a) {
     float s = sin(a);
@@ -38,28 +46,6 @@ vec2 getUV(vec2 uv, vec2 textureSize, vec2 quadSize){
   return tempUV;
 }
 
-vec2 bulge(vec2 uv, vec2 center) {
-  uv -= center;
-
-  float strength = 1.1;
-  
-  float dist = length(uv); // distance from UVs
-  float distPow = pow(dist, 2.); // exponential
-  float strengthAmount = strength / (1.0 + distPow); // Invert bulge and add a minimum of 1)
-
-  uv *= strengthAmount; 
-  uv += center;
-
-  return uv;
-}
-
-vec2 pixelate(vec2 uv, vec2 pixelSize) {
-  // vec2 pixelPos = gl_FragCoord.xy;
-  // vec2 gridSize = uQuadSize / uIntensity;
-  vec2 pixelPos = floor(uv / pixelSize) * pixelSize;
-  return pixelPos;
-}
-
 float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
   float dist = distance(uv, disc_center);
   return smoothstep(disc_radius+border_size, disc_radius-border_size, dist);
@@ -69,25 +55,14 @@ void main() {
   // vec2 correctUv = vUv;
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
-  // Bulge with the mouse
-  // vec2 bulgedUv = bulge(correctUv,vec2(uMappedMouse.x, max(uMappedMouse.y, 0.1)));
+  vec4 disp = texture2D(uDisplacement, correctUv);
+  vec2 dispVec = vec2(disp.r, disp.g);
 
-  // vec2 pixelatedUv = pixelate(correctUv, vec2(0.005));
+  vec2 distortedPosition1 = correctUv + getRotM(angle1) * dispVec * uIntro * (1.0 - uProgress);
+  vec2 distortedPosition2 = correctUv + getRotM(angle2) * dispVec * uIntro * (1.0 - uProgress);
 
-  // vec2 uvDivided = fract(correctUv*vec2(uProgress * 10.));
-  // vec2 uvDisplaced = correctUv + uvDivided * uProgress - vec2( 0.5, 0.5) * uProgress;
-  // vec2 uvDisplacedAndBulged = bulge(uvDisplaced, vec2(
-  //     (uProgress + 1.) / 2., 
-  //     (-1. * uProgress + 1.) / 2.
-  //   )
-  // );
-
-  vec4 color = texture2D(uTexture, correctUv);
-
-  // vec4 pixelatedColor = texture2D(uTexture, pixelatedUv);
-  // vec4 textureDisplaced = texture2D(uTexture, uvDisplacedAndBulged);
-
-  // vec4 bulgedColor = texture2D(uTexture, bulgedUv);
+  vec4 t1 = texture2D(uTexture, distortedPosition1);
+  vec4 t2 = texture2D(uTexture, distortedPosition2);
 
   // rgb shift
   float c = uIntensity * circle(vUv, uMappedMouse, uRadius, 0.2);
@@ -95,14 +70,12 @@ void main() {
   vec4 cga = texture2D(uTexture, correctUv);
   vec4 cb = texture2D(uTexture, (correctUv - c));
 
-  // zoom effect
-  // vec2 warp = mix(correctUv, uMappedMouse, c * 10.0);
-
+  vec4 t3 = vec4(cga.r, cr.g, cb.b, cga.a);
 
   // gl_FragColor = color;
   // gl_FragColor = bulgedColor;
   gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
   // gl_FragColor = texture2D(uTexture, warp);
-  // gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+  // gl_FragColor = mix(t1,t2, uProgress );
 
 }
