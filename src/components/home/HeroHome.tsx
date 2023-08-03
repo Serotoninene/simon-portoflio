@@ -15,9 +15,9 @@ import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
 import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 import { useWindowSize } from "@/utils/hooks";
 import { useControls } from "leva";
-import { Perf } from "r3f-perf";
+
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { useScroll } from "framer-motion";
+import { useInView } from "framer-motion";
 
 // [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
@@ -42,7 +42,14 @@ type BoxProps = {
   photoData: PhotoData;
 };
 
-const Box = ({ photoData }: BoxProps) => {
+const Box = () => {
+  const [photoData, setPhotoData] = useState<PhotoData>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
+
   const { height, width } = useWindowSize();
   const meshRef = React.useRef() as MutableRefObject<any>;
   const geometryRef = React.useRef() as MutableRefObject<any>;
@@ -56,8 +63,6 @@ const Box = ({ photoData }: BoxProps) => {
     uRadius: { value: 0.005, min: 0, max: 10, step: 0.01 },
     uIntensity: { value: 0.2, min: 0, max: 1, step: 0.01 },
   });
-
-  const vertex = useControls("vertex distortion", {});
 
   const texture = useLoader(
     THREE.TextureLoader,
@@ -86,12 +91,14 @@ const Box = ({ photoData }: BoxProps) => {
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
 
-    // okay so i have the size of the window and the size of the plane
-    // I need to get the mouse position relative to the plane
     const mappedMouse = new THREE.Vector2(
       THREE.MathUtils.mapLinear(mouse.x, -1, 1, 0, 1),
       THREE.MathUtils.mapLinear(mouse.y, -1, 1, 0, 1)
     );
+
+    const photoDiv = document.getElementById("hero-photo");
+
+    const rect = photoDiv?.getBoundingClientRect();
 
     shaderRef.current.uniforms.uMappedMouse.value = mappedMouse;
     shaderRef.current.uniforms.uMouse.value = mouse;
@@ -100,28 +107,39 @@ const Box = ({ photoData }: BoxProps) => {
     shaderRef.current.uniforms.uRadius.value = controls.uRadius;
     shaderRef.current.uniforms.uIntensity.value = controls.uIntensity;
 
-    meshRef.current.scale.set(photoData.width, photoData.height);
-  });
+    if (!rect) return;
+    if (height && width) {
+      const x = rect?.left - width / 2 + rect?.width / 2;
+      const y = -rect?.top + height / 2 - rect?.height / 2;
 
-  // console.log(geometryRef.current?.parameters.width);
-  // console.log(shaderRef.current);
-  // console.log(photoData.width);
+      setPhotoData({
+        x,
+        y,
+        height: rect?.height,
+        width: rect.width,
+      });
+    }
 
-  useEffect(() => {
-    if (!height || !width) return;
     shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
       photoData.width,
       photoData.height
     );
+  });
+
+  useEffect(() => {
+    if (!height || !width) return;
   }, [width, height]);
 
   return (
     <mesh
       ref={meshRef}
       position={[photoData.x, photoData.y, 0]}
-      scale={[photoData.width, photoData.height, 1]}
+      // scale={[photoData.width, photoData.height, 1]}
     >
-      <planeGeometry ref={geometryRef} args={[1, 1, 32, 32]} />
+      <planeGeometry
+        ref={geometryRef}
+        args={[photoData.width, photoData.height, 32, 32]}
+      />
       <shaderMaterial
         ref={shaderRef}
         vertexShader={vertexShader}
@@ -133,8 +151,7 @@ const Box = ({ photoData }: BoxProps) => {
   );
 };
 
-const Scene = ({ photoData }: SceneProps) => {
-  const canvasRef = useRef<any>(null);
+const Scene = () => {
   const { height, width } = useWindowSize();
   const [correctFov, setCorrectFov] = useState(0);
 
@@ -153,49 +170,26 @@ const Scene = ({ photoData }: SceneProps) => {
         near={10}
         far={1000}
       />
-      {/* <Perf position="top-left" /> */}
       <OrbitControls enableZoom={false} />
-      <Box photoData={photoData} />
+      <Box />
     </Canvas>
   );
 };
 
 export const HeroHome = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { height, width } = useWindowSize();
-
-  const [photoData, setPhotoData] = useState<PhotoData>({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-  });
-
-  useEffect(() => {
-    if (!height || !width) return;
-
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-
-    const x = rect.left - width / 2 + rect.width / 2;
-    const y = -rect.top + height / 2 - rect.height / 2;
-
-    setPhotoData({
-      x,
-      y,
-      height: rect?.height,
-      width: rect.width,
-    });
-  }, [height, width]);
 
   return (
     <>
       <div className="h-[100dvh] z-10 fixed top-0 left-0 right-0 ">
-        <Scene photoData={photoData} />
+        <Scene />
       </div>
       <div className="h-[calc(100dvh-32px)] flex flex-col justify-between gap-6 pt-10 pb-6">
         <div
+          data-scroll
+          data-scroll-speed="0.2"
           ref={ref}
+          id="hero-photo"
           className="h-full relative opacity-5 cursor-none pointer-events-auto"
         >
           <Image
