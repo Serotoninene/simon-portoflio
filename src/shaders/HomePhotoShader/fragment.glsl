@@ -5,7 +5,7 @@ uniform float uProgress;
 uniform sampler2D uTexture;
 uniform vec2 uTextureSize;
 uniform vec2 uQuadSize;
-uniform vec2 uMouse;
+uniform vec2 uMappedMouse;
 
 uniform float uRadius;
 uniform float uIntensity;
@@ -69,15 +69,12 @@ void main() {
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
   // Bulge with the mouse
-  // vec2 bulgedUv = bulge(correctUv, vec2(
-  //   (uMouse.x + 1.) / 2., 
-  //   (-1. * uMouse.y + 1.) / 2.
-  //   ));
+  vec2 bulgedUv = bulge(correctUv,uMappedMouse);
 
   // bulge with the progress variable
-  vec2 bulgedUv = bulge(correctUv, vec2(
-    uProgress/1. - 0.5
-  ));
+  // vec2 bulgedUv = bulge(correctUv, vec2(
+  //   uProgress/1. - 0.5 
+  // ));
 
   vec2 pixelatedUv = pixelate(correctUv, vec2(0.005));
 
@@ -97,16 +94,18 @@ void main() {
   vec4 bulgedColor = texture2D(uTexture, bulgedUv);
 
   // rgb shift
-  float c = uIntensity * circle(vUv, uMouse, uRadius, 0.2);
+  float c = uIntensity * circle(vUv, uMappedMouse, uRadius, 0.2);
   vec4 cr = texture2D(uTexture, (correctUv + c));
   vec4 cga = texture2D(uTexture, correctUv);
   vec4 cb = texture2D(uTexture, (correctUv - c));
 
-   // zoom effect
-  vec2 warp = mix(correctUv, uMouse, c * 10.0);
+  // zoom effect
+  vec2 warp = mix(correctUv, uMappedMouse, c * 10.0);
 
-  // gl_FragColor = bulgedColor;
-  gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
+
+  // gl_FragColor = color;
+  gl_FragColor = bulgedColor;
+  // gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
   // gl_FragColor = texture2D(uTexture, warp);
 
 }

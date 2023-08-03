@@ -15,6 +15,9 @@ import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
 import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 import { useWindowSize } from "@/utils/hooks";
 import { useControls } from "leva";
+import { Perf } from "r3f-perf";
+import { OrbitControls } from "@react-three/drei";
+import { useScroll } from "framer-motion";
 
 // [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
@@ -48,10 +51,12 @@ const Box = ({ photoData }: BoxProps) => {
     uProgress: { value: 1, min: 0, max: 1, step: 0.1 },
   });
 
-  const controls = useControls("params", {
+  const controls = useControls("shader zoom", {
     uRadius: { value: 0.005, min: 0, max: 10, step: 0.01 },
     uIntensity: { value: 0.2, min: 0, max: 1, step: 0.01 },
   });
+
+  const vertex = useControls("vertex distortion", {});
 
   const texture = useLoader(
     THREE.TextureLoader,
@@ -67,7 +72,8 @@ const Box = ({ photoData }: BoxProps) => {
       uQuadSize: {
         value: new THREE.Vector2(photoData.width, photoData.height),
       },
-      uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+      uMappedMouse: { value: new THREE.Vector2(0.5, 0.5) },
+      uMouse: { value: new THREE.Vector2(0, 0) },
       uTime: { value: 0 },
       uProgress: { value: uProgress },
       uRadius: { value: controls.uRadius },
@@ -93,7 +99,8 @@ const Box = ({ photoData }: BoxProps) => {
       THREE.MathUtils.mapLinear(mouse.y, -1, 1, 0, 1)
     );
 
-    shaderRef.current.uniforms.uMouse.value = mappedMouse;
+    shaderRef.current.uniforms.uMappedMouse.value = mappedMouse;
+    shaderRef.current.uniforms.uMouse.value = mouse;
     shaderRef.current.uniforms.uTime.value = time;
     shaderRef.current.uniforms.uProgress.value = uProgress;
     shaderRef.current.uniforms.uRadius.value = controls.uRadius;
@@ -111,6 +118,7 @@ const Box = ({ photoData }: BoxProps) => {
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms}
+        // wireframe
       />
     </mesh>
   );
@@ -130,7 +138,8 @@ const Scene = ({ photoData }: SceneProps) => {
     <Canvas
       camera={{ fov: correctFov, position: [0, 0, 600], near: 10, far: 1000 }}
     >
-      {/* <OrbitControls /> */}
+      <Perf position="top-left" />
+      <OrbitControls enableZoom={false} />
       <Box photoData={photoData} />
     </Canvas>
   );
@@ -139,6 +148,7 @@ const Scene = ({ photoData }: SceneProps) => {
 export const HeroHome = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { height, width } = useWindowSize();
+
   const [photoData, setPhotoData] = useState<PhotoData>({
     x: 0,
     y: 0,
@@ -162,9 +172,10 @@ export const HeroHome = () => {
       width: rect.width,
     });
   }, [height, width]);
+
   return (
     <>
-      <div className="h-[100dvh]  z-10 fixed top-0 left-0 right-0">
+      <div className="h-[100dvh] z-10 fixed top-0 left-0 right-0 ">
         <Scene photoData={photoData} />
       </div>
       <div className="h-[calc(100dvh-32px)] flex flex-col justify-between gap-6 pt-10 pb-6">
@@ -175,10 +186,6 @@ export const HeroHome = () => {
           <Image
             alt="house in a green field"
             src="/assets/photos/00_ACCUEIL.jpeg"
-            onLoad={(e) => {
-              // get the aspectRatio of the image
-              console.log(e);
-            }}
             fill
             priority
             className="object-cover"
