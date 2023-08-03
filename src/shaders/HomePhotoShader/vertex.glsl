@@ -5,7 +5,11 @@
 
   varying vec2 vUv;
 
-
+  float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
+    vec2 adjustedDiscCenter = vec2((disc_center.x+ 0.5  ), (disc_center.y +0.5 )) ;
+    float dist = distance(uv, adjustedDiscCenter);
+    return smoothstep(disc_radius+border_size, disc_radius-border_size, dist);
+  }
 
   void main()
   {

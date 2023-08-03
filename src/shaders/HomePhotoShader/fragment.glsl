@@ -60,10 +60,12 @@ vec2 pixelate(vec2 uv, vec2 pixelSize) {
   return pixelPos;
 }
 
-void main() {   
-  float mouseX = (uMouse.x - 1.) / 2.;
-  float mouseY = (-1. * uMouse.y + 1.) / 2.;
+float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
+  float dist = distance(uv, disc_center);
+  return smoothstep(disc_radius+border_size, disc_radius-border_size, dist);
+}
 
+void main() {   
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
   // Bulge with the mouse
@@ -94,5 +96,17 @@ void main() {
 
   vec4 bulgedColor = texture2D(uTexture, bulgedUv);
 
-  gl_FragColor = bulgedColor;
+  // rgb shift
+  float c = uIntensity * circle(vUv, uMouse, uRadius, 0.2);
+  vec4 cr = texture2D(uTexture, (correctUv + c));
+  vec4 cga = texture2D(uTexture, correctUv);
+  vec4 cb = texture2D(uTexture, (correctUv - c));
+
+   // zoom effect
+  vec2 warp = mix(correctUv, uMouse, c * 10.0);
+
+  // gl_FragColor = bulgedColor;
+  // gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
+  gl_FragColor = texture2D(uTexture, warp);
+
 }

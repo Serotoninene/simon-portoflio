@@ -10,7 +10,6 @@ import { spartan } from "../molecules/Layout";
 import * as THREE from "three";
 
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera, useHelper } from "@react-three/drei";
 
 import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
 import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
@@ -23,8 +22,14 @@ import { useControls } from "leva";
 // [X] fix the mesh on the html div sizes
 // [X] fix the mesh on the html div position
 // [X] calculate the ratio of the image to the plane
+// [] see how to distort the r g b with my mouse position
 
-type PhotoData = { x: number; y: number; width: number; height: number };
+type PhotoData = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
 type SceneProps = {
   photoData: PhotoData;
 };
@@ -43,8 +48,8 @@ const Box = ({ photoData }: BoxProps) => {
   });
 
   const controls = useControls("params", {
-    uRadius: { value: 0.005, min: 0, max: 0.1, step: 0.001 },
-    uIntensity: { value: 10, min: 0, max: 100, step: 0.1 },
+    uRadius: { value: 0.005, min: 0, max: 10, step: 0.01 },
+    uIntensity: { value: 0.2, min: 0, max: 1, step: 0.01 },
   });
 
   const texture = useLoader(
@@ -61,7 +66,7 @@ const Box = ({ photoData }: BoxProps) => {
       uQuadSize: {
         value: new THREE.Vector2(photoData.width, photoData.height),
       },
-      uMouse: { value: new THREE.Vector2(0, 0) },
+      uMouse: { value: new THREE.Vector2(0.5, 0.5) },
       uTime: { value: 0 },
       uProgress: { value: uProgress },
       uRadius: { value: controls.uRadius },
@@ -80,7 +85,14 @@ const Box = ({ photoData }: BoxProps) => {
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
 
-    shaderRef.current.uniforms.uMouse.value = mouse;
+    // okay so i have the size of the window and the size of the plane
+    // I need to get the mouse position relative to the plane
+    const mappedMouse = new THREE.Vector2(
+      THREE.MathUtils.mapLinear(mouse.x, -1, 1, 0, 1),
+      THREE.MathUtils.mapLinear(mouse.y, -1, 1, 0, 1)
+    );
+
+    shaderRef.current.uniforms.uMouse.value = mappedMouse;
     shaderRef.current.uniforms.uTime.value = time;
     shaderRef.current.uniforms.uProgress.value = uProgress;
     shaderRef.current.uniforms.uRadius.value = controls.uRadius;
@@ -126,7 +138,7 @@ const Scene = ({ photoData }: SceneProps) => {
 export const HeroHome = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { height, width } = useWindowSize();
-  const [photoData, setPhotoData] = useState({
+  const [photoData, setPhotoData] = useState<PhotoData>({
     x: 0,
     y: 0,
     width: 0,
@@ -155,7 +167,10 @@ export const HeroHome = () => {
         <Scene photoData={photoData} />
       </div>
       <div className="h-[calc(100dvh-32px)] flex flex-col justify-between gap-6 pt-10 pb-6">
-        <div ref={ref} className="h-full relative opacity-5">
+        <div
+          ref={ref}
+          className="h-full relative opacity-5 cursor-none pointer-events-auto"
+        >
           <Image
             alt="house in a green field"
             src="/assets/photos/00_ACCUEIL.jpeg"
