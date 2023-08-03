@@ -66,32 +66,28 @@ float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
 }
 
 void main() {   
+  // vec2 correctUv = vUv;
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
   // Bulge with the mouse
-  vec2 bulgedUv = bulge(correctUv,vec2(uMappedMouse.x, max(uMappedMouse.y, 0.1)));
+  // vec2 bulgedUv = bulge(correctUv,vec2(uMappedMouse.x, max(uMappedMouse.y, 0.1)));
 
-  // bulge with the progress variable
-  // vec2 bulgedUv = bulge(correctUv, vec2(
-  //   uProgress/1. - 0.5 
-  // ));
+  // vec2 pixelatedUv = pixelate(correctUv, vec2(0.005));
 
-  vec2 pixelatedUv = pixelate(correctUv, vec2(0.005));
-
-  vec2 uvDivided = fract(correctUv*vec2(uProgress * 10.));
-  vec2 uvDisplaced = correctUv + uvDivided * uProgress - vec2( 0.5, 0.5) * uProgress;
-  vec2 uvDisplacedAndBulged = bulge(uvDisplaced, vec2(
-      (uProgress + 1.) / 2., 
-      (-1. * uProgress + 1.) / 2.
-    )
-  );
+  // vec2 uvDivided = fract(correctUv*vec2(uProgress * 10.));
+  // vec2 uvDisplaced = correctUv + uvDivided * uProgress - vec2( 0.5, 0.5) * uProgress;
+  // vec2 uvDisplacedAndBulged = bulge(uvDisplaced, vec2(
+  //     (uProgress + 1.) / 2., 
+  //     (-1. * uProgress + 1.) / 2.
+  //   )
+  // );
 
   vec4 color = texture2D(uTexture, correctUv);
 
-  vec4 pixelatedColor = texture2D(uTexture, pixelatedUv);
-  vec4 textureDisplaced = texture2D(uTexture, uvDisplacedAndBulged);
+  // vec4 pixelatedColor = texture2D(uTexture, pixelatedUv);
+  // vec4 textureDisplaced = texture2D(uTexture, uvDisplacedAndBulged);
 
-  vec4 bulgedColor = texture2D(uTexture, bulgedUv);
+  // vec4 bulgedColor = texture2D(uTexture, bulgedUv);
 
   // rgb shift
   float c = uIntensity * circle(vUv, uMappedMouse, uRadius, 0.2);
@@ -100,12 +96,12 @@ void main() {
   vec4 cb = texture2D(uTexture, (correctUv - c));
 
   // zoom effect
-  vec2 warp = mix(correctUv, uMappedMouse, c * 10.0);
+  // vec2 warp = mix(correctUv, uMappedMouse, c * 10.0);
 
 
   // gl_FragColor = color;
-  gl_FragColor = bulgedColor;
-  // gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
+  // gl_FragColor = bulgedColor;
+  gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
   // gl_FragColor = texture2D(uTexture, warp);
 
 }

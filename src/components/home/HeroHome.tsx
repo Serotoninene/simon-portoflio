@@ -16,7 +16,7 @@ import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 import { useWindowSize } from "@/utils/hooks";
 import { useControls } from "leva";
 import { Perf } from "r3f-perf";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { useScroll } from "framer-motion";
 
 // [X] search for 'type declaration vertexshader glsl'
@@ -44,6 +44,7 @@ type BoxProps = {
 
 const Box = ({ photoData }: BoxProps) => {
   const { height, width } = useWindowSize();
+  const meshRef = React.useRef() as MutableRefObject<any>;
   const geometryRef = React.useRef() as MutableRefObject<any>;
   const shaderRef = React.useRef() as MutableRefObject<any>;
 
@@ -82,13 +83,6 @@ const Box = ({ photoData }: BoxProps) => {
     []
   );
 
-  useEffect(() => {
-    shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
-      photoData.width,
-      photoData.height
-    );
-  }, [width, height]);
-
   useFrame(({ clock, mouse }) => {
     const time = clock.getElapsedTime();
 
@@ -105,14 +99,29 @@ const Box = ({ photoData }: BoxProps) => {
     shaderRef.current.uniforms.uProgress.value = uProgress;
     shaderRef.current.uniforms.uRadius.value = controls.uRadius;
     shaderRef.current.uniforms.uIntensity.value = controls.uIntensity;
+
+    meshRef.current.scale.set(photoData.width, photoData.height);
   });
 
+  // console.log(geometryRef.current?.parameters.width);
+  // console.log(shaderRef.current);
+  // console.log(photoData.width);
+
+  useEffect(() => {
+    if (!height || !width) return;
+    shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
+      photoData.width,
+      photoData.height
+    );
+  }, [width, height]);
+
   return (
-    <mesh position={[photoData.x, photoData.y, 0]}>
-      <planeGeometry
-        ref={geometryRef}
-        args={[photoData.width, photoData.height, 32, 32]}
-      />
+    <mesh
+      ref={meshRef}
+      position={[photoData.x, photoData.y, 0]}
+      scale={[photoData.width, photoData.height, 1]}
+    >
+      <planeGeometry ref={geometryRef} args={[1, 1, 32, 32]} />
       <shaderMaterial
         ref={shaderRef}
         vertexShader={vertexShader}
@@ -125,6 +134,7 @@ const Box = ({ photoData }: BoxProps) => {
 };
 
 const Scene = ({ photoData }: SceneProps) => {
+  const canvasRef = useRef<any>(null);
   const { height, width } = useWindowSize();
   const [correctFov, setCorrectFov] = useState(0);
 
@@ -135,10 +145,15 @@ const Scene = ({ photoData }: SceneProps) => {
   }, [height, width]);
 
   return (
-    <Canvas
-      camera={{ fov: correctFov, position: [0, 0, 600], near: 10, far: 1000 }}
-    >
-      <Perf position="top-left" />
+    <Canvas>
+      <PerspectiveCamera
+        makeDefault
+        fov={correctFov}
+        position={[0, 0, 600]}
+        near={10}
+        far={1000}
+      />
+      {/* <Perf position="top-left" /> */}
       <OrbitControls enableZoom={false} />
       <Box photoData={photoData} />
     </Canvas>

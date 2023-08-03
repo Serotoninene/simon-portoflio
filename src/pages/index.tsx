@@ -86,16 +86,6 @@ const photos = [
     },
   },
   {
-    ...createPhoto("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
-    dominantColor: "#c3afa5",
-    caption: {
-      idx: "8",
-      title: "ALL ABOUT CLEANING",
-      place: "Canary Islands (ES)",
-      date: "2023",
-    },
-  },
-  {
     ...createPhoto("/assets/photos/09_SUPERMARKET.jpeg"),
     dominantColor: "#9e382f",
     caption: {
@@ -163,6 +153,16 @@ const photos = [
       title: "MONUMENT",
       place: "Whitehorse (CA)",
       date: "2020",
+    },
+  },
+  {
+    ...createPhoto("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
+    dominantColor: "#c3afa5",
+    caption: {
+      idx: "",
+      title: "ALL ABOUT CLEANING",
+      place: "Canary Islands (ES)",
+      date: "2023",
     },
   },
   {
@@ -347,6 +347,10 @@ const photos = [
   },
 ];
 
+photos.forEach((photo, idx) => {
+  photo.caption.idx = (idx + 1).toString();
+});
+
 export default function Home() {
   return (
     <LocomotiveScrollContainer>
@@ -367,20 +371,20 @@ export default function Home() {
             thirdPhoto={photos[5]}
           />
           <OneCentered photo={photos[6]} />
-          <OneCentered photo={photos[7]} />
-          <TwoShifted firstPhoto={photos[8]} secondPhoto={photos[9]} />
+          <TwoShifted firstPhoto={photos[7]} secondPhoto={photos[8]} />
           <TwoShifted
-            firstPhoto={photos[10]}
-            secondPhoto={photos[11]}
+            firstPhoto={photos[9]}
+            secondPhoto={photos[10]}
             inverted
           />
-          <OneWoCaption photo={photos[12]} />
+          <OneWoCaption photo={photos[10]} />
           <GridThree
             firstPhoto={photos[13]}
             secondPhoto={photos[15]}
             thirdPhoto={photos[14]}
             inverted
           />
+          <OneCentered photo={photos[7]} />
           <GridThree
             firstPhoto={photos[16]}
             secondPhoto={photos[17]}

@@ -26,15 +26,7 @@
   void main()
   {
     vUv = uv;
-    vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-    float elevation = sin(modelPosition.x *2.) * sin(modelPosition.z *2.) * 100.;
-    // Calculate the distance from the vertex to the mouse position
-    
-     // Apply a scaling factor based on the distance to create the bubble effect
-
-    modelPosition.y += elevation;
-  
-  
+    vec4 modelPosition = modelMatrix * vec4(position, 1.0);  
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
   
