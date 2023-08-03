@@ -34,7 +34,13 @@ import { usePathname } from "next/navigation";
 // [] make the title blend mode (on work page)
 // [] make a custom cursor
 
-const Photo = ({ photo, setIsOverview, isOverview }: any) => {
+const Photo = ({
+  photo,
+  setIsOverview,
+  isOverview,
+  idx,
+  photosLength,
+}: any) => {
   const path = usePathname();
   const ref = useRef<HTMLDivElement>(null);
   const childRef = useRef<HTMLDivElement>(null);
@@ -48,8 +54,12 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const handleClick = async () => {
     // wait for the change of state for the overview before scrolling
     await setIsOverview(false);
+    if (!width) return;
     const { top } = ref.current?.getBoundingClientRect() || { top: 0 };
-    window.scrollTo({ top, behavior: "smooth" });
+    window.scrollTo({
+      top: top + window.scrollY,
+      behavior: "smooth",
+    });
   };
 
   useEffect(() => {
@@ -265,6 +275,15 @@ export default function Work() {
 
   return (
     <Container className="pt-0">
+      <button
+        className="fixed top-8 left-5 text-red-500 z-30"
+        onClick={() => {
+          window.scrollTo({ top: 16958, behavior: "smooth" });
+        }}
+      >
+        {" "}
+        click me
+      </button>
       <LayoutGroup>
         <motion.div
           layout
@@ -288,6 +307,8 @@ export default function Work() {
             >
               <Photo
                 photo={photo}
+                photosLength={photos.length}
+                idx={idx}
                 isOverview={isOverview}
                 setIsOverview={setIsOverview}
               />
