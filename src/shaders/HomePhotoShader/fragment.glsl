@@ -69,7 +69,7 @@ void main() {
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
   // Bulge with the mouse
-  vec2 bulgedUv = bulge(correctUv,uMappedMouse);
+  vec2 bulgedUv = bulge(correctUv,vec2(uMappedMouse.x, max(uMappedMouse.y, 0.1)));
 
   // bulge with the progress variable
   // vec2 bulgedUv = bulge(correctUv, vec2(
