@@ -52,13 +52,12 @@ float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
 }
 
 void main() {   
-  // vec2 correctUv = vUv;
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
   vec4 disp = texture2D(uDisplacement, correctUv);
   vec2 dispVec = vec2(disp.r, disp.g);
 
-  vec2 distortedPosition1 = correctUv + getRotM(angle1) * dispVec * uIntro * (1.0 - uProgress);
+  vec2 distortedPosition1 = correctUv + getRotM(angle1) * dispVec * uIntro *  uProgress;
   vec2 distortedPosition2 = correctUv + getRotM(angle2) * dispVec * uIntro * (1.0 - uProgress);
 
   vec4 t1 = texture2D(uTexture, distortedPosition1);
@@ -72,10 +71,7 @@ void main() {
 
   vec4 t3 = vec4(cga.r, cr.g, cb.b, cga.a);
 
-  // gl_FragColor = color;
-  // gl_FragColor = bulgedColor;
-  gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
-  // gl_FragColor = texture2D(uTexture, warp);
-  // gl_FragColor = mix(t1,t2, uProgress );
+  // gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
+  gl_FragColor = mix(t1,t2, uProgress );
 
 }
