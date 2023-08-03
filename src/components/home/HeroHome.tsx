@@ -22,7 +22,8 @@ import { useControls } from "leva";
 // [X] fix the mesh on the html div sizes
 // [X] fix the mesh on the html div position
 // [X] calculate the ratio of the image to the plane
-// [] see how to distort the r g b with my mouse position
+// [X] see how to distort the r g b with my mouse position
+// [] see how to distort the vertex with my mouse position
 
 type PhotoData = {
   x: number;

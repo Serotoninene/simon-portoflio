@@ -106,7 +106,7 @@ void main() {
   vec2 warp = mix(correctUv, uMouse, c * 10.0);
 
   // gl_FragColor = bulgedColor;
-  // gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
-  gl_FragColor = texture2D(uTexture, warp);
+  gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
+  // gl_FragColor = texture2D(uTexture, warp);
 
 }
