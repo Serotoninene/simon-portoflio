@@ -16,7 +16,7 @@ varying vec2 vUv;
 
 const float PI = 3.1415;
 const float angle1 = PI *0.25;
-		const float angle2 = -PI *0.75;
+const float angle2 = -PI *0.75;
 
 mat2 getRotM(float angle) {
       float s = sin(angle);
@@ -55,13 +55,12 @@ void main() {
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
   vec4 disp = texture2D(uDisplacement, correctUv);
-  vec2 dispVec = vec2(disp.r, disp.g);
+  vec2 dispVec = vec2(disp.b, disp.g);
 
-  vec2 distortedPosition1 = correctUv + getRotM(angle1) * dispVec * uIntro *  uProgress;
-  vec2 distortedPosition2 = correctUv + getRotM(angle2) * dispVec * uIntro * (1.0 - uProgress);
+  vec2 distortedPosition = correctUv + getRotM(angle2) * dispVec * uIntro * (1.0 - uProgress);
 
-  vec4 t1 = texture2D(uTexture, distortedPosition1);
-  vec4 t2 = texture2D(uTexture, distortedPosition2);
+  vec4 t1 = vec4(0.0);
+  vec4 t2 = texture2D(uTexture, distortedPosition);
 
   // rgb shift
   float c = uIntensity * circle(vUv, uMappedMouse, uRadius, 0.2);
@@ -71,7 +70,6 @@ void main() {
 
   vec4 t3 = vec4(cga.r, cr.g, cb.b, cga.a);
 
-  // gl_FragColor = vec4(cga.r, cr.g, cb.b, cga.a);
-  gl_FragColor = mix(t1,t2, uProgress );
-
+  gl_FragColor = t3;
+  gl_FragColor = mix(t1,t2, uProgress);
 }
