@@ -9,14 +9,18 @@ interface Props {
   delay?: number;
   ease?: number[] | string | undefined;
   duration?: number | undefined;
+  rotate?: number | undefined;
   stagger?: number | undefined;
   start?: boolean | undefined;
+  y?: number | undefined;
   fontWeight?: string | undefined;
   absolute?: boolean;
 }
 
 const AnimatedLetters = ({
   string,
+  y = 400,
+  rotate = 0,
   delay = 0.4,
   ease = [0.6, 0.01, -0.05, 0.95],
   duration = 0.45,
@@ -43,7 +47,8 @@ const AnimatedLetters = ({
 
   const letterAnim = {
     hidden: {
-      y: 400,
+      y,
+      rotate,
       transition: {
         ease: ease,
         duration: duration,
@@ -51,13 +56,15 @@ const AnimatedLetters = ({
     },
     show: {
       y: 0,
+      rotate: 0,
       transition: {
         ease: ease,
         duration: duration,
       },
     },
     exit: {
-      y: -400,
+      y: -y,
+      rotate: -rotate,
       transition: {
         ease: ease,
         duration: duration,

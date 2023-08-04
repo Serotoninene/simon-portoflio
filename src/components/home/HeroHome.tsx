@@ -232,7 +232,10 @@ export const HeroHome = () => {
             <AnimatedLetters
               string="SIMON EYCHENNE"
               delay={0.7}
-              stagger={0.015}
+              rotate={15}
+              duration={1}
+              y={100}
+              stagger={0.01}
               ease={ease}
             />
           </h1>
