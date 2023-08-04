@@ -185,7 +185,7 @@ const Scene = () => {
         near={10}
         far={1000}
       />
-      <OrbitControls enableZoom={false} />
+      {/* <OrbitControls enableZoom={false} /> */}
       <Box />
     </Canvas>
   );
