@@ -49,8 +49,10 @@ const Box = () => {
     uIntensity: { value: 0.02, min: 0, max: 0.5, step: 0.001 },
   });
 
-  const { uIntro } = useControls("intro", {
-    uIntro: { value: 0, min: 0, max: 1, step: 0.1 },
+  const { uIntro, uDeformVertex, uIntensityVertex } = useControls("intro", {
+    uIntro: { value: 1, min: 0, max: 1, step: 0.1 },
+    uDeformVertex: { value: 2.1, min: 0, max: 10, step: 0.1 },
+    uIntensityVertex: { value: 20, min: 0, max: 20, step: 0.1 },
   });
 
   const [texture, displacementMap] = useLoader(THREE.TextureLoader, [
@@ -74,6 +76,8 @@ const Box = () => {
       uProgress: { value: uProgress },
       uRadius: { value: controls.uRadius },
       uIntensity: { value: controls.uIntensity },
+      uIntensityVertex: { value: uIntensityVertex },
+      uDeformVertex: { value: 0 },
       uIntro: { value: uIntro },
     }),
     []
@@ -98,6 +102,8 @@ const Box = () => {
     shaderRef.current.uniforms.uRadius.value = controls.uRadius;
     shaderRef.current.uniforms.uIntensity.value = controls.uIntensity;
     shaderRef.current.uniforms.uIntro.value = uIntro;
+    shaderRef.current.uniforms.uDeformVertex.value = uDeformVertex;
+    shaderRef.current.uniforms.uIntensityVertex.value = uIntensityVertex;
 
     if (!rect) return;
     if (height && width) {
@@ -119,8 +125,8 @@ const Box = () => {
   });
 
   useEffect(() => {
-    if (!height || !width) return;
-  }, [width, height]);
+    const introTl = gsap.timeline();
+  }, []);
 
   return (
     <mesh ref={meshRef} position={[photoData.x, photoData.y, 0]}>
