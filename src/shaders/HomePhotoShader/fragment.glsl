@@ -57,10 +57,10 @@ void main() {
   // vec4 t2 = texture2D(uTexture, distortedPosition2);
 
   // rgb shift
-  float c = uIntensity * circle(vUv, uMappedMouse, uRadius, 0.2);
-  vec4 cr = texture2D(uTexture, (correctUv + c));
+  float c = uIntensity * circle(vUv, uMappedMouse, uRadius , 0.2);
+  vec4 cr = texture2D(uTexture, (correctUv + c * (uProgress)));
   vec4 cga = texture2D(uTexture, correctUv);
-  vec4 cb = texture2D(uTexture, (correctUv - c));
+  vec4 cb = texture2D(uTexture, (correctUv - c * (uProgress)));
   vec4 rgbaShiftTexture = vec4(cga.r, cr.g, cb.b, cga.a);
 
   // rgba shift 

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { AnimLink } from "../atoms";
 import { Container } from "../molecules";
 import { motion } from "framer-motion";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 type NavLink = {
   href: string;

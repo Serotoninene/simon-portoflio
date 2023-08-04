@@ -14,10 +14,13 @@ import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
 import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 import { useWindowSize } from "@/utils/hooks";
-import { useControls } from "leva";
+import { useControls, Leva } from "leva";
 
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { Power3, gsap } from "gsap";
+import { Power4, gsap } from "gsap";
+import { motion } from "framer-motion";
+import AnimatedLetters from "../atoms/AnimLetters";
+import { ease } from "@/utils/store";
 
 // [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
@@ -101,7 +104,7 @@ const Box = () => {
     shaderRef.current.uniforms.uMappedMouse.value = mappedMouse;
     shaderRef.current.uniforms.uMouse.value = mouse;
     shaderRef.current.uniforms.uTime.value = time;
-    shaderRef.current.uniforms.uProgress.value = uProgress;
+    // shaderRef.current.uniforms.uProgress.value = uProgress;
     shaderRef.current.uniforms.uRadius.value = controls.uRadius;
     shaderRef.current.uniforms.uIntensity.value = controls.uIntensity;
     // shaderRef.current.uniforms.uIntro.value = uIntro;
@@ -130,11 +133,15 @@ const Box = () => {
   useEffect(() => {
     introTl.current = gsap.timeline();
 
-    introTl.current.to(shaderRef.current.uniforms.uIntro, {
-      value: 1,
-      duration: 1,
-      ease: Power3.easeOut,
-    });
+    introTl.current
+      .to(shaderRef.current.uniforms.uIntro, {
+        value: 1,
+        duration: 1.5,
+        ease: Power4.easeOut,
+      })
+      .to(shaderRef.current.uniforms.uProgress, {
+        value: 1,
+      });
 
     return () => {
       if (introTl.current) {
@@ -189,6 +196,7 @@ export const HeroHome = () => {
 
   return (
     <>
+      <Leva hidden />
       <div className="h-[100dvh] z-10 fixed top-0 left-0 right-0 ">
         <Scene />
       </div>
@@ -198,7 +206,7 @@ export const HeroHome = () => {
           data-scroll-speed="0.2"
           ref={ref}
           id="hero-photo"
-          className="h-full relative opacity-5 cursor-none pointer-events-auto"
+          className="h-full relative opacity-0 cursor-none pointer-events-auto"
         >
           <Image
             alt="house in a green field"
@@ -209,14 +217,24 @@ export const HeroHome = () => {
           />
         </div>
         <div className="sm:flex justify-between items-end">
-          <h2 className="hidden md:block pb-1">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ease: "easeOut", delay: 0.75 }}
+            className="hidden md:block pb-1"
+          >
             Hi, here is an overview of <br />
             my personal artistic work.
-          </h2>
+          </motion.h2>
           <h1
-            className={`${spartan.className} text-end flex-none text-2xl align-bottom leading-none sm:flex-1 sm:text-[64px]`}
+            className={`${spartan.className} text-end flex-none  text-2xl align-bottom leading-none sm:flex-1 sm:text-[64px]`}
           >
-            SIMON EYCHENNE
+            <AnimatedLetters
+              string="SIMON EYCHENNE"
+              delay={0.7}
+              stagger={0.015}
+              ease={ease}
+            />
           </h1>
         </div>
       </div>
