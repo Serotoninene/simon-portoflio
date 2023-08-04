@@ -17,6 +17,7 @@ import { useWindowSize } from "@/utils/hooks";
 import { useControls } from "leva";
 
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { gsap } from "gsap";
 
 // [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
@@ -34,7 +35,9 @@ const Box = () => {
     width: 0,
     height: 0,
   });
+  // make a ref for the numbers or string and be sure to add the types
 
+  const introTl = useRef<GSAPTimeline | null>(null);
   const { height, width } = useWindowSize();
   const meshRef = React.useRef() as MutableRefObject<any>;
   const geometryRef = React.useRef() as MutableRefObject<any>;
@@ -125,7 +128,13 @@ const Box = () => {
   });
 
   useEffect(() => {
-    const introTl = gsap.timeline();
+    introTl.current = gsap.timeline();
+
+    return () => {
+      if (introTl.current) {
+        introTl.current.kill();
+      }
+    };
   }, []);
 
   return (
