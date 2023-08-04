@@ -167,17 +167,20 @@ const Box = () => {
 };
 
 const Scene = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { height, width } = useWindowSize();
   const [correctFov, setCorrectFov] = useState(0);
 
   useEffect(() => {
     if (!height || !width) return;
+    console.log(height);
+    console.log(canvasRef.current?.clientHeight);
 
     setCorrectFov(((Math.atan(height / 2 / 600) * 180) / Math.PI) * 2);
   }, [height, width]);
 
   return (
-    <Canvas>
+    <Canvas ref={canvasRef}>
       <PerspectiveCamera
         makeDefault
         fov={correctFov}
@@ -197,7 +200,7 @@ export const HeroHome = () => {
   return (
     <>
       <Leva hidden />
-      <div className="h-[100dvh] z-10 fixed top-0 left-0 right-0 ">
+      <div className="h-[100vh] z-10 fixed top-0 left-0 right-0 ">
         <Scene />
       </div>
       <div className="h-[calc(100dvh-32px)] flex flex-col justify-between gap-6 pt-10 pb-6">
@@ -206,7 +209,7 @@ export const HeroHome = () => {
           data-scroll-speed="0.2"
           ref={ref}
           id="hero-photo"
-          className="h-full relative opacity-0 cursor-none pointer-events-auto"
+          className="h-full relative opacity-10 cursor-none pointer-events-auto"
         >
           <Image
             alt="house in a green field"
