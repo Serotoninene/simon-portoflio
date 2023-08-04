@@ -29,7 +29,8 @@ void main()
   vUv = uv;
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);  
   modelPosition.y -= 50. * (1. - uIntro) ;
-  modelPosition.y += cos(-modelPosition.x /  (100.0 * 2. )) * 20. * (1.-uIntro) ;
+  // modelPosition.y += cos(-modelPosition.x /  (100.0 * 2. )) * 20. * 3. *(1.-uIntro) ;
+  // 
 
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;

@@ -17,7 +17,7 @@ import { useWindowSize } from "@/utils/hooks";
 import { useControls } from "leva";
 
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { gsap } from "gsap";
+import { Power3, gsap } from "gsap";
 
 // [X] search for 'type declaration vertexshader glsl'
 // [X] make the image cover the plane without losing its aspect ratio
@@ -53,9 +53,9 @@ const Box = () => {
   });
 
   const { uIntro, uDeformVertex, uIntensityVertex } = useControls("intro", {
-    uIntro: { value: 1, min: 0, max: 1, step: 0.1 },
+    uIntro: { value: 0, min: 0, max: 1, step: 0.1 },
     uDeformVertex: { value: 2.1, min: 0, max: 10, step: 0.1 },
-    uIntensityVertex: { value: 20, min: 0, max: 20, step: 0.1 },
+    uIntensityVertex: { value: 100, min: 0, max: 20, step: 0.1 },
   });
 
   const [texture, displacementMap] = useLoader(THREE.TextureLoader, [
@@ -104,7 +104,7 @@ const Box = () => {
     shaderRef.current.uniforms.uProgress.value = uProgress;
     shaderRef.current.uniforms.uRadius.value = controls.uRadius;
     shaderRef.current.uniforms.uIntensity.value = controls.uIntensity;
-    shaderRef.current.uniforms.uIntro.value = uIntro;
+    // shaderRef.current.uniforms.uIntro.value = uIntro;
     shaderRef.current.uniforms.uDeformVertex.value = uDeformVertex;
     shaderRef.current.uniforms.uIntensityVertex.value = uIntensityVertex;
 
@@ -129,6 +129,12 @@ const Box = () => {
 
   useEffect(() => {
     introTl.current = gsap.timeline();
+
+    introTl.current.to(shaderRef.current.uniforms.uIntro, {
+      value: 1,
+      duration: 1,
+      ease: Power3.easeOut,
+    });
 
     return () => {
       if (introTl.current) {
