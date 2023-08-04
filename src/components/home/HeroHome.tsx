@@ -50,7 +50,7 @@ const Box = () => {
   });
 
   const { uIntro } = useControls("intro", {
-    uIntro: { value: 0.6, min: 0, max: 3, step: 0.01 },
+    uIntro: { value: 20, min: 0, max: 100, step: 0.1 },
   });
 
   const [texture, displacementMap] = useLoader(THREE.TextureLoader, [

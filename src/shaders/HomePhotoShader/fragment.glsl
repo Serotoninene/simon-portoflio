@@ -18,17 +18,11 @@ const float PI = 3.1415;
 const float angle1 = PI *0.25;
 const float angle2 = -PI *0.75;
 
-mat2 getRotM(float angle) {
-      float s = sin(angle);
-      float c = cos(angle);
-      return mat2(c, -s, s, c);
-  }
-
 mat2 rotate(float a) {
-    float s = sin(a);
-    float c = cos(a);
-    return mat2(c, -s, s, c);
-  }
+  float s = sin(a);
+  float c = cos(a);
+  return mat2(c, -s, s, c);
+}
 
 vec2 getUV(vec2 uv, vec2 textureSize, vec2 quadSize){
   vec2 tempUV = uv - vec2(0.5);
@@ -54,22 +48,37 @@ float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
 void main() {   
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
+  // // demo 6
   vec4 disp = texture2D(uDisplacement, correctUv);
-  vec2 dispVec = vec2(disp.b, disp.g);
+  vec2 dispVec = vec2(disp.r, disp.g);
 
-  vec2 distortedPosition = correctUv + getRotM(angle2) * dispVec * uIntro * (1.0 - uProgress);
+  // vec2 distortedPosition2 = correctUv + rotate(angle2) * dispVec * uIntro * (1.0 - uProgress);
+  // vec4 t1 = vec4(0.0);
+  // vec4 t2 = texture2D(uTexture, distortedPosition2);
 
-  vec4 t1 = vec4(0.0);
-  vec4 t2 = texture2D(uTexture, distortedPosition);
+  // // rgb shift
+  // float c = uIntensity * circle(vUv, uMappedMouse, uRadius, 0.2);
+  // vec4 cr = texture2D(uTexture, (correctUv + c));
+  // vec4 cga = texture2D(uTexture, correctUv);
+  // vec4 cb = texture2D(uTexture, (correctUv - c));
+  // vec4 t3 = vec4(cga.r, cr.g, cb.b, cga.a);
 
-  // rgb shift
-  float c = uIntensity * circle(vUv, uMappedMouse, uRadius, 0.2);
-  vec4 cr = texture2D(uTexture, (correctUv + c));
-  vec4 cga = texture2D(uTexture, correctUv);
-  vec4 cb = texture2D(uTexture, (correctUv - c));
+  // // rgba shift 
+  // gl_FragColor = t3;
+  // // demo6
+  // gl_FragColor = mix(t1,t2, uProgress);
 
-  vec4 t3 = vec4(cga.r, cr.g, cb.b, cga.a);
+  // demo 7
+  vec2 uvDivided = fract(correctUv*vec2(uIntro,1.0));
 
-  gl_FragColor = t3;
-  gl_FragColor = mix(t1,t2, uProgress);
+  float	x = smoothstep(.0,1.0,(uProgress*2.0+uvDivided.y-1.0));
+
+
+  vec2 uvDisplaced1 = correctUv + rotate(3.1415926/4.)*uvDivided*x*0.1;
+  vec2 uvDisplaced2 = correctUv +vec2(0., 1. - x)  + rotate(3.1415926/4.)*uvDivided*dispVec*(1. - x)*0.1;
+
+  vec4 t4 = vec4(0.0);
+  vec4 t5 = texture2D(uTexture, uvDisplaced2);
+
+  gl_FragColor= mix(t4,t5, x);
 }
