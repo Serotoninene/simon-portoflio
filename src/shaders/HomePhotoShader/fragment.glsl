@@ -56,29 +56,27 @@ void main() {
   // vec4 t1 = vec4(0.0);
   // vec4 t2 = texture2D(uTexture, distortedPosition2);
 
-  // // rgb shift
-  // float c = uIntensity * circle(vUv, uMappedMouse, uRadius, 0.2);
-  // vec4 cr = texture2D(uTexture, (correctUv + c));
-  // vec4 cga = texture2D(uTexture, correctUv);
-  // vec4 cb = texture2D(uTexture, (correctUv - c));
-  // vec4 t3 = vec4(cga.r, cr.g, cb.b, cga.a);
+  // rgb shift
+  float c = uIntensity * circle(vUv, uMappedMouse, uRadius, 0.2);
+  vec4 cr = texture2D(uTexture, (correctUv + c));
+  vec4 cga = texture2D(uTexture, correctUv);
+  vec4 cb = texture2D(uTexture, (correctUv - c));
+  vec4 rgbaShiftTexture = vec4(cga.r, cr.g, cb.b, cga.a);
 
-  // // rgba shift 
-  // gl_FragColor = t3;
+  // rgba shift 
   // // demo6
   // gl_FragColor = mix(t1,t2, uProgress);
 
   // demo 7
-  vec2 uvDivided = fract(correctUv*vec2(uIntro,1.0));
+  vec2 uvDivided = fract(correctUv*vec2(20.,1.0));
 
-  float	x = smoothstep(.0,1.0,(uProgress*2.0+uvDivided.y-1.0));
-
-
+  float	x = smoothstep(.0,1.0,(uIntro*2.0+uvDivided.y-1.0));
   vec2 uvDisplaced1 = correctUv + rotate(3.1415926/4.)*uvDivided*x*0.1;
   vec2 uvDisplaced2 = correctUv +vec2(0., 1. - x)  + rotate(3.1415926/4.)*uvDivided*dispVec*(1. - x)*0.1;
 
-  vec4 t4 = vec4(0.0);
-  vec4 t5 = texture2D(uTexture, uvDisplaced2);
+  vec4 t1 = vec4(0.0);
+  vec4 t2 = texture2D(uTexture, uvDisplaced2);
+  vec4 animTexture = mix(t1,t2, x);
 
-  gl_FragColor= mix(t4,t5, x);
+  gl_FragColor = mix(animTexture, rgbaShiftTexture, uProgress);
 }

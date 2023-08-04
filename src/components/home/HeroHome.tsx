@@ -41,7 +41,7 @@ const Box = () => {
   const shaderRef = React.useRef() as MutableRefObject<any>;
 
   const { uProgress } = useControls("webgl", {
-    uProgress: { value: 1, min: 0, max: 1, step: 0.1 },
+    uProgress: { value: 0, min: 0, max: 1, step: 0.1 },
   });
 
   const controls = useControls("shader zoom", {
@@ -50,7 +50,7 @@ const Box = () => {
   });
 
   const { uIntro } = useControls("intro", {
-    uIntro: { value: 20, min: 0, max: 100, step: 0.1 },
+    uIntro: { value: 0, min: 0, max: 1, step: 0.1 },
   });
 
   const [texture, displacementMap] = useLoader(THREE.TextureLoader, [
@@ -97,6 +97,7 @@ const Box = () => {
     shaderRef.current.uniforms.uProgress.value = uProgress;
     shaderRef.current.uniforms.uRadius.value = controls.uRadius;
     shaderRef.current.uniforms.uIntensity.value = controls.uIntensity;
+    shaderRef.current.uniforms.uIntro.value = uIntro;
 
     if (!rect) return;
     if (height && width) {
