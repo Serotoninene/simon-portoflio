@@ -5,6 +5,8 @@ import { Navbar } from "@/components/organisms";
 import Head from "next/head";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { useWindowSize } from "@/utils/hooks";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -37,10 +39,18 @@ export const metadata = {
 
 export default function Layout({ children }: Props) {
   const path = usePathname();
+  const { height, width } = useWindowSize();
+
+  useEffect(() => {
+    if (!height) return;
+    const screen = height;
+    document.documentElement.style.setProperty("--screen", screen + "px");
+  }, [height]);
+
   return (
     <div id="App" className={`${poppins.className} bg-light`}>
       <Head>
-        <title>Simon Eychennes</title>
+        <title>Simon Eychenne</title>
         <meta
           name="description"
           content="Virgile Hasselmann, a video and photo portfolio"

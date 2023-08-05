@@ -26,7 +26,7 @@ export const GridThree = ({
           <div
             data-scroll
             data-scroll-speed="2"
-            className="h-[100dvh] sm:h-full"
+            className="h-[var(--screen)] sm:h-full"
           >
             <AnimPhoto src={firstPhoto?.src} alt={firstPhoto?.alt} />
             <div className="block sm:hidden mt-4">
@@ -37,7 +37,7 @@ export const GridThree = ({
           <div
             data-scroll
             data-scroll-speed="1"
-            className="h-[100dvh] sm:h-[125%]"
+            className="h-[var(--screen)] sm:h-[125%]"
           >
             <PhotoLayout photo={secondPhoto} />
           </div>
@@ -53,7 +53,7 @@ export const GridThree = ({
           <div
             data-scroll
             data-scroll-speed="0.5"
-            className="h-[100dvh] sm:h-full"
+            className="h-[var(--screen)] sm:h-full"
           >
             <PhotoLayout photo={thirdPhoto} />
           </div>

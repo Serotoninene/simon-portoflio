@@ -98,8 +98,8 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
         key={path}
         className={`${
           !isOverview
-            ? "h-[100dvh] py-4 items-center"
-            : "h-[50dvh] cursor-pointer items-start"
+            ? "h-[var(--screen)] py-4 items-center"
+            : "h-[50vh] cursor-pointer items-start"
         } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
         onClick={handleClick}
       >
@@ -145,7 +145,7 @@ const WorkFooter = ({
       data-scroll
       data-scroll-sticky
       data-scroll-target="#scroll-container"
-      className={`flex items-end fixed left-0 top-0 h-[100dvh] py-4 px-10 w-full ${
+      className={`flex items-end fixed left-0 top-0 h-[var(--screen)] py-4 px-10 w-full ${
         isOverview ? "pointer-events-none" : "pointer-events-auto"
       }`}
     >
@@ -276,7 +276,7 @@ export default function Work() {
           className={`relative  ${
             isOverview
               ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 h-full gap-2"
-              : "flex flex-col gap-6 sm:gap-8 md:gap-[50dvh]"
+              : "flex flex-col gap-6 sm:gap-8 md:gap-[50vh]"
           } w-full`}
         >
           {photos.map((photo, idx) => (

@@ -199,11 +199,11 @@ export const HeroHome = () => {
 
   return (
     <>
-      <Leva hidden />
-      <div className="h-[100vh] z-10 fixed top-0 left-0 right-0 ">
+      <div className="h-[var(--screen)] z-10 fixed top-0 left-0 right-0 ">
+        <Leva hidden />
         <Scene />
       </div>
-      <div className="h-[calc(100dvh-32px)] flex flex-col justify-between gap-6 pt-10 pb-6">
+      <div className="h-[calc(var(--screen)-32px)] flex flex-col justify-between gap-6 pt-10 pb-6">
         <div
           data-scroll
           data-scroll-speed="0.2"
