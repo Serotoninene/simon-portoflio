@@ -42,8 +42,7 @@ export default function Layout({ children }: Props) {
   const { height, width } = useWindowSize();
 
   useEffect(() => {
-    if (!height) return;
-    const screen = height;
+    const screen = window.innerHeight;
     document.documentElement.style.setProperty("--fullScreen", screen + "px");
   }, [height]);
 

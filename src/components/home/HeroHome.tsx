@@ -199,11 +199,11 @@ export const HeroHome = () => {
 
   return (
     <>
-      <div className="h-screen z-10 fixed top-0 left-0 right-0 ">
+      <div className="h-[var(--fullScreen)] z-10 fixed top-0 left-0 right-0 ">
         <Leva hidden />
         <Scene />
       </div>
-      <div className="h-screen flex flex-col justify-between gap-6 pt-10 pb-10">
+      <div className="h-[var(--fullScreen)] flex flex-col justify-between gap-6 pt-10 pb-10">
         <div
           data-scroll
           data-scroll-speed="0.2"
