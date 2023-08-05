@@ -23,7 +23,5 @@ export const Container = ({ children, className }: Props) => {
 };
 
 export const HomeContainer = ({ children, fit }: HomeContainerProps) => (
-  <div className={`py-6 ${fit ? "h-auto" : "h-[var(--screen)]"}`}>
-    {children}
-  </div>
+  <div className={`py-6 ${fit ? "h-auto" : "h-[100vh]"}`}>{children}</div>
 );

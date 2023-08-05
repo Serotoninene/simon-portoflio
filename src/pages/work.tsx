@@ -98,7 +98,7 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
         key={path}
         className={`${
           !isOverview
-            ? "h-[var(--screen)] py-4 items-center"
+            ? "h-[100vh] py-4 items-center"
             : "h-[50vh] cursor-pointer items-start"
         } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
         onClick={handleClick}
@@ -145,7 +145,7 @@ const WorkFooter = ({
       data-scroll
       data-scroll-sticky
       data-scroll-target="#scroll-container"
-      className={`flex items-end fixed left-0 top-0 h-[var(--screen)] py-4 px-10 w-full ${
+      className={`flex items-end fixed left-0 top-0 h-[100vh] py-4 px-10 w-full ${
         isOverview ? "pointer-events-none" : "pointer-events-auto"
       }`}
     >

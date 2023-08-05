@@ -44,7 +44,7 @@ export default function Layout({ children }: Props) {
   useEffect(() => {
     if (!height) return;
     const screen = height;
-    document.documentElement.style.setProperty("--screen", screen + "px");
+    document.documentElement.style.setProperty("--fullScreen", screen + "px");
   }, [height]);
 
   return (
