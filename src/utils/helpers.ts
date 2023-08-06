@@ -1,3 +1,5 @@
+import ColorThief from "colorthief";
+
 export const capitalizeWord = (string: string) => {
   const uppercasedString = [string].map(
     (element: string) =>
@@ -46,3 +48,24 @@ export const rgbToHex = ([r, g, b]: [number, number, number]) =>
       return hex.length === 1 ? "0" + hex : hex;
     })
     .join("");
+
+export async function getDominantColor(imageSrc: string): Promise<string> {
+  const colorThief = new ColorThief();
+  const image = new Image();
+  image.src = imageSrc;
+
+  return new Promise((resolve) => {
+    image.onload = () => {
+      const dominantColor = colorThief.getColor(image);
+      const colorHex = `#${(
+        (1 << 24) +
+        (dominantColor[0] << 16) +
+        (dominantColor[1] << 8) +
+        dominantColor[2]
+      )
+        .toString(16)
+        .slice(1)}`;
+      resolve(colorHex);
+    };
+  });
+}

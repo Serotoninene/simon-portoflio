@@ -1,12 +1,11 @@
 "use client";
 
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { createAlt } from "@/utils/helpers";
-import { ease } from "@/utils/store";
+import { createAlt, getDominantColor, loadImage } from "@/utils/helpers";
 import { usePathname } from "next/navigation";
 
 type Props = {
@@ -17,18 +16,6 @@ type Props = {
   placeholder?: "blur" | "empty";
   blurDataURL?: string;
   sizes?: string;
-};
-
-const variants = {
-  hidden: { scale: 1, y: "100%" },
-  visible: {
-    scale: 1,
-    y: 0,
-    transition: {
-      ease: ease,
-      duration: 1.5,
-    },
-  },
 };
 
 export const AnimPhoto = ({
@@ -56,6 +43,16 @@ export const AnimPhoto = ({
   const handleLoad = () => {
     setIsLoaded(true);
   };
+
+  useEffect(() => {
+    const getImageDominantColor = async () => {
+      const imageUrl = "/path/to/your/image.jpg"; // Replace with the path to your image
+      const color = await getDominantColor(imageUrl);
+      console.log(color); // This will log the dominant color in rgb format
+    };
+
+    getImageDominantColor();
+  }, []);
 
   useEffect(() => {
     if (ref.current) {

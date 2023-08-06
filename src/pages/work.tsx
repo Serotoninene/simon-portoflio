@@ -36,7 +36,6 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
 
   useEffect(() => {
     if (!dominantColor) return;
-
     if (childRef.current) {
       childRef.current.style.backgroundColor = dominantColor;
     }
