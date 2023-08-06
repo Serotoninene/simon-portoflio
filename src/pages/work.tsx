@@ -12,28 +12,6 @@ import { Container } from "@/components/molecules";
 import { useWindowSize } from "@/utils/hooks";
 import { usePathname } from "next/navigation";
 
-// use Image but rename it NextImage
-
-// TO DO
-// [X] Make a "menu" layout to see all the images at once on click of a button
-// [X] onClick of one photo, back to the usual layout and scroll to the photo
-// [X] do the transition between the two layouts
-// [X] when overlay mode -> scroll to 0
-// [X] click to a photo -> scroll to the photo
-// [X] Insert all the photos on the homepage
-// [X] only smoothscroll on the home for now
-// [X] stick the footer properly ...
-// [X] make the footer change with the scroll
-// [X] replace all the img by Image on work page
-// [X] Make the photos lazy load
-// [X] make a menu for mobile
-// [X] make the text appear on scroll
-// [] make an intro animation
-// [] rearrange the layout on mobile
-// [X] remove the number from the title + capitalize the first letter (on work page)
-// [] make the title blend mode (on work page)
-// [] make a custom cursor
-
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const path = usePathname();
   const ref = useRef<HTMLDivElement>(null);

@@ -351,6 +351,15 @@ photos.forEach((photo, idx) => {
   photo.caption.idx = (idx + 1).toString();
 });
 
+// TO DO
+// [] changer les photos d'après le figma
+// [] changer le ratio pour le component OneWCaption
+// [] faire un script qui chope les couleurs dominantes + qui complète le photos array avec les index et les couleurs
+// [] commencer l'animation seulement après que la heroPhoto soit chargée / apparue
+// [] rearrange the layout on mobile
+// [] make the title blend mode (on work page)
+// [] make a custom cursor
+
 export default function Home() {
   return (
     <LocomotiveScrollContainer>

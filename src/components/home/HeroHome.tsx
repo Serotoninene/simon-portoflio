@@ -16,20 +16,11 @@ import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 import { useWindowSize } from "@/utils/hooks";
 import { useControls, Leva } from "leva";
 
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { PerspectiveCamera } from "@react-three/drei";
 import { Power4, gsap } from "gsap";
 import { motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { ease } from "@/utils/store";
-
-// [X] search for 'type declaration vertexshader glsl'
-// [X] make the image cover the plane without losing its aspect ratio
-// [X] calculate the camera z position so the units of the canvas match the pixels of the page
-// [X] fix the mesh on the html div sizes
-// [X] fix the mesh on the html div position
-// [X] calculate the ratio of the image to the plane
-// [X] see how to distort the r g b with my mouse position
-// [X] see how to distort the vertex with my mouse position
 
 const Box = () => {
   const [photoData, setPhotoData] = useState({
