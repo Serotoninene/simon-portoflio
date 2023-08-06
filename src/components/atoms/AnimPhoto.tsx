@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { createAlt, getDominantColor, loadImage } from "@/utils/helpers";
+import { createAlt, getDominantColor } from "@/utils/helpers";
 import { usePathname } from "next/navigation";
 
 type Props = {

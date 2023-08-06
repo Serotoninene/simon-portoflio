@@ -200,7 +200,7 @@ export const HeroHome = () => {
           data-scroll-speed="0.2"
           ref={ref}
           id="hero-photo"
-          className="h-full relative opacity-10 cursor-none pointer-events-auto"
+          className="h-full relative opacity-0 cursor-none pointer-events-auto"
         >
           <Image
             alt="house in a green field"
