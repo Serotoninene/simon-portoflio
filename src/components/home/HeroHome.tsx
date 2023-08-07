@@ -9,18 +9,18 @@ import Image from "next/image";
 import { spartan } from "../molecules/Layout";
 import * as THREE from "three";
 
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
 
 import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
 import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 import { useWindowSize } from "@/utils/hooks";
 import { useControls, Leva } from "leva";
 
-import { PerspectiveCamera } from "@react-three/drei";
 import { Power4, gsap } from "gsap";
 import { motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { ease } from "@/utils/store";
+import { CustomCanvas } from "@components/three";
 
 type SceneProps = {
   setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -177,17 +177,10 @@ const Scene = ({ setIsLoaded }: SceneProps) => {
   }, [height, width]);
 
   return (
-    <Canvas ref={canvasRef}>
-      <PerspectiveCamera
-        makeDefault
-        fov={correctFov}
-        position={[0, 0, 600]}
-        near={10}
-        far={1000}
-      />
+    <CustomCanvas>
       {/* <OrbitControls enableZoom={false} /> */}
       <Box setIsLoaded={setIsLoaded} />
-    </Canvas>
+    </CustomCanvas>
   );
 };
 

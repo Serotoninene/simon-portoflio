@@ -12,6 +12,16 @@ import { Container } from "@/components/molecules";
 import { useWindowSize } from "@/utils/hooks";
 import { usePathname } from "next/navigation";
 
+import { CustomCanvas } from "@/components/three";
+
+const Scene = () => {
+  return (
+    <CustomCanvas>
+      <ambientLight intensity={0.5} />
+    </CustomCanvas>
+  );
+};
+
 const Photo = ({ photo, setIsOverview, isOverview }: any) => {
   const path = usePathname();
   const ref = useRef<HTMLDivElement>(null);
@@ -263,7 +273,7 @@ export default function Work() {
               animate={{ y: 0 }}
               transition={{ delay: 0.005 * idx, ease: "easeOut" }}
               key={idx}
-              className={`flex-none ${
+              className={`flex-none opacity-10 ${
                 isOverview ? "flex h-full overflow-hidden " : ""
               }`}
             >
