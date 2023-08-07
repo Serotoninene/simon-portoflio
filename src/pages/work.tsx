@@ -137,22 +137,14 @@ const ThreePhoto = ({ photo, idx }: any) => {
 
   const texture = useTexture(photo.src) as THREE.Texture;
 
-  const { uProgressControl } = useControls({
-    uProgressControl: {
-      value: 0,
-      min: 0,
-      max: 1,
-    },
-  });
-
-  // useEffect(() => {
-  //   gsap.to(shaderRef.current, {
-  //     uProgress: 1,
-  //     duration: 1,
-  //     delay: 0.5,
-  //     ease: "easeOut",
-  //   });
-  // }, []);
+  useEffect(() => {
+    gsap.to(shaderRef.current, {
+      uProgress: 1,
+      duration: 1,
+      delay: 0.5,
+      ease: "easeOut",
+    });
+  }, []);
 
   useFrame(() => {
     const photoDiv = document.getElementById(photo.alt);
@@ -176,7 +168,6 @@ const ThreePhoto = ({ photo, idx }: any) => {
       texture.image.height
     );
     shaderRef.current.uQuadSize.set(photoData.width, photoData.height);
-    shaderRef.current.uProgress = uProgressControl;
   });
 
   return (
@@ -191,7 +182,7 @@ const ThreePhoto = ({ photo, idx }: any) => {
 const Scene = () => {
   return (
     <CustomCanvas>
-      <Perf />
+      {/* <Perf /> */}
       <ambientLight intensity={1} />
       <Suspense fallback={null}>
         {photos.map((photo, idx) => (
