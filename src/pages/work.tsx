@@ -12,48 +12,10 @@ import { usePathname } from "next/navigation";
 
 import { CustomCanvas } from "@/components/three";
 import { useFrame } from "@react-three/fiber";
+import { useTexture } from "@react-three/drei";
+import { Perf } from "r3f-perf";
 
 const photos = [
-  {
-    ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
-    date: "2019, Vancouver (CA)",
-  },
-  {
-    ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
-    date: "2020, Vancouver (CA)",
-  },
-  {
-    ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
-    date: "2019, Vancouver (CA)",
-  },
-  {
-    ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
-    date: "2020, Vancouver (CA)",
-  },
-  {
-    ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
-    date: "2019, Vancouver (CA)",
-  },
-  {
-    ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
-    date: "2019, Vancouver (CA)",
-  },
-  {
-    ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
-    date: "2020, Vancouver (CA)",
-  },
-  {
-    ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
-    date: "2019, Vancouver (CA)",
-  },
-  {
-    ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
-    date: "2020, Vancouver (CA)",
-  },
-  {
-    ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
-    date: "2019, Vancouver (CA)",
-  },
   {
     ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
     date: "2019, Vancouver (CA)",
@@ -85,6 +47,8 @@ const ThreePhoto = ({ photo }: any) => {
     height: 0,
   });
 
+  const texture = useTexture(photo.src) as THREE.Texture;
+
   useFrame(() => {
     const photoDiv = document.getElementById(photo.alt);
     const rect = photoDiv?.getBoundingClientRect();
@@ -93,6 +57,8 @@ const ThreePhoto = ({ photo }: any) => {
     if (height && width) {
       const x = rect?.left - width / 2 + rect?.width / 2;
       const y = -rect?.top + height / 2 - rect?.height / 2;
+      console.log(rect.height);
+      console.log(rect.width);
 
       setPhotoData({
         x,
@@ -102,10 +68,11 @@ const ThreePhoto = ({ photo }: any) => {
       });
     }
   });
+
   return (
     <mesh position={[photoData.x, photoData.y, 0]}>
       <boxGeometry args={[photoData.width, photoData.height, 1]} />
-      <meshBasicMaterial color="red" />
+      <meshBasicMaterial map={texture} />
     </mesh>
   );
 };
@@ -113,6 +80,7 @@ const ThreePhoto = ({ photo }: any) => {
 const Scene = () => {
   return (
     <CustomCanvas>
+      <Perf />
       {photos.map((photo, idx) => (
         <ThreePhoto key={idx} photo={photo} />
       ))}
@@ -187,10 +155,10 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
           !isOverview
             ? "h-[100vh] py-4 items-center"
             : "h-[50vh] cursor-pointer items-start"
-        } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
+        } w-full border opacity-0 flex flex-col flex-none justify-center relative pointer-events-auto `}
         onClick={handleClick}
       >
-        <div id={photo.alt} className="overflow-hidden">
+        <div>
           <motion.div
             initial={{
               opacity: 0,
@@ -203,6 +171,7 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
             ref={childRef}
           >
             <Image
+              id={photo.alt}
               alt={photo.alt}
               width={!isOverview ? imageSize.width : undefined}
               height={!isOverview ? imageSize.height : undefined}
@@ -262,7 +231,7 @@ export default function Work() {
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
 
-  const [isOverview, setIsOverview] = useState(false);
+  const [isOverview, setIsOverview] = useState(true);
   const { scrollYProgress } = useScroll();
 
   useEffect(() => {
@@ -313,7 +282,7 @@ export default function Work() {
               animate={{ y: 0 }}
               transition={{ delay: 0.005 * idx, ease: "easeOut" }}
               key={idx}
-              className={`flex-none opacity-10 bg-blue-200 ${
+              className={`flex-none  ${
                 isOverview ? "flex h-full overflow-hidden " : ""
               }`}
             >
