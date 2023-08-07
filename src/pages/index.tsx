@@ -1,4 +1,3 @@
-import { createPhoto, getDominantColor, loadImage } from "@/utils/helpers";
 import {
   HeroHome,
   GridTwo,
@@ -10,10 +9,6 @@ import {
 } from "@/components/home";
 import { OneWoCaption } from "@/components/home/OneWoCaption";
 import { Container, LocomotiveScrollContainer } from "@/components/molecules";
-import ColorThief from "colorthief";
-import { useEffect } from "react";
-import { useWindowSize } from "@/utils/hooks";
-import { parse } from "path";
 
 const photos = [
   {
