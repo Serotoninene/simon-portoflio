@@ -37,7 +37,35 @@ const photos = [
     date: "2020, Vancouver (CA)",
   },
   {
+    ...createPhotoTitle("/assets/photos/01_MY_GARDEN_IS_COOL.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/03_GOOGLE_MAPS-ING.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/04_FISHING.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/05_LIVING_ON_A_BOAT.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/06_CROWDED.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
     ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/11_APERITIF.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/31_LIFE_PERSPECTIVES.jpeg"),
     date: "2019, Vancouver (CA)",
   },
 ];
@@ -76,7 +104,7 @@ const ThreePhoto = ({ photo, idx }: any) => {
 
       setPhotoData({
         x,
-        y: THREE.MathUtils.lerp(photoData.y, y, 0.5 * idx + 0.09),
+        y: y,
         height: rect?.height,
         width: rect?.width,
       });
