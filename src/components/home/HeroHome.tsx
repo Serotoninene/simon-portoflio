@@ -69,16 +69,12 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
       uProgress: { value: 0 },
       uRadius: { value: 0.07 },
       uIntensity: { value: 0.02 },
-      uIntensityVertex: { value: uIntensityVertex },
-      uDeformVertex: { value: 0 },
       uIntro: { value: 0 },
     }),
     []
   );
 
-  useFrame(({ clock, mouse }) => {
-    const time = clock.getElapsedTime();
-
+  useFrame(({ mouse }) => {
     const mappedMouse = new THREE.Vector2(
       THREE.MathUtils.mapLinear(mouse.x, -1, 1, 0, 1),
       THREE.MathUtils.mapLinear(mouse.y, -1, 1, 0, 1)
@@ -86,10 +82,6 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
 
     const photoDiv = document.getElementById("hero-photo");
     const rect = photoDiv?.getBoundingClientRect();
-
-    shaderRef.current.uniforms.uMappedMouse.value = mappedMouse;
-    shaderRef.current.uniforms.uDeformVertex.value = uDeformVertex;
-    shaderRef.current.uniforms.uIntensityVertex.value = uIntensityVertex;
 
     if (!rect) return;
     if (height && width) {
@@ -104,6 +96,7 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
       });
     }
 
+    shaderRef.current.uniforms.uMappedMouse.value = mappedMouse;
     shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
       photoData.width,
       photoData.height
