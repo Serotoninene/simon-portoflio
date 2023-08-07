@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 
 import { loadImage, rgbToHex } from "@/utils/helpers";
 
@@ -23,6 +23,8 @@ import * as THREE from "three";
 
 import fragment from "@shaders/WorkPhotoShader/fragment.glsl";
 import vertex from "@shaders/WorkPhotoShader/vertex.glsl";
+import { gsap } from "gsap";
+import { useControls } from "leva";
 
 const photos = [
   {
@@ -111,17 +113,6 @@ const photos = [
   },
 ];
 
-const ColorShiftMaterial = shaderMaterial(
-  {
-    uTexture: new THREE.Texture(),
-    uTextureSize: new THREE.Vector2(0, 0),
-    uQuadSize: new THREE.Vector2(0, 0),
-  },
-  vertex,
-  fragment
-);
-extend({ ColorShiftMaterial });
-
 const ThreePhoto = ({ photo, idx }: any) => {
   const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
@@ -134,7 +125,32 @@ const ThreePhoto = ({ photo, idx }: any) => {
 
   const texture = useTexture(photo.src) as THREE.Texture;
 
-  useEffect(() => {});
+  const uniforms = useMemo(
+    () => ({
+      uTexture: { value: texture },
+      uTextureSize: { value: new THREE.Vector2(0, 0) },
+      uQuadSize: { value: new THREE.Vector2(0, 0) },
+      uProgress: { value: 0 },
+    }),
+    []
+  );
+
+  const { uProgressControl } = useControls({
+    uProgressControl: {
+      value: 0,
+      min: 0,
+      max: 1,
+    },
+  });
+
+  // useEffect(() => {
+  //   gsap.to(shaderRef.current, {
+  //     uProgress: 1,
+  //     duration: 1,
+  //     delay: 0.5,
+  //     ease: "easeOut",
+  //   });
+  // }, []);
 
   useFrame(() => {
     const photoDiv = document.getElementById(photo.alt);
@@ -153,18 +169,27 @@ const ThreePhoto = ({ photo, idx }: any) => {
       });
     }
 
-    shaderRef.current.uTextureSize.set(
+    shaderRef.current.uniforms.uTextureSize.value = new THREE.Vector2(
       texture.image.width,
       texture.image.height
     );
-    shaderRef.current.uQuadSize.set(photoData.width, photoData.height);
+    shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
+      photoData.width,
+      photoData.height
+    );
+    shaderRef.current.uniforms.uProgress.value = uProgressControl;
   });
 
   return (
     <mesh position={[photoData.x, photoData.y, 0]}>
       <planeGeometry args={[photoData.width, photoData.height, 1]} />
       {/* @ts-ignore */}
-      <colorShiftMaterial ref={shaderRef} uTexture={texture} />
+      <shaderMaterial
+        ref={shaderRef}
+        uniforms={uniforms}
+        vertexShader={vertex}
+        fragmentShader={fragment}
+      />
     </mesh>
   );
 };
