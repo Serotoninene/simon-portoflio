@@ -1,12 +1,7 @@
 import Image from "next/image";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import {
-  createPhotoTitle,
-  getDominantColor,
-  loadImage,
-  rgbToHex,
-} from "@/utils/helpers";
+import { loadImage, rgbToHex } from "@/utils/helpers";
 
 import ColorThief from "colorthief";
 import { AnimatePresence, LayoutGroup, motion, useScroll } from "framer-motion";
@@ -122,41 +117,6 @@ const ColorShiftMaterial = shaderMaterial(
 );
 extend({ ColorShiftMaterial });
 
-const PhotoPlacholder = ({ photo }: any) => {
-  const { height, width } = useWindowSize();
-  const [photoData, setPhotoData] = useState({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-  });
-
-  useFrame(() => {
-    const photoDiv = document.getElementById(photo.alt);
-    const rect = photoDiv?.getBoundingClientRect();
-
-    if (!rect) return;
-    if (height && width) {
-      const x = rect?.left - width / 2 + rect?.width / 2;
-      const y = -rect?.top + height / 2 - rect?.height / 2;
-
-      setPhotoData({
-        x,
-        y: y,
-        height: rect?.height,
-        width: rect?.width,
-      });
-    }
-  });
-
-  return (
-    <mesh position={[photoData.x, photoData.y, 0]}>
-      <planeGeometry args={[photoData.width, photoData.height, 1]} />
-      <meshBasicMaterial color={photo.dominantColor} />
-    </mesh>
-  );
-};
-
 const ThreePhoto = ({ photo, idx }: any) => {
   const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
@@ -208,9 +168,7 @@ const Scene = () => {
       <Perf />
       <ambientLight intensity={1} />
       {photos.map((photo, idx) => (
-        <Suspense key={idx} fallback={<PhotoPlacholder photo={photo} />}>
-          <ThreePhoto key={idx} photo={photo} idx={idx} />
-        </Suspense>
+        <ThreePhoto key={idx} photo={photo} idx={idx} />
       ))}
     </CustomCanvas>
   );
@@ -393,48 +351,55 @@ export default function Work() {
 
   return (
     <Container className="pt-0">
-      <div className="fixed top-0 left-0 right-0 bottom-0">
-        <Scene />
-      </div>
-      <LayoutGroup>
-        <motion.div
-          layout
-          data-scroll-section
-          className={`relative  ${
-            isOverview
-              ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 h-full gap-2"
-              : "flex flex-col gap-6 sm:gap-8 md:gap-[50vh]"
-          } w-full`}
-        >
-          {photos.map((photo, idx) => (
-            <motion.div
-              layout
-              initial={{ y: "50%" }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.005 * idx, ease: "easeOut" }}
-              key={idx}
-              className={`flex-none  ${
-                isOverview ? "flex h-full overflow-hidden " : ""
-              }`}
-            >
-              <Photo
-                photo={photo}
-                isOverview={isOverview}
-                setIsOverview={setIsOverview}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
-      </LayoutGroup>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ ease: "easeOut", duration: 0.5 }}
+      >
+        <div className="fixed top-0 left-0 right-0 bottom-0">
+          <Scene />
+        </div>
+        <LayoutGroup>
+          <motion.div
+            layout
+            data-scroll-section
+            className={`relative  ${
+              isOverview
+                ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 h-full gap-2"
+                : "flex flex-col gap-6 sm:gap-8 md:gap-[50vh]"
+            } w-full`}
+          >
+            {photos.map((photo, idx) => (
+              <motion.div
+                layout
+                initial={{ y: "50%" }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.005 * idx, ease: "easeOut" }}
+                key={idx}
+                className={`flex-none  ${
+                  isOverview ? "flex h-full overflow-hidden " : ""
+                }`}
+              >
+                <Photo
+                  photo={photo}
+                  isOverview={isOverview}
+                  setIsOverview={setIsOverview}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </LayoutGroup>
 
-      <WorkFooter
-        photos={photos}
-        title={title}
-        idx={idx}
-        variants={variants}
-        isOverview={isOverview}
-        handleToggleLayout={handleToggleLayout}
-      />
+        <WorkFooter
+          photos={photos}
+          title={title}
+          idx={idx}
+          variants={variants}
+          isOverview={isOverview}
+          handleToggleLayout={handleToggleLayout}
+        />
+      </motion.div>
     </Container>
   );
 }
