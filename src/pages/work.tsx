@@ -186,31 +186,29 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
         } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
         onClick={handleClick}
       >
-        <div>
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{ y: "100%" }}
-            transition={{ delay: 5, ease: "easeOut" }}
-            ref={childRef}
-          >
-            <Image
-              id={photo.alt}
-              alt={photo.alt}
-              width={!isOverview ? imageSize.width : undefined}
-              height={!isOverview ? imageSize.height : undefined}
-              placeholder="blur"
-              blurDataURL={photo.src}
-              fill={isOverview}
-              src={photo.src}
-              className="object-cover opacity-25"
-            />
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          exit={{ y: "100%" }}
+          transition={{ delay: 0.5, ease: "easeOut" }}
+          ref={childRef}
+        >
+          <Image
+            id={photo.alt}
+            alt={photo.alt}
+            width={!isOverview ? imageSize.width : undefined}
+            height={!isOverview ? imageSize.height : undefined}
+            placeholder="blur"
+            blurDataURL={photo.src}
+            fill={isOverview}
+            src={photo.src}
+            className="object-cover"
+          />
+        </motion.div>
       </div>
     </AnimatePresence>
   );
@@ -259,7 +257,7 @@ export default function Work() {
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
 
-  const [isOverview, setIsOverview] = useState(true);
+  const [isOverview, setIsOverview] = useState(false);
   const { scrollYProgress } = useScroll();
 
   useEffect(() => {

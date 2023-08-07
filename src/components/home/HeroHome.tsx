@@ -139,7 +139,7 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
 const Scene = ({ setIsLoaded }: SceneProps) => {
   return (
     <CustomCanvas>
-      <Perf />
+      {/* <Perf /> */}
       {/* <OrbitControls enableZoom={false} /> */}
       <HeroPhoto setIsLoaded={setIsLoaded} />
     </CustomCanvas>
