@@ -376,6 +376,7 @@ const photos = [
 // [X] changer le ratio pour le component OneWCaption
 // [X] faire un script qui chope les couleurs dominantes + qui complète le photos array avec les index et les couleurs
 // [X] commencer l'animation seulement après que la heroPhoto soit chargée / apparue
+// [] faire l'intro pour les photos de la page work
 // [] rearrange the layout on mobile
 // [] make the title blend mode (on work page)
 // [] make a custom cursor

@@ -134,6 +134,8 @@ const ThreePhoto = ({ photo, idx }: any) => {
 
   const texture = useTexture(photo.src) as THREE.Texture;
 
+  useEffect(() => {});
+
   useFrame(() => {
     const photoDiv = document.getElementById(photo.alt);
     const rect = photoDiv?.getBoundingClientRect();
