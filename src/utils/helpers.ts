@@ -25,7 +25,7 @@ export const createPhotoTitle = (src: string) => {
   const title = altArray.join(" ");
 
   const capitalizedTitle = capitalizeWord(title);
-  return { src, alt, capitalizedTitle };
+  return { src, alt, capitalizedTitle, dominantColor: "" };
 };
 
 export const createAlt = (src: string) => {
@@ -69,3 +69,12 @@ export async function getDominantColor(imageSrc: string): Promise<string> {
     };
   });
 }
+
+export const updateDominantColors = async (photos: any) => {
+  for (let idx = 0; idx < photos.length; idx++) {
+    const photo = photos[idx];
+    const color = await getDominantColor(photo.src);
+    photos[idx].dominantColor = color;
+  }
+  console.log(JSON.stringify(photos));
+};

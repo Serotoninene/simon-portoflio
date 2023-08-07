@@ -1,7 +1,12 @@
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { createPhotoTitle, loadImage, rgbToHex } from "@/utils/helpers";
+import {
+  createPhotoTitle,
+  getDominantColor,
+  loadImage,
+  rgbToHex,
+} from "@/utils/helpers";
 
 import ColorThief from "colorthief";
 import { AnimatePresence, LayoutGroup, motion, useScroll } from "framer-motion";
@@ -21,51 +26,87 @@ import vertex from "@shaders/WorkPhotoShader/vertex.glsl";
 
 const photos = [
   {
-    ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
+    src: "/assets/photos/10_TIME_FOR_LAUNDRY.jpeg",
+    alt: "0_TIME_FOR_LAUNDRY",
+    capitalizedTitle: "Time for laundry",
+    dominantColor: "#aba5ac",
     date: "2019, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
+    src: "/assets/photos/09_SUPERMARKET.jpeg",
+    alt: "9_SUPERMARKET",
+    capitalizedTitle: "Supermarket",
+    dominantColor: "#a82f28",
     date: "2020, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
+    src: "/assets/photos/08_ALL_ABOUT_CLEANING.jpeg",
+    alt: "8_ALL_ABOUT_CLEANING",
+    capitalizedTitle: "All about cleaning",
+    dominantColor: "#cab0a8",
     date: "2019, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+    src: "/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg",
+    alt: "2_MY_HOUSE_IS_A_TRIANGLE",
+    capitalizedTitle: "My house is a triangle",
+    dominantColor: "#a09a9d",
     date: "2020, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/01_MY_GARDEN_IS_COOL.jpeg"),
+    src: "/assets/photos/01_MY_GARDEN_IS_COOL.jpeg",
+    alt: "1_MY_GARDEN_IS_COOL",
+    capitalizedTitle: "My garden is cool",
+    dominantColor: "#272413",
     date: "2019, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/03_GOOGLE_MAPS-ING.jpeg"),
+    src: "/assets/photos/03_GOOGLE_MAPS-ING.jpeg",
+    alt: "3_GOOGLE_MAPS-ING",
+    capitalizedTitle: "Google maps-ing",
+    dominantColor: "#42361e",
     date: "2019, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/04_FISHING.jpeg"),
+    src: "/assets/photos/04_FISHING.jpeg",
+    alt: "4_FISHING",
+    capitalizedTitle: "Fishing",
+    dominantColor: "#bfbda2",
     date: "2019, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/05_LIVING_ON_A_BOAT.jpeg"),
+    src: "/assets/photos/05_LIVING_ON_A_BOAT.jpeg",
+    alt: "5_LIVING_ON_A_BOAT",
+    capitalizedTitle: "Living on a boat",
+    dominantColor: "#708d99",
     date: "2019, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/06_CROWDED.jpeg"),
+    src: "/assets/photos/06_CROWDED.jpeg",
+    alt: "6_CROWDED",
+    capitalizedTitle: "Crowded",
+    dominantColor: "#396b76",
     date: "2019, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
+    src: "/assets/photos/07_SQUARED.jpeg",
+    alt: "7_SQUARED",
+    capitalizedTitle: "Squared",
+    dominantColor: "#957858",
     date: "2019, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/11_APERITIF.jpeg"),
+    src: "/assets/photos/11_APERITIF.jpeg",
+    alt: "1_APERITIF",
+    capitalizedTitle: "Aperitif",
+    dominantColor: "#bfb7ae",
     date: "2019, Vancouver (CA)",
   },
   {
-    ...createPhotoTitle("/assets/photos/31_LIFE_PERSPECTIVES.jpeg"),
+    src: "/assets/photos/31_LIFE_PERSPECTIVES.jpeg",
+    alt: "1_LIFE_PERSPECTIVES",
+    capitalizedTitle: "Life perspectives",
+    dominantColor: "#66819d",
     date: "2019, Vancouver (CA)",
   },
 ];
@@ -197,8 +238,10 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
 
   return (
     <AnimatePresence mode="wait">
-      <div
+      <motion.div
         ref={ref}
+        layout
+        transition={{ scaleX: { duration: 15 } }}
         data-scroll
         data-scroll-to
         key={path}
@@ -235,7 +278,7 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
             />
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </AnimatePresence>
   );
 };
@@ -309,7 +352,7 @@ export default function Work() {
 
   const handleToggleLayout = () => {
     setIsOverview((prev) => !prev);
-    window.scrollTo({ top: 0, behavior: "instant" });
+    // window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
