@@ -53,7 +53,8 @@ const ColorShiftMaterial = shaderMaterial(
 );
 extend({ ColorShiftMaterial });
 
-const ThreePhoto = ({ photo }: any) => {
+const ThreePhoto = ({ photo, idx }: any) => {
+  const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
   const [photoData, setPhotoData] = useState({
     x: 0,
@@ -75,21 +76,25 @@ const ThreePhoto = ({ photo }: any) => {
 
       setPhotoData({
         x,
-        y: THREE.MathUtils.lerp(photoData.y, y, 0.09),
+        y: THREE.MathUtils.lerp(photoData.y, y, 0.5 * idx + 0.09),
         height: rect?.height,
         width: rect?.width,
       });
     }
+
+    shaderRef.current.uTextureSize.set(
+      texture.image.width,
+      texture.image.height
+    );
+    shaderRef.current.uQuadSize.set(photoData.width, photoData.height);
   });
 
   return (
     <mesh position={[photoData.x, photoData.y, 0]}>
       <boxGeometry args={[photoData.width, photoData.height, 1]} />
+      {/* <boxGeometry args={[width, 500, 1]} /> */}
       {/* @ts-ignore */}
-      <colorShiftMaterial
-        uTexture={texture}
-        uQuadSize={{ x: photoData.width, y: photoData.height }}
-      />
+      <colorShiftMaterial ref={shaderRef} uTexture={texture} />
     </mesh>
   );
 };
@@ -276,7 +281,7 @@ export default function Work() {
 
   const handleToggleLayout = () => {
     setIsOverview((prev) => !prev);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   return (
