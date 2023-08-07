@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 import { loadImage, rgbToHex } from "@/utils/helpers";
 
@@ -113,6 +113,18 @@ const photos = [
   },
 ];
 
+const ColorShiftMaterial = shaderMaterial(
+  {
+    uTexture: new THREE.Texture(),
+    uTextureSize: new THREE.Vector2(0, 0),
+    uQuadSize: new THREE.Vector2(0, 0),
+    uProgress: 0,
+  },
+  vertex,
+  fragment
+);
+extend({ ColorShiftMaterial });
+
 const ThreePhoto = ({ photo, idx }: any) => {
   const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
@@ -124,16 +136,6 @@ const ThreePhoto = ({ photo, idx }: any) => {
   });
 
   const texture = useTexture(photo.src) as THREE.Texture;
-
-  const uniforms = useMemo(
-    () => ({
-      uTexture: { value: texture },
-      uTextureSize: { value: new THREE.Vector2(0, 0) },
-      uQuadSize: { value: new THREE.Vector2(0, 0) },
-      uProgress: { value: 0 },
-    }),
-    []
-  );
 
   const { uProgressControl } = useControls({
     uProgressControl: {
@@ -169,27 +171,19 @@ const ThreePhoto = ({ photo, idx }: any) => {
       });
     }
 
-    shaderRef.current.uniforms.uTextureSize.value = new THREE.Vector2(
+    shaderRef.current.uTextureSize.set(
       texture.image.width,
       texture.image.height
     );
-    shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
-      photoData.width,
-      photoData.height
-    );
-    shaderRef.current.uniforms.uProgress.value = uProgressControl;
+    shaderRef.current.uQuadSize.set(photoData.width, photoData.height);
+    shaderRef.current.uProgress = uProgressControl;
   });
 
   return (
     <mesh position={[photoData.x, photoData.y, 0]}>
       <planeGeometry args={[photoData.width, photoData.height, 1]} />
       {/* @ts-ignore */}
-      <shaderMaterial
-        ref={shaderRef}
-        uniforms={uniforms}
-        vertexShader={vertex}
-        fragmentShader={fragment}
-      />
+      <colorShiftMaterial ref={shaderRef} uTexture={texture} />
     </mesh>
   );
 };

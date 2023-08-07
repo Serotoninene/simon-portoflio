@@ -42,4 +42,6 @@ void main() {
 
   gl_FragColor = mix(t1, t2, uProgress);
 
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
 }
