@@ -1,27 +1,121 @@
-"use client";
-
-import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 import { createPhotoTitle, loadImage, rgbToHex } from "@/utils/helpers";
 
-import { AnimatePresence, LayoutGroup, motion, useScroll } from "framer-motion";
 import ColorThief from "colorthief";
+import { AnimatePresence, LayoutGroup, motion, useScroll } from "framer-motion";
 
 import { Container } from "@/components/molecules";
 import { useWindowSize } from "@/utils/hooks";
 import { usePathname } from "next/navigation";
 
 import { CustomCanvas } from "@/components/three";
-import { Box } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+
+const photos = [
+  {
+    ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
+    date: "2020, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+    date: "2020, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
+    date: "2020, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+    date: "2020, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
+    date: "2020, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+    date: "2020, Vancouver (CA)",
+  },
+  {
+    ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
+    date: "2019, Vancouver (CA)",
+  },
+];
+
+const ThreePhoto = ({ photo }: any) => {
+  const { height, width } = useWindowSize();
+  const [photoData, setPhotoData] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
+
+  useFrame(() => {
+    const photoDiv = document.getElementById(photo.alt);
+    const rect = photoDiv?.getBoundingClientRect();
+
+    if (!rect) return;
+    if (height && width) {
+      const x = rect?.left - width / 2 + rect?.width / 2;
+      const y = -rect?.top + height / 2 - rect?.height / 2;
+
+      setPhotoData({
+        x,
+        y,
+        height: rect?.height,
+        width: rect.width,
+      });
+    }
+  });
+  return (
+    <mesh position={[photoData.x, photoData.y, 0]}>
+      <boxGeometry args={[photoData.width, photoData.height, 1]} />
+      <meshBasicMaterial color="red" />
+    </mesh>
+  );
+};
 
 const Scene = () => {
   return (
     <CustomCanvas>
-      <mesh>
-        <boxGeometry args={[500, 500, 1]} />
-        <meshBasicMaterial color="red" />
-      </mesh>
+      {photos.map((photo, idx) => (
+        <ThreePhoto key={idx} photo={photo} />
+      ))}
     </CustomCanvas>
   );
 };
@@ -96,7 +190,7 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
         } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
         onClick={handleClick}
       >
-        <div className="overflow-hidden">
+        <div id={photo.alt} className="overflow-hidden">
           <motion.div
             initial={{
               opacity: 0,
@@ -182,69 +276,6 @@ export default function Work() {
     });
   }, [scrollYProgress]);
 
-  const photos = [
-    {
-      ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
-      date: "2019, Vancouver (CA)",
-    },
-    // {
-    //   ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
-    //   date: "2020, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
-    //   date: "2019, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
-    //   date: "2020, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
-    //   date: "2019, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
-    //   date: "2019, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
-    //   date: "2020, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
-    //   date: "2019, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
-    //   date: "2020, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
-    //   date: "2019, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
-    //   date: "2019, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
-    //   date: "2020, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
-    //   date: "2019, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
-    //   date: "2020, Vancouver (CA)",
-    // },
-    // {
-    //   ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
-    //   date: "2019, Vancouver (CA)",
-    // },
-  ];
-
   const variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -282,7 +313,7 @@ export default function Work() {
               animate={{ y: 0 }}
               transition={{ delay: 0.005 * idx, ease: "easeOut" }}
               key={idx}
-              className={`flex-none opacity-10 ${
+              className={`flex-none opacity-10 bg-blue-200 ${
                 isOverview ? "flex h-full overflow-hidden " : ""
               }`}
             >

@@ -14,7 +14,6 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
 import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 import { useWindowSize } from "@/utils/hooks";
-import { useControls, Leva } from "leva";
 
 import { Power4, gsap } from "gsap";
 import { motion } from "framer-motion";
@@ -27,25 +26,20 @@ type SceneProps = {
 };
 
 const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
+  // setting up the values
   const [photoData, setPhotoData] = useState({
     x: 0,
     y: 0,
     width: 0,
     height: 0,
   });
-  // make a ref for the numbers or string and be sure to add the types
-
   const introTl = useRef<GSAPTimeline | null>(null);
   const { height, width } = useWindowSize();
   const meshRef = React.useRef() as MutableRefObject<any>;
   const geometryRef = React.useRef() as MutableRefObject<any>;
   const shaderRef = React.useRef() as MutableRefObject<any>;
 
-  const { uDeformVertex, uIntensityVertex } = useControls("intro", {
-    uDeformVertex: { value: 2.1, min: 0, max: 10, step: 0.1 },
-    uIntensityVertex: { value: 100, min: 0, max: 20, step: 0.1 },
-  });
-
+  // loading the texture
   const [texture, displacementMap] = useLoader(
     THREE.TextureLoader,
     ["/assets/photos/00_ACCUEIL.jpeg", "/assets/disp/disp1.jpg"],
@@ -74,6 +68,7 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
     []
   );
 
+  // updating the uniforms and photoData
   useFrame(({ mouse }) => {
     const mappedMouse = new THREE.Vector2(
       THREE.MathUtils.mapLinear(mouse.x, -1, 1, 0, 1),
@@ -103,6 +98,7 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
     );
   });
 
+  // intro anim - gsap part
   useEffect(() => {
     introTl.current = gsap.timeline();
 
@@ -149,7 +145,6 @@ const Scene = ({ setIsLoaded }: SceneProps) => {
 };
 
 export const HeroHome = () => {
-  const ref = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -161,14 +156,12 @@ export const HeroHome = () => {
   return (
     <>
       <div className="h-[var(--fullScreen)] z-10 fixed top-0 left-0 right-0 ">
-        <Leva hidden />
         <Scene setIsLoaded={setIsLoaded} />
       </div>
       <div className="h-[var(--fullScreen)] flex flex-col justify-between gap-6 pt-10 pb-10">
         <div
           data-scroll
           data-scroll-speed="0.2"
-          ref={ref}
           id="hero-photo"
           className="h-full relative opacity-0 cursor-none pointer-events-auto"
         >
