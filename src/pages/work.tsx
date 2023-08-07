@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 import { loadImage, rgbToHex } from "@/utils/helpers";
 
@@ -11,7 +11,12 @@ import { useWindowSize } from "@/utils/hooks";
 import { usePathname } from "next/navigation";
 
 import { CustomCanvas } from "@/components/three";
-import { shaderMaterial, useTexture } from "@react-three/drei";
+import {
+  Html,
+  shaderMaterial,
+  useProgress,
+  useTexture,
+} from "@react-three/drei";
 import { extend, useFrame } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import * as THREE from "three";
@@ -167,9 +172,11 @@ const Scene = () => {
     <CustomCanvas>
       <Perf />
       <ambientLight intensity={1} />
-      {photos.map((photo, idx) => (
-        <ThreePhoto key={idx} photo={photo} idx={idx} />
-      ))}
+      <Suspense fallback={null}>
+        {photos.map((photo, idx) => (
+          <ThreePhoto key={idx} photo={photo} idx={idx} />
+        ))}
+      </Suspense>
     </CustomCanvas>
   );
 };
