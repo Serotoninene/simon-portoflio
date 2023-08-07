@@ -229,7 +229,7 @@ export const HeroHome = () => {
             my personal artistic work.
           </motion.h2>
           <h1
-            className={`${spartan.className} text-end flex-none  text-2xl align-bottom leading-none sm:flex-1 sm:text-[64px]`}
+            className={`${spartan.className} text-end flex-none text-2xl align-bottom leading-none sm:flex-1 sm:text-[48px] lg:text-[64px]`}
           >
             <AnimatedLetters
               string="SIMON EYCHENNE"

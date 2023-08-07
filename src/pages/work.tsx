@@ -13,11 +13,15 @@ import { useWindowSize } from "@/utils/hooks";
 import { usePathname } from "next/navigation";
 
 import { CustomCanvas } from "@/components/three";
+import { Box } from "@react-three/drei";
 
 const Scene = () => {
   return (
     <CustomCanvas>
-      <ambientLight intensity={0.5} />
+      <mesh>
+        <boxGeometry args={[500, 500, 1]} />
+        <meshBasicMaterial color="red" />
+      </mesh>
     </CustomCanvas>
   );
 };
@@ -256,6 +260,9 @@ export default function Work() {
 
   return (
     <Container className="pt-0">
+      <div className="fixed top-0 left-0 right-0 bottom-0">
+        <Scene />
+      </div>
       <LayoutGroup>
         <motion.div
           layout
