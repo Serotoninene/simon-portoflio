@@ -17,7 +17,7 @@ export const OneWCaption = ({ photo, children }: Props) => {
 
   return (
     <HomeContainer>
-      <div className="grid grid-cols-1 sm:grid-cols-3 h-full gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-4 h-full gap-6">
         <div className="flex flex-col justify-between">
           <div className="flex sm:justify-end sm:pt-10">
             <motion.div
@@ -25,7 +25,7 @@ export const OneWCaption = ({ photo, children }: Props) => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 1, ease: "easeIn" }}
-              className="text-right text-2xl sm:w-3/4 md:2/4 sm:text-3xl md:text-[40px] md:leading-relaxed"
+              className="text-right text-2xl sm:w-3/4 sm:text-2xl md:text-3xl md:leading-relaxed lg:w-3/5 lg:text-[40px]"
             >
               {children}
             </motion.div>
@@ -35,7 +35,7 @@ export const OneWCaption = ({ photo, children }: Props) => {
           </div>
         </div>
 
-        <div className="sm:col-span-2">
+        <div className="sm:col-span-3">
           <AnimPhoto {...photo} />
           <div className="block sm:hidden">
             <PhotoCaption {...photo.caption} />
