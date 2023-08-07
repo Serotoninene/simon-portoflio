@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 import {
   createPhotoTitle,
@@ -122,6 +122,41 @@ const ColorShiftMaterial = shaderMaterial(
 );
 extend({ ColorShiftMaterial });
 
+const PhotoPlacholder = ({ photo }: any) => {
+  const { height, width } = useWindowSize();
+  const [photoData, setPhotoData] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
+
+  useFrame(() => {
+    const photoDiv = document.getElementById(photo.alt);
+    const rect = photoDiv?.getBoundingClientRect();
+
+    if (!rect) return;
+    if (height && width) {
+      const x = rect?.left - width / 2 + rect?.width / 2;
+      const y = -rect?.top + height / 2 - rect?.height / 2;
+
+      setPhotoData({
+        x,
+        y: y,
+        height: rect?.height,
+        width: rect?.width,
+      });
+    }
+  });
+
+  return (
+    <mesh position={[photoData.x, photoData.y, 0]}>
+      <planeGeometry args={[photoData.width, photoData.height, 1]} />
+      <meshBasicMaterial color={photo.dominantColor} />
+    </mesh>
+  );
+};
+
 const ThreePhoto = ({ photo, idx }: any) => {
   const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
@@ -160,8 +195,7 @@ const ThreePhoto = ({ photo, idx }: any) => {
 
   return (
     <mesh position={[photoData.x, photoData.y, 0]}>
-      <boxGeometry args={[photoData.width, photoData.height, 1]} />
-      {/* <boxGeometry args={[width, 500, 1]} /> */}
+      <planeGeometry args={[photoData.width, photoData.height, 1]} />
       {/* @ts-ignore */}
       <colorShiftMaterial ref={shaderRef} uTexture={texture} />
     </mesh>
@@ -174,7 +208,9 @@ const Scene = () => {
       <Perf />
       <ambientLight intensity={1} />
       {photos.map((photo, idx) => (
-        <ThreePhoto key={idx} photo={photo} idx={idx} />
+        <Suspense key={idx} fallback={<PhotoPlacholder photo={photo} />}>
+          <ThreePhoto key={idx} photo={photo} idx={idx} />
+        </Suspense>
       ))}
     </CustomCanvas>
   );
