@@ -229,7 +229,7 @@ export const HeroHome = () => {
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             animate={!isLoaded ? { opacity: 0, y: 40 } : { opacity: 1, y: 0 }}
-            transition={{ ease: "easeOut", delay: 0.75 }}
+            transition={{ ease: "easeOut", delay: 0.15 }}
             className="hidden md:block pb-1"
           >
             Hi, here is an overview of <br />
@@ -240,7 +240,7 @@ export const HeroHome = () => {
           >
             <AnimatedLetters
               string="SIMON EYCHENNE"
-              delay={0.7}
+              delay={0.1}
               start={isLoaded}
               rotate={15}
               duration={1}
