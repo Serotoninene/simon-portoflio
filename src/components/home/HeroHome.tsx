@@ -26,7 +26,7 @@ type SceneProps = {
   setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Box = ({ setIsLoaded }: SceneProps) => {
+const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
   const [photoData, setPhotoData] = useState({
     x: 0,
     y: 0,
@@ -41,17 +41,7 @@ const Box = ({ setIsLoaded }: SceneProps) => {
   const geometryRef = React.useRef() as MutableRefObject<any>;
   const shaderRef = React.useRef() as MutableRefObject<any>;
 
-  const { uProgress } = useControls("webgl", {
-    uProgress: { value: 0, min: 0, max: 1, step: 0.1 },
-  });
-
-  const controls = useControls("shader zoom", {
-    uRadius: { value: 0.07, min: 0, max: 1, step: 0.001 },
-    uIntensity: { value: 0.02, min: 0, max: 0.5, step: 0.001 },
-  });
-
-  const { uIntro, uDeformVertex, uIntensityVertex } = useControls("intro", {
-    uIntro: { value: 0, min: 0, max: 1, step: 0.1 },
+  const { uDeformVertex, uIntensityVertex } = useControls("intro", {
     uDeformVertex: { value: 2.1, min: 0, max: 10, step: 0.1 },
     uIntensityVertex: { value: 100, min: 0, max: 20, step: 0.1 },
   });
@@ -76,14 +66,12 @@ const Box = ({ setIsLoaded }: SceneProps) => {
         value: new THREE.Vector2(photoData.width, photoData.height),
       },
       uMappedMouse: { value: new THREE.Vector2(0.5, 0.5) },
-      uMouse: { value: new THREE.Vector2(0, 0) },
-      uTime: { value: 0 },
-      uProgress: { value: uProgress },
-      uRadius: { value: controls.uRadius },
-      uIntensity: { value: controls.uIntensity },
+      uProgress: { value: 0 },
+      uRadius: { value: 0.07 },
+      uIntensity: { value: 0.02 },
       uIntensityVertex: { value: uIntensityVertex },
       uDeformVertex: { value: 0 },
-      uIntro: { value: uIntro },
+      uIntro: { value: 0 },
     }),
     []
   );
@@ -97,16 +85,9 @@ const Box = ({ setIsLoaded }: SceneProps) => {
     );
 
     const photoDiv = document.getElementById("hero-photo");
-
     const rect = photoDiv?.getBoundingClientRect();
 
     shaderRef.current.uniforms.uMappedMouse.value = mappedMouse;
-    shaderRef.current.uniforms.uMouse.value = mouse;
-    shaderRef.current.uniforms.uTime.value = time;
-    // shaderRef.current.uniforms.uProgress.value = uProgress;
-    shaderRef.current.uniforms.uRadius.value = controls.uRadius;
-    shaderRef.current.uniforms.uIntensity.value = controls.uIntensity;
-    // shaderRef.current.uniforms.uIntro.value = uIntro;
     shaderRef.current.uniforms.uDeformVertex.value = uDeformVertex;
     shaderRef.current.uniforms.uIntensityVertex.value = uIntensityVertex;
 
@@ -166,20 +147,10 @@ const Box = ({ setIsLoaded }: SceneProps) => {
 };
 
 const Scene = ({ setIsLoaded }: SceneProps) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { height, width } = useWindowSize();
-  const [correctFov, setCorrectFov] = useState(0);
-
-  useEffect(() => {
-    if (!height || !width) return;
-
-    setCorrectFov(((Math.atan(height / 2 / 600) * 180) / Math.PI) * 2);
-  }, [height, width]);
-
   return (
     <CustomCanvas>
       {/* <OrbitControls enableZoom={false} /> */}
-      <Box setIsLoaded={setIsLoaded} />
+      <HeroPhoto setIsLoaded={setIsLoaded} />
     </CustomCanvas>
   );
 };

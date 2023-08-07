@@ -1,6 +1,5 @@
 precision highp float;
 
-uniform float uTime;  
 uniform float uProgress;
 uniform float uIntro;
 uniform sampler2D uTexture;
@@ -15,8 +14,6 @@ uniform float uIntensity;
 varying vec2 vUv; 
 
 const float PI = 3.1415;
-const float angle1 = PI *0.25;
-const float angle2 = -PI *0.75;
 
 mat2 rotate(float a) {
   float s = sin(a);
@@ -52,10 +49,6 @@ void main() {
   vec4 disp = texture2D(uDisplacement, correctUv);
   vec2 dispVec = vec2(disp.r, disp.g);
 
-  // vec2 distortedPosition2 = correctUv + rotate(angle2) * dispVec * uIntro * (1.0 - uProgress);
-  // vec4 t1 = vec4(0.0);
-  // vec4 t2 = texture2D(uTexture, distortedPosition2);
-
   // rgb shift
   float c = uIntensity * circle(vUv, uMappedMouse, uRadius , 0.2);
   vec4 cr = texture2D(uTexture, (correctUv + c * (uProgress)));
@@ -63,11 +56,7 @@ void main() {
   vec4 cb = texture2D(uTexture, (correctUv - c * (uProgress)));
   vec4 rgbaShiftTexture = vec4(cga.r, cr.g, cb.b, cga.a);
 
-  // rgba shift 
-  // // demo6
-  // gl_FragColor = mix(t1,t2, uProgress);
-
-  // demo 7
+  // intro anim
   vec2 uvDivided = fract(correctUv*vec2(20.,1.0));
 
   float	x = smoothstep(.0,1.0,(uIntro*2.0+uvDivided.y-1.0));

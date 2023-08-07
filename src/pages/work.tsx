@@ -78,6 +78,8 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
     });
   }, [photo.src, width, height, aspectRatio]);
 
+  useEffect(() => {}, []);
+
   if (!width || !height) return null;
 
   return (
@@ -185,62 +187,62 @@ export default function Work() {
       ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
       date: "2019, Vancouver (CA)",
     },
-    {
-      ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
-      date: "2020, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
-      date: "2019, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
-      date: "2020, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
-      date: "2019, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
-      date: "2019, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
-      date: "2020, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
-      date: "2019, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
-      date: "2020, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
-      date: "2019, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
-      date: "2019, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
-      date: "2020, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
-      date: "2019, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
-      date: "2020, Vancouver (CA)",
-    },
-    {
-      ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
-      date: "2019, Vancouver (CA)",
-    },
+    // {
+    //   ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
+    //   date: "2020, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
+    //   date: "2019, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+    //   date: "2020, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
+    //   date: "2019, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
+    //   date: "2019, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
+    //   date: "2020, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
+    //   date: "2019, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+    //   date: "2020, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
+    //   date: "2019, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/10_TIME_FOR_LAUNDRY.jpeg"),
+    //   date: "2019, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/09_SUPERMARKET.jpeg"),
+    //   date: "2020, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/08_ALL_ABOUT_CLEANING.jpeg"),
+    //   date: "2019, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg"),
+    //   date: "2020, Vancouver (CA)",
+    // },
+    // {
+    //   ...createPhotoTitle("/assets/photos/07_SQUARED.jpeg"),
+    //   date: "2019, Vancouver (CA)",
+    // },
   ];
 
   const variants = {
