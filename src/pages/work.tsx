@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { createPhotoTitle, loadImage, rgbToHex } from "@/utils/helpers";
 
@@ -11,9 +11,13 @@ import { useWindowSize } from "@/utils/hooks";
 import { usePathname } from "next/navigation";
 
 import { CustomCanvas } from "@/components/three";
-import { useFrame } from "@react-three/fiber";
-import { useTexture } from "@react-three/drei";
+import { shaderMaterial, useTexture } from "@react-three/drei";
+import { extend, useFrame } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
+import * as THREE from "three";
+
+import fragment from "@shaders/WorkPhotoShader/fragment.glsl";
+import vertex from "@shaders/WorkPhotoShader/vertex.glsl";
 
 const photos = [
   {
@@ -38,7 +42,19 @@ const photos = [
   },
 ];
 
+const ColorShiftMaterial = shaderMaterial(
+  {
+    uTexture: new THREE.Texture(),
+    uTextureSize: new THREE.Vector2(0, 0),
+    uQuadSize: new THREE.Vector2(0, 0),
+  },
+  vertex,
+  fragment
+);
+extend({ ColorShiftMaterial });
+
 const ThreePhoto = ({ photo }: any) => {
+  const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
   const [photoData, setPhotoData] = useState({
     x: 0,
@@ -49,6 +65,19 @@ const ThreePhoto = ({ photo }: any) => {
 
   const texture = useTexture(photo.src) as THREE.Texture;
 
+  const uniforms = useMemo(
+    () => ({
+      uTexture: { value: texture },
+      uTextureSize: {
+        value: new THREE.Vector2(texture.image.width, texture.image.height),
+      },
+      uQuadSize: {
+        value: new THREE.Vector2(photoData.width, photoData.height),
+      },
+    }),
+    []
+  );
+
   useFrame(() => {
     const photoDiv = document.getElementById(photo.alt);
     const rect = photoDiv?.getBoundingClientRect();
@@ -57,8 +86,6 @@ const ThreePhoto = ({ photo }: any) => {
     if (height && width) {
       const x = rect?.left - width / 2 + rect?.width / 2;
       const y = -rect?.top + height / 2 - rect?.height / 2;
-      console.log(rect.height);
-      console.log(rect.width);
 
       setPhotoData({
         x,
@@ -73,6 +100,7 @@ const ThreePhoto = ({ photo }: any) => {
     <mesh position={[photoData.x, photoData.y, 0]}>
       <boxGeometry args={[photoData.width, photoData.height, 1]} />
       <meshBasicMaterial map={texture} />
+      {/* <colorShiftMaterial ref={shaderRef} uTexture={texture} /> */}
     </mesh>
   );
 };
@@ -154,8 +182,8 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
         className={`${
           !isOverview
             ? "h-[100vh] py-4 items-center"
-            : "h-[50vh] cursor-pointer items-start"
-        } w-full border opacity-0 flex flex-col flex-none justify-center relative pointer-events-auto `}
+            : "h-[25vh] cursor-pointer items-start"
+        } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
         onClick={handleClick}
       >
         <div>
@@ -167,7 +195,7 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
               opacity: 1,
             }}
             exit={{ y: "100%" }}
-            transition={{ delay: 0.5, ease: "easeOut" }}
+            transition={{ delay: 5, ease: "easeOut" }}
             ref={childRef}
           >
             <Image
@@ -179,7 +207,7 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
               blurDataURL={photo.src}
               fill={isOverview}
               src={photo.src}
-              className="object-cover"
+              className="object-cover opacity-25"
             />
           </motion.div>
         </div>
@@ -262,9 +290,9 @@ export default function Work() {
 
   return (
     <Container className="pt-0">
-      <div className="fixed top-0 left-0 right-0 bottom-0">
+      {/* <div className="fixed top-0 left-0 right-0 bottom-0">
         <Scene />
-      </div>
+      </div> */}
       <LayoutGroup>
         <motion.div
           layout

@@ -20,6 +20,7 @@ import { motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { ease } from "@/utils/store";
 import { CustomCanvas } from "@components/three";
+import { Perf } from "r3f-perf";
 
 type SceneProps = {
   setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,9 +36,9 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
   });
   const introTl = useRef<GSAPTimeline | null>(null);
   const { height, width } = useWindowSize();
-  const meshRef = React.useRef() as MutableRefObject<any>;
-  const geometryRef = React.useRef() as MutableRefObject<any>;
-  const shaderRef = React.useRef() as MutableRefObject<any>;
+  const meshRef = useRef<any>();
+  const geometryRef = useRef<any>();
+  const shaderRef = useRef<any>();
 
   // loading the texture
   const [texture, displacementMap] = useLoader(
@@ -138,6 +139,7 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
 const Scene = ({ setIsLoaded }: SceneProps) => {
   return (
     <CustomCanvas>
+      <Perf />
       {/* <OrbitControls enableZoom={false} /> */}
       <HeroPhoto setIsLoaded={setIsLoaded} />
     </CustomCanvas>
