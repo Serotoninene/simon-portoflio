@@ -19,7 +19,7 @@ export const CustomCanvas = ({ children }: Props) => {
   }, [height, width]);
 
   return (
-    <Canvas ref={canvasRef}>
+    <Canvas flat ref={canvasRef}>
       <PerspectiveCamera
         makeDefault
         fov={correctFov}

@@ -26,7 +26,7 @@ vec2 getUV(vec2 uv, vec2 textureSize, vec2 quadSize){
 void main() {   
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
   vec4 texture = texture2D(uTexture, vUv);
-
   gl_FragColor = texture;
-  // gl_FragColor = vec4(1., 0., 0., 1.);
+  #include <tonemapping_fragment>
+  #include <encodings_fragment>
 }

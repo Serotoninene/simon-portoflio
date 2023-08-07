@@ -54,7 +54,6 @@ const ColorShiftMaterial = shaderMaterial(
 extend({ ColorShiftMaterial });
 
 const ThreePhoto = ({ photo }: any) => {
-  const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
   const [photoData, setPhotoData] = useState({
     x: 0,
@@ -64,19 +63,6 @@ const ThreePhoto = ({ photo }: any) => {
   });
 
   const texture = useTexture(photo.src) as THREE.Texture;
-
-  const uniforms = useMemo(
-    () => ({
-      uTexture: { value: texture },
-      uTextureSize: {
-        value: new THREE.Vector2(texture.image.width, texture.image.height),
-      },
-      uQuadSize: {
-        value: new THREE.Vector2(photoData.width, photoData.height),
-      },
-    }),
-    []
-  );
 
   useFrame(() => {
     const photoDiv = document.getElementById(photo.alt);
@@ -89,9 +75,9 @@ const ThreePhoto = ({ photo }: any) => {
 
       setPhotoData({
         x,
-        y,
+        y: THREE.MathUtils.lerp(photoData.y, y, 0.09),
         height: rect?.height,
-        width: rect.width,
+        width: rect?.width,
       });
     }
   });
@@ -99,8 +85,11 @@ const ThreePhoto = ({ photo }: any) => {
   return (
     <mesh position={[photoData.x, photoData.y, 0]}>
       <boxGeometry args={[photoData.width, photoData.height, 1]} />
-      <meshBasicMaterial map={texture} />
-      {/* <colorShiftMaterial ref={shaderRef} uTexture={texture} /> */}
+      {/* @ts-ignore */}
+      <colorShiftMaterial
+        uTexture={texture}
+        uQuadSize={{ x: photoData.width, y: photoData.height }}
+      />
     </mesh>
   );
 };
@@ -109,8 +98,9 @@ const Scene = () => {
   return (
     <CustomCanvas>
       <Perf />
+      <ambientLight intensity={1} />
       {photos.map((photo, idx) => (
-        <ThreePhoto key={idx} photo={photo} />
+        <ThreePhoto key={idx} photo={photo} idx={idx} />
       ))}
     </CustomCanvas>
   );
@@ -186,29 +176,32 @@ const Photo = ({ photo, setIsOverview, isOverview }: any) => {
         } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
         onClick={handleClick}
       >
-        <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          exit={{ y: "100%" }}
-          transition={{ delay: 0.5, ease: "easeOut" }}
-          ref={childRef}
-        >
-          <Image
-            id={photo.alt}
-            alt={photo.alt}
-            width={!isOverview ? imageSize.width : undefined}
-            height={!isOverview ? imageSize.height : undefined}
-            placeholder="blur"
-            blurDataURL={photo.src}
-            fill={isOverview}
-            src={photo.src}
-            className="object-cover"
-          />
-        </motion.div>
+        <div className="opacity-0">
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{ y: "100%" }}
+            transition={{ delay: 0.5, ease: "easeOut" }}
+            className=""
+            ref={childRef}
+          >
+            <Image
+              id={photo.alt}
+              alt={photo.alt}
+              width={!isOverview ? imageSize.width : undefined}
+              height={!isOverview ? imageSize.height : undefined}
+              placeholder="blur"
+              blurDataURL={photo.src}
+              fill={isOverview}
+              src={photo.src}
+              className="object-cover "
+            />
+          </motion.div>
+        </div>
       </div>
     </AnimatePresence>
   );
@@ -288,9 +281,9 @@ export default function Work() {
 
   return (
     <Container className="pt-0">
-      {/* <div className="fixed top-0 left-0 right-0 bottom-0">
+      <div className="fixed top-0 left-0 right-0 bottom-0">
         <Scene />
-      </div> */}
+      </div>
       <LayoutGroup>
         <motion.div
           layout
