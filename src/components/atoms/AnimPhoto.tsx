@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { createAlt, getDominantColor } from "@/utils/helpers";
+import { createAlt } from "@/utils/helpers";
 import { usePathname } from "next/navigation";
 
 type Props = {
@@ -43,16 +43,6 @@ export const AnimPhoto = ({
   const handleLoad = () => {
     setIsLoaded(true);
   };
-
-  useEffect(() => {
-    const getImageDominantColor = async () => {
-      const imageUrl = "/path/to/your/image.jpg"; // Replace with the path to your image
-      const color = await getDominantColor(imageUrl);
-      console.log(color); // This will log the dominant color in rgb format
-    };
-
-    getImageDominantColor();
-  }, []);
 
   useEffect(() => {
     if (ref.current) {

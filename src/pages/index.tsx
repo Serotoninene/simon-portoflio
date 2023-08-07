@@ -372,9 +372,9 @@ const photos = [
 ];
 
 // TO DO
-// [] changer les photos d'après le figma
-// [] changer le ratio pour le component OneWCaption
-// [] faire un script qui chope les couleurs dominantes + qui complète le photos array avec les index et les couleurs
+// [X] changer les photos d'après le figma
+// [X] changer le ratio pour le component OneWCaption
+// [X] faire un script qui chope les couleurs dominantes + qui complète le photos array avec les index et les couleurs
 // [] commencer l'animation seulement après que la heroPhoto soit chargée / apparue
 // [] rearrange the layout on mobile
 // [] make the title blend mode (on work page)

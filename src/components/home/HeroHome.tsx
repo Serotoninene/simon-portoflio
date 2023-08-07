@@ -22,7 +22,11 @@ import { motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { ease } from "@/utils/store";
 
-const Box = () => {
+type SceneProps = {
+  setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Box = ({ setIsLoaded }: SceneProps) => {
   const [photoData, setPhotoData] = useState({
     x: 0,
     y: 0,
@@ -52,10 +56,14 @@ const Box = () => {
     uIntensityVertex: { value: 100, min: 0, max: 20, step: 0.1 },
   });
 
-  const [texture, displacementMap] = useLoader(THREE.TextureLoader, [
-    "/assets/photos/00_ACCUEIL.jpeg",
-    "/assets/disp/disp1.jpg",
-  ]);
+  const [texture, displacementMap] = useLoader(
+    THREE.TextureLoader,
+    ["/assets/photos/00_ACCUEIL.jpeg", "/assets/disp/disp1.jpg"],
+    () => {
+      // init the animation of the page when texure is loaded
+      setIsLoaded(true);
+    }
+  );
 
   const uniforms = useMemo(
     () => ({
@@ -157,15 +165,13 @@ const Box = () => {
   );
 };
 
-const Scene = () => {
+const Scene = ({ setIsLoaded }: SceneProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { height, width } = useWindowSize();
   const [correctFov, setCorrectFov] = useState(0);
 
   useEffect(() => {
     if (!height || !width) return;
-    console.log(height);
-    console.log(canvasRef.current?.clientHeight);
 
     setCorrectFov(((Math.atan(height / 2 / 600) * 180) / Math.PI) * 2);
   }, [height, width]);
@@ -180,19 +186,26 @@ const Scene = () => {
         far={1000}
       />
       {/* <OrbitControls enableZoom={false} /> */}
-      <Box />
+      <Box setIsLoaded={setIsLoaded} />
     </Canvas>
   );
 };
 
 export const HeroHome = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 1000);
+  }, []);
 
   return (
     <>
       <div className="h-[var(--fullScreen)] z-10 fixed top-0 left-0 right-0 ">
         <Leva hidden />
-        <Scene />
+        <Scene setIsLoaded={setIsLoaded} />
       </div>
       <div className="h-[var(--fullScreen)] flex flex-col justify-between gap-6 pt-10 pb-10">
         <div
@@ -211,9 +224,11 @@ export const HeroHome = () => {
           />
         </div>
         <div className="sm:flex justify-between items-end">
+          {/* wait until isLoaded is true to trigger the anim */}
+
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={!isLoaded ? { opacity: 0, y: 40 } : { opacity: 1, y: 0 }}
             transition={{ ease: "easeOut", delay: 0.75 }}
             className="hidden md:block pb-1"
           >
@@ -226,6 +241,7 @@ export const HeroHome = () => {
             <AnimatedLetters
               string="SIMON EYCHENNE"
               delay={0.7}
+              start={isLoaded}
               rotate={15}
               duration={1}
               y={100}
