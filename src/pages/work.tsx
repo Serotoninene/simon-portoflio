@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { Suspense, use, useEffect, useState } from "react";
 import { LayoutGroup, motion, useScroll } from "framer-motion";
 
 import { Container } from "@/components/molecules";
@@ -10,13 +10,12 @@ import {
 
 import { workPhotos as photos } from "@/utils/store";
 import { useProgress } from "@react-three/drei";
+import { Loader } from "@/components/organisms";
 
 const HTMLPart = () => {
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
   const { isOverview } = useOverviewContext();
-
-  const { progress } = useProgress();
 
   const { scrollYProgress } = useScroll();
 
@@ -67,13 +66,16 @@ const HTMLPart = () => {
 
 export default function Work() {
   if (!photos) return;
+
   return (
     <Container className="pt-0">
       <OverviewProvider>
-        <div className="fixed top-0 left-0 right-0 bottom-0">
-          <Scene photos={photos} />
-        </div>
-        <HTMLPart />
+        <Suspense fallback={<Loader />}>
+          <div className="fixed top-0 left-0 right-0 bottom-0">
+            <Scene photos={photos} />
+          </div>
+          <HTMLPart />
+        </Suspense>
       </OverviewProvider>
     </Container>
   );
