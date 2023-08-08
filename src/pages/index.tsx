@@ -379,8 +379,8 @@ const photos = [
 // [X] faire l'intro pour les photos de la page work
 // [X] polish the layout animation for the work page
 // [] make a little loading component for the work page
-// [] try again using the isOverview context god damnit !
 // [] refactor the work page
+// [] try again using the isOverview context god damnit !
 // [] rearrange the layout on mobile
 // [] make a custom cursor
 // [] make an effect on scroll
