@@ -120,7 +120,7 @@ const ColorShiftMaterial = shaderMaterial(
 );
 extend({ ColorShiftMaterial });
 
-const ThreePhoto = ({ photo, isOverview }: any) => {
+const ThreePhoto = ({ photo, idx }: any) => {
   const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
   const [photoData, setPhotoData] = useState({
@@ -128,14 +128,6 @@ const ThreePhoto = ({ photo, isOverview }: any) => {
     y: 0,
     width: 0,
     height: 0,
-  });
-
-  const { zPosition } = useControls({
-    zPosition: {
-      value: 0,
-      min: -100,
-      max: 100,
-    },
   });
 
   const texture = useTexture(photo.src) as THREE.Texture;
@@ -161,7 +153,7 @@ const ThreePhoto = ({ photo, isOverview }: any) => {
       setPhotoData({
         x,
         // Add a delay to the y movement to create a parallax effect
-        y: THREE.MathUtils.lerp(photoData.y, y, 0.04),
+        y: THREE.MathUtils.lerp(photoData.y, y, 0.12),
         height: rect?.height,
         width: rect?.width,
       });
@@ -175,7 +167,7 @@ const ThreePhoto = ({ photo, isOverview }: any) => {
   });
 
   return (
-    <mesh position={[photoData.x, photoData.y, zPosition]}>
+    <mesh position={[photoData.x, photoData.y, 0]}>
       <planeGeometry args={[photoData.width, photoData.height, 1]} />
       {/* @ts-ignore */}
       <colorShiftMaterial ref={shaderRef} uTexture={texture} />
