@@ -7,6 +7,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { use, useEffect, useRef, useState } from "react";
 import { useOverviewContext } from "../context/OverviewContext";
+import { useCursorContext } from "../context/CursorContext";
 
 type Props = {
   photo: ExtendedPhoto;
@@ -14,6 +15,8 @@ type Props = {
 
 export const Photo = ({ photo }: Props) => {
   const { isOverview, setIsOverview } = useOverviewContext();
+  const { setCursorType } = useCursorContext();
+
   const path = usePathname();
   const ref = useRef<HTMLDivElement>(null);
   const childRef = useRef<HTMLDivElement>(null);
@@ -83,6 +86,12 @@ export const Photo = ({ photo }: Props) => {
             ? "h-[100vh] py-4 items-center"
             : "h-[25vh] cursor-pointer items-start"
         } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
+        onMouseEnter={() => {
+          setCursorType(isOverview ? "hover" : "pointer");
+        }}
+        onMouseLeave={() => {
+          setCursorType("pointer");
+        }}
         onClick={handleClick}
       >
         <div className="opacity-0">

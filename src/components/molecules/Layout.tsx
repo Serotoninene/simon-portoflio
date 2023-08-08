@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useWindowSize } from "@/utils/hooks";
+import CustomCursor from "./CustomCursor";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -60,6 +61,7 @@ export default function Layout({ children }: Props) {
       <header>
         <Navbar />
       </header>
+
       <AnimatePresence mode="wait">
         <motion.main
           key={path}
@@ -67,6 +69,7 @@ export default function Layout({ children }: Props) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
+          <CustomCursor />
           {children}
         </motion.main>
       </AnimatePresence>

@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 import { motion } from "framer-motion";
+import { useCursorContext } from "../context/CursorContext";
 
 type Props = {
   children: React.ReactNode;
@@ -41,10 +42,21 @@ const hiddenLetterAnim = {
 };
 
 export const AnimLink = ({ children, href = "/" }: Props) => {
+  const { setCursorType } = useCursorContext();
   const words = children?.toString().split(" ");
 
   return (
-    <Link href={href} scroll={false} className="cursor-pointer">
+    <Link
+      href={href}
+      scroll={false}
+      className="cursor-pointer"
+      onMouseOver={() => {
+        setCursorType("hover");
+      }}
+      onMouseLeave={() => {
+        setCursorType("pointer");
+      }}
+    >
       <motion.span
         variants={containerAnim}
         initial="normal"

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { useOverviewContext } from "../context/OverviewContext";
+import { useCursorContext } from "../context/CursorContext";
 
 const variants = {
   hidden: {
@@ -19,6 +20,7 @@ const variants = {
 
 export const WorkFooter = ({ photos, idx, title }: any) => {
   const { isOverview, setIsOverview } = useOverviewContext();
+  const { setCursorType } = useCursorContext();
 
   return (
     <div
@@ -44,6 +46,8 @@ export const WorkFooter = ({ photos, idx, title }: any) => {
           </motion.div>
           <div
             className="cursor-pointer"
+            onMouseEnter={() => setCursorType("hover")}
+            onMouseLeave={() => setCursorType("pointer")}
             onClick={() => {
               setIsOverview(true);
             }}

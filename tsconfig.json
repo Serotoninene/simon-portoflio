@@ -23,7 +23,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
-      "@shaders/*": ["./src/shaders/*"]
+      "@shaders/*": ["./src/shaders/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": [

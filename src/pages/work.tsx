@@ -67,19 +67,12 @@ export default function Work() {
   if (!photos) return;
   return (
     <Container className="pt-0">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ ease: "easeOut", duration: 0.5 }}
-      >
-        <OverviewProvider>
-          <div className="fixed top-0 left-0 right-0 bottom-0">
-            <Scene photos={photos} />
-          </div>
-          <HTMLPart />
-        </OverviewProvider>
-      </motion.div>
+      <OverviewProvider>
+        <div className="fixed top-0 left-0 right-0 bottom-0">
+          <Scene photos={photos} />
+        </div>
+        <HTMLPart />
+      </OverviewProvider>
     </Container>
   );
 }
