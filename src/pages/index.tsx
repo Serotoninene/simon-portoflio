@@ -377,11 +377,13 @@ const photos = [
 // [X] faire un script qui chope les couleurs dominantes + qui complète le photos array avec les index et les couleurs
 // [X] commencer l'animation seulement après que la heroPhoto soit chargée / apparue
 // [X] faire l'intro pour les photos de la page work
-// [] polish the layout animation for the work page
+// [X] polish the layout animation for the work page
 // [] make a little loading component for the work page
+// [] try again using the isOverview context god damnit !
 // [] refactor the work page
 // [] rearrange the layout on mobile
 // [] make a custom cursor
+// [] make an effect on scroll
 // [] faire un test avec gsap flip pour la transition
 // [] make the title blend mode (on work page)
 

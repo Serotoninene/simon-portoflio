@@ -20,6 +20,7 @@ import fragment from "@shaders/WorkPhotoShader/fragment.glsl";
 import vertex from "@shaders/WorkPhotoShader/vertex.glsl";
 import { gsap } from "gsap";
 import { useControls } from "leva";
+import AnimatedLetters from "@/components/atoms/AnimLetters";
 
 const photos = [
   {
@@ -315,7 +316,7 @@ const WorkFooter = ({
             key={title}
             variants={variants}
             initial="hidden"
-            animate="visible"
+            animate={isOverview ? "hidden" : "visible"}
             exit="hidden"
             className="font-bold"
           >
@@ -323,7 +324,14 @@ const WorkFooter = ({
             <span className="text-sm font-normal">{photos[idx]?.date}.</span>
           </motion.div>
           <div className="cursor-pointer" onClick={handleToggleLayout}>
-            See all photos
+            <AnimatedLetters
+              string="See all photos"
+              stagger={0.01}
+              rotate={15}
+              duration={0.4}
+              y={100}
+              start={!isOverview}
+            />
           </div>
         </div>
       </AnimatePresence>
@@ -350,11 +358,16 @@ export default function Work() {
   }, [scrollYProgress]);
 
   const variants = {
-    hidden: { opacity: 0 },
+    hidden: {
+      opacity: 0,
+      transition: { duration: 1, delay: 0.5, ease: "easeOut" },
+    },
     visible: {
       opacity: 1,
       transition: {
         duration: 0.5,
+        delay: 0.5,
+        ease: "easeOut",
       },
     },
   };
@@ -378,11 +391,11 @@ export default function Work() {
           <motion.div
             layout
             data-scroll-section
-            className={`relative  ${
+            className={`relative ${
               isOverview
-                ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 h-full gap-2"
+                ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 mt-6"
                 : "flex flex-col gap-6 sm:gap-8 md:gap-[50vh]"
-            } w-full`}
+            }`}
           >
             {photos.map((photo, idx) => (
               <motion.div
