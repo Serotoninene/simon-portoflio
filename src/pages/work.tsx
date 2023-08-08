@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { LayoutGroup, motion, useScroll } from "framer-motion";
 
 import { Container } from "@/components/molecules";
@@ -13,8 +13,9 @@ import { workPhotos as photos } from "@/utils/store";
 const HTMLPart = () => {
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
+  const { isOverview, loadingCount } = useOverviewContext();
 
-  const { isOverview } = useOverviewContext();
+  console.log(loadingCount);
 
   const { scrollYProgress } = useScroll();
 

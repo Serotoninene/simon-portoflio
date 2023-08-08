@@ -19,8 +19,10 @@ const variants = {
 };
 
 export const WorkFooter = ({ photos, idx, title }: any) => {
-  const { isOverview, setIsOverview } = useOverviewContext();
+  const { isOverview, setIsOverview, isLoaded } = useOverviewContext();
   const { setCursorType } = useCursorContext();
+
+  // if (!isLoaded) return null;
 
   return (
     <div

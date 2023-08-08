@@ -7,6 +7,7 @@ import * as THREE from "three";
 import fragment from "@shaders/WorkPhotoShader/fragment.glsl";
 import vertex from "@shaders/WorkPhotoShader/vertex.glsl";
 import { Power3, gsap } from "gsap";
+import { useOverviewContext } from "../context/OverviewContext";
 
 const ColorShiftMaterial = shaderMaterial(
   {
@@ -20,7 +21,7 @@ const ColorShiftMaterial = shaderMaterial(
 );
 extend({ ColorShiftMaterial });
 
-export const ThreePhoto = ({ photo, idx }: any) => {
+export const ThreePhoto = ({ photo }: any) => {
   const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
   const [photoData, setPhotoData] = useState({
@@ -30,7 +31,7 @@ export const ThreePhoto = ({ photo, idx }: any) => {
     height: 0,
   });
 
-  const texture = useTexture(photo.src) as THREE.Texture;
+  const texture = useTexture(photo.src, () => {}) as THREE.Texture;
 
   useEffect(() => {
     gsap.to(shaderRef.current, {
@@ -40,6 +41,10 @@ export const ThreePhoto = ({ photo, idx }: any) => {
       ease: Power3.easeOut,
     });
   }, []);
+
+  useEffect(() => {
+    if (!texture) return;
+  }, [texture]);
 
   useFrame(() => {
     const photoDiv = document.getElementById(photo.alt);
