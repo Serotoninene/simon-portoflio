@@ -29,13 +29,13 @@ mat2 rotate(float a) {
   return mat2(c, -s, s, c);
 }
 const float PI = 3.1415;
-const float angle = -PI *0.75;
+const float angle = -PI *0.25;
 
 
 void main() {   
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
-  vec2 uvDivided = fract(correctUv*vec2(50.,1.));
+  vec2 uvDivided = fract(correctUv*vec2(10.,1.));
   vec2 uvDisplaced = correctUv + rotate(PI/4.)*uvDivided*(1. - uProgress)*0.1;
   vec4 t1 = vec4(0.);
   vec4 t2 = texture2D(uTexture,uvDisplaced);

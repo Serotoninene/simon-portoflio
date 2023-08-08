@@ -18,7 +18,7 @@ import * as THREE from "three";
 
 import fragment from "@shaders/WorkPhotoShader/fragment.glsl";
 import vertex from "@shaders/WorkPhotoShader/vertex.glsl";
-import { gsap } from "gsap";
+import { Power3, gsap } from "gsap";
 import { useControls } from "leva";
 import AnimatedLetters from "@/components/atoms/AnimLetters";
 
@@ -136,9 +136,9 @@ const ThreePhoto = ({ photo, idx }: any) => {
   useEffect(() => {
     gsap.to(shaderRef.current, {
       uProgress: 1,
-      duration: 1,
+      duration: 0.5,
       delay: 0.5,
-      ease: "easeOut",
+      ease: Power3.easeOut,
     });
   }, []);
 
@@ -360,13 +360,13 @@ export default function Work() {
   const variants = {
     hidden: {
       opacity: 0,
-      transition: { duration: 1, delay: 0.5, ease: "easeOut" },
+      transition: {
+        ease: "easeOut",
+      },
     },
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.5,
-        delay: 0.5,
         ease: "easeOut",
       },
     },
