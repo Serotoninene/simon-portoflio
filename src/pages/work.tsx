@@ -1,4 +1,4 @@
-import { Suspense, use, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { LayoutGroup, motion, useScroll } from "framer-motion";
 
 import { Container } from "@/components/molecules";
@@ -9,7 +9,6 @@ import {
 } from "@/components/context/OverviewContext";
 
 import { workPhotos as photos } from "@/utils/store";
-import { useProgress } from "@react-three/drei";
 import { Loader } from "@/components/organisms";
 
 const HTMLPart = () => {
