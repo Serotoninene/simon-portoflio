@@ -376,11 +376,14 @@ const photos = [
 // [X] changer le ratio pour le component OneWCaption
 // [X] faire un script qui chope les couleurs dominantes + qui complète le photos array avec les index et les couleurs
 // [X] commencer l'animation seulement après que la heroPhoto soit chargée / apparue
-// [] faire l'intro pour les photos de la page work
-// [] faire un test avec gsap flip pour la transition
+// [X] faire l'intro pour les photos de la page work
+// [] polish the layout animation for the work page
+// [] make a little loading component for the work page
+// [] refactor the work page
 // [] rearrange the layout on mobile
-// [] make the title blend mode (on work page)
 // [] make a custom cursor
+// [] faire un test avec gsap flip pour la transition
+// [] make the title blend mode (on work page)
 
 export default function Home() {
   return (
