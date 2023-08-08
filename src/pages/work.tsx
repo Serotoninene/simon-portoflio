@@ -9,13 +9,14 @@ import {
 } from "@/components/context/OverviewContext";
 
 import { workPhotos as photos } from "@/utils/store";
+import { useProgress } from "@react-three/drei";
 
 const HTMLPart = () => {
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
-  const { isOverview, loadingCount } = useOverviewContext();
+  const { isOverview } = useOverviewContext();
 
-  console.log(loadingCount);
+  const { progress } = useProgress();
 
   const { scrollYProgress } = useScroll();
 

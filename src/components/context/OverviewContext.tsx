@@ -7,36 +7,22 @@ type OverviewProviderProps = {
 type OverviewContextProps = {
   isOverview: boolean;
   setIsOverview: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoaded: boolean;
-  setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
-  loadingCount: number;
-  setLoadingCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const OverviewContext = createContext<OverviewContextProps>({
   isOverview: false,
   setIsOverview: () => {},
-  isLoaded: false,
-  setIsLoaded: () => {},
-  loadingCount: 0,
-  setLoadingCount: () => {},
 });
 
 export const OverviewProvider = ({ children }: OverviewProviderProps) => {
   const [isOverview, setIsOverview] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [loadingCount, setLoadingCount] = useState(0);
 
   const value = useMemo(
     () => ({
       isOverview,
       setIsOverview,
-      isLoaded,
-      setIsLoaded,
-      loadingCount,
-      setLoadingCount,
     }),
-    [loadingCount, isOverview, isLoaded]
+    [isOverview]
   );
 
   return (
