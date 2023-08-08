@@ -11,12 +11,7 @@ import { useWindowSize } from "@/utils/hooks";
 import { usePathname } from "next/navigation";
 
 import { CustomCanvas } from "@/components/three";
-import {
-  Html,
-  shaderMaterial,
-  useProgress,
-  useTexture,
-} from "@react-three/drei";
+import { shaderMaterial, useTexture } from "@react-three/drei";
 import { extend, useFrame } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import * as THREE from "three";
@@ -125,7 +120,7 @@ const ColorShiftMaterial = shaderMaterial(
 );
 extend({ ColorShiftMaterial });
 
-const ThreePhoto = ({ photo, idx }: any) => {
+const ThreePhoto = ({ photo, isOverview }: any) => {
   const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
   const [photoData, setPhotoData] = useState({
@@ -133,6 +128,14 @@ const ThreePhoto = ({ photo, idx }: any) => {
     y: 0,
     width: 0,
     height: 0,
+  });
+
+  const { zPosition } = useControls({
+    zPosition: {
+      value: 0,
+      min: -100,
+      max: 100,
+    },
   });
 
   const texture = useTexture(photo.src) as THREE.Texture;
@@ -157,7 +160,8 @@ const ThreePhoto = ({ photo, idx }: any) => {
 
       setPhotoData({
         x,
-        y: y,
+        // Add a delay to the y movement to create a parallax effect
+        y: THREE.MathUtils.lerp(photoData.y, y, 0.04),
         height: rect?.height,
         width: rect?.width,
       });
@@ -171,7 +175,7 @@ const ThreePhoto = ({ photo, idx }: any) => {
   });
 
   return (
-    <mesh position={[photoData.x, photoData.y, 0]}>
+    <mesh position={[photoData.x, photoData.y, zPosition]}>
       <planeGeometry args={[photoData.width, photoData.height, 1]} />
       {/* @ts-ignore */}
       <colorShiftMaterial ref={shaderRef} uTexture={texture} />
@@ -365,7 +369,6 @@ export default function Work() {
 
   const handleToggleLayout = () => {
     setIsOverview((prev) => !prev);
-    // window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
