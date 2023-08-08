@@ -1,14 +1,25 @@
 import { AnimatePresence, motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
+import { useOverviewContext } from "../context/OverviewContext";
 
-export const WorkFooter = ({
-  photos,
-  idx,
-  title,
-  variants,
-  isOverview,
-  handleToggleLayout,
-}: any) => {
+const variants = {
+  hidden: {
+    opacity: 0,
+    transition: {
+      ease: "easeOut",
+    },
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      ease: "easeOut",
+    },
+  },
+};
+
+export const WorkFooter = ({ photos, idx, title }: any) => {
+  const { isOverview, setIsOverview } = useOverviewContext();
+
   return (
     <div
       data-scroll
@@ -31,7 +42,12 @@ export const WorkFooter = ({
             {title}{" "}
             <span className="text-sm font-normal">{photos[idx]?.date}.</span>
           </motion.div>
-          <div className="cursor-pointer" onClick={handleToggleLayout}>
+          <div
+            className="cursor-pointer"
+            onClick={() => {
+              setIsOverview(true);
+            }}
+          >
             <AnimatedLetters
               string="See all photos"
               stagger={0.01}

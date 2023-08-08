@@ -5,15 +5,15 @@ import ColorThief from "colorthief";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
+import { useOverviewContext } from "../context/OverviewContext";
 
 type Props = {
   photo: ExtendedPhoto;
-  isOverview: boolean;
-  setIsOverview: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const Photo = ({ photo, setIsOverview, isOverview }: any) => {
+export const Photo = ({ photo }: Props) => {
+  const { isOverview, setIsOverview } = useOverviewContext();
   const path = usePathname();
   const ref = useRef<HTMLDivElement>(null);
   const childRef = useRef<HTMLDivElement>(null);
@@ -26,7 +26,7 @@ export const Photo = ({ photo, setIsOverview, isOverview }: any) => {
 
   const handleClick = async () => {
     // wait for the change of state for the overview before scrolling
-    await setIsOverview(false);
+    await setIsOverview(false); // <- don't believe what VSC tells u, if u remove the await the smooth scroll won't work
     if (!width) return;
     const { top } = ref.current?.getBoundingClientRect() || { top: 0 };
     window.scrollTo({

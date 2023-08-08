@@ -1,1 +1,88 @@
 export const ease = [0.6, 0.01, -0.05, 0.95];
+
+export const workPhotos = [
+  {
+    src: "/assets/photos/10_TIME_FOR_LAUNDRY.jpeg",
+    alt: "0_TIME_FOR_LAUNDRY",
+    capitalizedTitle: "Time for laundry",
+    dominantColor: "#aba5ac",
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/09_SUPERMARKET.jpeg",
+    alt: "9_SUPERMARKET",
+    capitalizedTitle: "Supermarket",
+    dominantColor: "#a82f28",
+    date: "2020, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/08_ALL_ABOUT_CLEANING.jpeg",
+    alt: "8_ALL_ABOUT_CLEANING",
+    capitalizedTitle: "All about cleaning",
+    dominantColor: "#cab0a8",
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg",
+    alt: "2_MY_HOUSE_IS_A_TRIANGLE",
+    capitalizedTitle: "My house is a triangle",
+    dominantColor: "#a09a9d",
+    date: "2020, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/01_MY_GARDEN_IS_COOL.jpeg",
+    alt: "1_MY_GARDEN_IS_COOL",
+    capitalizedTitle: "My garden is cool",
+    dominantColor: "#272413",
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/03_GOOGLE_MAPS-ING.jpeg",
+    alt: "3_GOOGLE_MAPS-ING",
+    capitalizedTitle: "Google maps-ing",
+    dominantColor: "#42361e",
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/04_FISHING.jpeg",
+    alt: "4_FISHING",
+    capitalizedTitle: "Fishing",
+    dominantColor: "#bfbda2",
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/05_LIVING_ON_A_BOAT.jpeg",
+    alt: "5_LIVING_ON_A_BOAT",
+    capitalizedTitle: "Living on a boat",
+    dominantColor: "#708d99",
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/06_CROWDED.jpeg",
+    alt: "6_CROWDED",
+    capitalizedTitle: "Crowded",
+    dominantColor: "#396b76",
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/07_SQUARED.jpeg",
+    alt: "7_SQUARED",
+    capitalizedTitle: "Squared",
+    dominantColor: "#957858",
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/11_APERITIF.jpeg",
+    alt: "1_APERITIF",
+    capitalizedTitle: "Aperitif",
+    dominantColor: "#bfb7ae",
+    date: "2019, Vancouver (CA)",
+  },
+  {
+    src: "/assets/photos/31_LIFE_PERSPECTIVES.jpeg",
+    alt: "1_LIFE_PERSPECTIVES",
+    capitalizedTitle: "Life perspectives",
+    dominantColor: "#66819d",
+    date: "2019, Vancouver (CA)",
+  },
+];
