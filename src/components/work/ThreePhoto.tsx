@@ -50,8 +50,8 @@ export const ThreePhoto = ({ photo, geometry }: any) => {
       const y = -rect?.top + height / 2 - rect?.height / 2;
 
       setPhotoData({
-        x,
-        y: THREE.MathUtils.lerp(photoData.y, y, 0.35),
+        x: THREE.MathUtils.lerp(photoData.x, x, 0.15),
+        y: THREE.MathUtils.lerp(photoData.y, y, 0.15),
         height: rect?.height,
         width: rect?.width,
       });

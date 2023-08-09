@@ -1,9 +1,8 @@
-import { useEffect, useState, useContext } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 // Context
 import { useCursorContext } from "@components/context/CursorContext";
 import { useMediaQuery } from "@utils/hooks";
-import { useControls } from "leva";
 
 export default function CustomCursor() {
   const onMobile = useMediaQuery(640);

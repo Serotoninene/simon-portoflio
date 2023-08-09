@@ -64,6 +64,21 @@ const HTMLPart = () => {
 };
 
 export default function Work() {
+  useEffect(() => {
+    // Function to fetch file names from the directory
+    const fetchPhotoFileNames = async () => {
+      try {
+        const response = await fetch("/assets/photos"); // Adjust the path as needed
+        const text = await response.text();
+        const fileNames = text.split("\n").filter((name) => name.trim() !== "");
+      } catch (error) {
+        console.error("Error fetching photo file names:", error);
+      }
+    };
+
+    fetchPhotoFileNames();
+  }, []);
+
   if (!photos) return;
 
   return (
