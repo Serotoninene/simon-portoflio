@@ -1,26 +1,11 @@
 import { useWindowSize } from "@/utils/hooks";
-import { shaderMaterial, useProgress, useTexture } from "@react-three/drei";
-import { extend, useFrame } from "@react-three/fiber";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useFrame } from "@react-three/fiber";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
-import fragment from "@shaders/WorkPhotoShader/fragment.glsl";
-import vertex from "@shaders/WorkPhotoShader/vertex.glsl";
 import { Power3, gsap } from "gsap";
 
-const ColorShiftMaterial = shaderMaterial(
-  {
-    uTexture: new THREE.Texture(),
-    uTextureSize: new THREE.Vector2(0, 0),
-    uQuadSize: new THREE.Vector2(0, 0),
-    uProgress: 0,
-  },
-  vertex,
-  fragment
-);
-extend({ ColorShiftMaterial });
-
-export const ThreePhoto = ({ photo, geometry }: any) => {
+export const ThreePhoto = ({ photo, texture, geometry }: any) => {
   const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
   const [photoData, setPhotoData] = useState({
@@ -29,7 +14,6 @@ export const ThreePhoto = ({ photo, geometry }: any) => {
     width: 0,
     height: 0,
   });
-  const texture = useTexture(photo.src, () => {}) as THREE.Texture;
 
   useEffect(() => {
     gsap.to(shaderRef.current, {

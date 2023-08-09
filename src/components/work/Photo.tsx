@@ -80,7 +80,8 @@ export const Photo = ({ photo }: Props) => {
           !isOverview
             ? "h-[100vh] py-4 items-center"
             : "h-[25vh] cursor-pointer items-start"
-        } w-full flex flex-col flex-none justify-center relative pointer-events-auto bg-light`}
+        } w-full flex flex-col flex-none justify-center relative pointer-events-auto
+         `}
         onMouseEnter={() => {
           setCursorType(isOverview ? "hover" : "pointer");
         }}
@@ -89,7 +90,7 @@ export const Photo = ({ photo }: Props) => {
         }}
         onClick={handleClick}
       >
-        <div ref={childRef} className="opacity-100">
+        <div ref={childRef} className="opacity-0">
           <motion.div
             initial={{
               opacity: 0,

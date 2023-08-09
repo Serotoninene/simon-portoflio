@@ -73,9 +73,9 @@ export default function Work() {
     <Container className="pt-0">
       <OverviewProvider>
         <Suspense fallback={<Loader />}>
-          {/* <div className="fixed top-0 left-0 right-0 bottom-0">
+          <div className="fixed top-0 left-0 right-0 bottom-0">
             <Scene photos={photos} />
-          </div> */}
+          </div>
           <HTMLPart />
         </Suspense>
       </OverviewProvider>
