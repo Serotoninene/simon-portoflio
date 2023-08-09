@@ -52,6 +52,10 @@ export const WorkFooter = ({ photos, idx, title }: any) => {
             onMouseLeave={() => setCursorType("pointer")}
             onClick={() => {
               setIsOverview(true);
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
             }}
           >
             <AnimatedLetters

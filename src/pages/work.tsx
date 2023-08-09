@@ -10,6 +10,7 @@ import {
 
 import { workPhotos as photos } from "@/utils/store";
 import { Loader } from "@/components/organisms";
+import { createPhotoTitle, updateDominantColors } from "@/utils/helpers";
 
 const HTMLPart = () => {
   const [idx, setIdx] = useState(0);
@@ -63,11 +64,9 @@ const HTMLPart = () => {
   );
 };
 
-export default function Work() {
-  useEffect(() => {
-    // Function to fetch file names from the directory
-  }, []);
+// i need the src, alt, capitalizedTitle, and the date
 
+export default function Work() {
   if (!photos) return;
 
   return (
