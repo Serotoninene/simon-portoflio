@@ -78,7 +78,7 @@ export const Photo = ({ photo }: Props) => {
           !isOverview
             ? "h-[100vh] py-4 items-center"
             : "h-[25vh] cursor-pointer items-start"
-        } w-full flex flex-col flex-none justify-center relative pointer-events-auto
+        } w-full flex flex-col flex-none justify-center relative pointer-events-auto photo
          `}
         onMouseEnter={() => {
           setCursorType(isOverview ? "hover" : "pointer");

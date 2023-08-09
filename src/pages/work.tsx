@@ -782,7 +782,7 @@ const HTMLPart = () => {
         {photos.map((photo, idx) => (
           <div
             key={idx}
-            className={isOverview ? "flex h-full overflow-hidden " : ""}
+            className={isOverview ? "flex h-fit overflow-hidden " : ""}
           >
             <Photo photo={photo} />
           </div>

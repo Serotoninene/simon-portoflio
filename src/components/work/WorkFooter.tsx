@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
+import { Power3 } from "gsap";
 import { Flip } from "gsap/dist/Flip";
 
 const variants = {
@@ -25,21 +26,20 @@ export const WorkFooter = ({ photos, idx, title }: any) => {
 
   const handleOverview = () => {
     const photos = document.querySelectorAll(
-      "#gallery-container, #gallery-container > div"
+      "#gallery-container, #gallery-container photo"
     );
     const state = Flip.getState(photos);
 
     setIsOverview(true);
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: "instant",
+    // });
 
     Flip.from(state, {
-      duration: 0.5,
-      stagger: 0.1,
-      ease: "power3.inOut",
       absolute: true,
+      ease: Power3.easeOut,
+      nested: true,
     });
   };
 
