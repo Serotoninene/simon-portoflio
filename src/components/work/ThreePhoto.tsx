@@ -1,7 +1,7 @@
 import { useWindowSize } from "@/utils/hooks";
 import { shaderMaterial, useTexture } from "@react-three/drei";
 import { extend, useFrame } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 import fragment from "@shaders/WorkPhotoShader/fragment.glsl";
@@ -20,7 +20,7 @@ const ColorShiftMaterial = shaderMaterial(
 );
 extend({ ColorShiftMaterial });
 
-export const ThreePhoto = ({ photo }: any) => {
+export const ThreePhoto = ({ photo, geometry }: any) => {
   const shaderRef = useRef<any>();
   const { height, width } = useWindowSize();
   const [photoData, setPhotoData] = useState({
@@ -70,8 +70,11 @@ export const ThreePhoto = ({ photo }: any) => {
   });
 
   return (
-    <mesh position={[photoData.x, photoData.y, 0]}>
-      <planeGeometry args={[photoData.width, photoData.height, 1]} />
+    <mesh
+      position={[photoData.x, photoData.y, 0]}
+      geometry={geometry}
+      scale={[photoData.width, photoData.height, 1]}
+    >
       {/* @ts-ignore */}
       <colorShiftMaterial ref={shaderRef} uTexture={texture} />
     </mesh>

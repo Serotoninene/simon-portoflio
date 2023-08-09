@@ -1,10 +1,4 @@
-import React, {
-  MutableRefObject,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { spartan } from "../molecules/Layout";
 import * as THREE from "three";
@@ -20,7 +14,6 @@ import { motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { ease } from "@/utils/store";
 import { CustomCanvas } from "@components/three";
-import { Perf } from "r3f-perf";
 
 type SceneProps = {
   setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
