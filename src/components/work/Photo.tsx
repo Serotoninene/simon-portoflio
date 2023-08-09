@@ -64,8 +64,6 @@ export const Photo = ({ photo }: Props) => {
     });
   }, [photo.src, width, height, aspectRatio]);
 
-  useEffect(() => {}, []);
-
   if (!width || !height) return null;
 
   return (

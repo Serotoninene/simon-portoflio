@@ -1,3 +1,4 @@
+import { Flip } from "gsap/dist/Flip";
 import React, { createContext, useContext, useMemo, useState } from "react";
 
 type OverviewProviderProps = {
@@ -20,6 +21,7 @@ export const OverviewProvider = ({ children }: OverviewProviderProps) => {
   const value = useMemo(
     () => ({
       isOverview,
+      // rename toggleOverview as testFunction
       setIsOverview,
     }),
     [isOverview]

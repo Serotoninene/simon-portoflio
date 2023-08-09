@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
+import { Flip } from "gsap/dist/Flip";
 
 const variants = {
   hidden: {
@@ -22,7 +23,25 @@ export const WorkFooter = ({ photos, idx, title }: any) => {
   const { isOverview, setIsOverview } = useOverviewContext();
   const { setCursorType } = useCursorContext();
 
-  // if (!isLoaded) return null;
+  const handleOverview = () => {
+    const photos = document.querySelectorAll(
+      "#gallery-container, #gallery-container > div"
+    );
+    const state = Flip.getState(photos);
+
+    setIsOverview(true);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    Flip.from(state, {
+      duration: 0.5,
+      stagger: 0.1,
+      ease: "power3.inOut",
+      absolute: true,
+    });
+  };
 
   return (
     <div
@@ -49,13 +68,7 @@ export const WorkFooter = ({ photos, idx, title }: any) => {
             className="cursor-pointer"
             onMouseEnter={() => setCursorType("hover")}
             onMouseLeave={() => setCursorType("pointer")}
-            onClick={() => {
-              setIsOverview(true);
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              });
-            }}
+            onClick={handleOverview}
           >
             <AnimatedLetters
               string="See all photos"
