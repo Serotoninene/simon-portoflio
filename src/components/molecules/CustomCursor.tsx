@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 // Context
 import { useCursorContext } from "@components/context/CursorContext";
 import { useMediaQuery } from "@utils/hooks";
-import { lerp } from "@/utils/helpers";
 
 export default function CustomCursor() {
   const onMobile = useMediaQuery(640);

@@ -21,11 +21,10 @@ import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 // [X] try again using the isOverview context god damnit !
 // [X] make a custom cursor
 // [X] switch for the new favicon
-// [] insert most of the photos in work
+// [X] insert most of the photos in work
+// [] faire un test avec gsap flip pour la transition
 // [] make a little loading component for the work page
 // [] rearrange the layout on mobile
-// [] make an effect on scroll
-// [] faire un test avec gsap flip pour la transition
 // [] make the title blend mode (on work page)
 
 export const photos = [
