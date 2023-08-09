@@ -40,7 +40,7 @@ export const metadata = {
 
 export default function Layout({ children }: Props) {
   const path = usePathname();
-  const { height, width } = useWindowSize();
+  const { height } = useWindowSize();
 
   useEffect(() => {
     const screen = window.innerHeight;
@@ -61,6 +61,7 @@ export default function Layout({ children }: Props) {
       <header>
         <Navbar />
       </header>
+      <CustomCursor />
 
       <AnimatePresence mode="wait">
         <motion.main
@@ -69,7 +70,6 @@ export default function Layout({ children }: Props) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <CustomCursor />
           {children}
         </motion.main>
       </AnimatePresence>

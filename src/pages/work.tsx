@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState } from "react";
 import { LayoutGroup, motion, useScroll } from "framer-motion";
 
 import { Container } from "@/components/molecules";
-import { Photo, Scene, WorkFooter } from "@/components/work";
+import { Photo, WorkFooter } from "@/components/work";
 import {
   OverviewProvider,
   useOverviewContext,
@@ -10,7 +10,6 @@ import {
 
 import { workPhotos as photos } from "@/utils/store";
 import { Loader } from "@/components/organisms";
-import { createPhotoTitle, updateDominantColors } from "@/utils/helpers";
 
 const HTMLPart = () => {
   const [idx, setIdx] = useState(0);
@@ -73,9 +72,9 @@ export default function Work() {
     <Container className="pt-0">
       <OverviewProvider>
         <Suspense fallback={<Loader />}>
-          <div className="fixed top-0 left-0 right-0 bottom-0">
+          {/* <div className="fixed top-0 left-0 right-0 bottom-0">
             <Scene photos={photos} />
-          </div>
+          </div> */}
           <HTMLPart />
         </Suspense>
       </OverviewProvider>

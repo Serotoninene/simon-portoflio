@@ -60,7 +60,7 @@ export const AnimPhoto = ({
           }}
           data-scroll
           data-scroll-speed="-0.5"
-          className="relative h-full  translate-y-10"
+          className="relative h-full translate-y-10"
         >
           {/* eslint-disable-next-line */}
           <Image

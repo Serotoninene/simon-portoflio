@@ -17,6 +17,10 @@ export const createPhoto = (src: string) => {
   };
 };
 
+export function lerp(x: number, y: number, t: number) {
+  return (1 - t) * x + t * y;
+}
+
 export const createPhotoTitle = (src: string) => {
   const fileName = src?.split("/").pop()?.slice(1);
   const alt = fileName ? fileName.split(".")[0] : "";

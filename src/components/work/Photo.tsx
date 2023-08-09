@@ -90,7 +90,7 @@ export const Photo = ({ photo }: Props) => {
         }}
         onClick={handleClick}
       >
-        <div ref={childRef} className="opacity-0">
+        <div ref={childRef} className="opacity-100">
           <motion.div
             initial={{
               opacity: 0,
