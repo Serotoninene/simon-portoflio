@@ -6,7 +6,7 @@ export type Photo = {
 };
 
 export type ExtendedPhoto = Photo & {
-  date: string;
+  date?: string;
   capitalizedTitle: string;
 };
 

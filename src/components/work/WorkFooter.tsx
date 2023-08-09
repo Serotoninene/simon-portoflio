@@ -44,7 +44,6 @@ export const WorkFooter = ({ photos, idx, title }: any) => {
             className="font-bold"
           >
             {title}{" "}
-            <span className="text-sm font-normal">{photos[idx]?.date}.</span>
           </motion.div>
           <div
             className="cursor-pointer"
