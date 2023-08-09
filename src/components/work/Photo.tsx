@@ -39,21 +39,17 @@ export const Photo = ({ photo }: Props) => {
   };
 
   useEffect(() => {
-    if (!dominantColor) return;
     if (childRef.current) {
-      childRef.current.style.backgroundColor = dominantColor;
+      childRef.current.style.backgroundColor = photo.dominantColor ?? "#071732";
     }
-  }, [dominantColor]);
+  }, [childRef.current, dominantColor]);
 
   useEffect(() => {
     if (!width || !height) return;
     const img = loadImage(photo.src);
-    const colorThief = new ColorThief();
 
     img.src = photo.src;
     img.onload = () => {
-      const color = colorThief.getColor(img);
-      setDominantColor(rgbToHex(color));
       setAspectRatio(img.width / img.height);
     };
 
@@ -77,7 +73,6 @@ export const Photo = ({ photo }: Props) => {
       <motion.div
         ref={ref}
         layout
-        transition={{ scaleX: { duration: 15 } }}
         data-scroll
         data-scroll-to
         key={path}
@@ -85,7 +80,7 @@ export const Photo = ({ photo }: Props) => {
           !isOverview
             ? "h-[100vh] py-4 items-center"
             : "h-[25vh] cursor-pointer items-start"
-        } w-full flex flex-col flex-none justify-center relative pointer-events-auto `}
+        } w-full flex flex-col flex-none justify-center relative pointer-events-auto bg-light`}
         onMouseEnter={() => {
           setCursorType(isOverview ? "hover" : "pointer");
         }}
@@ -94,7 +89,7 @@ export const Photo = ({ photo }: Props) => {
         }}
         onClick={handleClick}
       >
-        <div className="opacity-0">
+        <div ref={childRef} className="opacity-100">
           <motion.div
             initial={{
               opacity: 0,
@@ -105,7 +100,6 @@ export const Photo = ({ photo }: Props) => {
             exit={{ y: "100%" }}
             transition={{ delay: 0.5, ease: "easeOut" }}
             className=""
-            ref={childRef}
           >
             <Image
               id={photo.alt}
@@ -116,7 +110,7 @@ export const Photo = ({ photo }: Props) => {
               blurDataURL={photo.src}
               fill={isOverview}
               src={photo.src}
-              className="object-cover "
+              className="object-cover"
             />
           </motion.div>
         </div>
