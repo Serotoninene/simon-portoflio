@@ -7,7 +7,6 @@ import * as THREE from "three";
 import fragment from "@shaders/WorkPhotoShader/fragment.glsl";
 import vertex from "@shaders/WorkPhotoShader/vertex.glsl";
 import { Power3, gsap } from "gsap";
-import { useOverviewContext } from "../context/OverviewContext";
 
 const ColorShiftMaterial = shaderMaterial(
   {
@@ -37,7 +36,7 @@ export const ThreePhoto = ({ photo }: any) => {
     gsap.to(shaderRef.current, {
       uProgress: 1,
       duration: 0.5,
-      delay: 0.5,
+      delay: 1,
       ease: Power3.easeOut,
     });
   }, []);
