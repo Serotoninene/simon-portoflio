@@ -1,5 +1,5 @@
 import { useWindowSize } from "@/utils/hooks";
-import { shaderMaterial, useTexture } from "@react-three/drei";
+import { shaderMaterial, useProgress, useTexture } from "@react-three/drei";
 import { extend, useFrame } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as THREE from "three";
@@ -29,7 +29,6 @@ export const ThreePhoto = ({ photo, geometry }: any) => {
     width: 0,
     height: 0,
   });
-
   const texture = useTexture(photo.src, () => {}) as THREE.Texture;
 
   useEffect(() => {
@@ -52,7 +51,7 @@ export const ThreePhoto = ({ photo, geometry }: any) => {
 
       setPhotoData({
         x,
-        y: THREE.MathUtils.lerp(photoData.y, y, 0.12),
+        y: THREE.MathUtils.lerp(photoData.y, y, 0.35),
         height: rect?.height,
         width: rect?.width,
       });

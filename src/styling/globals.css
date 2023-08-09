@@ -100,10 +100,9 @@ html.has-scroll-dragging {
   align-items: center;
   position: fixed;
   pointer-events: none;
-  border: 1px solid #071732;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 10px;
+  height: 10px;
   z-index: 99;
   transform: translate(-20px, -20px);
   transition: all ease-out 0.25s;

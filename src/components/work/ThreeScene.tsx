@@ -1,5 +1,5 @@
 import { ExtendedPhoto } from "@/types";
-import { shaderMaterial } from "@react-three/drei";
+import { shaderMaterial, useProgress } from "@react-three/drei";
 import { extend } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import { CustomCanvas } from "../three";
@@ -16,6 +16,8 @@ type Props = {
 const geometry = new THREE.PlaneGeometry(1, 1, 1, 1);
 
 const Photos = ({ photos }: Props) => {
+  const { progress } = useProgress();
+
   return (
     <>
       {photos.map((photo, idx) => (

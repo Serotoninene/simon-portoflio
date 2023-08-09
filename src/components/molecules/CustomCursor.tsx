@@ -57,11 +57,11 @@ export default function CustomCursor() {
         className={onMobile ? "opacity-0" : ""}
         style={{
           scale: cursorType === "hover" ? 0.3 : 1,
-          backgroundColor: cursorType === "hover" ? "#071732" : "transparent",
+          backgroundColor: "#071732",
         }}
         animate={{
-          top: mousePosition.y - 15,
-          left: mousePosition.x - 15,
+          top: mousePosition.y - 5,
+          left: mousePosition.x - 5,
         }}
         transition={{
           type: "spring",
