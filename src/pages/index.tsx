@@ -22,6 +22,7 @@ import { homePhotos as photos } from "@/utils/store";
 // [X] try again using the isOverview context god damnit !
 // [X] make a custom cursor
 // [X] switch for the new favicon
+// [] insert most of the photos in work
 // [] make a little loading component for the work page
 // [] rearrange the layout on mobile
 // [] make an effect on scroll
