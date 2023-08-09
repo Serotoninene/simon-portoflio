@@ -56,35 +56,16 @@ export default function CustomCursor() {
         id="CustomCursor" // had to use css for styling here --> base.scss
         className={onMobile ? "opacity-0" : ""}
         style={{
-          scale: cursorType === "hover" ? 0.3 : 1,
-          backgroundColor: "#071732",
+          scale: cursorType === "hover" ? 0.5 : 1,
+          backgroundColor: "white",
         }}
         animate={{
-          top: mousePosition.y - 5,
-          left: mousePosition.x - 5,
+          top: mousePosition.y - 10,
+          left: mousePosition.x - 10,
         }}
         transition={{
           type: "spring",
           damping: 38,
-          mass: 0.1,
-          stiffness: 500,
-          // velocity: 10,
-        }}
-      ></motion.div>
-      <motion.div
-        id="InnerCustomCursor" // had to use css for styling here --> base.scss
-        className={onMobile ? "opacity-0" : ""}
-        style={{
-          scale: cursorType === "hover" ? 0.3 : 1,
-          backgroundColor: "#071732",
-        }}
-        animate={{
-          top: mousePosition.y - 2.5,
-          left: mousePosition.x - 2.5,
-        }}
-        transition={{
-          type: "spring",
-          damping: 10,
           mass: 0.1,
           stiffness: 500,
           // velocity: 10,
