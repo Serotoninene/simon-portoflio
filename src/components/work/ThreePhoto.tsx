@@ -41,10 +41,6 @@ export const ThreePhoto = ({ photo, geometry }: any) => {
     });
   }, []);
 
-  useEffect(() => {
-    if (!texture) return;
-  }, [texture]);
-
   useFrame(() => {
     const photoDiv = document.getElementById(photo.alt);
     const rect = photoDiv?.getBoundingClientRect();
