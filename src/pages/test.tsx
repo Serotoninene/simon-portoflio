@@ -1,18 +1,17 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { photos } from "./work";
+import { photos } from "@/data/photos";
 import Image from "next/image";
-import { gsap, Power3 } from "gsap";
+import { gsap, Power4 } from "gsap";
 import { Flip } from "gsap/dist/Flip";
 
 type Props = {};
 
-const GalleryPhoto = ({ idx, photo, photosRef, galleryState }: any) => {
+const GalleryPhoto = ({ photo, galleryState }: any) => {
   // GRID STATE
   if (galleryState === "grid")
     return (
       <div
-        ref={(e) => (photosRef.current[idx] = e)}
         data-flip-id={photo.alt}
         className="gallery-photo p-2 relative h-[50px] overflow-hidden"
       >
@@ -32,7 +31,6 @@ const GalleryPhoto = ({ idx, photo, photosRef, galleryState }: any) => {
 };
 
 export default function Test(props: Props) {
-  const photosRef = useRef<any[]>([]);
   const [flipState, setFlipState] = useState<any>();
   const [galleryState, setGalleryState] = useState<"grid" | "flex">("grid");
   const toggleState = () => {
@@ -40,7 +38,7 @@ export default function Test(props: Props) {
     setGalleryState(galleryState === "grid" ? "flex" : "grid");
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     gsap.registerPlugin(Flip);
 
     if (!flipState) return;
@@ -50,8 +48,9 @@ export default function Test(props: Props) {
         amount: 0.1,
         from: galleryState === "grid" ? "start" : "end",
       },
+      duration: 1.5,
       // staggerFrom: galleryState === "grid" ? "start" : "end",
-      ease: Power3.easeOut,
+      ease: Power4.easeInOut,
       absolute: true,
     });
   }, [galleryState, flipState]);
@@ -61,13 +60,11 @@ export default function Test(props: Props) {
       id=".gallery-container"
       className={`${galleryState} grid-cols-4 flex-col gap-10`}
     >
-      {photos.map((photo, idx) => (
+      {photos.map((photo) => (
         <GalleryPhoto
-          idx={idx}
-          photo={photo}
-          photosRef={photosRef}
-          galleryState={galleryState}
           key={photo.alt}
+          photo={photo}
+          galleryState={galleryState}
         />
       ))}
 
