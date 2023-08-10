@@ -13,6 +13,8 @@ export default function CustomCursor() {
     y: 200,
   });
 
+  console.log(mousePosition);
+
   const onMouseMove = (event: MouseEvent) => {
     const { clientX: x, clientY: y } = event;
     setMousePosition({
@@ -36,8 +38,8 @@ export default function CustomCursor() {
         scale: cursorType === "hover" ? 0.5 : 1,
       }}
       animate={{
-        top: mousePosition.y,
-        left: mousePosition.x,
+        top: mousePosition.y - 10,
+        left: mousePosition.x - 10,
       }}
       transition={{
         type: "spring",

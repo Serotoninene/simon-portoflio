@@ -95,8 +95,9 @@ html.has-scroll-dragging {
 
 #CustomCursor,
 #InnerCustomCursor {
+  display: none;
   position: fixed;
-  background-color: white;
+  background-color: #fffef8;
   mix-blend-mode: difference;
   pointer-events: none;
   border-radius: 50%;
@@ -122,6 +123,10 @@ html.has-scroll-dragging {
 
 /* tailwind sm */
 @media screen and (min-width: 640px) {
+  #CustomCursor {
+    display: block;
+  }
+
   .grid-gallery {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -139,9 +144,5 @@ html.has-scroll-dragging {
 
   .flex-gallery {
     gap: 50vh;
-  }
-
-  #CustomCursor {
-    display: none;
   }
 }

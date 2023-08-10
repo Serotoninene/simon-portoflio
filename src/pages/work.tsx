@@ -91,7 +91,7 @@ const HTMLPart = () => {
 export default function Work() {
   if (!photos) return;
   return (
-    <Container className="pt-0">
+    <Container className="pt-0 bg-light">
       <OverviewProvider>
         <Suspense fallback={<Loader />}>
           {/* <div className="fixed top-0 left-0 right-0 bottom-0">
