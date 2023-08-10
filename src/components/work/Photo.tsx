@@ -23,6 +23,7 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
   if (isOverview)
     return (
       <div
+        id={photo.alt}
         data-flip-id={photo.alt}
         className="gallery-photo h-[25vh] relative"
         onMouseEnter={() => {

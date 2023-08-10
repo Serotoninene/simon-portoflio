@@ -12,6 +12,7 @@ import { Loader } from "@/components/organisms";
 
 import { gsap, Power4 } from "gsap";
 import { Flip } from "gsap/dist/Flip";
+import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
 import { photos } from "@/data/photos";
 
 const HTMLPart = () => {
@@ -24,7 +25,7 @@ const HTMLPart = () => {
   const [photoTarget, setPhotoTarget] = useState("");
 
   useEffect(() => {
-    window.addEventListener("scroll", (e) => {});
+    gsap.registerPlugin(ScrollToPlugin);
   }, []);
 
   useEffect(() => {
@@ -39,8 +40,6 @@ const HTMLPart = () => {
       oldScroll = window.scrollY;
     }
 
-    console.log(0);
-
     Flip.from(flipState, {
       duration: 1.5,
       ease: Power4.easeInOut,
@@ -49,15 +48,10 @@ const HTMLPart = () => {
         amount: 0.1,
         from: isOverview ? "start" : "end",
       },
-      onComplete: () => {
+      onStart: () => {
         if (isOverview) return;
-
-        // const newScrollY = oldScrollY + (topTarget - oldScrollY);
-
-        window.scrollTo({
-          top: topTarget + window.scrollY,
-          behavior: "smooth",
-        });
+        //or to scroll to the element with the ID "#someID":
+        gsap.to(window, { scrollTo: topTarget, duration: 2 });
       },
     });
   }, [isOverview, flipState]);
