@@ -10,19 +10,29 @@ import {
 
 import { Loader } from "@/components/organisms";
 
-import { gsap } from "gsap";
+import { gsap, Power4 } from "gsap";
 import { Flip } from "gsap/dist/Flip";
 import { photos } from "@/data/photos";
 
 const HTMLPart = () => {
+  const { scrollYProgress } = useScroll();
+  const { isOverview, flipState, handleOverviewSwitch } = useOverviewContext();
+
+  // TO CHECK : DO I REALLY NEED THIS IDX ?
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
-  const { isOverview } = useOverviewContext();
-  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     gsap.registerPlugin(Flip);
-  }, [isOverview]);
+
+    if (!flipState) return;
+
+    Flip.from(flipState, {
+      duration: 1.5,
+      ease: Power4.easeInOut,
+      absolute: true,
+    });
+  }, [isOverview, flipState]);
 
   // updated the title when the idx changes
   useEffect(() => {

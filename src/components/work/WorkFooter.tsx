@@ -20,26 +20,15 @@ const variants = {
   },
 };
 
-export const WorkFooter = ({ photos, idx, title }: any) => {
-  const { isOverview, setIsOverview } = useOverviewContext();
+export const WorkFooter = ({ title }: any) => {
+  const { isOverview, handleOverviewSwitch } = useOverviewContext();
   const { setCursorType } = useCursorContext();
 
   const handleOverview = () => {
-    const photos = document.querySelectorAll(
-      "#gallery-container, #gallery-container photo"
-    );
-    const state = Flip.getState(photos);
-
-    setIsOverview(true);
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: "instant",
-    // });
-
-    Flip.from(state, {
-      absolute: true,
-      ease: Power3.easeOut,
-      nested: true,
+    handleOverviewSwitch(true);
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
     });
   };
 

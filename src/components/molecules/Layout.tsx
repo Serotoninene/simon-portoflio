@@ -43,7 +43,7 @@ export default function Layout({ children }: Props) {
   }, [height]);
 
   return (
-    <div id="App" className={`${poppins.className} bg-light`}>
+    <div id="App" className={`${poppins.className}`}>
       <Head>
         <title>Simon Eychenne</title>
         <meta

@@ -1,5 +1,5 @@
-import { Flip } from "gsap/dist/Flip";
 import React, { createContext, useContext, useMemo, useState } from "react";
+import { Flip } from "gsap/dist/Flip";
 
 type OverviewProviderProps = {
   children: React.ReactNode;
@@ -7,24 +7,32 @@ type OverviewProviderProps = {
 
 type OverviewContextProps = {
   isOverview: boolean;
-  setIsOverview: React.Dispatch<React.SetStateAction<boolean>>;
+  flipState: any;
+  handleOverviewSwitch: (overviewState: boolean) => void;
 };
 
 export const OverviewContext = createContext<OverviewContextProps>({
   isOverview: false,
-  setIsOverview: () => {},
+  flipState: null,
+  handleOverviewSwitch: () => {},
 });
 
 export const OverviewProvider = ({ children }: OverviewProviderProps) => {
+  const [flipState, setFlipState] = useState<any>();
   const [isOverview, setIsOverview] = useState(false);
+
+  const handleOverviewSwitch = (overviewState: boolean) => {
+    setFlipState(Flip.getState(".gallery-photo"));
+    setIsOverview(overviewState);
+  };
 
   const value = useMemo(
     () => ({
       isOverview,
-      // rename toggleOverview as testFunction
-      setIsOverview,
+      flipState,
+      handleOverviewSwitch,
     }),
-    [isOverview]
+    [isOverview, flipState]
   );
 
   return (

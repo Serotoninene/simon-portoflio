@@ -6,20 +6,18 @@ import { useRef } from "react";
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
 
-type Props = {
-  photo: ExtendedPhoto;
-};
+type Props = { photo: ExtendedPhoto };
 
 export const Photo = ({ photo }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const { setCursorType } = useCursorContext();
-  const { isOverview, setIsOverview } = useOverviewContext();
+  const { isOverview, handleOverviewSwitch } = useOverviewContext();
   const { width } = useWindowSize();
 
   const handleClick = async () => {
     // wait for the change of state for the overview before scrolling
-    await setIsOverview(false); // <- don't believe what VSC tells u, if u remove the await the smooth scroll won't work
+    await handleOverviewSwitch(false); // <- don't believe what VSC tells u, if u remove the await the smooth scroll won't work
     if (!width) return;
     const { top } = ref.current?.getBoundingClientRect() || { top: 0 };
     window.scrollTo({
@@ -32,7 +30,8 @@ export const Photo = ({ photo }: Props) => {
     return (
       <div
         ref={ref}
-        className="h-[25vh] relative"
+        data-flip-id={photo.alt}
+        className="gallery-photo h-[25vh] relative"
         onMouseEnter={() => {
           setCursorType("hover");
         }}
@@ -47,14 +46,18 @@ export const Photo = ({ photo }: Props) => {
           alt={photo.alt}
           placeholder="blur"
           blurDataURL={photo.src}
-          className="object-cover"
+          className="object-contain"
           fill
         />
       </div>
     );
 
   return (
-    <motion.div ref={ref} className="h-[calc(100vh-32px)] my-4 relative">
+    <div
+      ref={ref}
+      data-flip-id={photo.alt}
+      className="gallery-photo h-[calc(100vh-32px)] my-4 relative"
+    >
       <Image
         id={photo.alt}
         src={photo.src}
@@ -64,6 +67,6 @@ export const Photo = ({ photo }: Props) => {
         className="object-center object-contain"
         fill
       />
-    </motion.div>
+    </div>
   );
 };
