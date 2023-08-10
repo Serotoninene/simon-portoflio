@@ -107,7 +107,44 @@ html.has-scroll-dragging {
   transition-property: width, transform, background-color, backdrop-filter;
 }
 
-@media screen and (max-width: 768px) {
+#gallery-container {
+  position: relative;
+}
+
+.grid-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.flex-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* tailwind sm */
+@media screen and (min-width: 640px) {
+  .grid-gallery {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .flex-gallery {
+    gap: 32px;
+  }
+}
+
+/* tailwind md */
+@media screen and (min-width: 768px) {
+  .grid-gallery {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .flex-gallery {
+    gap: 50vh;
+  }
+
   #CustomCursor {
     display: none;
   }

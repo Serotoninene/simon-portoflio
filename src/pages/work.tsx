@@ -41,11 +41,7 @@ const HTMLPart = () => {
     <>
       <div
         id="gallery-container"
-        className={`relative ${
-          isOverview
-            ? "grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 mt-6"
-            : "flex flex-col gap-6 sm:gap-8 md:gap-[50vh]"
-        }`}
+        className={isOverview ? "grid-gallery" : "flex-gallery"}
       >
         {photos.map((photo, idx) => (
           <div

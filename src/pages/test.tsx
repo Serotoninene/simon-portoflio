@@ -57,7 +57,7 @@ export default function Test(props: Props) {
 
   return (
     <div
-      id=".gallery-container"
+      id="gallery-container"
       className={`${galleryState} grid-cols-4 flex-col gap-10`}
     >
       {photos.map((photo) => (
