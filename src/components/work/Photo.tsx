@@ -6,30 +6,23 @@ import { useRef } from "react";
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
 
-type Props = { photo: ExtendedPhoto };
+type Props = { photo: ExtendedPhoto; setPhotoTarget: (id: string) => void };
 
-export const Photo = ({ photo }: Props) => {
+export const Photo = ({ photo, setPhotoTarget }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const { setCursorType } = useCursorContext();
   const { isOverview, handleOverviewSwitch } = useOverviewContext();
-  const { width } = useWindowSize();
 
   const handleClick = async () => {
     // wait for the change of state for the overview before scrolling
-    await handleOverviewSwitch(false); // <- don't believe what VSC tells u, if u remove the await the smooth scroll won't work
-    if (!width) return;
-    const { top } = ref.current?.getBoundingClientRect() || { top: 0 };
-    window.scrollTo({
-      top: top + window.scrollY,
-      behavior: "smooth",
-    });
+    handleOverviewSwitch(false); // <- don't believe what VSC tells u, if u remove the await the smooth scroll won't work
+    setPhotoTarget(photo.alt);
   };
 
   if (isOverview)
     return (
       <div
-        ref={ref}
         data-flip-id={photo.alt}
         className="gallery-photo h-[25vh] relative"
         onMouseEnter={() => {
@@ -54,6 +47,7 @@ export const Photo = ({ photo }: Props) => {
 
   return (
     <div
+      id={photo.alt}
       ref={ref}
       data-flip-id={photo.alt}
       className="gallery-photo h-[calc(100vh-32px)] my-4 relative"

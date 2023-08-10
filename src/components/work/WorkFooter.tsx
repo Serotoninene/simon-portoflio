@@ -2,8 +2,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
-import { Power3 } from "gsap";
-import { Flip } from "gsap/dist/Flip";
 
 const variants = {
   hidden: {
@@ -28,7 +26,7 @@ export const WorkFooter = ({ title }: any) => {
     handleOverviewSwitch(true);
     window.scrollTo({
       top: 0,
-      behavior: "instant",
+      behavior: "smooth",
     });
   };
 

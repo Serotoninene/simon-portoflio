@@ -21,16 +21,44 @@ const HTMLPart = () => {
   // TO CHECK : DO I REALLY NEED THIS IDX ?
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
+  const [photoTarget, setPhotoTarget] = useState("");
+
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => {});
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(Flip);
 
     if (!flipState) return;
 
+    const topTarget = document.getElementById(photoTarget)?.offsetTop || 0;
+    let oldScroll = 0;
+
+    if (!isOverview) {
+      oldScroll = window.scrollY;
+    }
+
+    console.log(0);
+
     Flip.from(flipState, {
       duration: 1.5,
       ease: Power4.easeInOut,
       absolute: true,
+      stagger: {
+        amount: 0.1,
+        from: isOverview ? "start" : "end",
+      },
+      onComplete: () => {
+        if (isOverview) return;
+
+        // const newScrollY = oldScrollY + (topTarget - oldScrollY);
+
+        window.scrollTo({
+          top: topTarget + window.scrollY,
+          behavior: "smooth",
+        });
+      },
     });
   }, [isOverview, flipState]);
 
@@ -54,15 +82,17 @@ const HTMLPart = () => {
         className={isOverview ? "grid-gallery" : "flex-gallery"}
       >
         {photos.map((photo) => (
-          <Photo key={photo.alt} photo={photo} />
+          <Photo
+            key={photo.alt}
+            photo={photo}
+            setPhotoTarget={setPhotoTarget}
+          />
         ))}
       </div>
       <WorkFooter photos={photos} title={title} idx={idx} />
     </>
   );
 };
-
-// i need the src, alt, capitalizedTitle, and the date
 
 export default function Work() {
   if (!photos) return;
