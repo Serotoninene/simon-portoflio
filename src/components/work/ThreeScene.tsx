@@ -49,7 +49,7 @@ export const Scene = ({ photos }: Props) => {
   return (
     <CustomCanvas>
       <Perf />
-      <Photos photos={photos} />
+      {/* <Photos photos={photos} /> */}
     </CustomCanvas>
   );
 };
