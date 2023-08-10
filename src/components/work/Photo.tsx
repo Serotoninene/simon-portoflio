@@ -71,8 +71,6 @@ export const Photo = ({ photo }: Props) => {
       <motion.div
         ref={ref}
         layout
-        data-scroll
-        data-scroll-to
         key={path}
         className={`${
           !isOverview
