@@ -14,18 +14,11 @@ type Props = {
 };
 
 export const Photo = ({ photo }: Props) => {
-  const { isOverview, setIsOverview } = useOverviewContext();
-  const { setCursorType } = useCursorContext();
-
-  const path = usePathname();
   const ref = useRef<HTMLDivElement>(null);
-  const childRef = useRef<HTMLDivElement>(null);
-  const { width, height } = useWindowSize();
-  const [dominantColor, setDominantColor] = useState("");
-  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
 
-  // know the aspect ratio of the photo
-  const [aspectRatio, setAspectRatio] = useState(1);
+  const { cursorType, setCursorType } = useCursorContext();
+  const { isOverview, setIsOverview } = useOverviewContext();
+  const { width } = useWindowSize();
 
   const handleClick = async () => {
     // wait for the change of state for the overview before scrolling
@@ -38,76 +31,50 @@ export const Photo = ({ photo }: Props) => {
     });
   };
 
-  useEffect(() => {
-    if (childRef.current) {
-      childRef.current.style.backgroundColor = photo.dominantColor ?? "#071732";
-    }
-  }, [childRef.current, dominantColor]);
-
-  useEffect(() => {
-    if (!width || !height) return;
-    const img = loadImage(photo.src);
-    img.src = photo.src;
-    img.onload = () => {
-      setAspectRatio(img.width / img.height);
-    };
-
-    const windowAspectRatio = width / height;
-
-    setImageSize({
-      width:
-        aspectRatio > 1
-          ? (width / windowAspectRatio) * aspectRatio - 48
-          : height * aspectRatio - 32,
-      height: 400,
-    });
-  }, [photo.src, width, height, aspectRatio]);
-
-  if (!width || !height) return null;
-
-  return (
-    <AnimatePresence mode="wait">
-      <motion.div
+  if (isOverview)
+    return (
+      <div
         ref={ref}
-        key={path}
-        className={`${
-          !isOverview
-            ? "h-[100vh] py-4 items-center"
-            : "h-[25vh] cursor-pointer items-start"
-        } w-full flex flex-col flex-none justify-center relative photo
-         `}
+        className="h-[25vh] relative"
         onMouseEnter={() => {
-          setCursorType(isOverview ? "hover" : "pointer");
+          setCursorType("hover");
         }}
         onMouseLeave={() => {
           setCursorType("pointer");
         }}
         onClick={handleClick}
       >
-        <motion.div
-          ref={childRef}
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          exit={{ y: "100%" }}
-          transition={{ delay: 0.5, ease: "easeOut" }}
-        >
-          <Image
-            id={photo.alt}
-            alt={photo.alt}
-            width={!isOverview ? imageSize.width : undefined}
-            height={!isOverview ? imageSize.height : undefined}
-            placeholder="blur"
-            blurDataURL={photo.src}
-            fill={isOverview}
-            src={photo.src}
-            className="object-cover"
-          />
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+        <Image
+          id={photo.alt}
+          alt={photo.alt}
+          placeholder="blur"
+          blurDataURL={photo.src}
+          src={photo.src}
+          fill
+          className="object-cover"
+        />
+      </div>
+    );
+
+  return (
+    <motion.div
+      ref={ref}
+      className={`${
+        !isOverview ? "h-[calc(100vh-32px)] my-4" : "h-[25vh]"
+      }  relative
+         `}
+    >
+      <Image
+        id={photo.alt}
+        alt={photo.alt}
+        placeholder="blur"
+        blurDataURL={photo.src}
+        fill
+        src={photo.src}
+        className={`object-center opacity-10 ${
+          isOverview ? "object-cover" : "object-contain"
+        }`}
+      />
+    </motion.div>
   );
 };
