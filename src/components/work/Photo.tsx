@@ -47,7 +47,6 @@ export const Photo = ({ photo }: Props) => {
   useEffect(() => {
     if (!width || !height) return;
     const img = loadImage(photo.src);
-
     img.src = photo.src;
     img.onload = () => {
       setAspectRatio(img.width / img.height);
@@ -70,13 +69,12 @@ export const Photo = ({ photo }: Props) => {
     <AnimatePresence mode="wait">
       <motion.div
         ref={ref}
-        layout
         key={path}
         className={`${
           !isOverview
             ? "h-[100vh] py-4 items-center"
             : "h-[25vh] cursor-pointer items-start"
-        } w-full flex flex-col flex-none justify-center relative pointer-events-auto photo
+        } w-full flex flex-col flex-none justify-center relative photo
          `}
         onMouseEnter={() => {
           setCursorType(isOverview ? "hover" : "pointer");
@@ -86,31 +84,29 @@ export const Photo = ({ photo }: Props) => {
         }}
         onClick={handleClick}
       >
-        <div ref={childRef} className="opacity-100">
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{ y: "100%" }}
-            transition={{ delay: 0.5, ease: "easeOut" }}
-            className=""
-          >
-            <Image
-              id={photo.alt}
-              alt={photo.alt}
-              width={!isOverview ? imageSize.width : undefined}
-              height={!isOverview ? imageSize.height : undefined}
-              placeholder="blur"
-              blurDataURL={photo.src}
-              fill={isOverview}
-              src={photo.src}
-              className="object-cover"
-            />
-          </motion.div>
-        </div>
+        <motion.div
+          ref={childRef}
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          exit={{ y: "100%" }}
+          transition={{ delay: 0.5, ease: "easeOut" }}
+        >
+          <Image
+            id={photo.alt}
+            alt={photo.alt}
+            width={!isOverview ? imageSize.width : undefined}
+            height={!isOverview ? imageSize.height : undefined}
+            placeholder="blur"
+            blurDataURL={photo.src}
+            fill={isOverview}
+            src={photo.src}
+            className="object-cover"
+          />
+        </motion.div>
       </motion.div>
     </AnimatePresence>
   );

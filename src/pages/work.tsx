@@ -43,13 +43,8 @@ const HTMLPart = () => {
         id="gallery-container"
         className={isOverview ? "grid-gallery" : "flex-gallery"}
       >
-        {photos.map((photo, idx) => (
-          <div
-            key={photo.alt}
-            className={isOverview ? "flex h-fit overflow-hidden " : ""}
-          >
-            <Photo photo={photo} />
-          </div>
+        {photos.map((photo) => (
+          <Photo key={photo.alt} photo={photo} />
         ))}
       </div>
       <WorkFooter photos={photos} title={title} idx={idx} />
