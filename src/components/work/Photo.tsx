@@ -1,11 +1,8 @@
 import { ExtendedPhoto } from "@/types";
-import { loadImage, rgbToHex } from "@/utils/helpers";
 import { useWindowSize } from "@/utils/hooks";
-import ColorThief from "colorthief";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { use, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
 
@@ -16,7 +13,7 @@ type Props = {
 export const Photo = ({ photo }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const { cursorType, setCursorType } = useCursorContext();
+  const { setCursorType } = useCursorContext();
   const { isOverview, setIsOverview } = useOverviewContext();
   const { width } = useWindowSize();
 
@@ -46,34 +43,26 @@ export const Photo = ({ photo }: Props) => {
       >
         <Image
           id={photo.alt}
+          src={photo.src}
           alt={photo.alt}
           placeholder="blur"
           blurDataURL={photo.src}
-          src={photo.src}
-          fill
           className="object-cover"
+          fill
         />
       </div>
     );
 
   return (
-    <motion.div
-      ref={ref}
-      className={`${
-        !isOverview ? "h-[calc(100vh-32px)] my-4" : "h-[25vh]"
-      }  relative
-         `}
-    >
+    <motion.div ref={ref} className="h-[calc(100vh-32px)] my-4 relative">
       <Image
         id={photo.alt}
+        src={photo.src}
         alt={photo.alt}
         placeholder="blur"
         blurDataURL={photo.src}
+        className="object-center object-contain"
         fill
-        src={photo.src}
-        className={`object-center opacity-10 ${
-          isOverview ? "object-cover" : "object-contain"
-        }`}
       />
     </motion.div>
   );
