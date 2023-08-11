@@ -41,7 +41,7 @@ const HTMLPart = () => {
     }
 
     Flip.from(flipState, {
-      duration: 1.5,
+      duration: 1,
       ease: Power4.easeInOut,
       absolute: true,
       stagger: {
@@ -52,7 +52,7 @@ const HTMLPart = () => {
         if (isOverview) return;
         //or to scroll to the element with the ID "#someID":
 
-        gsap.to(window, { scrollTo: topTarget, duration: 2, delay: 0.7 });
+        gsap.to(window, { scrollTo: topTarget, duration: 0, delay: 0.5 });
       },
     });
   }, [isOverview, flipState]);
