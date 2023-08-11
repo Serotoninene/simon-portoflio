@@ -51,7 +51,8 @@ const HTMLPart = () => {
       onStart: () => {
         if (isOverview) return;
         //or to scroll to the element with the ID "#someID":
-        gsap.to(window, { scrollTo: topTarget, duration: 2 });
+
+        gsap.to(window, { scrollTo: topTarget, duration: 2, delay: 0.7 });
       },
     });
   }, [isOverview, flipState]);
@@ -73,7 +74,9 @@ const HTMLPart = () => {
     <>
       <div
         id="gallery-container"
-        className={isOverview ? "grid-gallery" : "flex-gallery"}
+        className={
+          isOverview ? "grid-gallery" : "flex-gallery relative bg-light"
+        }
       >
         {photos.map((photo) => (
           <Photo
@@ -91,15 +94,17 @@ const HTMLPart = () => {
 export default function Work() {
   if (!photos) return;
   return (
-    <Container className="pt-0 bg-light">
-      <OverviewProvider>
-        <Suspense fallback={<Loader />}>
-          {/* <div className="fixed top-0 left-0 right-0 bottom-0">
+    <>
+      <Container className="pt-0 bg-light">
+        <OverviewProvider>
+          <Suspense fallback={<Loader />}>
+            {/* <div className="fixed top-0 left-0 right-0 bottom-0">
             <Scene photos={photos} />
           </div> */}
-          <HTMLPart />
-        </Suspense>
-      </OverviewProvider>
-    </Container>
+            <HTMLPart />
+          </Suspense>
+        </OverviewProvider>
+      </Container>
+    </>
   );
 }

@@ -32,15 +32,13 @@ export const WorkFooter = ({ title }: any) => {
 
   return (
     <div
-      data-scroll
-      data-scroll-sticky
-      data-scroll-target="#scroll-container"
-      className={`flex items-end fixed left-0 top-0 h-[100vh] py-4 px-10 w-full ${
+      className={`flex items-end relative left-0 top-0 h-0 z-10 py-4 px-10 w-full mix-blend-difference ${
         isOverview ? "pointer-events-none" : "pointer-events-auto"
       }`}
     >
+      {" "}
       <AnimatePresence mode="popLayout">
-        <div className="flex justify-between items-center w-full mix-blend-difference">
+        <div className="fixed bottom-4 left-10 right-10 flex justify-between items-center text-light">
           <motion.div
             key={title}
             variants={variants}
@@ -49,7 +47,7 @@ export const WorkFooter = ({ title }: any) => {
             exit="hidden"
             className="font-bold"
           >
-            {title}{" "}
+            <span className=" text-light">{title} </span>
           </motion.div>
           <div
             className="cursor-pointer"

@@ -13,8 +13,6 @@ export default function CustomCursor() {
     y: 200,
   });
 
-  console.log(mousePosition);
-
   const onMouseMove = (event: MouseEvent) => {
     const { clientX: x, clientY: y } = event;
     setMousePosition({
