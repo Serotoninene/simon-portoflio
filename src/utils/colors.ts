@@ -14,31 +14,14 @@ export const rgbToHex = ([r, g, b]: [number, number, number]) =>
     .join("");
 
 export const hexToRgb = (hex: string) => {
-  // Remove the # character if present
-  hex = hex.replace("#", "");
-
-  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-  if (hex.length === 3) {
-    hex = hex.replace(/(.)/g, "$1$1");
-  }
-
-  // Verify if the input is a valid hexadecimal color code
-  const validHexRegex = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
-
-  if (!validHexRegex.test(hex)) {
-    throw new Error("Invalid Hexadecimal Color Code.");
-  }
-
-  // Convert the hex value to decimal
-  const [r, g, b] = (hex.match(/[A-Fa-f0-9]{2}/g) || []) // Match the values in pairs (e.g. 03, FF)
-    .map((value) => parseInt(value, 16));
-
-  // Return the RGB values as an object
-  return {
-    r,
-    g,
-    b,
-  };
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null;
 };
 
 export async function getDominantColor(imageSrc: string): Promise<string> {
