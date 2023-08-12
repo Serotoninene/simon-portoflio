@@ -1,18 +1,24 @@
-import { ExtendedPhoto } from "@/types";
-import { useWindowSize } from "@/utils/hooks";
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { useRef } from "react";
+
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
+
+import { ExtendedPhoto } from "@/types";
 
 type Props = { photo: ExtendedPhoto; setPhotoTarget: (id: string) => void };
 
 export const Photo = ({ photo, setPhotoTarget }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const { setCursorType } = useCursorContext();
   const { isOverview, handleOverviewSwitch } = useOverviewContext();
+
+  const onLoadCallback = () => {
+    setIsLoaded(true);
+  };
 
   const handleClick = async () => {
     // wait for the change of state for the overview before scrolling
@@ -42,6 +48,7 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
           blurDataURL={photo.src}
           className="object-contain"
           fill
+          onLoadingComplete={onLoadCallback}
         />
       </div>
     );

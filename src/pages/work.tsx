@@ -7,13 +7,13 @@ import {
   OverviewProvider,
   useOverviewContext,
 } from "@/components/context/OverviewContext";
-
 import { Loader } from "@/components/organisms";
+import { photos } from "@/data/photos";
 
 import { gsap, Power4 } from "gsap";
 import { Flip } from "gsap/dist/Flip";
 import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
-import { photos } from "@/data/photos";
+import Image from "next/image";
 
 const HTMLPart = () => {
   const { scrollYProgress } = useScroll();
@@ -72,6 +72,7 @@ const HTMLPart = () => {
 
   return (
     <>
+      <Image alt="test" width={1000} height={1000} />
       <div
         id="gallery-container"
         className={
