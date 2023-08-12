@@ -24,10 +24,6 @@ export const WorkFooter = ({ title }: any) => {
 
   const handleOverview = () => {
     handleOverviewSwitch(true);
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   };
 
   return (

@@ -1,10 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
 
 import { ExtendedPhoto } from "@/types";
+import { hexToRgb } from "@/utils/colors";
 
 type Props = { photo: ExtendedPhoto; setPhotoTarget: (id: string) => void };
 
@@ -25,6 +26,12 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
     handleOverviewSwitch(false); // <- don't believe what VSC tells u, if u remove the await the smooth scroll won't work
     setPhotoTarget(photo.alt);
   };
+
+  useEffect(() => {
+    if (!photo.dominantColor) return;
+    const rgbValue = hexToRgb(photo?.dominantColor);
+    console.log(rgbValue);
+  }, []);
 
   if (isOverview)
     return (

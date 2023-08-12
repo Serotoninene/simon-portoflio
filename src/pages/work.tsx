@@ -13,11 +13,13 @@ import { photos } from "@/data/photos";
 import { gsap, Power4 } from "gsap";
 import { Flip } from "gsap/dist/Flip";
 import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
-import Image from "next/image";
 
 const HTMLPart = () => {
   const { scrollYProgress } = useScroll();
   const { isOverview, flipState, handleOverviewSwitch } = useOverviewContext();
+
+  // only the 10 first photos
+  const testPhotos = photos.slice(0, 10);
 
   // TO CHECK : DO I REALLY NEED THIS IDX ?
   const [idx, setIdx] = useState(0);
@@ -34,11 +36,6 @@ const HTMLPart = () => {
     if (!flipState) return;
 
     const topTarget = document.getElementById(photoTarget)?.offsetTop || 0;
-    let oldScroll = 0;
-
-    if (!isOverview) {
-      oldScroll = window.scrollY;
-    }
 
     Flip.from(flipState, {
       duration: 1,
@@ -51,8 +48,7 @@ const HTMLPart = () => {
       onStart: () => {
         if (isOverview) return;
         //or to scroll to the element with the ID "#someID":
-
-        gsap.to(window, { scrollTo: topTarget, duration: 0, delay: 0.5 });
+        gsap.to(window, { scrollTo: topTarget, duration: 0.5, delay: 0.6 });
       },
     });
   }, [isOverview, flipState]);
@@ -72,14 +68,13 @@ const HTMLPart = () => {
 
   return (
     <>
-      <Image alt="test" width={1000} height={1000} />
       <div
         id="gallery-container"
         className={
           isOverview ? "grid-gallery" : "flex-gallery relative bg-light"
         }
       >
-        {photos.map((photo) => (
+        {testPhotos.map((photo) => (
           <Photo
             key={photo.alt}
             photo={photo}
