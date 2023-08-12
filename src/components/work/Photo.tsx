@@ -5,7 +5,8 @@ import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
 
 import { ExtendedPhoto } from "@/types";
-import { hexToRgb } from "@/utils/colors";
+import { hexToRgb, rgbDataURL } from "@/utils/colors";
+import { type } from "os";
 
 type Props = { photo: ExtendedPhoto; setPhotoTarget: (id: string) => void };
 
@@ -13,6 +14,7 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [dominantColorPlaceholder, setDominantColorPlaceholder] = useState("");
 
   const { setCursorType } = useCursorContext();
   const { isOverview, handleOverviewSwitch } = useOverviewContext();
@@ -28,12 +30,15 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
   };
 
   useEffect(() => {
-    if (!photo.dominantColor) return;
-    const rgbValue = hexToRgb(photo?.dominantColor);
-    console.log(rgbValue);
+    if (!photo.dominantColor) {
+      return;
+    }
+
+    const rgb = hexToRgb(photo?.dominantColor) || { r: 0, g: 0, b: 0 };
+    setDominantColorPlaceholder(rgbDataURL(rgb.r, rgb.g, rgb.b));
   }, []);
 
-  if (isOverview)
+  if (isOverview && dominantColorPlaceholder === "")
     return (
       <div
         id={photo.alt}
@@ -72,7 +77,8 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
         src={photo.src}
         alt={photo.alt}
         placeholder="blur"
-        blurDataURL={photo.src}
+        // blurDataURL={photo.src}
+        blurDataURL={dominantColorPlaceholder}
         className="object-center object-contain"
         fill
       />

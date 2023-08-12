@@ -74,7 +74,7 @@ const HTMLPart = () => {
           isOverview ? "grid-gallery" : "flex-gallery relative bg-light"
         }
       >
-        {testPhotos.map((photo) => (
+        {photos.map((photo) => (
           <Photo
             key={photo.alt}
             photo={photo}
