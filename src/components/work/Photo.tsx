@@ -8,9 +8,13 @@ import { ExtendedPhoto } from "@/types";
 import { hexToRgb, rgbDataURL } from "@/utils/colors";
 import { type } from "os";
 
-type Props = { photo: ExtendedPhoto; setPhotoTarget: (id: string) => void };
+type Props = {
+  idx: number;
+  photo: ExtendedPhoto;
+  setPhotoTarget: (id: string) => void;
+};
 
-export const Photo = ({ photo, setPhotoTarget }: Props) => {
+export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -52,6 +56,7 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
         onClick={handleClick}
       >
         <Image
+          priority={idx < 9}
           id={photo.alt}
           src={photo.src}
           alt={photo.alt}
@@ -72,6 +77,7 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
       className="gallery-photo h-[calc(100vh-32px)] my-4 relative"
     >
       <Image
+        priority={idx < 9}
         id={photo.alt}
         src={photo.src}
         alt={photo.alt}

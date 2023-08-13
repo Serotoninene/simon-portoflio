@@ -16,7 +16,7 @@ import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
 
 const HTMLPart = () => {
   const { scrollYProgress } = useScroll();
-  const { isOverview, flipState, handleOverviewSwitch } = useOverviewContext();
+  const { isOverview, flipState } = useOverviewContext();
 
   // only the 10 first photos
   const testPhotos = photos.slice(0, 10);
@@ -32,9 +32,6 @@ const HTMLPart = () => {
 
   useEffect(() => {
     gsap.registerPlugin(Flip);
-
-    if (!flipState) return;
-
     const topTarget = document.getElementById(photoTarget)?.offsetTop || 0;
 
     Flip.from(flipState, {
@@ -77,6 +74,7 @@ const HTMLPart = () => {
         {photos.map((photo) => (
           <Photo
             key={photo.alt}
+            idx={idx}
             photo={photo}
             setPhotoTarget={setPhotoTarget}
           />
