@@ -18,9 +18,6 @@ const HTMLPart = () => {
   const { scrollYProgress } = useScroll();
   const { isOverview, flipState } = useOverviewContext();
 
-  // only the 10 first photos
-  const testPhotos = photos.slice(0, 10);
-
   // TO CHECK : DO I REALLY NEED THIS IDX ?
   const [idx, setIdx] = useState(0);
   const [title, setTitle] = useState("");
@@ -28,6 +25,28 @@ const HTMLPart = () => {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
+
+    const getAspectRatio = async () => {
+      await Promise.all(
+        photos.map(async (photo) => {
+          const img = new Image();
+          img.src = photo.src;
+
+          await new Promise((resolve) => {
+            img.onload = (e: any) => {
+              const width = e.target.width;
+              const height = e.target.height;
+              const aspectRatio = width / height;
+
+              // Update the photo object with the aspectRatio
+              photo.aspectRatio = aspectRatio;
+            };
+          });
+        })
+      );
+    };
+
+    getAspectRatio();
   }, []);
 
   useEffect(() => {

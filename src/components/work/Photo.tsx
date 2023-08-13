@@ -55,7 +55,13 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
         }}
         onClick={handleClick}
       >
-        <LazyPhoto priority={idx < 9} src={photo.src} alt={photo.alt} />
+        <LazyPhoto
+          priority={idx < 9}
+          src={photo.src}
+          alt={photo.alt}
+          aspectRatio={photo.aspectRatio}
+          dominantColor={photo.dominantColor}
+        />
         {/* <Image
           priority={idx < 9}
           src={photo.src}
@@ -76,7 +82,13 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
       data-flip-id={photo.alt}
       className="gallery-photo h-[calc(100vh-32px)] my-4 relative"
     >
-      <LazyPhoto priority={idx < 9} src={photo.src} alt={photo.alt} />
+      <LazyPhoto
+        priority={idx < 9}
+        src={photo.src}
+        alt={photo.alt}
+        aspectRatio={photo.aspectRatio}
+        dominantColor={photo.dominantColor}
+      />
       {/* <Image
         priority={idx < 9}
         id={photo.alt}
