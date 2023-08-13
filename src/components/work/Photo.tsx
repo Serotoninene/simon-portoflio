@@ -34,16 +34,13 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
   };
 
   useEffect(() => {
-    if (!photo.dominantColor) {
-      return;
-    }
-
-    const rgb = hexToRgb(photo?.dominantColor) || { r: 0, g: 0, b: 0 };
+    if (!photo.dominantColor) return;
   }, []);
 
   if (isOverview)
     return (
       <div
+        ref={ref}
         id={photo.alt}
         data-flip-id={photo.alt}
         className="gallery-photo h-[25vh] relative"
@@ -62,7 +59,7 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
           alt={photo.alt}
           placeholder="blur"
           blurDataURL={rgbDataURL(100, 100, 100)}
-          className="object-contain"
+          className="object-cover"
           fill
           onLoadingComplete={onLoadCallback}
         />

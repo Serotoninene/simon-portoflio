@@ -34,6 +34,8 @@ const HTMLPart = () => {
     gsap.registerPlugin(Flip);
     const topTarget = document.getElementById(photoTarget)?.offsetTop || 0;
 
+    if (!flipState) return;
+
     Flip.from(flipState, {
       duration: 1,
       ease: Power4.easeInOut,
