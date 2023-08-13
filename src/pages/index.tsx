@@ -29,6 +29,8 @@ import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 // [] try and see if snapping isn't possible
 // [X] make the title blend mode (on work page)
 // [] rearrange the layout on mobile
+// [] add a "move to see al the photos" at the bottom of index
+// [] clean the numbers of photos on the Two Shifted component
 
 export const photos = [
   {
