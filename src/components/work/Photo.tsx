@@ -35,10 +35,9 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
     }
 
     const rgb = hexToRgb(photo?.dominantColor) || { r: 0, g: 0, b: 0 };
-    setDominantColorPlaceholder(rgbDataURL(rgb.r, rgb.g, rgb.b));
   }, []);
 
-  if (isOverview && dominantColorPlaceholder === "")
+  if (isOverview)
     return (
       <div
         id={photo.alt}
@@ -57,7 +56,7 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
           src={photo.src}
           alt={photo.alt}
           placeholder="blur"
-          blurDataURL={photo.src}
+          blurDataURL={rgbDataURL(100, 100, 100)}
           className="object-contain"
           fill
           onLoadingComplete={onLoadCallback}
@@ -77,8 +76,8 @@ export const Photo = ({ photo, setPhotoTarget }: Props) => {
         src={photo.src}
         alt={photo.alt}
         placeholder="blur"
-        // blurDataURL={photo.src}
-        blurDataURL={dominantColorPlaceholder}
+        blurDataURL={rgbDataURL(100, 100, 100)}
+        // blurDataURL={dominantColorPlaceholder}
         className="object-center object-contain"
         fill
       />
