@@ -6,7 +6,7 @@ import { useCursorContext } from "../context/CursorContext";
 
 import { ExtendedPhoto } from "@/types";
 import { hexToRgb, rgbDataURL } from "@/utils/colors";
-import { type } from "os";
+import { LazyPhoto } from "../atoms";
 
 type Props = {
   idx: number;
@@ -55,9 +55,9 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
         }}
         onClick={handleClick}
       >
-        <Image
+        <LazyPhoto priority={idx < 9} src={photo.src} alt={photo.alt} />
+        {/* <Image
           priority={idx < 9}
-          id={photo.alt}
           src={photo.src}
           alt={photo.alt}
           placeholder="blur"
@@ -65,7 +65,7 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
           className="object-contain"
           fill
           onLoadingComplete={onLoadCallback}
-        />
+        /> */}
       </div>
     );
 
@@ -76,7 +76,8 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
       data-flip-id={photo.alt}
       className="gallery-photo h-[calc(100vh-32px)] my-4 relative"
     >
-      <Image
+      <LazyPhoto priority={idx < 9} src={photo.src} alt={photo.alt} />
+      {/* <Image
         priority={idx < 9}
         id={photo.alt}
         src={photo.src}
@@ -86,7 +87,7 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
         // blurDataURL={dominantColorPlaceholder}
         className="object-center object-contain"
         fill
-      />
+      /> */}
     </div>
   );
 };
