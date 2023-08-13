@@ -20,7 +20,7 @@ export const LazyPhoto = ({
   const [isLoaded, setIsLoaded] = useState(false);
 
   const imageProps = {
-    alt,
+    alt: alt || "photo",
     src,
     priority,
     className: `object-${fit || "cover"}`,
