@@ -60,16 +60,6 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
           aspectRatio={photo.aspectRatio}
           dominantColor={photo.dominantColor}
         />
-        {/* <Image
-          priority={idx < 9}
-          src={photo.src}
-          alt={photo.alt}
-          placeholder="blur"
-          blurDataURL={rgbDataURL(100, 100, 100)}
-          className="object-contain"
-          fill
-          onLoadingComplete={onLoadCallback}
-        /> */}
       </div>
     );
 

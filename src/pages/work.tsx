@@ -25,28 +25,6 @@ const HTMLPart = () => {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
-
-    const getAspectRatio = async () => {
-      await Promise.all(
-        photos.map(async (photo) => {
-          const img = new Image();
-          img.src = photo.src;
-
-          await new Promise((resolve) => {
-            img.onload = (e: any) => {
-              const width = e.target.width;
-              const height = e.target.height;
-              const aspectRatio = width / height;
-
-              // Update the photo object with the aspectRatio
-              photo.aspectRatio = aspectRatio;
-            };
-          });
-        })
-      );
-    };
-
-    getAspectRatio();
   }, []);
 
   useEffect(() => {

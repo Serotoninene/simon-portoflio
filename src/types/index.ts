@@ -8,6 +8,7 @@ export type Photo = {
 export type ExtendedPhoto = Photo & {
   date?: string;
   capitalizedTitle: string;
+  aspectRatio: number;
 };
 
 export type Caption = {

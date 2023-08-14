@@ -23,7 +23,7 @@ import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 // [X] switch for the new favicon
 // [X] insert most of the photos in work
 // [X] faire un test avec gsap flip pour la transition
-// [] do the lazy loading with dominant color : https://jagad.dev/posts/custom-image-transition-in-nextjs-with-tailwind-css
+// [X] do the lazy loading with dominant color : https://jagad.dev/posts/custom-image-transition-in-nextjs-with-tailwind-css
 // [X] do a small opacity animation to intro and exit work page
 // [] smooth the scroll on the work page
 // [] try and see if snapping isn't possible

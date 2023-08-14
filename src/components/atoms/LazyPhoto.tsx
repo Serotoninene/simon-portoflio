@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useOverviewContext } from "../context/OverviewContext";
-import { useWindowSize } from "@/utils/hooks";
 
 type Props = {
   priority?: boolean;
@@ -22,7 +21,6 @@ export const LazyPhoto = ({
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const { width, height } = useWindowSize();
   const [isLoaded, setIsLoaded] = useState(false);
   const { isOverview } = useOverviewContext();
 
@@ -59,14 +57,14 @@ export const LazyPhoto = ({
       <div
         ref={ref}
         style={{ position: "relative" }}
-        className={`h-full relative`}
+        className={`lazy-container h-full relative`}
       >
         {/* eslint-disable-next-line */}
         <Image
           fill
           {...imageProps}
           onLoad={() => setIsLoaded(true)}
-          className={`transition-opacity duration-1000 object-contain  ${
+          className={`lazy-photo transition-opacity duration-1000 object-contain  ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
         />
