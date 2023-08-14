@@ -25,10 +25,10 @@ import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 // [X] faire un test avec gsap flip pour la transition
 // [X] do the lazy loading with dominant color : https://jagad.dev/posts/custom-image-transition-in-nextjs-with-tailwind-css
 // [X] do a small opacity animation to intro and exit work page
-// [] smooth the scroll on the work page
-// [] try and see if snapping isn't possible
 // [X] make the title blend mode (on work page)
+// [] try and see if snapping isn't possible
 // [] rearrange the layout on mobile
+// [] smooth the scroll on the work page
 
 export const photos = [
   {

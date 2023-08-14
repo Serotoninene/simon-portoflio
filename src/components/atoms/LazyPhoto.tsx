@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useOverviewContext } from "../context/OverviewContext";
+import { useWindowSize } from "@/utils/hooks";
 
 type Props = {
   priority?: boolean;
@@ -23,6 +24,7 @@ export const LazyPhoto = ({
   const ref = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const { isOverview } = useOverviewContext();
+  const { width, height } = useWindowSize();
 
   const imageProps = {
     alt: alt || "photo",
@@ -47,7 +49,7 @@ export const LazyPhoto = ({
         ref.current.style.margin = "0 auto";
       }
     }
-  }, [isOverview, isLoaded]);
+  }, [isOverview, isLoaded, width, height]);
 
   return (
     <div

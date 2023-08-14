@@ -7,6 +7,9 @@ import { useCursorContext } from "../context/CursorContext";
 import { ExtendedPhoto } from "@/types";
 import { hexToRgb, rgbDataURL } from "@/utils/colors";
 import { AnimPhoto, LazyPhoto } from "../atoms";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { Power3 } from "gsap";
 
 type Props = {
   idx: number;
@@ -17,15 +20,8 @@ type Props = {
 export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [dominantColorPlaceholder, setDominantColorPlaceholder] = useState("");
-
   const { setCursorType } = useCursorContext();
   const { isOverview, handleOverviewSwitch } = useOverviewContext();
-
-  const onLoadCallback = () => {
-    setIsLoaded(true);
-  };
 
   const handleClick = async () => {
     // wait for the change of state for the overview before scrolling
@@ -34,6 +30,7 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
   };
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     if (!photo.dominantColor) {
       return;
     }

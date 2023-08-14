@@ -13,6 +13,14 @@ import { photos } from "@/data/photos";
 import { gsap, Power4 } from "gsap";
 import { Flip } from "gsap/dist/Flip";
 import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
+import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollContainer";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
+
+const Gallery = () => {
+  const { scroll } = useLocomotiveScroll();
+  scroll.update;
+  return <div>FUCK</div>;
+};
 
 const HTMLPart = () => {
   const { scrollYProgress } = useScroll();
@@ -25,6 +33,7 @@ const HTMLPart = () => {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
+    //  get locomotive scroll progress
   }, []);
 
   useEffect(() => {
@@ -34,7 +43,7 @@ const HTMLPart = () => {
     if (!flipState) return;
 
     Flip.from(flipState, {
-      duration: 1,
+      duration: 1.5,
       ease: Power4.easeInOut,
       absolute: true,
       stagger: {
@@ -79,6 +88,7 @@ const HTMLPart = () => {
           />
         ))}
       </div>
+
       <WorkFooter photos={photos} title={title} idx={idx} />
     </>
   );

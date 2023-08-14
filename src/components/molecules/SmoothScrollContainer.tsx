@@ -39,7 +39,7 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
         id="scroll-container"
         data-scroll-container
         ref={containerRef}
-        className="fixed bg-light"
+        className="fixed top-0 left-0 bg-light w-full"
       >
         {children}
       </div>
