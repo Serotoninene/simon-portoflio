@@ -78,7 +78,7 @@ export default function Work() {
 
   return (
     <>
-      <Container className="pt-0 bg-light">
+      <Container className="pt-0 bg-light relative">
         <OverviewProvider>
           <LocomotiveScrollContainer>
             <Container>

@@ -117,7 +117,7 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
     <mesh ref={meshRef} position={[photoData.x, photoData.y, 0]}>
       <planeGeometry
         ref={geometryRef}
-        args={[photoData.width, photoData.height, 32, 32]}
+        args={[photoData.width, photoData.height, 2, 2]}
       />
       <shaderMaterial
         ref={shaderRef}

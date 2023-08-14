@@ -5,3 +5,4 @@ export * from "./OneWCaption";
 export * from "./OneCentered";
 export * from "./TwoShifted";
 export * from "./ThreeAlined";
+export * from "./Outro";
