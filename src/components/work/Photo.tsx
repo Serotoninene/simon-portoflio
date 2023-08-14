@@ -1,15 +1,12 @@
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
 
 import { ExtendedPhoto } from "@/types";
-import { hexToRgb, rgbDataURL } from "@/utils/colors";
-import { AnimPhoto, LazyPhoto } from "../atoms";
+import { LazyPhoto } from "../atoms";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { Power3 } from "gsap";
 
 type Props = {
   idx: number;
@@ -62,10 +59,9 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
 
   return (
     <div
-      id={photo.alt}
       ref={ref}
       data-flip-id={photo.alt}
-      className="gallery-photo h-[calc(100vh-32px)] my-4 relative"
+      className="gallery-photo h-[calc(100vh-32px)] my-4 relative "
     >
       <LazyPhoto
         priority={idx < 9}
