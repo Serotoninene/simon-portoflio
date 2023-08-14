@@ -22,7 +22,7 @@ export const OverviewProvider = ({ children }: OverviewProviderProps) => {
   const [isOverview, setIsOverview] = useState(false);
 
   const handleOverviewSwitch = (overviewState: boolean) => {
-    setFlipState(Flip.getState(".gallery-photo, .lazy-container"));
+    setFlipState(Flip.getState(".gallery-photo, .lazy-container, .lazy-photo"));
     setIsOverview(overviewState);
   };
 

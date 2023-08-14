@@ -33,7 +33,9 @@ export const LazyPhoto = ({
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.style.backgroundColor = dominantColor ?? "#000000";
+      isLoaded
+        ? (ref.current.style.backgroundColor = "transparent")
+        : (ref.current.style.backgroundColor = dominantColor ?? "#000000");
       if (!aspectRatio) return;
       const bounds = containerRef.current?.getBoundingClientRect();
       if (!bounds) return;
@@ -47,7 +49,7 @@ export const LazyPhoto = ({
         ref.current.style.margin = "0 auto";
       }
     }
-  }, [isOverview]);
+  }, [isOverview, isLoaded]);
 
   return (
     <div
