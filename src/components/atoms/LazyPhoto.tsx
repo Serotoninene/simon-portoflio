@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useOverviewContext } from "../context/OverviewContext";
+import { useWindowSize } from "@/utils/hooks";
 
 type Props = {
   priority?: boolean;
   alt?: string;
   src: string;
-  aspectRatio?: string;
+  aspectRatio?: number;
   dominantColor?: string;
   fit?: "cover" | "contain";
 };
@@ -18,8 +20,11 @@ export const LazyPhoto = ({
   aspectRatio,
   dominantColor,
 }: Props) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const { width, height } = useWindowSize();
   const [isLoaded, setIsLoaded] = useState(false);
+  const { isOverview } = useOverviewContext();
 
   const imageProps = {
     alt: alt || "photo",
@@ -31,26 +36,41 @@ export const LazyPhoto = ({
   useEffect(() => {
     if (ref.current) {
       ref.current.style.backgroundColor = dominantColor ?? "#000000";
-
+      if (!aspectRatio) return;
+      const bounds = containerRef.current?.getBoundingClientRect();
+      if (!bounds) return;
       if (aspectRatio > 1) {
-        ref.current.style.paddingBottom = `${aspectRatio * 100}%`;
+        ref.current.style.height =
+          Math.min(bounds.width / aspectRatio, bounds.height) + "px";
+        ref.current.style.width =
+          Math.min(bounds.width, bounds.height * aspectRatio) + "px";
       } else {
-        ref.current.style.paddingBottom = `${100 / aspectRatio}%`;
+        ref.current.style.width = bounds.height * aspectRatio + 5 + "px";
+        ref.current.style.margin = "0 auto";
       }
     }
-  }, [ref.current, isLoaded]);
+  }, [isOverview]);
 
   return (
-    <div ref={ref} className="h-full">
-      {/* eslint-disable-next-line */}
-      <Image
-        fill
-        {...imageProps}
-        onLoad={() => setIsLoaded(true)}
-        className={`transition-opacity duration-1000 object-contain ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
-      />
+    <div
+      ref={containerRef}
+      className="h-full w-full  flex justify-center items-center"
+    >
+      <div
+        ref={ref}
+        style={{ position: "relative" }}
+        className={`h-full relative`}
+      >
+        {/* eslint-disable-next-line */}
+        <Image
+          fill
+          {...imageProps}
+          onLoad={() => setIsLoaded(true)}
+          className={`transition-opacity duration-1000 object-contain  ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      </div>
     </div>
   );
 };

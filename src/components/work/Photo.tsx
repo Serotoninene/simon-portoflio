@@ -6,7 +6,7 @@ import { useCursorContext } from "../context/CursorContext";
 
 import { ExtendedPhoto } from "@/types";
 import { hexToRgb, rgbDataURL } from "@/utils/colors";
-import { LazyPhoto } from "../atoms";
+import { AnimPhoto, LazyPhoto } from "../atoms";
 
 type Props = {
   idx: number;
@@ -37,8 +37,6 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
     if (!photo.dominantColor) {
       return;
     }
-
-    const rgb = hexToRgb(photo?.dominantColor) || { r: 0, g: 0, b: 0 };
   }, []);
 
   if (isOverview)
@@ -89,17 +87,6 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
         aspectRatio={photo.aspectRatio}
         dominantColor={photo.dominantColor}
       />
-      {/* <Image
-        priority={idx < 9}
-        id={photo.alt}
-        src={photo.src}
-        alt={photo.alt}
-        placeholder="blur"
-        blurDataURL={rgbDataURL(100, 100, 100)}
-        // blurDataURL={dominantColorPlaceholder}
-        className="object-center object-contain"
-        fill
-      /> */}
     </div>
   );
 };
