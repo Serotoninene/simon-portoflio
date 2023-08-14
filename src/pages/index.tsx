@@ -130,7 +130,7 @@ export const photos = [
     alt: "11_APERITIF",
     dominantColor: "#bcb7af",
     caption: {
-      idx: "10",
+      idx: "11",
       title: "APERITIF",
       place: "Honolulu (US)",
       date: "2020",
@@ -141,7 +141,7 @@ export const photos = [
     alt: "10_TIME_FOR_LAUNDRY",
     dominantColor: "#a8a4aa",
     caption: {
-      idx: "11",
+      idx: "10",
       title: "TIME FOR LAUNDRY",
       place: "Vancouver (CA)",
       date: "2020",
@@ -273,7 +273,7 @@ export const photos = [
     alt: "72_LA_VIE_ET_SES_PLAISIRS",
     dominantColor: "#789aa8",
     caption: {
-      idx: "23",
+      idx: "24",
       title: "LA VIE ET SES PLAISIRS",
       place: "Saint-Tropez (FR)",
       date: "2022",
@@ -284,7 +284,7 @@ export const photos = [
     alt: "71_THERE_IS_NOTHING_ON_THE_ROOF",
     dominantColor: "#817250",
     caption: {
-      idx: "24",
+      idx: "23",
       title: "THERE IS NOTHING ON THE ROOF",
       place: "Bergen (NO)",
       date: "2022",
@@ -317,7 +317,7 @@ export const photos = [
     alt: "48_LA_FILLE_ET_LE_PARAPLUIE",
     dominantColor: "#19261d",
     caption: {
-      idx: "27",
+      idx: "28",
       title: "LA FILLE ET LE PARAPLUIE",
       place: "Paris (FR)",
       date: "2022",
@@ -328,7 +328,7 @@ export const photos = [
     alt: "47_LE_PIED_ET_LE_PARASOL",
     dominantColor: "#decfc0",
     caption: {
-      idx: "28",
+      idx: "27",
       title: "LE PIED ET LE PARASOL",
       place: "Victoria (CA)",
       date: "2020",

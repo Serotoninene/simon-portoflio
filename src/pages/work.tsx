@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useScroll } from "framer-motion";
 
 import { Container } from "@/components/molecules";
 import { Photo, WorkFooter } from "@/components/work";

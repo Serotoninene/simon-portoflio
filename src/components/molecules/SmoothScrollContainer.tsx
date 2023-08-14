@@ -22,7 +22,7 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
         mobile: {
           breakpoint: 0,
           smooth: true,
-          multiplier: 15,
+          multiplier: 5,
           class: "is-reveal",
         },
         tablet: {
@@ -31,6 +31,7 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
           multiplier: 1,
           class: "is-reveal",
         },
+        multiplier: 0.75,
       }}
       watch={[path]}
       location={path}
