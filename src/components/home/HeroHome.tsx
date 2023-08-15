@@ -85,6 +85,7 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
       });
     }
 
+    if (!shaderRef.current) return;
     shaderRef.current.uniforms.uMappedMouse.value = mappedMouse;
     shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
       photoData.width,

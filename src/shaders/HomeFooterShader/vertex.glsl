@@ -1,4 +1,8 @@
+uniform vec2 uTextureSize;
+uniform vec2 uQuadSize;
+
 varying vec2 vUv;
+varying vec2 v_tpos;
 
 const float PI = 3.1415;
 
@@ -8,14 +12,29 @@ vec3 deformationCurve(vec3 position, vec2 uv, vec2 offset){
   return position;
 }
 
+vec2 getUV(vec2 uv, vec2 textureSize, vec2 quadSize){
+  vec2 tempUV = uv - vec2(0.5);
+
+  float quadAspect = quadSize.x / quadSize.y;
+  float textureAspect = textureSize.x / textureSize.y;
+
+  if(quadAspect < textureAspect){
+    tempUV *= vec2(quadAspect / textureAspect, 1.);
+  }else{
+    tempUV*= vec2(1., textureAspect / quadAspect);
+  }
+
+  tempUV += vec2(0.5);
+  return tempUV;
+}
+
 void main()
 {
-  vUv = uv;
+  vUv = getUV(uv, uTextureSize, uQuadSize);
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);  
-  modelPosition.y -= 50. * (1. - uIntro) ;
 
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
 
-  gl_Position = projectedPosition;  
+  gl_Position = vec4(position, 1.);  
 }
