@@ -17,8 +17,6 @@ mat2 rotate(float a) {
   return mat2(c, -s, s, c);
 }
 
-
-
 float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
   float dist = distance(uv, disc_center);
   return smoothstep(disc_radius+border_size, disc_radius-border_size, dist);

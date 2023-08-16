@@ -56,7 +56,7 @@ export default function Layout({ children }: Props) {
       <header>
         <Navbar />
       </header>
-      <CustomCursor />
+      {/* <CustomCursor /> */}
 
       <AnimatePresence mode="wait">
         <motion.main

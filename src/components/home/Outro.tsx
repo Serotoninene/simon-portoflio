@@ -2,7 +2,7 @@ import React, { use, useEffect, useMemo, useRef, useState } from "react";
 import { CustomCanvas } from "../three";
 
 import * as THREE from "three";
-import { useTexture } from "@react-three/drei";
+import { OrbitControls, useTexture } from "@react-three/drei";
 
 import vertexShader from "@shaders/HomeFooterShader/vertex.glsl";
 import fragmentShader from "@shaders/HomeFooterShader/fragment.glsl";
@@ -27,7 +27,7 @@ const OutroScene = ({ footerSize }: Props) => {
     uIntensity: {
       value: 0.5,
       min: 0,
-      max: 10,
+      max: 100,
     },
     uRadius: {
       value: 0.1,
@@ -87,7 +87,7 @@ const OutroScene = ({ footerSize }: Props) => {
 
   return (
     <mesh scale={[1, 1, 1]}>
-      <planeGeometry args={[2, 2, 4, 4]} />
+      <planeGeometry args={[2, 2, 64, 64]} />
       <shaderMaterial
         ref={shaderRef}
         vertexShader={vertexShader}
@@ -115,6 +115,7 @@ export const Outro = () => {
   return (
     <div ref={ref} className="h-[50vh]">
       <CustomCanvas>
+        {/* <OrbitControls /> */}
         <OutroScene footerSize={footerSize} />
       </CustomCanvas>
     </div>
