@@ -8,6 +8,7 @@ import vertexShader from "@shaders/HomeFooterShader/vertex.glsl";
 import fragmentShader from "@shaders/HomeFooterShader/fragment.glsl";
 import { useFrame } from "@react-three/fiber";
 import { useWindowSize } from "@/utils/hooks";
+import { useControls } from "leva";
 
 type Props = {
   footerSize: {
@@ -22,6 +23,34 @@ const OutroScene = ({ footerSize }: Props) => {
     "/assets/photos/14_ROOMS_FOR_ME_&_FOR_MY_CAR.jpeg"
   );
 
+  const { uIntensity, uRadius, uBlurAmount } = useControls({
+    uIntensity: {
+      value: 0.5,
+      min: 0,
+      max: 10,
+    },
+    uRadius: {
+      value: 0.1,
+      min: 0,
+      max: 1,
+    },
+    uBlurAmount: {
+      value: 0.02,
+      min: 0,
+      max: 1,
+    },
+  });
+
+  const particleCount = 1000;
+
+  const particles = useMemo(() => {
+    const particles = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount * 3; i++) {
+      particles[i] = THREE.MathUtils.randFloatSpread(2);
+    }
+    return particles;
+  }, [particleCount]);
+
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
@@ -33,6 +62,9 @@ const OutroScene = ({ footerSize }: Props) => {
         value: new THREE.Vector2(footerSize.width, footerSize.height),
       },
       uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+      uIntensity: { value: uIntensity },
+      uRadius: { value: uRadius },
+      uBlurAmount: { value: uBlurAmount },
     }),
     []
   );
@@ -47,6 +79,10 @@ const OutroScene = ({ footerSize }: Props) => {
       THREE.MathUtils.mapLinear(mouse.x, -1, 1, 0, 1),
       THREE.MathUtils.mapLinear(mouse.y, -1, 1, 0, 1)
     );
+
+    shaderRef.current.uniforms.uIntensity.value = uIntensity;
+    shaderRef.current.uniforms.uRadius.value = uRadius;
+    shaderRef.current.uniforms.uBlurAmount.value = uBlurAmount;
   });
 
   return (
@@ -62,7 +98,7 @@ const OutroScene = ({ footerSize }: Props) => {
   );
 };
 
-export const Outro = (props: Props) => {
+export const Outro = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { width, height } = useWindowSize();
   const [footerSize, setFooterSize] = useState({

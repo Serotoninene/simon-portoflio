@@ -3,6 +3,10 @@ precision highp float;
 uniform sampler2D uTexture;
 uniform vec2 uMouse;
 
+uniform float uIntensity;
+uniform float uRadius;
+uniform float uBlurAmount;
+
 varying vec2 vUv; 
 
 const float PI = 3.1415;
@@ -23,24 +27,10 @@ float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
 void main() {   
   vec4 color = texture2D(uTexture, vUv);
 
-  float blurAmount = 0.005; // Adjust this value for stronger or weaker blur
   float maxBlurDistance = 0.5; // Maximum distance for blur effect
 
+  float c = 0.5 * circle(vUv, uMouse, uRadius , 0.5);
 
-  for (float i = -10.0; i <= 10.0; i += 1.0) {
-    vec2 offset = vec2(i * blurAmount, 0.0);
-    vec2 sampledPos = vUv + offset;
-
-    // Calculate the distance between the current pixel and the mouse position
-    float distanceToMouse = distance(sampledPos, uMouse);
-
-    // Adjust the blur amount based on the distance to create the localized effect
-    float adjustedBlurAmount = mix(0.0 ,blurAmount , smoothstep(0.0, maxBlurDistance, distanceToMouse));
-
-    color += texture2D(uTexture, sampledPos + vec2(adjustedBlurAmount * i, 0.0));
-  }
-
-  color /= 20.0; // Average the colors
-
-  gl_FragColor = color;
+  gl_FragColor = vec4(2. * color.rgb * c , color.a);
+  // gl_FragColor = color;
 }

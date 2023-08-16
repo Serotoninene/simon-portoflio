@@ -398,7 +398,7 @@ export default function Home() {
     <LocomotiveScrollContainer>
       <Container className="pt-6">
         <div className="relative flex flex-col items gap-56 pb-6 bg-light">
-          <HeroHome />
+          {/* <HeroHome /> */}
           {/*  <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
           <OneWCaption photo={photos[2]}>
             <>
