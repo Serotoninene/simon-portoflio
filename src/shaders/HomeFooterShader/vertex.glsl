@@ -18,7 +18,7 @@ vec3 deformationCurve(vec3 position, vec2 uv, vec2 offset){
 
 float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
   float dist = distance(uv, disc_center);
-  return smoothstep(disc_radius+border_size, disc_radius-border_size, dist);
+  return step(disc_radius, dist);
 }
 
 vec2 getUV(vec2 uv, vec2 textureSize, vec2 quadSize){
@@ -48,15 +48,15 @@ void main()
 
   float c = 0.5 * circle(vUv, uMouse, uRadius , 0.5);
 
-  customPosition.z += c * 1.5;
+  customPosition.z += c * uIntensity ;
 
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);  
   // modelPosition. -= 50. * (1. - uIntro) ;
-  modelPosition.z += c * 50.;
+  // modelPosition.z += c * 500.;
 
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;
   
 
-  gl_Position = customPosition;  
+  gl_Position = projectedPosition;  
 }

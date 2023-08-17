@@ -6,9 +6,10 @@ import { OrbitControls, useTexture } from "@react-three/drei";
 
 import vertexShader from "@shaders/HomeFooterShader/vertex.glsl";
 import fragmentShader from "@shaders/HomeFooterShader/fragment.glsl";
-import { useFrame } from "@react-three/fiber";
+import { ThreeElements, useFrame, useThree } from "@react-three/fiber";
 import { useWindowSize } from "@/utils/hooks";
 import { useControls } from "leva";
+import TouchTexture from "../three/TouchTexture";
 
 type Props = {
   footerSize: {
@@ -18,7 +19,17 @@ type Props = {
 };
 
 const OutroScene = ({ footerSize }: Props) => {
+  const meshRef = useRef<any>();
   const shaderRef = useRef<any>(null);
+  const touchTexture = useMemo<any>(() => new TouchTexture(), []);
+  const [touchTextureInit, setTouchTextureInit] = useState(false);
+
+  const [hover, setHover] = useState(false);
+
+  const handleMouseMove = (e: THREE.Vector2) => {
+    touchTexture.addTouch(e);
+  };
+
   const texture = useTexture(
     "/assets/photos/14_ROOMS_FOR_ME_&_FOR_MY_CAR.jpeg"
   );
@@ -41,16 +52,6 @@ const OutroScene = ({ footerSize }: Props) => {
     },
   });
 
-  const particleCount = 1000;
-
-  const particles = useMemo(() => {
-    const particles = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount * 3; i++) {
-      particles[i] = THREE.MathUtils.randFloatSpread(2);
-    }
-    return particles;
-  }, [particleCount]);
-
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
@@ -70,6 +71,7 @@ const OutroScene = ({ footerSize }: Props) => {
   );
 
   useFrame(({ clock, mouse }) => {
+    console.log(mouse);
     shaderRef.current.uniforms.uTime.value = clock.getElapsedTime();
     shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
       footerSize.width,
@@ -83,10 +85,27 @@ const OutroScene = ({ footerSize }: Props) => {
     shaderRef.current.uniforms.uIntensity.value = uIntensity;
     shaderRef.current.uniforms.uRadius.value = uRadius;
     shaderRef.current.uniforms.uBlurAmount.value = uBlurAmount;
+
+    if (!touchTexture) return;
+    touchTexture.update();
+    if (hover) {
+      const mappedMouse = new THREE.Vector2(
+        THREE.MathUtils.mapLinear(mouse.x, -1, 1, 0, 1),
+        THREE.MathUtils.mapLinear(mouse.y, -1, 1, 0, 1)
+      );
+      handleMouseMove(mappedMouse);
+    }
   });
 
   return (
-    <mesh scale={[1, 1, 1]}>
+    <mesh
+      ref={meshRef}
+      scale={[1000, 1000, 1]}
+      onPointerOver={(e) => {
+        setHover(true);
+      }}
+      onPointerLeave={() => setHover(false)}
+    >
       <planeGeometry args={[2, 2, 64, 64]} />
       <shaderMaterial
         ref={shaderRef}
@@ -115,7 +134,8 @@ export const Outro = () => {
   return (
     <div ref={ref} className="h-[50vh]">
       <CustomCanvas>
-        {/* <OrbitControls /> */}
+        <OrbitControls />
+
         <OutroScene footerSize={footerSize} />
       </CustomCanvas>
     </div>

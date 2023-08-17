@@ -3,7 +3,6 @@ precision highp float;
 uniform sampler2D uTexture;
 uniform vec2 uMouse;
 
-uniform float uIntensity;
 uniform float uRadius;
 uniform float uBlurAmount;
 
@@ -29,6 +28,6 @@ void main() {
 
   float c = 0.5 * circle(vUv, uMouse, uRadius , 0.5);
 
-  gl_FragColor = vec4(2. * color.rgb * c , color.a);
-  // gl_FragColor = color;
+  // gl_FragColor = vec4(2. * color.rgb * c , color.a);
+  gl_FragColor = color;
 }
