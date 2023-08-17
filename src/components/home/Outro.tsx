@@ -13,6 +13,7 @@ import fragmentShader from "@shaders/HomeFooterShader/fragment.glsl";
 import { useWindowSize } from "@/utils/hooks";
 
 import { useCursorContext } from "../context/CursorContext";
+import { useRouter } from "next/router";
 
 type Props = {
   footerSize: {
@@ -24,6 +25,7 @@ type Props = {
 const OutroScene = ({ footerSize }: Props) => {
   const meshRef = useRef<any>();
   const shaderRef = useRef<any>(null);
+  const router = useRouter();
   const touchTexture = useMemo<any>(() => new TouchTexture(), []);
 
   const { cursorType, setCursorType } = useCursorContext();
@@ -59,17 +61,23 @@ const OutroScene = ({ footerSize }: Props) => {
   );
 
   useEffect(() => {
-    hovered
-      ? gsap.to(shaderRef.current.uniforms.uHoverValue, {
-          value: 1,
-          ease: Power0.easeNone,
-          duration: 1,
-        })
-      : gsap.to(shaderRef.current.uniforms.uHoverValue, {
-          value: 0,
-          ease: Linear.easeIn,
-          duration: 1,
-        });
+    const body = document.querySelector("body");
+    if (!body) return;
+    if (hovered) {
+      gsap.to(shaderRef.current.uniforms.uHoverValue, {
+        value: 1,
+        ease: Power0.easeNone,
+        duration: 1,
+      });
+      body.style.cursor = "none";
+    } else {
+      gsap.to(shaderRef.current.uniforms.uHoverValue, {
+        value: 0,
+        ease: Linear.easeIn,
+        duration: 1,
+      });
+      body.style.cursor = "auto";
+    }
   }, [hovered]);
 
   useFrame(({ clock, mouse }) => {
@@ -103,6 +111,10 @@ const OutroScene = ({ footerSize }: Props) => {
       }}
       onPointerLeave={() => {
         setHovered(false);
+        setCursorType("pointer");
+      }}
+      onClick={() => {
+        router.push("/work");
         setCursorType("pointer");
       }}
     >

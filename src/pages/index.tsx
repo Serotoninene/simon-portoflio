@@ -396,7 +396,7 @@ export default function Home() {
   if (!photos) return <div></div>;
   return (
     <LocomotiveScrollContainer>
-      {/* <Container className="pt-6">
+      <Container className="pt-6">
         <div className="relative flex flex-col items gap-56 pb-6 bg-light">
           <HeroHome />
           <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
@@ -457,7 +457,7 @@ export default function Home() {
             thirdPhoto={photos[32]}
           />
         </div>
-      </Container> */}
+      </Container>
       <Outro />
     </LocomotiveScrollContainer>
   );
