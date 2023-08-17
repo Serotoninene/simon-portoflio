@@ -1,15 +1,18 @@
-import React, { use, useEffect, useMemo, useRef, useState } from "react";
-import { CustomCanvas } from "../three";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+
+import { Linear, Power0, gsap } from "gsap";
 
 import * as THREE from "three";
-import { OrbitControls, useTexture } from "@react-three/drei";
-
+import { CustomCanvas } from "../three";
+import { useFrame } from "@react-three/fiber";
+import { useTexture } from "@react-three/drei";
+import TouchTexture from "../three/TouchTexture";
 import vertexShader from "@shaders/HomeFooterShader/vertex.glsl";
 import fragmentShader from "@shaders/HomeFooterShader/fragment.glsl";
-import { ThreeElements, useFrame, useThree } from "@react-three/fiber";
+
 import { useWindowSize } from "@/utils/hooks";
-import { useControls } from "leva";
-import TouchTexture from "../three/TouchTexture";
+
+import { useCursorContext } from "../context/CursorContext";
 
 type Props = {
   footerSize: {
@@ -22,9 +25,10 @@ const OutroScene = ({ footerSize }: Props) => {
   const meshRef = useRef<any>();
   const shaderRef = useRef<any>(null);
   const touchTexture = useMemo<any>(() => new TouchTexture(), []);
-  const [touchTextureInit, setTouchTextureInit] = useState(false);
 
-  const [hover, setHover] = useState(false);
+  const { cursorType, setCursorType } = useCursorContext();
+
+  const [hovered, setHovered] = useState(false);
 
   const handleMouseMove = (e: THREE.Vector2) => {
     touchTexture.addTouch(e);
@@ -33,24 +37,6 @@ const OutroScene = ({ footerSize }: Props) => {
   const texture = useTexture(
     "/assets/photos/14_ROOMS_FOR_ME_&_FOR_MY_CAR.jpeg"
   );
-
-  const { uIntensity, uRadius, uBlurAmount } = useControls({
-    uIntensity: {
-      value: 0.5,
-      min: 0,
-      max: 100,
-    },
-    uRadius: {
-      value: 0.1,
-      min: 0,
-      max: 1,
-    },
-    uBlurAmount: {
-      value: 0.02,
-      min: 0,
-      max: 1,
-    },
-  });
 
   const uniforms = useMemo(
     () => ({
@@ -64,12 +50,27 @@ const OutroScene = ({ footerSize }: Props) => {
       },
       uTouchTexture: { value: touchTexture.texture },
       uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-      uIntensity: { value: uIntensity },
-      uRadius: { value: uRadius },
-      uBlurAmount: { value: uBlurAmount },
+      uIntensity: { value: 0.5 },
+      uRadius: { value: 0.1 },
+      uBlurAmount: { value: 0.02 },
+      uHoverValue: { value: 0 },
     }),
     []
   );
+
+  useEffect(() => {
+    hovered
+      ? gsap.to(shaderRef.current.uniforms.uHoverValue, {
+          value: 1,
+          ease: Power0.easeNone,
+          duration: 1,
+        })
+      : gsap.to(shaderRef.current.uniforms.uHoverValue, {
+          value: 0,
+          ease: Linear.easeIn,
+          duration: 1,
+        });
+  }, [hovered]);
 
   useFrame(({ clock, mouse }) => {
     shaderRef.current.uniforms.uTime.value = clock.getElapsedTime();
@@ -82,13 +83,9 @@ const OutroScene = ({ footerSize }: Props) => {
       THREE.MathUtils.mapLinear(mouse.y, -1, 1, 0, 1)
     );
 
-    shaderRef.current.uniforms.uIntensity.value = uIntensity;
-    shaderRef.current.uniforms.uRadius.value = uRadius;
-    shaderRef.current.uniforms.uBlurAmount.value = uBlurAmount;
-
     if (!touchTexture) return;
     touchTexture.update();
-    if (hover) {
+    if (hovered) {
       const mappedMouse = new THREE.Vector2(
         THREE.MathUtils.mapLinear(mouse.x, -1, 1, 0, 1),
         THREE.MathUtils.mapLinear(mouse.y, -1, 1, 0, 1)
@@ -100,13 +97,19 @@ const OutroScene = ({ footerSize }: Props) => {
   return (
     <mesh
       ref={meshRef}
-      scale={[1000, 1000, 1]}
       onPointerOver={(e) => {
-        setHover(true);
+        setHovered(true);
+        setCursorType("cta");
       }}
-      onPointerLeave={() => setHover(false)}
+      onPointerLeave={() => {
+        setHovered(false);
+        setCursorType("pointer");
+      }}
     >
-      <planeGeometry args={[2, 2, 128, 128]} />
+      <planeGeometry
+        args={[footerSize.width * 2, footerSize.height * 2, 128, 128]}
+        // i must multiply the width and height by 2 as the canvas is only 50vh and the all fov calculus to base px on ndc is based on 100vh
+      />
       <shaderMaterial
         ref={shaderRef}
         vertexShader={vertexShader}
@@ -132,10 +135,8 @@ export const Outro = () => {
   }, [width, height]);
 
   return (
-    <div ref={ref} className="h-[50vh]">
+    <div ref={ref} className="h-[50vh] mt-10 sm:mt-40">
       <CustomCanvas>
-        <OrbitControls />
-
         <OutroScene footerSize={footerSize} />
       </CustomCanvas>
     </div>

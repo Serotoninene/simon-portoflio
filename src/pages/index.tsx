@@ -396,10 +396,10 @@ export default function Home() {
   if (!photos) return <div></div>;
   return (
     <LocomotiveScrollContainer>
-      <Container className="pt-6">
+      {/* <Container className="pt-6">
         <div className="relative flex flex-col items gap-56 pb-6 bg-light">
-          {/* <HeroHome /> */}
-          {/*  <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
+          <HeroHome />
+          <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
           <OneWCaption photo={photos[2]}>
             <>
               <span className="font-bold">Tourists taking a break from</span>{" "}
@@ -412,7 +412,7 @@ export default function Home() {
             secondPhoto={photos[4]}
             thirdPhoto={photos[5]}
           />
-           <OneCentered photo={photos[6]} />
+          <OneCentered photo={photos[6]} />
           <TwoShifted firstPhoto={photos[7]} secondPhoto={photos[8]} />
           <TwoShifted
             firstPhoto={photos[9]}
@@ -455,9 +455,9 @@ export default function Home() {
             firstPhoto={photos[30]}
             secondPhoto={photos[31]}
             thirdPhoto={photos[32]}
-          /> */}
+          />
         </div>
-      </Container>
+      </Container> */}
       <Outro />
     </LocomotiveScrollContainer>
   );

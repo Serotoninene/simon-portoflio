@@ -7,8 +7,8 @@ function outSine(n) {
 export default class TouchTexture {
   constructor() {
     this.size = 128;
-    this.maxAge = 60;
-    this.radius = 0.05;
+    this.maxAge = 120;
+    this.radius = 0.2;
     this.trail = [];
     this.canDraw = true;
 
@@ -20,10 +20,9 @@ export default class TouchTexture {
     this.canvas = document.createElement("canvas");
     this.canvas.width = this.canvas.height = this.size;
     this.ctx = this.canvas.getContext("2d");
+    // draw black background
     this.ctx.fillStyle = "black";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    // draw black background
-
     // use the canvas as a texture
     this.texture = new Texture(this.canvas);
 
@@ -34,7 +33,7 @@ export default class TouchTexture {
     this.canvas.style.zIndex = "10000";
 
     // No need to add it to the body,
-    document.body.appendChild(this.canvas);
+    // document.body.appendChild(this.canvas);
   }
 
   update() {

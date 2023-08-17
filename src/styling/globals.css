@@ -2,72 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  overscroll-behavior: none;
-  /* hide the cursor */
-  /* cursor: none; */
-  /* overflow: hidden; */
-}
-
-#CustomCursor,
-#InnerCustomCursor {
-  display: none;
-  position: fixed;
-  background-color: #fffef8;
-  mix-blend-mode: difference;
-  pointer-events: none;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  z-index: 99;
-  transition: all ease-out 0.25s;
-  transition-property: width, transform, background-color, backdrop-filter;
-}
-
-.grid-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 24px;
-}
-
-.flex-gallery {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  scroll-snap-type: y mandatory;
-}
-
-.gallery-photo {
-  scroll-snap-align: start;
-}
-
-/* tailwind sm */
-@media screen and (min-width: 640px) {
-  #CustomCursor {
-    display: block;
-  }
-
-  .grid-gallery {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .flex-gallery {
-    gap: 32px;
-  }
-}
-
-/* tailwind md */
-@media screen and (min-width: 768px) {
-  .grid-gallery {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
-  .flex-gallery {
-    gap: 50vh;
-  }
-}
-
 /* LOCOMOTIVE PART  */
 /*! locomotive-scroll v4.1.3 | MIT License | https://github.com/locomotivemtl/locomotive-scroll */
 html.has-scroll-smooth {
@@ -150,4 +84,87 @@ html.has-scroll-dragging {
 [data-scroll-direction="horizontal"] .c-scrollbar_thumb {
   right: auto;
   bottom: 0;
+}
+
+body {
+  overscroll-behavior: none;
+  /* hide the cursor */
+  /* cursor: none; */
+  /* overflow: hidden; */
+}
+
+#CustomCursor {
+  display: none;
+  position: fixed;
+  background-color: #fffef8;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  z-index: 99;
+  transition: all ease-out 0.25s;
+  transition-property: width, height, transform, background-color,
+    backdrop-filter;
+}
+
+#CustomCursor.hover {
+  transform: scale(0.5);
+}
+
+#CustomCursor.cta {
+  width: 120px;
+  height: 120px;
+  background-color: rgba(7, 23, 50, 0.2);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+  display: flex;
+  color: #fffef8;
+  justify-content: center;
+  align-items: center;
+  mix-blend-mode: normal;
+}
+
+.grid-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.flex-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  scroll-snap-type: y mandatory;
+}
+
+.gallery-photo {
+  scroll-snap-align: start;
+}
+
+/* tailwind sm */
+@media screen and (min-width: 640px) {
+  #CustomCursor {
+    display: block;
+  }
+
+  .grid-gallery {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .flex-gallery {
+    gap: 32px;
+  }
+}
+
+/* tailwind md */
+@media screen and (min-width: 768px) {
+  .grid-gallery {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .flex-gallery {
+    gap: 50vh;
+  }
 }

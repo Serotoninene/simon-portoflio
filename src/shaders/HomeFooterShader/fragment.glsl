@@ -5,6 +5,7 @@ uniform vec2 uMouse;
 
 uniform float uRadius;
 uniform float uBlurAmount;
+uniform float uHoverValue;
 
 varying vec2 vUv; 
 
@@ -21,13 +22,33 @@ float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
   return smoothstep(disc_radius+border_size, disc_radius-border_size, dist);
 }
 
+float exponentialInOut(float t) {
+  return t == 0.0 || t == 1.0 
+    ? t 
+    : t < 0.5
+      ? +0.5 * pow(2.0, (20.0 * t) - 10.0)
+      : -0.5 * pow(2.0, 10.0 - (t * 20.0)) + 1.0;
+} 
+
 void main() {   
-  vec4 color = texture2D(uTexture, vUv);
+  // vec4 color = texture2D(uTexture, vUv);
+  vec2 zoomedUv = vUv - 0.5;
+  zoomedUv *= .8;
+  zoomedUv += 0.5;
 
-  float maxBlurDistance = 0.5; // Maximum distance for blur effect
+  // hover effect
+  float zoomLevel = -0.2;
+  float hoverLevel = exponentialInOut(min(1., (distance(vec2(.5), zoomedUv) * uHoverValue) + uHoverValue));
+  zoomedUv *= 1. - zoomLevel * hoverLevel;
+  zoomedUv += zoomLevel / 2. * hoverLevel;
+  zoomedUv = clamp(zoomedUv, 0., 1.);
 
-  float c = 0.5 * circle(vUv, uMouse, uRadius , 0.5);
+  // zoomedUv = clamp(zoomedUv, 0., 1.);
+  vec4 color = texture2D(uTexture, zoomedUv);
 
-  // gl_FragColor = vec4(2. * color.rgb * c , color.a);
+
+
+
+  // gl_FragColor = vec4(1., 0., uHoverValue, 1.);
   gl_FragColor = color;
 }
