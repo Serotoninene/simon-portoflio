@@ -62,6 +62,7 @@ const OutroScene = ({ footerSize }: Props) => {
       uQuadSize: {
         value: new THREE.Vector2(footerSize.width, footerSize.height),
       },
+      uTouchTexture: { value: touchTexture.texture },
       uMouse: { value: new THREE.Vector2(0.5, 0.5) },
       uIntensity: { value: uIntensity },
       uRadius: { value: uRadius },
@@ -71,7 +72,6 @@ const OutroScene = ({ footerSize }: Props) => {
   );
 
   useFrame(({ clock, mouse }) => {
-    console.log(mouse);
     shaderRef.current.uniforms.uTime.value = clock.getElapsedTime();
     shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
       footerSize.width,
@@ -106,7 +106,7 @@ const OutroScene = ({ footerSize }: Props) => {
       }}
       onPointerLeave={() => setHover(false)}
     >
-      <planeGeometry args={[2, 2, 64, 64]} />
+      <planeGeometry args={[2, 2, 128, 128]} />
       <shaderMaterial
         ref={shaderRef}
         vertexShader={vertexShader}

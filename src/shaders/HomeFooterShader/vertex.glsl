@@ -2,6 +2,7 @@ uniform vec2 uTextureSize;
 uniform vec2 uQuadSize;
 uniform vec2 uMouse;
 uniform float uRadius;
+uniform sampler2D uTouchTexture;
 uniform float uIntensity;
 
 
@@ -51,6 +52,10 @@ void main()
   customPosition.z += c * uIntensity ;
 
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);  
+  float touch = texture2D(uTouchTexture, vUv).r;
+
+
+  modelPosition.z += touch * 100.;
   // modelPosition. -= 50. * (1. - uIntro) ;
   // modelPosition.z += c * 500.;
 
