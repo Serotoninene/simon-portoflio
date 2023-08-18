@@ -9,15 +9,16 @@ import {
 
 import { photos } from "@/data/photos";
 
+import { AnimatePresence, motion } from "framer-motion";
+
 import { gsap, Power4 } from "gsap";
 import { Flip } from "gsap/dist/Flip";
 import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
 import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollContainer";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { ExtendedPhoto } from "@/types";
-import { getAspectRatio } from "@/utils/helpers";
 
-const Gallery = ({ photos, setTitle }: any) => {
+const Gallery = ({ photos, photoGroup, setTitle }: any) => {
   const { isOverview, flipState } = useOverviewContext();
   const [photoTarget, setPhotoTarget] = useState("");
   const { scroll } = useLocomotiveScroll();
@@ -55,21 +56,36 @@ const Gallery = ({ photos, setTitle }: any) => {
   }, [isOverview, flipState]);
 
   return (
-    <div
-      id="gallery-container"
-      className={isOverview ? "grid-gallery" : "flex-gallery relative bg-light"}
-    >
-      {photos.map((photo: ExtendedPhoto, idx: number) => (
-        <div id={photo.alt} key={photo.alt}>
-          <Photo idx={idx} photo={photo} setPhotoTarget={setPhotoTarget} />
-        </div>
-      ))}
-    </div>
+    <AnimatePresence mode="wait">
+      <div
+        id="gallery-container"
+        className={
+          isOverview ? "grid-gallery" : "flex-gallery relative bg-light"
+        }
+      >
+        {photos.map((photo: ExtendedPhoto, idx: number) => (
+          <div id={photo.alt} key={photo.alt}>
+            <motion.div
+              key={photoGroup}
+              initial={{ opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ opacity: 0, y: "-150%" }}
+              transition={{ duration: 0.2, delay: 0.5, ease: "easeOut" }}
+            >
+              <Photo idx={idx} photo={photo} setPhotoTarget={setPhotoTarget} />
+            </motion.div>
+          </div>
+        ))}
+      </div>
+    </AnimatePresence>
   );
 };
 
 export default function Work() {
   const [title, setTitle] = useState("");
+  const [photoGroup, setPhotoGroup] = useState<
+    "summer" | "autumn" | "winter" | "spring"
+  >("summer");
 
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
@@ -83,10 +99,18 @@ export default function Work() {
         <OverviewProvider>
           <LocomotiveScrollContainer>
             <Container>
-              <Gallery photos={photos} setTitle={setTitle} />
+              <Gallery
+                photos={photos}
+                photoGroup={photoGroup}
+                setTitle={setTitle}
+              />
             </Container>
           </LocomotiveScrollContainer>
-          <WorkFooter photos={photos} title={title} />
+          <WorkFooter
+            title={title}
+            photoGroup={photoGroup}
+            setPhotogroup={setPhotoGroup}
+          />
         </OverviewProvider>
       </Container>
     </>

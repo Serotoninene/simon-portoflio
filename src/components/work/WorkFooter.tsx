@@ -18,7 +18,9 @@ const variants = {
   },
 };
 
-export const WorkFooter = ({ title }: any) => {
+const groups = ["summer", "autumn", "winter", "spring"];
+
+export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
   const { isOverview, handleOverviewSwitch } = useOverviewContext();
   const { setCursorType } = useCursorContext();
 
@@ -46,19 +48,35 @@ export const WorkFooter = ({ title }: any) => {
             <span className=" text-light">{title} </span>
           </motion.div>
           <div
-            className="cursor-pointer"
-            onMouseEnter={() => setCursorType("hover")}
-            onMouseLeave={() => setCursorType("pointer")}
+            className="cursor-pointer flex items-end gap-10"
             onClick={handleOverview}
           >
-            <AnimatedLetters
-              string="See all photos"
-              stagger={0.01}
-              rotate={15}
-              duration={0.4}
-              y={100}
-              start={!isOverview}
-            />
+            <ul>
+              {groups.map((group) => (
+                <li
+                  key={group}
+                  onMouseEnter={() => setCursorType("hover")}
+                  onMouseLeave={() => setCursorType("pointer")}
+                  onClick={() => setPhotoGroup(group)}
+                  className={`${group === title ? "text-light" : "text-dark"}`}
+                >
+                  {group}
+                </li>
+              ))}
+            </ul>
+            <div
+              onMouseEnter={() => setCursorType("hover")}
+              onMouseLeave={() => setCursorType("pointer")}
+            >
+              <AnimatedLetters
+                string="See all photos"
+                stagger={0.01}
+                rotate={15}
+                duration={0.4}
+                y={100}
+                start={!isOverview}
+              />
+            </div>
           </div>
         </div>
       </AnimatePresence>

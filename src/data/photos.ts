@@ -5,6 +5,7 @@ export const photos = [
     capitalizedTitle: "My garden is cool",
     dominantColor: "#272413",
     aspectRatio: 1.4927113702623906,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/02_MY_HOUSE_IS_A_TRIANGLE.jpeg",
@@ -12,6 +13,7 @@ export const photos = [
     capitalizedTitle: "My house is a triangle",
     dominantColor: "#a09a9d",
     aspectRatio: 1.480456026058632,
+    group: "autumn",
   },
   {
     src: "/assets/photos/autumn/03_GOOGLE_MAPS-ING.jpeg",
@@ -19,6 +21,7 @@ export const photos = [
     capitalizedTitle: "Google maps-ing",
     dominantColor: "#42361e",
     aspectRatio: 1.480456026058632,
+    group: "autumn",
   },
   {
     src: "/assets/photos/summer/04_FISHING.jpeg",
@@ -26,6 +29,7 @@ export const photos = [
     capitalizedTitle: "Fishing",
     dominantColor: "#bfbda2",
     aspectRatio: 1.5078988941548184,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/05_LIVING_ON_A_BOAT.jpeg",
@@ -33,6 +37,7 @@ export const photos = [
     capitalizedTitle: "Living on a boat",
     dominantColor: "#708d99",
     aspectRatio: 1.5,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/06_CROWDED.jpeg",
@@ -40,6 +45,7 @@ export const photos = [
     capitalizedTitle: "Crowded",
     dominantColor: "#396b76",
     aspectRatio: 1.4804979253112034,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/07_SQUARED.jpeg",
@@ -47,6 +53,7 @@ export const photos = [
     capitalizedTitle: "Squared",
     dominantColor: "#957858",
     aspectRatio: 1.4958540630182422,
+    group: "autumn",
   },
   {
     src: "/assets/photos/spring/08_ALL_ABOUT_CLEANING.jpeg",
@@ -54,6 +61,7 @@ export const photos = [
     capitalizedTitle: "All about cleaning",
     dominantColor: "#cab0a8",
     aspectRatio: 1.4808333333333332,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/09_SUPERMARKET.jpeg",
@@ -61,6 +69,7 @@ export const photos = [
     capitalizedTitle: "Supermarket",
     dominantColor: "#a82f28",
     aspectRatio: 1.5086762518591967,
+    group: "summer",
   },
   {
     src: "/assets/photos/spring/100_L'INCONNUE_VERTE.jpeg",
@@ -68,6 +77,7 @@ export const photos = [
     capitalizedTitle: "L'inconnue verte",
     dominantColor: "#789a1c",
     aspectRatio: 1.4996549344375432,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/101_UN_INCONNU_DE_DOS.jpeg",
@@ -75,6 +85,7 @@ export const photos = [
     capitalizedTitle: "Un inconnu de dos",
     dominantColor: "#b18e6b",
     aspectRatio: 1.5006666666666666,
+    group: "summer",
   },
   {
     src: "/assets/photos/winter/102_STRIPES.jpeg",
@@ -82,6 +93,7 @@ export const photos = [
     capitalizedTitle: "Stripes",
     dominantColor: "#c3b6c7",
     aspectRatio: 1.4795117698343505,
+    group: "winter",
   },
   {
     src: "/assets/photos/winter/103_AVEC_ALLURE.jpeg",
@@ -89,6 +101,7 @@ export const photos = [
     capitalizedTitle: "Avec allure",
     dominantColor: "#071516",
     aspectRatio: 1.4803817603393425,
+    group: "winter",
   },
   {
     src: "/assets/photos/summer/104_FAITH.jpeg",
@@ -96,6 +109,7 @@ export const photos = [
     capitalizedTitle: "Faith",
     dominantColor: "#2781a5",
     aspectRatio: 1.480456026058632,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/105_CHECK_YOUR_MAIL.jpeg",
@@ -103,6 +117,7 @@ export const photos = [
     capitalizedTitle: "Check your mail",
     dominantColor: "#a48358",
     aspectRatio: 1.5086705202312138,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/106_RUNNING_TRACK.jpeg",
@@ -110,6 +125,7 @@ export const photos = [
     capitalizedTitle: "Running track",
     dominantColor: "#0a0804",
     aspectRatio: 1.3941368078175895,
+    group: "summer",
   },
   {
     src: "/assets/photos/winter/107_NIGHT_SHOPS.jpeg",
@@ -117,6 +133,7 @@ export const photos = [
     capitalizedTitle: "Night shops",
     dominantColor: "#6f8e7f",
     aspectRatio: 1.4922555663117134,
+    group: "winter",
   },
   {
     src: "/assets/photos/winter/108_CLOUDS.jpeg",
@@ -124,6 +141,7 @@ export const photos = [
     capitalizedTitle: "Clouds",
     dominantColor: "#431719",
     aspectRatio: 1.481848184818482,
+    group: "winter",
   },
   {
     src: "/assets/photos/winter/109_THE SALES.jpeg",
@@ -131,6 +149,7 @@ export const photos = [
     capitalizedTitle: "The sales",
     dominantColor: "#0c080c",
     aspectRatio: 1.4944524843222382,
+    group: "winter",
   },
   {
     src: "/assets/photos/spring/10_TIME_FOR_LAUNDRY.jpeg",
@@ -138,6 +157,7 @@ export const photos = [
     capitalizedTitle: "Time for laundry",
     dominantColor: "#aba5ac",
     aspectRatio: 1.4806534823731727,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/110_LE_REPAS_DES_OMBRES.jpeg",
@@ -145,6 +165,7 @@ export const photos = [
     capitalizedTitle: "Le repas des ombres",
     dominantColor: "#2d160d",
     aspectRatio: 1.4829833454018826,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/111_UN_DIMANCHE_EN_FRANCE.jpeg",
@@ -152,6 +173,7 @@ export const photos = [
     capitalizedTitle: "Un dimanche en france",
     dominantColor: "#ac9564",
     aspectRatio: 1.4921436588103254,
+    group: "autumn",
   },
   {
     src: "/assets/photos/winter/112_A_BLURRED_BEAUTY.jpeg",
@@ -159,6 +181,7 @@ export const photos = [
     capitalizedTitle: "A blurred beauty",
     dominantColor: "#ad8276",
     aspectRatio: 1.4995640802092416,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/113_GREEN_&_GRAY.jpeg",
@@ -166,6 +189,7 @@ export const photos = [
     capitalizedTitle: "Green & gray",
     dominantColor: "#1c362f",
     aspectRatio: 1.5,
+    group: "spring",
   },
   {
     src: "/assets/photos/winter/114_FROM_THE_BUS.jpeg",
@@ -173,6 +197,7 @@ export const photos = [
     capitalizedTitle: "From the bus",
     dominantColor: "#c1b4b3",
     aspectRatio: 1.4997686256362794,
+    group: "winter",
   },
   {
     src: "/assets/photos/summer/115_PALM_TREE_ON_MY_DOOR.jpeg",
@@ -180,6 +205,7 @@ export const photos = [
     capitalizedTitle: "Palm tree on my door",
     dominantColor: "#697588",
     aspectRatio: 1.4808836023789296,
+    group: "summer",
   },
   {
     src: "/assets/photos/winter/116_A_GAS_STATION.jpeg",
@@ -187,6 +213,7 @@ export const photos = [
     capitalizedTitle: "A gas station",
     dominantColor: "#111f15",
     aspectRatio: 1.4804753820033956,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/117_A_MOTHER_HER_CHILD_AND_THE_SEE.jpeg",
@@ -194,6 +221,7 @@ export const photos = [
     capitalizedTitle: "A mother her child and the see",
     dominantColor: "#a28a3c",
     aspectRatio: 1.4917771883289124,
+    group: "autumn",
   },
   {
     src: "/assets/photos/autumn/118_FLOWERS_&_OCEAN.jpeg",
@@ -201,6 +229,7 @@ export const photos = [
     capitalizedTitle: "Flowers & ocean",
     dominantColor: "#b5a9ab",
     aspectRatio: 1.4801548886737657,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/119_MOVING_SHADOWS.jpeg",
@@ -208,6 +237,7 @@ export const photos = [
     capitalizedTitle: "Moving shadows",
     dominantColor: "#2a2218",
     aspectRatio: 1.480456026058632,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/11_APERITIF.jpeg",
@@ -215,6 +245,7 @@ export const photos = [
     capitalizedTitle: "Aperitif",
     dominantColor: "#bfb7ae",
     aspectRatio: 1.4444444444444444,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/120_FIGHTING_INFLATION.jpeg",
@@ -222,6 +253,7 @@ export const photos = [
     capitalizedTitle: "Fighting inflation",
     dominantColor: "#302011",
     aspectRatio: 1.5078125,
+    group: "autumn",
   },
   {
     src: "/assets/photos/summer/121_A_DAY_AT_THE_BEACH.jpeg",
@@ -229,6 +261,7 @@ export const photos = [
     capitalizedTitle: "A day at the beach",
     dominantColor: "#d0bdab",
     aspectRatio: 1.667584940312213,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/122_FACADE.jpeg",
@@ -236,6 +269,7 @@ export const photos = [
     capitalizedTitle: "Facade",
     dominantColor: "#c3a69b",
     aspectRatio: 1.480456026058632,
+    group: "autumn",
   },
   {
     src: "/assets/photos/spring/12_AROUND_THE_CORNER.jpeg",
@@ -243,6 +277,7 @@ export const photos = [
     capitalizedTitle: "Around the corner",
     dominantColor: "#acaba9",
     aspectRatio: 1.4927113702623906,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/13_TROPICAL_CHURCH.jpeg",
@@ -250,6 +285,7 @@ export const photos = [
     capitalizedTitle: "Tropical church",
     dominantColor: "#b0aabb",
     aspectRatio: 1.4800693240901213,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/14_ROOMS_FOR_ME_&_FOR_MY_CAR.jpeg",
@@ -257,6 +293,7 @@ export const photos = [
     capitalizedTitle: "Rooms for me & for my car",
     dominantColor: "#dbc1ad",
     aspectRatio: 1.4813805631244323,
+    group: "summer",
   },
   {
     src: "/assets/photos/winter/15_MONUMENT.jpeg",
@@ -264,6 +301,7 @@ export const photos = [
     capitalizedTitle: "Monument",
     dominantColor: "#b8adb1",
     aspectRatio: 1.4812343619683068,
+    group: "winter",
   },
   {
     src: "/assets/photos/winter/16_WHITE_IN_THE_BLUE.jpeg",
@@ -271,6 +309,7 @@ export const photos = [
     capitalizedTitle: "White in the blue",
     dominantColor: "#0b639f",
     aspectRatio: 1.4919018972697826,
+    group: "winter",
   },
   {
     src: "/assets/photos/winter/17_A_POLAR_CHURCH.jpeg",
@@ -278,6 +317,7 @@ export const photos = [
     capitalizedTitle: "A polar church",
     dominantColor: "#1f262f",
     aspectRatio: 1.505804311774461,
+    group: "winter",
   },
   {
     src: "/assets/photos/summer/18_A_SCHOOL_IN_COLOR.jpeg",
@@ -285,6 +325,7 @@ export const photos = [
     capitalizedTitle: "A school in color",
     dominantColor: "#224e4f",
     aspectRatio: 1.5005045408678104,
+    group: "summer",
   },
   {
     src: "/assets/photos/spring/19_I_MISSED_THE_TRAIN.jpeg",
@@ -292,6 +333,7 @@ export const photos = [
     capitalizedTitle: "I missed the train",
     dominantColor: "#ae916e",
     aspectRatio: 1.4997653683716565,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/20_LOVE_IN_A_RUBBER_BOAT.jpeg",
@@ -299,6 +341,7 @@ export const photos = [
     capitalizedTitle: "Love in a rubber boat",
     dominantColor: "#1a462e",
     aspectRatio: 1.480456026058632,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/21_LOVE_AT_THE_STREET_CORNER.jpeg",
@@ -306,6 +349,7 @@ export const photos = [
     capitalizedTitle: "Love at the street corner",
     dominantColor: "#a5a196",
     aspectRatio: 1.508371385083714,
+    group: "autumn",
   },
   {
     src: "/assets/photos/summer/22_HIDING_FROM_THE_SHADOWS.jpeg",
@@ -313,6 +357,7 @@ export const photos = [
     capitalizedTitle: "Hiding from the shadows",
     dominantColor: "#dac7b5",
     aspectRatio: 1.454632282712512,
+    group: "summer",
   },
   {
     src: "/assets/photos/spring/23_GOING_OUT_FOR_DINNER.jpeg",
@@ -320,6 +365,7 @@ export const photos = [
     capitalizedTitle: "Going out for dinner",
     dominantColor: "#699bae",
     aspectRatio: 1.481636060100167,
+    group: "spring",
   },
   {
     src: "/assets/photos/spring/24_DOWN_BY_THE_LAKE.jpeg",
@@ -327,6 +373,7 @@ export const photos = [
     capitalizedTitle: "Down by the lake",
     dominantColor: "#83704a",
     aspectRatio: 1.500545256270447,
+    group: "spring",
   },
   {
     src: "/assets/photos/spring/25_THROUGH_THE_MIRROR.jpeg",
@@ -334,6 +381,7 @@ export const photos = [
     capitalizedTitle: "Through the mirror",
     dominantColor: "#bb9335",
     aspectRatio: 1.480456026058632,
+    group: "spring",
   },
   {
     src: "/assets/photos/spring/26_REST_AREA.jpeg",
@@ -341,6 +389,7 @@ export const photos = [
     capitalizedTitle: "Rest area",
     dominantColor: "#5a8ea2",
     aspectRatio: 1.480456026058632,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/27_THE_PERFECT_FAMILY.jpeg",
@@ -348,6 +397,7 @@ export const photos = [
     capitalizedTitle: "The perfect family",
     dominantColor: "#dfcdb7",
     aspectRatio: 1.5022747952684259,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/28_FUMER_TUE.jpeg",
@@ -355,6 +405,7 @@ export const photos = [
     capitalizedTitle: "Fumer tue",
     dominantColor: "#e1cebe",
     aspectRatio: 1.5004074979625102,
+    group: "autumn",
   },
   {
     src: "/assets/photos/autumn/29_UNE_MAQUETTE.jpeg",
@@ -362,6 +413,7 @@ export const photos = [
     capitalizedTitle: "Une maquette",
     dominantColor: "#2d3519",
     aspectRatio: 1.5078125,
+    group: "autumn",
   },
   {
     src: "/assets/photos/winter/30_DIVING_IN_THE_BLUE.jpeg",
@@ -369,6 +421,7 @@ export const photos = [
     capitalizedTitle: "Diving in the blue",
     dominantColor: "#cacad5",
     aspectRatio: 1.4927113702623906,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/31_LIFE_PERSPECTIVES.jpeg",
@@ -376,6 +429,7 @@ export const photos = [
     capitalizedTitle: "Life perspectives",
     dominantColor: "#66819d",
     aspectRatio: 1.4806265457543282,
+    group: "autumn",
   },
   {
     src: "/assets/photos/autumn/79_STRANGER.jpeg",
@@ -383,6 +437,7 @@ export const photos = [
     capitalizedTitle: "Stranger",
     dominantColor: "#431c11",
     aspectRatio: 1.48,
+    group: "autumn",
   },
   {
     src: "/assets/photos/winter/32_BEN.jpeg",
@@ -390,6 +445,7 @@ export const photos = [
     capitalizedTitle: "Ben",
     dominantColor: "#ae958f",
     aspectRatio: 1.4807692307692308,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/80_SHANGLIE.jpeg",
@@ -397,6 +453,7 @@ export const photos = [
     capitalizedTitle: "Shanglie",
     dominantColor: "#97aea6",
     aspectRatio: 1.5010799136069115,
+    group: "autumn",
   },
   {
     src: "/assets/photos/autumn/33_KITA.jpeg",
@@ -404,6 +461,7 @@ export const photos = [
     capitalizedTitle: "Kita",
     dominantColor: "#3e3d1e",
     aspectRatio: 1.4807692307692308,
+    group: "autumn",
   },
   {
     src: "/assets/photos/autumn/81_MA_GRAND-MERE.jpeg",
@@ -411,6 +469,7 @@ export const photos = [
     capitalizedTitle: "Ma grand-mere",
     dominantColor: "#954d30",
     aspectRatio: 1.4808695652173913,
+    group: "autumn",
   },
   {
     src: "/assets/photos/autumn/34_AYMAN.jpeg",
@@ -418,6 +477,7 @@ export const photos = [
     capitalizedTitle: "Ayman",
     dominantColor: "#8c9a90",
     aspectRatio: 1.5,
+    group: "autumn",
   },
   {
     src: "/assets/photos/winter/35_WATCHING_THE_TRAIN_LEAVING.jpeg",
@@ -425,6 +485,7 @@ export const photos = [
     capitalizedTitle: "Watching the train leaving",
     dominantColor: "#231f17",
     aspectRatio: 1.5007843137254901,
+    group: "winter",
   },
   {
     src: "/assets/photos/winter/36_THE_BEE.jpeg",
@@ -432,6 +493,7 @@ export const photos = [
     capitalizedTitle: "The bee",
     dominantColor: "#aba95c",
     aspectRatio: 1.5007843137254901,
+    group: "winter",
   },
   {
     src: "/assets/photos/spring/37_LAYING_ON_THE_FIELD.jpeg",
@@ -439,6 +501,7 @@ export const photos = [
     capitalizedTitle: "Laying on the field",
     dominantColor: "#bbb23d",
     aspectRatio: 1.480456026058632,
+    group: "spring",
   },
   {
     src: "/assets/photos/spring/38_DOLCE_VITA.jpeg",
@@ -446,6 +509,7 @@ export const photos = [
     capitalizedTitle: "Dolce vita",
     dominantColor: "#ae7f2b",
     aspectRatio: 1.5074424898511503,
+    group: "spring",
   },
   {
     src: "/assets/photos/winter/39_RED_BOXES.jpeg",
@@ -453,6 +517,7 @@ export const photos = [
     capitalizedTitle: "Red boxes",
     dominantColor: "#9d91a7",
     aspectRatio: 1.4811133200795228,
+    group: "winter",
   },
   {
     src: "/assets/photos/spring/40_FLAT_17_A.jpeg",
@@ -460,6 +525,7 @@ export const photos = [
     capitalizedTitle: "Flat 17 a",
     dominantColor: "#e1c9ad",
     aspectRatio: 1.5019115237575096,
+    group: "spring",
   },
   {
     src: "/assets/photos/autumn/41_A_REGULAR.jpeg",
@@ -467,6 +533,7 @@ export const photos = [
     capitalizedTitle: "A regular",
     dominantColor: "#617682",
     aspectRatio: 1.4816433566433567,
+    group: "autumn",
   },
   {
     src: "/assets/photos/summer/42_TIME_TO_DRY.jpeg",
@@ -474,6 +541,7 @@ export const photos = [
     capitalizedTitle: "Time to dry",
     dominantColor: "#b49d91",
     aspectRatio: 1.5005707762557077,
+    group: "summer",
   },
   {
     src: "/assets/photos/spring/43_PRIMAVERA.jpeg",
@@ -481,6 +549,7 @@ export const photos = [
     capitalizedTitle: "Primavera",
     dominantColor: "#315810",
     aspectRatio: 1.5,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/44_LEMONADE.jpeg",
@@ -488,6 +557,7 @@ export const photos = [
     capitalizedTitle: "Lemonade",
     dominantColor: "#d2ac55",
     aspectRatio: 1.4919018972697826,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/45_LIVING_THE_DREAM.jpeg",
@@ -495,6 +565,7 @@ export const photos = [
     capitalizedTitle: "Living the dream",
     dominantColor: "#2d363c",
     aspectRatio: 1.48110599078341,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/46_DREAMING_THE_DREAM.jpeg",
@@ -502,6 +573,7 @@ export const photos = [
     capitalizedTitle: "Dreaming the dream",
     dominantColor: "#ba7d37",
     aspectRatio: 1.480456026058632,
+    group: "autumn",
   },
   {
     src: "/assets/photos/summer/47_LE_PIED_ET_LE_PARASOL.jpeg",
@@ -509,6 +581,7 @@ export const photos = [
     capitalizedTitle: "Le pied et le parasol",
     dominantColor: "#ae932b",
     aspectRatio: 1.4806949806949807,
+    group: "summer",
   },
   {
     src: "/assets/photos/winter/48_LA_FILLE_ET_LE_PARAPLUIE.jpeg",
@@ -516,6 +589,7 @@ export const photos = [
     capitalizedTitle: "La fille et le parapluie",
     dominantColor: "#aa908a",
     aspectRatio: 1.507991660875608,
+    group: "winter",
   },
   {
     src: "/assets/photos/summer/49_THE_SUN_BEATS_DOWN.jpeg",
@@ -523,6 +597,7 @@ export const photos = [
     capitalizedTitle: "The sun beats down",
     dominantColor: "#aba89c",
     aspectRatio: 1.4816625916870416,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/50_LOST_IN_THE_FOREST.jpeg",
@@ -530,6 +605,7 @@ export const photos = [
     capitalizedTitle: "Lost in the forest",
     dominantColor: "#aea925",
     aspectRatio: 1.4805725971370143,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/51_ANGLE.jpeg",
@@ -537,6 +613,7 @@ export const photos = [
     capitalizedTitle: "Angle",
     dominantColor: "#beb5ab",
     aspectRatio: 1.492176386913229,
+    group: "autumn",
   },
   {
     src: "/assets/photos/winter/52_LEGS_&_STRIPES.jpeg",
@@ -544,6 +621,7 @@ export const photos = [
     capitalizedTitle: "Legs & stripes",
     dominantColor: "#136997",
     aspectRatio: 1.480456026058632,
+    group: "winter",
   },
   {
     src: "/assets/photos/spring/53_FACING_WATER.jpeg",
@@ -551,6 +629,7 @@ export const photos = [
     capitalizedTitle: "Facing water",
     dominantColor: "#c7b9b3",
     aspectRatio: 1.5,
+    group: "spring",
   },
   {
     src: "/assets/photos/autumn/54_REFLECTIONS.jpeg",
@@ -558,6 +637,7 @@ export const photos = [
     capitalizedTitle: "Reflections",
     dominantColor: "#212a23",
     aspectRatio: 1.4921615201900238,
+    group: "autumn",
   },
   {
     src: "/assets/photos/autumn/55_TROTINETTE_INTERDITE.jpeg",
@@ -565,6 +645,7 @@ export const photos = [
     capitalizedTitle: "Trotinette interdite",
     dominantColor: "#b6bcc2",
     aspectRatio: 1.4913793103448276,
+    group: "autumn",
   },
   {
     src: "/assets/photos/spring/56_ME_AND_MYSELF.jpeg",
@@ -572,6 +653,7 @@ export const photos = [
     capitalizedTitle: "Me and myself",
     dominantColor: "#89805d",
     aspectRatio: 1.5023696682464456,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/57_THIS_HOUSE.jpeg",
@@ -579,6 +661,7 @@ export const photos = [
     capitalizedTitle: "This house",
     dominantColor: "#d5bdab",
     aspectRatio: 1.5002536783358702,
+    group: "summer",
   },
   {
     src: "/assets/photos/winter/58_BEFORE_THE_STORM.jpeg",
@@ -586,6 +669,7 @@ export const photos = [
     capitalizedTitle: "Before the storm",
     dominantColor: "#999286",
     aspectRatio: 1.4800325998370008,
+    group: "winter",
   },
   {
     src: "/assets/photos/winter/59_VIDAR.jpeg",
@@ -593,6 +677,7 @@ export const photos = [
     capitalizedTitle: "Vidar",
     dominantColor: "#dcbbb3",
     aspectRatio: 1.4987518721917124,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/60_STRANGERS.jpeg",
@@ -600,6 +685,7 @@ export const photos = [
     capitalizedTitle: "Strangers",
     dominantColor: "#2d454a",
     aspectRatio: 1.480456026058632,
+    group: "autumn",
   },
   {
     src: "/assets/photos/summer/61_JOSE.jpeg",
@@ -607,6 +693,7 @@ export const photos = [
     capitalizedTitle: "Jose",
     dominantColor: "#a77e62",
     aspectRatio: 1.4807692307692308,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/62_1,2,3.jpeg",
@@ -614,6 +701,7 @@ export const photos = [
     capitalizedTitle: "1,2,3",
     dominantColor: "#b7816c",
     aspectRatio: 1.5008130081300812,
+    group: "summer",
   },
   {
     src: "/assets/photos/spring/63_THE_FLOOR.jpeg",
@@ -621,6 +709,7 @@ export const photos = [
     capitalizedTitle: "The floor",
     dominantColor: "#999a93",
     aspectRatio: 1.4917355371900827,
+    group: "spring",
   },
   {
     src: "/assets/photos/autumn/64_WHAT'S_UP.jpeg",
@@ -628,6 +717,7 @@ export const photos = [
     capitalizedTitle: "What's up",
     dominantColor: "#bea572",
     aspectRatio: 1.7390719569603228,
+    group: "autumn",
   },
   {
     src: "/assets/photos/winter/65_LA_PLUIE_ET_PARIS.jpeg",
@@ -635,6 +725,7 @@ export const photos = [
     capitalizedTitle: "La pluie et paris",
     dominantColor: "#c2b7b7",
     aspectRatio: 1.4919690660321236,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/66_CHEZ_LE_COIFFEUR.jpeg",
@@ -642,6 +733,7 @@ export const photos = [
     capitalizedTitle: "Chez le coiffeur",
     dominantColor: "#cdbab2",
     aspectRatio: 1.5060975609756098,
+    group: "autumn",
   },
   {
     src: "/assets/photos/autumn/67_JUST_ABOUT_TO_GET_HOME.jpeg",
@@ -649,6 +741,7 @@ export const photos = [
     capitalizedTitle: "Just about to get home",
     dominantColor: "#d0c2ae",
     aspectRatio: 1.4926553672316385,
+    group: "autumn",
   },
   {
     src: "/assets/photos/summer/68_TERRACE.jpeg",
@@ -656,6 +749,7 @@ export const photos = [
     capitalizedTitle: "Terrace",
     dominantColor: "#6f3d1b",
     aspectRatio: 1.570949720670391,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/69_SHAPES.jpeg",
@@ -663,6 +757,7 @@ export const photos = [
     capitalizedTitle: "Shapes",
     dominantColor: "#e2ab67",
     aspectRatio: 1.3412135539795114,
+    group: "summer",
   },
   {
     src: "/assets/photos/spring/70_URBAN_DESIGN.jpeg",
@@ -670,6 +765,7 @@ export const photos = [
     capitalizedTitle: "Urban design",
     dominantColor: "#d2b798",
     aspectRatio: 1.499700419412822,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/71_THERE_IS_NOTHING_ON_THE_ROOF.jpeg",
@@ -677,6 +773,7 @@ export const photos = [
     capitalizedTitle: "There is nothing on the roof",
     dominantColor: "#c7925b",
     aspectRatio: 1.5,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/72_LA_VIE_ET_SES_PLAISIRS.jpeg",
@@ -684,6 +781,7 @@ export const photos = [
     capitalizedTitle: "La vie et ses plaisirs",
     dominantColor: "#cda36d",
     aspectRatio: 1.5,
+    group: "summer",
   },
   {
     src: "/assets/photos/spring/73_FAKING_CAMPING.jpeg",
@@ -691,6 +789,7 @@ export const photos = [
     capitalizedTitle: "Faking camping",
     dominantColor: "#192518",
     aspectRatio: 1.5011195700850872,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/74_INTERWINED.jpeg",
@@ -698,6 +797,7 @@ export const photos = [
     capitalizedTitle: "Interwined",
     dominantColor: "#c1c188",
     aspectRatio: 1.480456026058632,
+    group: "summer",
   },
   {
     src: "/assets/photos/winter/75_LA_CALLE.jpeg",
@@ -705,6 +805,7 @@ export const photos = [
     capitalizedTitle: "La calle",
     dominantColor: "#b8aab4",
     aspectRatio: 1.480456026058632,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/76_SEA_SIDE.jpeg",
@@ -712,6 +813,7 @@ export const photos = [
     capitalizedTitle: "Sea side",
     dominantColor: "#17131f",
     aspectRatio: 1.4804329725228975,
+    group: "autumn",
   },
   {
     src: "/assets/photos/spring/77_AMOR_A_LA_ESQUINA.jpeg",
@@ -719,6 +821,7 @@ export const photos = [
     capitalizedTitle: "Amor a la esquina",
     dominantColor: "#17271f",
     aspectRatio: 1.4810951760104303,
+    group: "spring",
   },
   {
     src: "/assets/photos/winter/78_PEATONAL.jpeg",
@@ -726,6 +829,7 @@ export const photos = [
     capitalizedTitle: "Peatonal",
     dominantColor: "#9b9f9b",
     aspectRatio: 1.4919018972697826,
+    group: "winter",
   },
   {
     src: "/assets/photos/winter/82_OH_I_SEE_HER.jpeg",
@@ -733,6 +837,7 @@ export const photos = [
     capitalizedTitle: "Oh i see her",
     dominantColor: "#a29c99",
     aspectRatio: 1.4919018972697826,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/83_FLIP_FLOPS.jpeg",
@@ -740,6 +845,7 @@ export const photos = [
     capitalizedTitle: "Flip flops",
     dominantColor: "#d1973a",
     aspectRatio: 1.4809885931558935,
+    group: "autumn",
   },
   {
     src: "/assets/photos/summer/84_PLANET.jpeg",
@@ -747,6 +853,7 @@ export const photos = [
     capitalizedTitle: "Planet",
     dominantColor: "#ccc4cb",
     aspectRatio: 1.480456026058632,
+    group: "summer",
   },
   {
     src: "/assets/photos/spring/85_LIGHTING_THE_DAY.jpeg",
@@ -754,6 +861,7 @@ export const photos = [
     capitalizedTitle: "Lighting the day",
     dominantColor: "#3f7385",
     aspectRatio: 1.537556561085973,
+    group: "spring",
   },
   {
     src: "/assets/photos/winter/86_FIFTH_AVENUE.jpeg",
@@ -761,6 +869,7 @@ export const photos = [
     capitalizedTitle: "Fifth avenue",
     dominantColor: "#d2cacb",
     aspectRatio: 1.4811664641555287,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/87_STOOOOP!.jpeg",
@@ -768,6 +877,7 @@ export const photos = [
     capitalizedTitle: "Stoooop!",
     dominantColor: "#8f705f",
     aspectRatio: 1.480456026058632,
+    group: "autumn",
   },
   {
     src: "/assets/photos/winter/88_LA_CHASSE_EN_AMERIQUE.jpeg",
@@ -775,6 +885,7 @@ export const photos = [
     capitalizedTitle: "La chasse en amerique",
     dominantColor: "#c4c0cc",
     aspectRatio: 1.481290322580645,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/89_COOL_BUILDING.jpeg",
@@ -782,6 +893,7 @@ export const photos = [
     capitalizedTitle: "Cool building",
     dominantColor: "#8da8aa",
     aspectRatio: 1.266768292682927,
+    group: "autumn",
   },
   {
     src: "/assets/photos/summer/90_NO_EXIT.jpeg",
@@ -789,6 +901,7 @@ export const photos = [
     capitalizedTitle: "No exit",
     dominantColor: "#0d494f",
     aspectRatio: 1.480456026058632,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/91_EXCLUSION.jpeg",
@@ -796,6 +909,7 @@ export const photos = [
     capitalizedTitle: "Exclusion",
     dominantColor: "#baab98",
     aspectRatio: 1.480456026058632,
+    group: "spring",
   },
   {
     src: "/assets/photos/summer/92_L'ETE_EN_FRANCAIS.jpeg",
@@ -803,6 +917,7 @@ export const photos = [
     capitalizedTitle: "L'ete en francais",
     dominantColor: "#cebdb4",
     aspectRatio: 1.504201680672269,
+    group: "summer",
   },
   {
     src: "/assets/photos/summer/93_LATE_AFTERNOON.jpeg",
@@ -810,6 +925,7 @@ export const photos = [
     capitalizedTitle: "Late afternoon",
     dominantColor: "#d2bcab",
     aspectRatio: 1.480456026058632,
+    group: "summer",
   },
   {
     src: "/assets/photos/autumn/94_LIQUOR_STORE.jpeg",
@@ -817,6 +933,7 @@ export const photos = [
     capitalizedTitle: "Liquor store",
     dominantColor: "#ba9d73",
     aspectRatio: 1.4997278170930866,
+    group: "autumn",
   },
   {
     src: "/assets/photos/autumn/95_THE_FISHERMEN'S_TOWN.jpeg",
@@ -824,6 +941,7 @@ export const photos = [
     capitalizedTitle: "The fishermen's town",
     dominantColor: "#baaba8",
     aspectRatio: 1.5,
+    group: "autumn",
   },
   {
     src: "/assets/photos/winter/96_WILD.jpeg",
@@ -831,6 +949,7 @@ export const photos = [
     capitalizedTitle: "Wild",
     dominantColor: "#0b2532",
     aspectRatio: 1.5083056478405317,
+    group: "winter",
   },
   {
     src: "/assets/photos/winter/97_CHEZ_JOANNE.jpeg",
@@ -838,6 +957,7 @@ export const photos = [
     capitalizedTitle: "Chez joanne",
     dominantColor: "#bba8a1",
     aspectRatio: 1.480456026058632,
+    group: "winter",
   },
   {
     src: "/assets/photos/autumn/98_NOUS_ETIONS_CHEZ_NOUS.jpeg",
@@ -845,6 +965,7 @@ export const photos = [
     capitalizedTitle: "Nous etions chez nous",
     dominantColor: "#7a6f41",
     aspectRatio: 1.4919018972697826,
+    group: "autumn",
   },
   {
     src: "/assets/photos/winter/99_STRANGER.jpeg",
@@ -852,5 +973,6 @@ export const photos = [
     capitalizedTitle: "Stranger",
     dominantColor: "#b0a69c",
     aspectRatio: 1.5083102493074791,
+    group: "winter",
   },
 ];
