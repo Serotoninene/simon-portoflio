@@ -15,6 +15,7 @@ import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
 import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollContainer";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { ExtendedPhoto } from "@/types";
+import { getAspectRatio } from "@/utils/helpers";
 
 const Gallery = ({ photos, setTitle }: any) => {
   const { isOverview, flipState } = useOverviewContext();
