@@ -21,7 +21,7 @@ const variants = {
 };
 
 const containerTransition = {
-  staggerChildren: 0.5,
+  staggerChildren: 0.05,
   delayChildren: 0.1,
 };
 
@@ -33,6 +33,7 @@ const variantsContainer = {
 const groups = ["summer", "autumn", "winter", "spring"];
 
 export const GroupElement = ({
+  idx,
   handleClick,
   group,
   photoGroup,
@@ -43,22 +44,34 @@ export const GroupElement = ({
   const groupActive = photoGroup === group;
 
   const variantsItem = {
-    hidden: { opacity: 0, y: "100%" },
-    visible: (custom: boolean) => ({
-      opacity: isActive || groupActive ? 1 : 0,
-      y: isActive || groupActive ? 0 : "100%",
-    }),
+    hidden: {
+      opacity: 0,
+      y: "100%",
+      transition: { ease: "easeOut", duration: 0.2 },
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { ease: "easeOut", duration: 0.2, delay: idx * 0.06 },
+    },
   };
+
+  if (!isActive && !groupActive) return null;
 
   return (
     <motion.li
+      layout
+      key={group}
       variants={variantsItem}
+      initial={"hidden"}
+      animate="visible"
+      exit={"hidden"}
       onMouseEnter={() => isActive && setCursorType("hover")}
       onMouseLeave={() => setCursorType("pointer")}
       onClick={(e) => {
         handleClick(group, e);
       }}
-      className={photoGroup === group ? "font-bold order-1" : ""}
+      className={groupActive ? "font-black order-1" : ""}
     >
       {group}
     </motion.li>
@@ -69,34 +82,32 @@ export const GroupSelector = ({ photoGroup, setPhotoGroup }: any) => {
 
   const handleClick = (group: string, e: MouseEvent) => {
     e.stopPropagation();
-    console.log("group from array", group);
-    console.log("photoGroup", photoGroup);
     if (group === photoGroup) {
-      console.log("same group");
       setIsActive((prev) => !prev);
     } else {
       isActive && setPhotoGroup(group);
+      setIsActive(false);
     }
   };
 
   return (
-    <motion.ul
-      variants={variantsContainer}
-      initial="hidden"
-      animate="visible"
-      className="flex flex-col gap-1"
-    >
-      {groups.map((group) => (
-        <div key={group} className={photoGroup === group ? "order-2 z-10" : ""}>
+    <AnimatePresence mode="wait">
+      <ul
+        key={isActive.toString()}
+        className="flex flex-col items-start w-20 gap-1"
+      >
+        {groups.map((group, idx) => (
           <GroupElement
+            key={group}
+            idx={idx}
             group={group}
             isActive={isActive}
             photoGroup={photoGroup}
             handleClick={handleClick}
           />
-        </div>
-      ))}
-    </motion.ul>
+        ))}
+      </ul>
+    </AnimatePresence>
   );
 };
 

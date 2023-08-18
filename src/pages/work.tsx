@@ -70,13 +70,11 @@ const Gallery = ({ photos, photoGroup, setTitle }: any) => {
   }, [isOverview, flipState]);
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="popLayout">
       <div
         id="gallery-container"
         className={
-          isOverview
-            ? "grid-gallery"
-            : "opacity-0 flex-gallery relative bg-light"
+          isOverview ? "grid-gallery" : "flex-gallery relative bg-light"
         }
       >
         {photosDisplayed.map((photo: ExtendedPhoto, idx: number) => (
