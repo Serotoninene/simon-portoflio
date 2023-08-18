@@ -19,9 +19,20 @@ import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { ExtendedPhoto } from "@/types";
 
 const Gallery = ({ photos, photoGroup, setTitle }: any) => {
-  const { isOverview, flipState } = useOverviewContext();
-  const [photoTarget, setPhotoTarget] = useState("");
   const { scroll } = useLocomotiveScroll();
+  const [photosDisplayed, setPhotosDisplayed] = useState([]);
+  const [photoTarget, setPhotoTarget] = useState("");
+  const { isOverview, flipState } = useOverviewContext();
+
+  useEffect(() => {
+    if (!photos) return;
+    const photosDisplayed = photos.filter(
+      (photo: ExtendedPhoto) => photo.group === photoGroup
+    );
+    setPhotosDisplayed(photosDisplayed);
+  }, [photoGroup]);
+
+  console.log(photosDisplayed);
 
   useEffect(() => {
     if (!scroll) return;
@@ -63,7 +74,7 @@ const Gallery = ({ photos, photoGroup, setTitle }: any) => {
           isOverview ? "grid-gallery" : "flex-gallery relative bg-light"
         }
       >
-        {photos.map((photo: ExtendedPhoto, idx: number) => (
+        {photosDisplayed.map((photo: ExtendedPhoto, idx: number) => (
           <div id={photo.alt} key={photo.alt}>
             <motion.div
               key={photoGroup}
@@ -109,7 +120,7 @@ export default function Work() {
           <WorkFooter
             title={title}
             photoGroup={photoGroup}
-            setPhotogroup={setPhotoGroup}
+            setPhotoGroup={setPhotoGroup}
           />
         </OverviewProvider>
       </Container>

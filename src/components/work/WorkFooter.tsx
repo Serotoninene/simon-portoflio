@@ -57,7 +57,10 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
                   key={group}
                   onMouseEnter={() => setCursorType("hover")}
                   onMouseLeave={() => setCursorType("pointer")}
-                  onClick={() => setPhotoGroup(group)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setPhotoGroup(group);
+                  }}
                   className={`${group === title ? "text-light" : "text-dark"}`}
                 >
                   {group}
