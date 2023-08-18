@@ -30,19 +30,22 @@ const Gallery = ({ photos, photoGroup, setTitle }: any) => {
       (photo: ExtendedPhoto) => photo.group === photoGroup
     );
     setPhotosDisplayed(photosDisplayed);
-  }, [photoGroup]);
-
-  console.log(photosDisplayed);
+    scroll && scroll.update();
+  }, [scroll, photoGroup]);
 
   useEffect(() => {
     if (!scroll) return;
 
     // Update the title when the scroll changes
     scroll.on("scroll", (e: any) => {
-      const idx = Math.round((e.scroll.y / e.limit.y) * (photos.length - 1));
-      setTitle(photos[idx]?.capitalizedTitle);
+      const idx = Math.round(
+        (e.scroll.y / e.limit.y) * (photosDisplayed.length - 1)
+      );
+
+      // @ts-ignore
+      setTitle(photosDisplayed[idx]?.capitalizedTitle);
     });
-  }, [scroll]);
+  }, [scroll, photoGroup]);
 
   useEffect(() => {
     gsap.registerPlugin(Flip);
@@ -71,7 +74,9 @@ const Gallery = ({ photos, photoGroup, setTitle }: any) => {
       <div
         id="gallery-container"
         className={
-          isOverview ? "grid-gallery" : "flex-gallery relative bg-light"
+          isOverview
+            ? "grid-gallery"
+            : "opacity-0 flex-gallery relative bg-light"
         }
       >
         {photosDisplayed.map((photo: ExtendedPhoto, idx: number) => (
