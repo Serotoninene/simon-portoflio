@@ -9,13 +9,11 @@ type Props = {
   src: string;
   aspectRatio?: number;
   dominantColor?: string;
-  fit?: "cover" | "contain";
 };
 
 export const LazyPhoto = ({
   alt,
   src,
-  fit,
   priority,
   aspectRatio,
   dominantColor,
@@ -30,7 +28,6 @@ export const LazyPhoto = ({
     alt: alt || "photo",
     src,
     priority,
-    className: `object-${fit || "cover"}`,
   };
 
   useEffect(() => {
