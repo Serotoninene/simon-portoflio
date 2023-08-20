@@ -4,6 +4,7 @@ import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
 import { MouseEvent, useState } from "react";
 import { isConstructorDeclaration } from "typescript";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 const variants = {
   hidden: {

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useOverviewContext } from "../context/OverviewContext";
 import { useWindowSize } from "@/utils/hooks";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 type Props = {
   priority?: boolean;
@@ -18,6 +19,7 @@ export const LazyPhoto = ({
   aspectRatio,
   dominantColor,
 }: Props) => {
+  const { scroll } = useLocomotiveScroll();
   const containerRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -62,7 +64,10 @@ export const LazyPhoto = ({
         <Image
           fill
           {...imageProps}
-          onLoad={() => setIsLoaded(true)}
+          onLoad={() => {
+            setIsLoaded(true);
+            scroll.update();
+          }}
           className={`lazy-photo transition-opacity duration-1000 object-cover  ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}

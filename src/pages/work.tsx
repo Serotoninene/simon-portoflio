@@ -30,8 +30,7 @@ const Gallery = ({ photos, photoGroup, setTitle }: any) => {
       (photo: ExtendedPhoto) => photo.group === photoGroup
     );
     setPhotosDisplayed(photosDisplayed);
-    scroll && scroll.update();
-  }, [scroll, photoGroup]);
+  }, [photoGroup]);
 
   useEffect(() => {
     if (!scroll) return;
