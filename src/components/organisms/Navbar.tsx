@@ -41,7 +41,7 @@ const linkAnim = {
 const navLinks = [
   { href: "/", title: "home" },
   { href: "/work", title: "work" },
-  { href: "instagram", title: "instagram" },
+  { href: "https://www.instagram.com/uma__simon/", title: "instagram" },
 ];
 
 interface BurgerButtonProps {
@@ -75,8 +75,6 @@ const BurgerButton = ({ isMenuOpen }: BurgerButtonProps) => {
     </div>
   );
 };
-
-// [] find a better easing
 
 export const Menu = ({ navLinks, isMenuOpen, setIsMenuOpen }: Props) => {
   const path = usePathname();

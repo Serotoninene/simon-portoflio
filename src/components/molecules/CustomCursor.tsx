@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 // Context
 import { useCursorContext } from "@components/context/CursorContext";
 import { useMediaQuery } from "@utils/hooks";
+import AnimatedLetters from "../atoms/AnimLetters";
 
 export default function CustomCursor() {
   const onMobile = useMediaQuery(640);
@@ -31,10 +32,7 @@ export default function CustomCursor() {
   return (
     <motion.div
       id="CustomCursor" // had to use css for styling here --> base.scss
-      className={onMobile ? "opacity-0" : ""}
-      style={{
-        scale: cursorType === "hover" ? 0.5 : 1,
-      }}
+      className={cursorType}
       animate={{
         top: mousePosition.y - 10,
         left: mousePosition.x - 10,
@@ -45,6 +43,10 @@ export default function CustomCursor() {
         mass: 0.25,
         stiffness: 1000,
       }}
-    ></motion.div>
+    >
+      {cursorType === "cta" && (
+        <AnimatedLetters key="cta" delay={0} string="SEE ALL" />
+      )}
+    </motion.div>
   );
 }

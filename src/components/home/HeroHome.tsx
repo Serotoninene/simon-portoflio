@@ -85,6 +85,7 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
       });
     }
 
+    if (!shaderRef.current) return;
     shaderRef.current.uniforms.uMappedMouse.value = mappedMouse;
     shaderRef.current.uniforms.uQuadSize.value = new THREE.Vector2(
       photoData.width,
@@ -117,7 +118,7 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
     <mesh ref={meshRef} position={[photoData.x, photoData.y, 0]}>
       <planeGeometry
         ref={geometryRef}
-        args={[photoData.width, photoData.height, 32, 32]}
+        args={[photoData.width, photoData.height, 2, 2]}
       />
       <shaderMaterial
         ref={shaderRef}

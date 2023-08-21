@@ -22,7 +22,7 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
         mobile: {
           breakpoint: 0,
           smooth: true,
-          multiplier: 15,
+          multiplier: 5,
           class: "is-reveal",
         },
         tablet: {
@@ -31,6 +31,7 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
           multiplier: 1,
           class: "is-reveal",
         },
+        multiplier: 0.75,
       }}
       watch={[path]}
       location={path}
@@ -39,7 +40,7 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
         id="scroll-container"
         data-scroll-container
         ref={containerRef}
-        className="fixed bg-light"
+        className="fixed top-0 left-0 bg-light w-full"
       >
         {children}
       </div>

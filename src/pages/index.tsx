@@ -6,6 +6,7 @@ import {
   OneCentered,
   TwoShifted,
   ThreeAlined,
+  Outro,
 } from "@/components/home";
 import { OneWoCaption } from "@/components/home/OneWoCaption";
 import { Container, LocomotiveScrollContainer } from "@/components/molecules";
@@ -23,14 +24,14 @@ import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 // [X] switch for the new favicon
 // [X] insert most of the photos in work
 // [X] faire un test avec gsap flip pour la transition
-// [] do the lazy loading with dominant color : https://jagad.dev/posts/custom-image-transition-in-nextjs-with-tailwind-css
+// [X] do the lazy loading with dominant color : https://jagad.dev/posts/custom-image-transition-in-nextjs-with-tailwind-css
 // [X] do a small opacity animation to intro and exit work page
-// [] smooth the scroll on the work page
-// [] try and see if snapping isn't possible
 // [X] make the title blend mode (on work page)
+// [] try and see if snapping isn't possible
 // [] rearrange the layout on mobile
 // [] add a "move to see al the photos" at the bottom of index
 // [] clean the numbers of photos on the Two Shifted component
+// [] smooth the scroll on the work page
 
 export const photos = [
   {
@@ -132,7 +133,7 @@ export const photos = [
     alt: "11_APERITIF",
     dominantColor: "#bcb7af",
     caption: {
-      idx: "10",
+      idx: "11",
       title: "APERITIF",
       place: "Honolulu (US)",
       date: "2020",
@@ -143,7 +144,7 @@ export const photos = [
     alt: "10_TIME_FOR_LAUNDRY",
     dominantColor: "#a8a4aa",
     caption: {
-      idx: "11",
+      idx: "10",
       title: "TIME FOR LAUNDRY",
       place: "Vancouver (CA)",
       date: "2020",
@@ -275,7 +276,7 @@ export const photos = [
     alt: "72_LA_VIE_ET_SES_PLAISIRS",
     dominantColor: "#789aa8",
     caption: {
-      idx: "23",
+      idx: "24",
       title: "LA VIE ET SES PLAISIRS",
       place: "Saint-Tropez (FR)",
       date: "2022",
@@ -286,7 +287,7 @@ export const photos = [
     alt: "71_THERE_IS_NOTHING_ON_THE_ROOF",
     dominantColor: "#817250",
     caption: {
-      idx: "24",
+      idx: "23",
       title: "THERE IS NOTHING ON THE ROOF",
       place: "Bergen (NO)",
       date: "2022",
@@ -319,7 +320,7 @@ export const photos = [
     alt: "48_LA_FILLE_ET_LE_PARAPLUIE",
     dominantColor: "#19261d",
     caption: {
-      idx: "27",
+      idx: "28",
       title: "LA FILLE ET LE PARAPLUIE",
       place: "Paris (FR)",
       date: "2022",
@@ -330,7 +331,7 @@ export const photos = [
     alt: "47_LE_PIED_ET_LE_PARASOL",
     dominantColor: "#decfc0",
     caption: {
-      idx: "28",
+      idx: "27",
       title: "LE PIED ET LE PARASOL",
       place: "Victoria (CA)",
       date: "2020",
@@ -459,6 +460,7 @@ export default function Home() {
           />
         </div>
       </Container>
+      <Outro />
     </LocomotiveScrollContainer>
   );
 }

@@ -1,5 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
-import { useScroll } from "framer-motion";
+import { useEffect, useState } from "react";
 
 import { Container } from "@/components/molecules";
 import { Photo, WorkFooter } from "@/components/work";
@@ -7,98 +6,124 @@ import {
   OverviewProvider,
   useOverviewContext,
 } from "@/components/context/OverviewContext";
-import { Loader } from "@/components/organisms";
+
 import { photos } from "@/data/photos";
+
+import { AnimatePresence, motion } from "framer-motion";
 
 import { gsap, Power4 } from "gsap";
 import { Flip } from "gsap/dist/Flip";
 import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
+import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollContainer";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
+import { ExtendedPhoto } from "@/types";
 
-const HTMLPart = () => {
-  const { scrollYProgress } = useScroll();
+const Gallery = ({ photos, photoGroup, setTitle }: any) => {
+  const { scroll } = useLocomotiveScroll();
+  const [photosDisplayed, setPhotosDisplayed] = useState([]);
+  const [photoTarget, setPhotoTarget] = useState("");
   const { isOverview, flipState } = useOverviewContext();
 
-  // only the 10 first photos
-  const testPhotos = photos.slice(0, 10);
-
-  // TO CHECK : DO I REALLY NEED THIS IDX ?
-  const [idx, setIdx] = useState(0);
-  const [title, setTitle] = useState("");
-  const [photoTarget, setPhotoTarget] = useState("");
+  useEffect(() => {
+    if (!photos) return;
+    const photosDisplayed = photos.filter(
+      (photo: ExtendedPhoto) => photo.group === photoGroup
+    );
+    setPhotosDisplayed(photosDisplayed);
+  }, [photoGroup]);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollToPlugin);
-  }, []);
+    if (!scroll) return;
+
+    // Update the title when the scroll changes
+    scroll.on("scroll", (e: any) => {
+      const idx = Math.round(
+        (e.scroll.y / e.limit.y) * (photosDisplayed.length - 1)
+      );
+
+      // @ts-ignore
+      setTitle(photosDisplayed[idx]?.capitalizedTitle);
+    });
+  }, [scroll, photoGroup]);
 
   useEffect(() => {
     gsap.registerPlugin(Flip);
-    const topTarget = document.getElementById(photoTarget)?.offsetTop || 0;
+    const target = document.getElementById(photoTarget);
 
     if (!flipState) return;
-
+    scroll.update(); // update the locoscroll so it resizes the container
+    scroll.scrollTo(0, 0, 0); // scroll to the top of the page if we are in the overview
     Flip.from(flipState, {
-      duration: 1,
+      duration: 1.5,
       ease: Power4.easeInOut,
       absolute: true,
       stagger: {
         amount: 0.1,
         from: isOverview ? "start" : "end",
       },
-      onStart: () => {
+      onComplete: () => {
         if (isOverview) return;
-        //or to scroll to the element with the ID "#someID":
-        gsap.to(window, { scrollTo: topTarget, duration: 0.5, delay: 0.6 });
+        scroll.scrollTo(target);
       },
     });
   }, [isOverview, flipState]);
 
-  // updated the title when the idx changes
-  useEffect(() => {
-    setTitle(photos[idx]?.capitalizedTitle);
-  }, [idx]);
-
-  // updating the idx when the scrollYProgress changes
-  useEffect(() => {
-    if (!scrollYProgress) return;
-    scrollYProgress.on("change", (e: any) => {
-      setIdx(Math.round(e * (photos.length - 1)));
-    });
-  }, [scrollYProgress]);
-
   return (
-    <>
+    <AnimatePresence mode="popLayout">
       <div
         id="gallery-container"
         className={
           isOverview ? "grid-gallery" : "flex-gallery relative bg-light"
         }
       >
-        {photos.map((photo) => (
-          <Photo
-            key={photo.alt}
-            idx={idx}
-            photo={photo}
-            setPhotoTarget={setPhotoTarget}
-          />
+        {photosDisplayed.map((photo: ExtendedPhoto, idx: number) => (
+          <div id={photo.alt} key={photo.alt}>
+            <motion.div
+              key={photoGroup}
+              initial={{ opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ opacity: 0, y: "-150%" }}
+              transition={{ duration: 0.2, delay: 0.5, ease: "easeOut" }}
+            >
+              <Photo idx={idx} photo={photo} setPhotoTarget={setPhotoTarget} />
+            </motion.div>
+          </div>
         ))}
       </div>
-      <WorkFooter photos={photos} title={title} idx={idx} />
-    </>
+    </AnimatePresence>
   );
 };
 
 export default function Work() {
+  const [title, setTitle] = useState("");
+  const [photoGroup, setPhotoGroup] = useState<
+    "summer" | "autumn" | "winter" | "spring"
+  >("summer");
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollToPlugin);
+  }, []);
+
   if (!photos) return;
+
   return (
     <>
-      <Container className="pt-0 bg-light">
+      <Container className="pt-0 bg-light relative">
         <OverviewProvider>
-          <Suspense fallback={<Loader />}>
-            {/* <div className="fixed top-0 left-0 right-0 bottom-0">
-            <Scene photos={photos} />
-          </div> */}
-            <HTMLPart />
-          </Suspense>
+          <LocomotiveScrollContainer>
+            <Container>
+              <Gallery
+                photos={photos}
+                photoGroup={photoGroup}
+                setTitle={setTitle}
+              />
+            </Container>
+          </LocomotiveScrollContainer>
+          <WorkFooter
+            title={title}
+            photoGroup={photoGroup}
+            setPhotoGroup={setPhotoGroup}
+          />
         </OverviewProvider>
       </Container>
     </>

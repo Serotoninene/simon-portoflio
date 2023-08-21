@@ -7,8 +7,9 @@ type Props = {
 export const CursorContext = createContext<any>("pointer");
 
 export function CursorProvider({ children }: Props) {
-  // different types possible so far : "pointer" , "hover", "scrollIndicator"
-  const [cursorType, setCursorType] = useState<"hover" | "pointer">("pointer");
+  const [cursorType, setCursorType] = useState<"hover" | "pointer" | "cta">(
+    "pointer"
+  );
 
   const contextValue = useMemo(() => {
     return { cursorType, setCursorType };

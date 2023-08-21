@@ -1,4 +1,4 @@
-import ColorThief from "colorthief";
+import { ExtendedPhoto } from "@/types";
 
 export const capitalizeWord = (string: string) => {
   const uppercasedString = [string].map(
@@ -42,4 +42,24 @@ export const loadImage = (src: string) => {
   const img = new Image();
   img.src = src;
   return img;
+};
+
+export const getAspectRatio = async (photos: ExtendedPhoto[]) => {
+  await Promise.all(
+    photos.map(async (photo) => {
+      const img = new Image();
+      img.src = photo.src;
+
+      await new Promise((resolve) => {
+        img.onload = (e: any) => {
+          const width = e.target.width;
+          const height = e.target.height;
+          const aspectRatio = width / height;
+
+          // Update the photo object with the aspectRatio
+          photo.aspectRatio = aspectRatio;
+        };
+      });
+    })
+  );
 };

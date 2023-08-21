@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
 
 import { ExtendedPhoto } from "@/types";
-import { hexToRgb, rgbDataURL } from "@/utils/colors";
-import { type } from "os";
+import { LazyPhoto } from "../atoms";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 type Props = {
   idx: number;
@@ -17,15 +17,8 @@ type Props = {
 export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [dominantColorPlaceholder, setDominantColorPlaceholder] = useState("");
-
   const { setCursorType } = useCursorContext();
   const { isOverview, handleOverviewSwitch } = useOverviewContext();
-
-  const onLoadCallback = () => {
-    setIsLoaded(true);
-  };
 
   const handleClick = async () => {
     // wait for the change of state for the overview before scrolling
@@ -34,7 +27,10 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
   };
 
   useEffect(() => {
-    if (!photo.dominantColor) return;
+    gsap.registerPlugin(ScrollTrigger);
+    if (!photo.dominantColor) {
+      return;
+    }
   }, []);
 
   if (isOverview)
@@ -52,37 +48,28 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
         }}
         onClick={handleClick}
       >
-        <Image
+        <LazyPhoto
           priority={idx < 9}
-          id={photo.alt}
           src={photo.src}
           alt={photo.alt}
-          placeholder="blur"
-          blurDataURL={rgbDataURL(100, 100, 100)}
-          className="object-cover"
-          fill
-          onLoadingComplete={onLoadCallback}
+          aspectRatio={photo.aspectRatio}
+          dominantColor={photo.dominantColor}
         />
       </div>
     );
 
   return (
     <div
-      id={photo.alt}
       ref={ref}
       data-flip-id={photo.alt}
-      className="gallery-photo h-[calc(100vh-32px)] my-4 relative"
+      className="gallery-photo h-[calc(100vh-32px)] my-4 relative "
     >
-      <Image
+      <LazyPhoto
         priority={idx < 9}
-        id={photo.alt}
         src={photo.src}
         alt={photo.alt}
-        placeholder="blur"
-        blurDataURL={rgbDataURL(100, 100, 100)}
-        // blurDataURL={dominantColorPlaceholder}
-        className="object-center object-contain"
-        fill
+        aspectRatio={photo.aspectRatio}
+        dominantColor={photo.dominantColor}
       />
     </div>
   );
