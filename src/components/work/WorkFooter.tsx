@@ -3,8 +3,6 @@ import AnimatedLetters from "../atoms/AnimLetters";
 import { useOverviewContext } from "../context/OverviewContext";
 import { useCursorContext } from "../context/CursorContext";
 import { MouseEvent, useState } from "react";
-import { isConstructorDeclaration } from "typescript";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 const variants = {
   hidden: {
@@ -19,16 +17,6 @@ const variants = {
       ease: "easeOut",
     },
   },
-};
-
-const containerTransition = {
-  staggerChildren: 0.05,
-  delayChildren: 0.1,
-};
-
-const variantsContainer = {
-  hidden: { transition: containerTransition }, // this is needed to avoid a bug with the exit animation
-  visible: { transition: containerTransition },
 };
 
 const groups = ["summer", "autumn", "winter", "spring"];
@@ -67,12 +55,14 @@ export const GroupElement = ({
       initial={"hidden"}
       animate="visible"
       exit={"hidden"}
-      onMouseEnter={() => isActive && setCursorType("hover")}
+      onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("pointer")}
       onClick={(e) => {
         handleClick(group, e);
       }}
-      className={groupActive ? "font-black order-1" : ""}
+      className={
+        groupActive ? "font-black order-1 cursor-pointer" : "cursor-pointer"
+      }
     >
       {group}
     </motion.li>
@@ -154,6 +144,7 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
             <div
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={() => setCursorType("pointer")}
+              className="cursor-pointer"
             >
               <AnimatedLetters
                 string="See all photos"
