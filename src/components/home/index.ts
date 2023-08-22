@@ -1,4 +1,5 @@
 export * from "./HeroHome";
+export * from "./About";
 export * from "./GridTwo";
 export * from "./GridThree";
 export * from "./OneWCaption";

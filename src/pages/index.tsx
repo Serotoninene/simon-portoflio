@@ -7,6 +7,7 @@ import {
   TwoShifted,
   ThreeAlined,
   Outro,
+  About,
 } from "@/components/home";
 import { OneWoCaption } from "@/components/home/OneWoCaption";
 import { Container, LocomotiveScrollContainer } from "@/components/molecules";
@@ -31,6 +32,7 @@ import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 // [X] clean the numbers of photos on the Two Shifted component
 // [X] smooth the scroll on the work page
 // [] add the Simon introduction to the index
+// [] make the rgb shift appear more quickly to the
 // [] try and see if snapping isn't possible
 // [] rearrange the layout on mobile
 
@@ -402,6 +404,7 @@ export default function Home() {
       <Container className="pt-6">
         <div className="relative flex flex-col items gap-56 pb-6 bg-light">
           <HeroHome />
+          <About />
           <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
           <OneWCaption photo={photos[2]}>
             <>
