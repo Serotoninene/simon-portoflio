@@ -7,12 +7,19 @@ type Props = {};
 
 export const About = (props: Props) => {
   const ref = useRef(null);
-  const isInView = useInView(ref);
+  const isInView = useInView(ref, {
+    once: true,
+  });
 
   return (
-    <div ref={ref} className="grid gap-8 md:grid-cols-8 ">
-      <div className="col-span-3 font-black text-4xl leading-[150%]">
+    <div ref={ref} className="grid grid-cols-2 md:grid-cols-8 md:gap-8">
+      <div
+        data-scroll
+        data-scroll-speed="3"
+        className="col-span-3 font-black text-4xl leading-[110%]"
+      >
         <AnimatedWords
+          delay={0}
           stagger={0.01}
           start={isInView}
           fontWeight="font-bold"
@@ -22,21 +29,29 @@ export const About = (props: Props) => {
       </div>
       <div />
 
-      <div className="col-span-2 text-justify flex items-end sm:text-lg">
+      <div
+        data-scroll
+        data-scroll-speed="3"
+        className="md:col-span-2 text-justify flex items-end sm:text-lg"
+      >
         <AnimatedWords
+          delay={0}
           stagger={0.005}
           start={isInView}
-          delay={0.3}
           fontWeight="font-medium"
           string="It is more intriguing to me to offer a unique and original composition
           of something that is ultimately ordinary."
         />
       </div>
-      <div className="col-span-2 text-justify flex items-end sm:text-lg">
+      <div
+        data-scroll
+        data-scroll-speed="3"
+        className="col-span-2 text-justify flex items-end sm:text-lg"
+      >
         <AnimatedWords
+          delay={0}
           stagger={0.005}
           start={isInView}
-          delay={0.5}
           fontWeight="font-medium"
           string="Without pretension, I would like to pay tribute here to all objects, all
           bodies, all gestures, all buildings, and all the details that have

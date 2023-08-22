@@ -13,6 +13,7 @@ interface Props {
   stagger?: number | undefined;
   start?: boolean | undefined;
   fontWeight?: string | undefined;
+  leading?: string | undefined;
   absolute?: boolean;
 }
 
@@ -24,7 +25,6 @@ export const AnimatedWords = ({
   stagger = 0.02,
   start = true,
   fontWeight = "font-normal",
-
   absolute,
 }: Props) => {
   const path = usePathname();
@@ -80,7 +80,7 @@ export const AnimatedWords = ({
         animate={start ? "show" : "hidden"}
         exit="exit"
         className={`${absolute ? "absolute w-[100px]" : ""}
-        overflow-hidden inline-block align-bottom leading-[110%] `}
+        overflow-hidden inline-block align-bottom`}
       >
         {words?.map((word) => (
           <>
