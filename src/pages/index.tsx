@@ -31,8 +31,8 @@ import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 // [X] add a "move to see al the photos" at the bottom of index
 // [X] clean the numbers of photos on the Two Shifted component
 // [X] smooth the scroll on the work page
-// [] add the Simon introduction to the index
-// [] make the rgb shift appear more quickly to the
+// [X] add the Simon introduction to the index
+// [X] make the rgb shift appear more quickly to the
 // [] try and see if snapping isn't possible
 // [] rearrange the layout on mobile
 
