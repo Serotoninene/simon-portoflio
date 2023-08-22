@@ -7,15 +7,13 @@ type Props = {};
 
 export const About = (props: Props) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, {
-    once: true,
-  });
+  const isInView = useInView(ref);
 
   return (
     <div ref={ref} className="grid grid-cols-2 md:grid-cols-8 md:gap-8">
       <div
         data-scroll
-        data-scroll-speed="3"
+        data-scroll-speed="0.5"
         className="col-span-3 font-black text-4xl leading-[110%]"
       >
         <AnimatedWords
@@ -31,7 +29,7 @@ export const About = (props: Props) => {
 
       <div
         data-scroll
-        data-scroll-speed="3"
+        data-scroll-speed="0.5"
         className="md:col-span-2 text-justify flex items-end sm:text-lg"
       >
         <AnimatedWords
@@ -45,7 +43,7 @@ export const About = (props: Props) => {
       </div>
       <div
         data-scroll
-        data-scroll-speed="3"
+        data-scroll-speed="0.5"
         className="col-span-2 text-justify flex items-end sm:text-lg"
       >
         <AnimatedWords
