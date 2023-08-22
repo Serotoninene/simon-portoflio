@@ -1,20 +1,18 @@
 import React from "react";
 
 import { AnimatedWords } from "../atoms";
-import AnimatedLetters from "../atoms/AnimLetters";
 
 type Props = {};
 
 export const About = (props: Props) => {
   return (
-    <div className="grid gap-8 sm:grid-cols-8 ">
+    <div className="grid gap-8 md:grid-cols-8 ">
       <div className="col-span-3 font-black text-4xl leading-[150%]">
-        <AnimatedLetters
+        <AnimatedWords
           string="What is supposed to be photogenic does not interest me as much as its
         inherent beauty."
           fontWeight="font-black"
           stagger={0.02}
-          delay={1}
         />
       </div>
       <div />

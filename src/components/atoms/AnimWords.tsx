@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 // Framer Motion
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
@@ -24,6 +24,7 @@ export const AnimatedWords = ({
   stagger = 0.02,
   start = true,
   fontWeight = "font-normal",
+
   absolute,
 }: Props) => {
   const path = usePathname();
@@ -73,22 +74,27 @@ export const AnimatedWords = ({
     <AnimatePresence mode="wait">
       <motion.span
         key={path}
+        id={string}
         variants={containerAnim}
         initial="hidden"
         animate={start ? "show" : "hidden"}
         exit="exit"
         className={`${absolute ? "absolute w-[100px]" : ""}
-       overflow-hidden inline-block align-bottom leading-[110%]`}
+        overflow-hidden inline-block align-bottom leading-[110%] `}
       >
         {words?.map((word) => (
           <>
-            <motion.span
+            <span
               key={`${word}-${string}`}
-              className={`${fontWeight} inline-block`}
-              variants={letterAnim}
+              className="overflow-hidden inline-block"
             >
-              {word}
-            </motion.span>{" "}
+              <motion.span
+                className={`${fontWeight} inline-block`}
+                variants={letterAnim}
+              >
+                {word}
+              </motion.span>
+            </span>{" "}
           </>
         ))}
       </motion.span>

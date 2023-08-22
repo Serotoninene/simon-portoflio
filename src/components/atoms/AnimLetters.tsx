@@ -17,7 +17,7 @@ interface Props {
   absolute?: boolean;
 }
 
-const AnimatedLetters = ({
+export const AnimatedLetters = ({
   string,
   y = 400,
   rotate = 0,
