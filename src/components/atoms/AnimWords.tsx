@@ -80,10 +80,10 @@ export const AnimatedWords = ({
         className={`${absolute ? "absolute w-[100px]" : ""}
        overflow-hidden inline-block align-bottom leading-[110%]`}
       >
-        {words?.map((word, idx) => (
+        {words?.map((word) => (
           <>
             <motion.span
-              key={`${word}-${idx}`}
+              key={`${word}-${string}`}
               className={`${fontWeight} inline-block`}
               variants={letterAnim}
             >
