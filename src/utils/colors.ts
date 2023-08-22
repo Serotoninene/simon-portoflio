@@ -58,6 +58,7 @@ export const rgbDataURL = (r: number, g: number, b: number) => {
 };
 
 export const updateDominantColors = async (photos: any) => {
+  console.log("Updating dominant colors");
   for (let idx = 0; idx < photos.length; idx++) {
     const photo = photos[idx];
     const color = await getDominantColor(photo.src);

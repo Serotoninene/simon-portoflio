@@ -44,7 +44,9 @@ const Gallery = ({ photos, photoGroup, setTitle }: any) => {
       // @ts-ignore
       setTitle(photosDisplayed[idx]?.capitalizedTitle);
     });
-  }, [scroll, photoGroup]);
+
+    // Update the title when the scroll changes
+  }, [scroll, photosDisplayed]);
 
   useEffect(() => {
     gsap.registerPlugin(Flip);

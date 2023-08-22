@@ -399,6 +399,7 @@ export const photos = [
 
 export default function Home() {
   if (!photos) return <div></div>;
+
   return (
     <LocomotiveScrollContainer>
       <Container className="pt-6">
