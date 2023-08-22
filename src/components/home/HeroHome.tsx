@@ -103,9 +103,13 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
         duration: 1.5,
         ease: Power4.easeOut,
       })
-      .to(shaderRef.current.uniforms.uProgress, {
-        value: 1,
-      });
+      .to(
+        shaderRef.current.uniforms.uProgress,
+        {
+          value: 1,
+        },
+        "<40%"
+      );
 
     return () => {
       if (introTl.current) {
