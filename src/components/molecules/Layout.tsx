@@ -8,6 +8,8 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useWindowSize } from "@/utils/hooks";
 import CustomCursor from "./CustomCursor";
+import { useRouter } from "next/router";
+import { gsap } from "gsap";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -35,12 +37,37 @@ export const metadata = {
 
 export default function Layout({ children }: Props) {
   const path = usePathname();
+  const router = useRouter();
   const { height } = useWindowSize();
+
+  const handleChangeStart = () => {
+    gsap.to("body", {
+      x: 500,
+      duration: 2.5,
+    });
+  };
+
+  const handleChangeComplete = () => {
+    gsap.to("body", {
+      x: 0,
+      duration: 2.5,
+    });
+  };
 
   useEffect(() => {
     const screen = window.innerHeight;
     document.documentElement.style.setProperty("--fullScreen", screen + "px");
   }, [height]);
+
+  // useEffect(() => {
+  //   router.events.on("routeChangeStart", handleChangeStart);
+  //   router.events.on("routeChangeComplete", handleChangeComplete);
+
+  //   return () => {
+  //     router.events.off("routeChangeStart", handleChangeStart);
+  //     router.events.off("routeChangeComplete", handleChangeComplete);
+  //   };
+  // }, [router]);
 
   return (
     <div id="App" className={`${poppins.className}`}>
