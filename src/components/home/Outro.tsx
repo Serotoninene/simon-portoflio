@@ -37,7 +37,7 @@ const OutroScene = ({ footerSize }: Props) => {
   };
 
   const texture = useTexture(
-    "/assets/photos/14_ROOMS_FOR_ME_&_FOR_MY_CAR.jpeg"
+    "/assets/photos/spring/37_LAYING_ON_THE_FIELD.jpeg"
   );
 
   const uniforms = useMemo(
