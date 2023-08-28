@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion, useMotionValue } from "framer-motion";
 // Context
 import { useCursorContext } from "@components/context/CursorContext";
-import { useMediaQuery } from "@utils/hooks";
 import AnimatedLetters from "../atoms/AnimLetters";
 
 export default function CustomCursor() {
-  const onMobile = useMediaQuery(640);
-
   const { cursorType } = useCursorContext();
 
   const mousePosition = {
@@ -15,19 +12,10 @@ export default function CustomCursor() {
     y: useMotionValue(200),
   };
 
-  // const [mousePosition, setMousePosition] = useState({
-  //   x: 200,
-  //   y: 200,
-  // });
-
   const onMouseMove = (event: MouseEvent) => {
     const { clientX, clientY } = event;
-    mousePosition.x.set(clientX);
-    mousePosition.y.set(clientY);
-    // setMousePosition({
-    //   x,
-    //   y,
-    // });
+    mousePosition.x.set(clientX - 10);
+    mousePosition.y.set(clientY - 10);
   };
 
   useEffect(() => {
@@ -44,6 +32,7 @@ export default function CustomCursor() {
       style={{
         x: mousePosition.x,
         y: mousePosition.y,
+        scale: cursorType === "hover" ? 0.5 : 1,
       }}
       transition={{
         type: "spring",
