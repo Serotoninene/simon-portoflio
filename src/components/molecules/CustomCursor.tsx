@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 // Context
 import { useCursorContext } from "@components/context/CursorContext";
 import { useMediaQuery } from "@utils/hooks";
@@ -9,17 +9,25 @@ export default function CustomCursor() {
   const onMobile = useMediaQuery(640);
 
   const { cursorType } = useCursorContext();
-  const [mousePosition, setMousePosition] = useState({
-    x: 200,
-    y: 200,
-  });
+
+  const mousePosition = {
+    x: useMotionValue(200),
+    y: useMotionValue(200),
+  };
+
+  // const [mousePosition, setMousePosition] = useState({
+  //   x: 200,
+  //   y: 200,
+  // });
 
   const onMouseMove = (event: MouseEvent) => {
-    const { clientX: x, clientY: y } = event;
-    setMousePosition({
-      x,
-      y,
-    });
+    const { clientX, clientY } = event;
+    mousePosition.x.set(clientX);
+    mousePosition.y.set(clientY);
+    // setMousePosition({
+    //   x,
+    //   y,
+    // });
   };
 
   useEffect(() => {
@@ -33,9 +41,9 @@ export default function CustomCursor() {
     <motion.div
       id="CustomCursor" // had to use css for styling here --> base.scss
       className={cursorType}
-      animate={{
-        top: mousePosition.y - 10,
-        left: mousePosition.x - 10,
+      style={{
+        x: mousePosition.x,
+        y: mousePosition.y,
       }}
       transition={{
         type: "spring",
