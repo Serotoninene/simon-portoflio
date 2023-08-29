@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 // Context
 import { useCursorContext } from "@components/context/CursorContext";
 import AnimatedLetters from "../atoms/AnimLetters";
@@ -7,9 +7,15 @@ import AnimatedLetters from "../atoms/AnimLetters";
 export default function CustomCursor() {
   const { cursorType } = useCursorContext();
 
+  const springConfig = {
+    stiffness: 500,
+    damping: 15,
+    mass: 0.5,
+  };
+
   const mousePosition = {
-    x: useMotionValue(200),
-    y: useMotionValue(200),
+    x: useSpring(200, springConfig),
+    y: useSpring(200, springConfig),
   };
 
   const onMouseMove = (event: MouseEvent) => {
@@ -33,12 +39,6 @@ export default function CustomCursor() {
         x: mousePosition.x,
         y: mousePosition.y,
         scale: cursorType === "hover" ? 0.5 : 1,
-      }}
-      transition={{
-        type: "spring",
-        damping: 100,
-        mass: 0.25,
-        stiffness: 1000,
       }}
     >
       {cursorType === "cta" && (
