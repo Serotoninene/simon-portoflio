@@ -66,7 +66,9 @@ export const LazyPhoto = ({
           {...imageProps}
           onLoad={() => {
             setIsLoaded(true);
-            scroll?.update();
+            if (!scroll) {
+              scroll.update();
+            }
           }}
           className={`lazy-photo transition-opacity duration-1000 object-cover  ${
             isLoaded ? "opacity-100" : "opacity-0"

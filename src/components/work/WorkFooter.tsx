@@ -85,7 +85,7 @@ export const GroupSelector = ({ photoGroup, setPhotoGroup }: any) => {
     <AnimatePresence mode="wait">
       <ul
         key={isActive.toString()}
-        className="flex flex-col items-start w-20 gap-1"
+        className="flex flex-col items-end w-20 gap-1"
       >
         {groups.map((group, idx) => (
           <GroupElement
@@ -125,11 +125,14 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
             initial="hidden"
             animate={isOverview ? "hidden" : "visible"}
             exit="hidden"
-            className="font-bold"
+            className="font-bold w-1/2 leading-[1.1] sm:width-auto"
           >
-            <span className=" text-light">{title} </span>
+            <span className="text-light">{title} </span>
           </motion.div>
-          <div className="flex items-end gap-40" onClick={handleOverview}>
+          <div
+            className="flex flex-col items-end sm:flex-row sm:gap-40"
+            onClick={handleOverview}
+          >
             <motion.div
               variants={variants}
               initial="hidden"
