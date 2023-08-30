@@ -26,6 +26,7 @@ export default function CustomCursor() {
 
   useEffect(() => {
     document.addEventListener("mousemove", onMouseMove);
+
     return () => {
       document.removeEventListener("mousemove", onMouseMove);
     };

@@ -119,7 +119,7 @@ const OutroScene = ({ footerSize }: Props) => {
       }}
     >
       <planeGeometry
-        args={[footerSize.width * 2, footerSize.height * 2, 128, 128]}
+        args={[footerSize.width * 1.35, footerSize.height * 1.35, 128, 128]}
         // i must multiply the width and height by 2 as the canvas is only 50vh and the all fov calculus to base px on ndc is based on 100vh
       />
       <shaderMaterial
@@ -147,7 +147,7 @@ export const Outro = () => {
   }, [width, height]);
 
   return (
-    <div ref={ref} className="h-[50vh] mt-10 sm:mt-40">
+    <div ref={ref} className="h-[75vh] bg-red-400 mt-10 sm:mt-40">
       <CustomCanvas>
         <OutroScene footerSize={footerSize} />
       </CustomCanvas>
