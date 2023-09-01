@@ -14,6 +14,7 @@ import { useWindowSize } from "@/utils/hooks";
 
 import { useCursorContext } from "../../context/CursorContext";
 import { useRouter } from "next/router";
+import { useLoadingContext } from "@/context/LoadingContext";
 
 type Props = {
   footerSize: {
@@ -28,7 +29,7 @@ const OutroScene = ({ footerSize }: Props) => {
   const router = useRouter();
   const touchTexture = useMemo<any>(() => new TouchTexture(), []);
 
-  const { cursorType, setCursorType } = useCursorContext();
+  const { setCursorType } = useCursorContext();
 
   const [hovered, setHovered] = useState(false);
 
@@ -134,6 +135,7 @@ const OutroScene = ({ footerSize }: Props) => {
 
 export const Outro = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const { isLoaded } = useLoadingContext();
   const { width, height } = useWindowSize();
   const [footerSize, setFooterSize] = useState({
     width: 0,
@@ -147,7 +149,7 @@ export const Outro = () => {
   }, [width, height]);
 
   return (
-    <div ref={ref} className="h-[75vh] bg-red-400 mt-10 sm:mt-40">
+    <div ref={ref} className="h-[75vh] mt-10 sm:mt-40">
       <CustomCanvas>
         <OutroScene footerSize={footerSize} />
       </CustomCanvas>

@@ -11,7 +11,9 @@ import {
 } from "@/components/home";
 import { OneWoCaption } from "@/components/home/OneWoCaption";
 import { Container, LocomotiveScrollContainer } from "@/components/molecules";
-import { useState } from "react";
+import { Loader } from "@/components/organisms";
+import { useLoadingContext } from "@/context/LoadingContext";
+import { RefObject, useEffect, useRef } from "react";
 
 // TO DO
 // [X] changer les photos d'après le figma
@@ -399,12 +401,17 @@ export const photos = [
 ];
 
 export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const { isLoaded } = useLoadingContext();
 
-  if (!photos) return <div></div>;
+  if (!photos)
+    return (
+      <div className="bg-red-400 h-[var(--fullScreen)] flex justify-center items-center"></div>
+    );
 
   return (
     <LocomotiveScrollContainer>
+      <Loader />
+
       <Container className="pt-6">
         <div className="relative flex flex-col items gap-56 pb-6 bg-light">
           <HeroHome />

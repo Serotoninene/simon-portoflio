@@ -1,4 +1,4 @@
-import { Poppins, Public_Sans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Navbar } from "@/components/organisms";
@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useWindowSize } from "@/utils/hooks";
 import CustomCursor from "./CustomCursor";
+import { LoadingProvider } from "@/context/LoadingContext";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -53,21 +54,23 @@ export default function Layout({ children }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
-        <Navbar />
-      </header>
-      <CustomCursor />
+      <LoadingProvider>
+        <header>
+          <Navbar />
+        </header>
+        <CustomCursor />
 
-      <AnimatePresence mode="wait">
-        <motion.main
-          key={path}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          {children}
-        </motion.main>
-      </AnimatePresence>
+        <AnimatePresence mode="wait">
+          <motion.main
+            key={path}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {children}
+          </motion.main>
+        </AnimatePresence>
+      </LoadingProvider>
     </div>
   );
 }

@@ -14,12 +14,9 @@ import { motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { ease } from "@/utils/store";
 import { CustomCanvas } from "@components/three";
+import { useLoadingContext } from "@/context/LoadingContext";
 
-type SceneProps = {
-  setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
+const HeroPhoto = () => {
   // setting up the values
   const [photoData, setPhotoData] = useState({
     x: 0,
@@ -27,6 +24,8 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
     width: 0,
     height: 0,
   });
+
+  const { setIsLoaded } = useLoadingContext();
   const introTl = useRef<GSAPTimeline | null>(null);
   const { height, width } = useWindowSize();
   const meshRef = useRef<any>();
@@ -134,29 +133,23 @@ const HeroPhoto = ({ setIsLoaded }: SceneProps) => {
   );
 };
 
-const Scene = ({ setIsLoaded }: SceneProps) => {
+const Scene = () => {
   return (
     <CustomCanvas>
       {/* <Perf /> */}
       {/* <OrbitControls enableZoom={false} /> */}
-      <HeroPhoto setIsLoaded={setIsLoaded} />
+      <HeroPhoto />
     </CustomCanvas>
   );
 };
 
 export const HeroHome = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoaded(true);
-    }, 1000);
-  }, []);
+  const { isLoaded } = useLoadingContext();
 
   return (
     <>
       <div className="h-[var(--fullScreen)] z-10 fixed top-0 left-0 right-0 ">
-        <Scene setIsLoaded={setIsLoaded} />
+        <Scene />
       </div>
       <div className="h-[var(--fullScreen)] flex flex-col justify-between gap-6 pt-10 pb-10">
         <div

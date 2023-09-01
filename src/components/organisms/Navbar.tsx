@@ -6,6 +6,7 @@ import { AnimLink } from "../atoms";
 import { Container } from "../molecules";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useLoadingContext } from "@/context/LoadingContext";
 
 type NavLink = {
   href: string;
@@ -116,6 +117,7 @@ export const Menu = ({ navLinks, isMenuOpen, setIsMenuOpen }: Props) => {
 };
 
 export const Navbar = () => {
+  const { isLoaded } = useLoadingContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollDir, setScrollDir] = useState<"up" | "down">("up");
 
@@ -137,6 +139,8 @@ export const Navbar = () => {
 
     return document.removeEventListener("wheel", handleWheel);
   }, []);
+
+  if (!isLoaded) return null;
 
   return (
     <Container className="fixed left-0 right-0 z-10 pt-4">

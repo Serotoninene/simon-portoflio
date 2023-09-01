@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import React, { RefObject, use, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
