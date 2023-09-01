@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import AnimatedLetters from "../atoms/AnimLetters";
-import { useOverviewContext } from "../context/OverviewContext";
-import { useCursorContext } from "../context/CursorContext";
+import { useOverviewContext } from "../../context/OverviewContext";
+import { useCursorContext } from "../../context/CursorContext";
 import { MouseEvent, useState } from "react";
 
 const variants = {

@@ -11,6 +11,7 @@ import {
 } from "@/components/home";
 import { OneWoCaption } from "@/components/home/OneWoCaption";
 import { Container, LocomotiveScrollContainer } from "@/components/molecules";
+import { useState } from "react";
 
 // TO DO
 // [X] changer les photos d'après le figma
@@ -398,6 +399,8 @@ export const photos = [
 ];
 
 export default function Home() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   if (!photos) return <div></div>;
 
   return (

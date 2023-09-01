@@ -1,7 +1,7 @@
 import "../styling/globals.css";
 import type { AppProps } from "next/app";
 import Layout from "@/components/molecules/Layout";
-import { CursorProvider } from "@/components/context/CursorContext";
+import { CursorProvider } from "@/context/CursorContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

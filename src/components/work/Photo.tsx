@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
-import { useOverviewContext } from "../context/OverviewContext";
-import { useCursorContext } from "../context/CursorContext";
+import { useOverviewContext } from "../../context/OverviewContext";
+import { useCursorContext } from "../../context/CursorContext";
 
 import { ExtendedPhoto } from "@/types";
 import { LazyPhoto } from "../atoms";

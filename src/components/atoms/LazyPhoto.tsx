@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useOverviewContext } from "../context/OverviewContext";
+import { useOverviewContext } from "../../context/OverviewContext";
 import { useWindowSize } from "@/utils/hooks";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 

@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 import { motion } from "framer-motion";
-import { useCursorContext } from "../context/CursorContext";
+import { useCursorContext } from "../../context/CursorContext";
 
 type Props = {
   children: React.ReactNode;

@@ -12,7 +12,7 @@ import fragmentShader from "@shaders/HomeFooterShader/fragment.glsl";
 
 import { useWindowSize } from "@/utils/hooks";
 
-import { useCursorContext } from "../context/CursorContext";
+import { useCursorContext } from "../../context/CursorContext";
 import { useRouter } from "next/router";
 
 type Props = {

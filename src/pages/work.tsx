@@ -5,7 +5,7 @@ import { Photo, WorkFooter } from "@/components/work";
 import {
   OverviewProvider,
   useOverviewContext,
-} from "@/components/context/OverviewContext";
+} from "@/context/OverviewContext";
 
 import { photos } from "@/data/photos";
 

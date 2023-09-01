@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 // Context
-import { useCursorContext } from "@components/context/CursorContext";
+import { useCursorContext } from "@/context/CursorContext";
 import AnimatedLetters from "../atoms/AnimLetters";
 
 export default function CustomCursor() {
