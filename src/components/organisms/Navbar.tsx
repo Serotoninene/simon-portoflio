@@ -122,6 +122,7 @@ export const Navbar = () => {
   const [scrollDir, setScrollDir] = useState<"up" | "down">("up");
 
   const handleWheel = (e: WheelEvent) => {
+    if (!isLoaded) return;
     if (e.deltaY > 0) {
       setScrollDir("down");
     } else {
