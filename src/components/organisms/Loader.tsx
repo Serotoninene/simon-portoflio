@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
-import { useProgress } from "@react-three/drei";
 import { useLoadingContext } from "@/context/LoadingContext";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 export const Loader = () => {
-  const { progress } = useProgress();
   const { isLoaded } = useLoadingContext();
   const { scroll } = useLocomotiveScroll();
+  scroll?.stop();
 
-  isLoaded ? scroll.start() : scroll?.stop();
+  useEffect(() => {
+    if (isLoaded) {
+      scroll?.start();
+    }
+  }, [isLoaded]);
 
   if (isLoaded) return null;
 
