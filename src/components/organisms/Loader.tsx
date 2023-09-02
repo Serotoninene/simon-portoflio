@@ -5,7 +5,7 @@ import { useLocomotiveScroll } from "react-locomotive-scroll";
 export const Loader = () => {
   const { isLoaded } = useLoadingContext();
   const { scroll } = useLocomotiveScroll();
-  scroll?.stop();
+  !isLoaded && scroll?.stop();
 
   useEffect(() => {
     if (isLoaded) {
