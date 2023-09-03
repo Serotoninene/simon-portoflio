@@ -7,7 +7,7 @@ type Props = {};
 
 export const About = (props: Props) => {
   const ref = useRef(null);
-  const isInView = useInView(ref);
+  const isInView = useInView(ref, { margin: "20px" });
 
   return (
     <div ref={ref} className="grid grid-cols-2 md:grid-cols-8 md:gap-8">

@@ -85,6 +85,12 @@ export const GroupSelector = ({ photoGroup, setPhotoGroup }: any) => {
     <AnimatePresence mode="wait">
       <ul
         key={isActive.toString()}
+        onMouseEnter={() => {
+          setIsActive(true);
+        }}
+        onMouseLeave={() => {
+          setIsActive(false);
+        }}
         className="flex flex-col items-end w-20 gap-1"
       >
         {groups.map((group, idx) => (

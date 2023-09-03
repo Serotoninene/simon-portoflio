@@ -452,8 +452,8 @@ export default function Home() {
           <GridTwo firstPhoto={photos[19]} secondPhoto={photos[20]} />
           <OneWCaption photo={photos[21]}>
             <>
-              <span className="font-bold">The couch</span> couch waits all day
-              for you <span className="font-bold">to come home.</span>
+              <span className="font-bold">The couch</span> waits all day for you{" "}
+              <span className="font-bold">to come home.</span>
             </>
           </OneWCaption>
           <TwoShifted

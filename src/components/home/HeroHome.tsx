@@ -136,8 +136,6 @@ const HeroPhoto = () => {
 const Scene = () => {
   return (
     <CustomCanvas>
-      {/* <Perf /> */}
-      {/* <OrbitControls enableZoom={false} /> */}
       <HeroPhoto />
     </CustomCanvas>
   );
