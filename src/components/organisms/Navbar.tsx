@@ -117,12 +117,12 @@ export const Menu = ({ navLinks, isMenuOpen, setIsMenuOpen }: Props) => {
 };
 
 export const Navbar = () => {
+  const path = usePathname();
   const { isLoaded } = useLoadingContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollDir, setScrollDir] = useState<"up" | "down">("up");
 
   const handleWheel = (e: WheelEvent) => {
-    if (!isLoaded) return;
     if (e.deltaY > 0) {
       setScrollDir("down");
     } else {
@@ -141,7 +141,13 @@ export const Navbar = () => {
     return document.removeEventListener("wheel", handleWheel);
   }, []);
 
-  if (!isLoaded) return null;
+  useEffect(() => {
+    if (isLoaded) {
+      setScrollDir("up");
+    }
+  }, [isLoaded]);
+
+  if (!isLoaded && path === "/") return null;
 
   return (
     <Container className="fixed left-0 right-0 z-10 pt-4">

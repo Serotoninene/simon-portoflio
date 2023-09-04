@@ -13,7 +13,6 @@ import { OneWoCaption } from "@/components/home/OneWoCaption";
 import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 import { Loader } from "@/components/organisms";
 import { useLoadingContext } from "@/context/LoadingContext";
-import { RefObject, useEffect, useRef } from "react";
 
 // TO DO
 // [X] changer les photos d'après le figma
@@ -36,6 +35,14 @@ import { RefObject, useEffect, useRef } from "react";
 // [X] smooth the scroll on the work page
 // [X] add the Simon introduction to the index
 // [X] make the rgb shift appear more quickly to the
+// [X] navbar disappears sometimes
+// [] when overview scroll malfunctions
+// [] contact page
+// [] improve custom cursor performance
+// [] animate loading screen
+// [] groups sometime disappear since added the anim on hover
+// [] add the trailing with TouchTexture
+
 // [] try and see if snapping isn't possible
 // [] rearrange the layout on mobile
 
