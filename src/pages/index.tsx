@@ -36,11 +36,11 @@ import { useLoadingContext } from "@/context/LoadingContext";
 // [X] add the Simon introduction to the index
 // [X] make the rgb shift appear more quickly to the
 // [X] navbar disappears sometimes
-// [] when overview scroll malfunctions
-// [] contact page
 // [] improve custom cursor performance
+// [] contact page
 // [] animate loading screen
 // [] groups sometime disappear since added the anim on hover
+// [] when overview scroll malfunctions
 // [] add the trailing with TouchTexture
 
 // [] try and see if snapping isn't possible

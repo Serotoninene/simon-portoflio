@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useSpring } from "framer-motion";
 // Context
 import { useCursorContext } from "@/context/CursorContext";
 import AnimatedLetters from "../atoms/AnimLetters";

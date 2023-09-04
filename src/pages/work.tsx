@@ -33,10 +33,8 @@ const Gallery = ({ photos, photoGroup, setTitle }: any) => {
   }, [photoGroup]);
 
   useEffect(() => {
-    if (!scroll) return;
-
     // Update the title when the scroll changes
-    scroll.on("scroll", (e: any) => {
+    scroll?.on("scroll", (e: any) => {
       const idx = Math.round(
         (e.scroll.y / e.limit.y) * (photosDisplayed.length - 1)
       );
