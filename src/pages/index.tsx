@@ -40,11 +40,12 @@ import { Loader } from "@/components/organisms";
 // [X] contact page
 // [] animate loading screen
 // [] groups sometime disappear since added the anim on hover
-// [] when overview scroll malfunctions
 // [] add the trailing with TouchTexture
+// [] animate the wording in the contact page
 
-// [] try and see if snapping isn't possible
 // [] rearrange the layout on mobile
+// [] when overview scroll malfunctions (no bug on live version ...)
+// [] try and see if snapping isn't possible
 
 export const photos = [
   {
