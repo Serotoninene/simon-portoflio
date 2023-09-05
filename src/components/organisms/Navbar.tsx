@@ -42,7 +42,7 @@ const linkAnim = {
 const navLinks = [
   { href: "/", title: "home" },
   { href: "/work", title: "work" },
-  { href: "https://www.instagram.com/uma__simon/", title: "instagram" },
+  { href: "/contact", title: "contact" },
 ];
 
 interface BurgerButtonProps {
