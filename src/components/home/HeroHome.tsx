@@ -35,7 +35,7 @@ const HeroPhoto = () => {
   // loading the texture
   const [texture, displacementMap] = useLoader(
     THREE.TextureLoader,
-    ["/assets/photos/00_ACCUEIL.jpeg", "/assets/disp/disp1.jpg"],
+    ["/assets/photos/home/00_ACCUEIL.jpeg", "/assets/disp/disp1.jpg"],
     () => {
       // init the animation of the page when texure is loaded
       setIsLoaded(true);

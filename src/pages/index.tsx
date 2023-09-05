@@ -12,7 +12,6 @@ import {
 import { OneWoCaption } from "@/components/home/OneWoCaption";
 import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 import { Loader } from "@/components/organisms";
-import { useLoadingContext } from "@/context/LoadingContext";
 
 // TO DO
 // [X] changer les photos d'après le figma
@@ -38,7 +37,7 @@ import { useLoadingContext } from "@/context/LoadingContext";
 // [X] navbar disappears sometimes
 // [X] improve custom cursor performance
 // [X] kinda lost time over photos management for no real reason
-// [] contact page
+// [X] contact page
 // [] animate loading screen
 // [] groups sometime disappear since added the anim on hover
 // [] when overview scroll malfunctions
@@ -409,8 +408,6 @@ export const photos = [
 ];
 
 export default function Home() {
-  const { isLoaded } = useLoadingContext();
-
   if (!photos)
     return (
       <div className="bg-red-400 h-[var(--fullScreen)] flex justify-center items-center"></div>
@@ -422,7 +419,7 @@ export default function Home() {
 
       <Container className="pt-6">
         <div className="relative flex flex-col items gap-56 pb-6 bg-light">
-          {/* <HeroHome /> */}
+          <HeroHome />
           <About />
           <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
           <OneWCaption photo={photos[2]}>
