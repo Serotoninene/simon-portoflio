@@ -36,7 +36,8 @@ import { useLoadingContext } from "@/context/LoadingContext";
 // [X] add the Simon introduction to the index
 // [X] make the rgb shift appear more quickly to the
 // [X] navbar disappears sometimes
-// [] improve custom cursor performance
+// [X] improve custom cursor performance
+// [X] kinda lost time over photos management for no real reason
 // [] contact page
 // [] animate loading screen
 // [] groups sometime disappear since added the anim on hover
