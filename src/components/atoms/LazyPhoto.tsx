@@ -53,7 +53,7 @@ export const LazyPhoto = ({
   return (
     <div
       ref={containerRef}
-      className="h-full w-full  flex justify-center items-center"
+      className="h-full w-full flex justify-center items-center"
     >
       <div
         ref={ref}

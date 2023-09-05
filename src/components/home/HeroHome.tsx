@@ -158,7 +158,7 @@ export const HeroHome = () => {
         >
           <Image
             alt="house in a green field"
-            src="/assets/photos/00_ACCUEIL.jpeg"
+            src="/assets/photos/home/00_ACCUEIL.jpeg"
             fill
             priority
             className="object-cover"

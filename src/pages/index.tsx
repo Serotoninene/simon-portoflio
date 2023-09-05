@@ -48,7 +48,7 @@ import { useLoadingContext } from "@/context/LoadingContext";
 
 export const photos = [
   {
-    src: "/assets/photos/01_MY_GARDEN_IS_COOL.jpeg",
+    src: "/assets/photos/home/01_MY_GARDEN_IS_COOL.jpeg",
     alt: "01_MY_GARDEN_IS_COOL",
     dominantColor: "#282515",
     caption: {
@@ -59,7 +59,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/02_MY_HOUSE_IS_A_TRIANGLE.jpeg",
+    src: "/assets/photos/home/02_MY_HOUSE_IS_A_TRIANGLE.jpeg",
     alt: "02_MY_HOUSE_IS_A_TRIANGLE",
     dominantColor: "#a29c9d",
     caption: {
@@ -70,7 +70,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/03_GOOGLE_MAPS-ING.jpeg",
+    src: "/assets/photos/home/03_GOOGLE_MAPS-ING.jpeg",
     alt: "03_GOOGLE_MAPS-ING",
     dominantColor: "#413722",
     caption: {
@@ -81,7 +81,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/04_FISHING.jpeg",
+    src: "/assets/photos/home/04_FISHING.jpeg",
     alt: "04_FISHING",
     dominantColor: "#bdbba3",
     caption: {
@@ -92,7 +92,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/05_LIVING_ON_A_BOAT.jpeg",
+    src: "/assets/photos/home/05_LIVING_ON_A_BOAT.jpeg",
     alt: "05_LIVING_ON_A_BOAT",
     dominantColor: "#798d97",
     caption: {
@@ -103,7 +103,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/06_CROWDED.jpeg",
+    src: "/assets/photos/home/06_CROWDED.jpeg",
     alt: "06_CROWDED",
     dominantColor: "#a6b2bc",
     caption: {
@@ -114,13 +114,13 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/07_SQUARED.jpeg",
+    src: "/assets/photos/home/07_SQUARED.jpeg",
     alt: "07_SQUARED",
     dominantColor: "#917b5d",
     caption: { idx: "7", title: "SQUARED", place: "Hawaï (US)", date: "2020" },
   },
   {
-    src: "/assets/photos/08_ALL_ABOUT_CLEANING.jpeg",
+    src: "/assets/photos/home/08_ALL_ABOUT_CLEANING.jpeg",
     alt: "08_ALL_ABOUT_CLEANING",
     dominantColor: "#c3afa5",
     caption: {
@@ -131,7 +131,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/09_SUPERMARKET.jpeg",
+    src: "/assets/photos/home/09_SUPERMARKET.jpeg",
     alt: "09_SUPERMARKET",
     dominantColor: "#9e382f",
     caption: {
@@ -142,7 +142,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/11_APERITIF.jpeg",
+    src: "/assets/photos/home/11_APERITIF.jpeg",
     alt: "11_APERITIF",
     dominantColor: "#bcb7af",
     caption: {
@@ -153,7 +153,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/10_TIME_FOR_LAUNDRY.jpeg",
+    src: "/assets/photos/home/10_TIME_FOR_LAUNDRY.jpeg",
     alt: "10_TIME_FOR_LAUNDRY",
     dominantColor: "#a8a4aa",
     caption: {
@@ -164,7 +164,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/31_LIFE_PERSPECTIVES.jpeg",
+    src: "/assets/photos/home/31_LIFE_PERSPECTIVES.jpeg",
     alt: "31_LIFE_PERSPECTIVES",
     dominantColor: "#ababa7",
     caption: {
@@ -175,7 +175,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/14_ROOMS_FOR_ME_&_FOR_MY_CAR.jpeg",
+    src: "/assets/photos/home/14_ROOMS_FOR_ME_&_FOR_MY_CAR.jpeg",
     alt: "14_ROOMS_FOR_ME_&_FOR_MY_CAR",
     dominantColor: "#cfbaa5",
     caption: {
@@ -186,7 +186,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/15_MONUMENT.jpeg",
+    src: "/assets/photos/home/15_MONUMENT.jpeg",
     alt: "15_MONUMENT",
     dominantColor: "#b6adb0",
     caption: {
@@ -197,7 +197,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/13_TROPICAL_CHURCH.jpeg",
+    src: "/assets/photos/home/13_TROPICAL_CHURCH.jpeg",
     alt: "13_TROPICAL_CHURCH",
     dominantColor: "#aeaab9",
     caption: {
@@ -208,7 +208,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/19_I_MISSED_THE_TRAIN.jpeg",
+    src: "/assets/photos/home/19_I_MISSED_THE_TRAIN.jpeg",
     alt: "19_I_MISSED_THE_TRAIN",
     dominantColor: "#cabdb7",
     caption: {
@@ -219,7 +219,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/23_GOING_OUT_FOR_DINNER.jpeg",
+    src: "/assets/photos/home/23_GOING_OUT_FOR_DINNER.jpeg",
     alt: "23_GOING_OUT_FOR_DINNER",
     dominantColor: "#262b33",
     caption: {
@@ -230,7 +230,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/24_DOWN_BY_THE_LAKE.jpeg",
+    src: "/assets/photos/home/24_DOWN_BY_THE_LAKE.jpeg",
     alt: "24_DOWN_BY_THE_LAKE",
     dominantColor: "#304d4e",
     caption: {
@@ -241,7 +241,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/25_THROUGH_THE_MIRROR.jpeg",
+    src: "/assets/photos/home/25_THROUGH_THE_MIRROR.jpeg",
     alt: "25_THROUGH_THE_MIRROR",
     dominantColor: "#a39279",
     caption: {
@@ -252,7 +252,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/42_TIME_TO_DRY.jpeg",
+    src: "/assets/photos/home/42_TIME_TO_DRY.jpeg",
     alt: "42_TIME_TO_DRY",
     dominantColor: "",
     caption: {
@@ -263,7 +263,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/43_PRIMAVERA.jpeg",
+    src: "/assets/photos/home/43_PRIMAVERA.jpeg",
     alt: "43_PRIMAVERA",
     dominantColor: "",
     caption: {
@@ -274,7 +274,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/44_LEMONADE.jpeg",
+    src: "/assets/photos/home/44_LEMONADE.jpeg",
     alt: "44_LEMONADE",
     dominantColor: "#d2c6b4",
     caption: {
@@ -285,7 +285,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/72_LA_VIE_ET_SES_PLAISIRS.jpeg",
+    src: "/assets/photos/home/72_LA_VIE_ET_SES_PLAISIRS.jpeg",
     alt: "72_LA_VIE_ET_SES_PLAISIRS",
     dominantColor: "#789aa8",
     caption: {
@@ -296,7 +296,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/71_THERE_IS_NOTHING_ON_THE_ROOF.jpeg",
+    src: "/assets/photos/home/71_THERE_IS_NOTHING_ON_THE_ROOF.jpeg",
     alt: "71_THERE_IS_NOTHING_ON_THE_ROOF",
     dominantColor: "#817250",
     caption: {
@@ -307,7 +307,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/45_LIVING_THE_DREAM.jpeg",
+    src: "/assets/photos/home/45_LIVING_THE_DREAM.jpeg",
     alt: "45_LIVING_THE_DREAM",
     dominantColor: "#ba9a48",
     caption: {
@@ -318,7 +318,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/46_DREAMING_THE_DREAM.jpeg",
+    src: "/assets/photos/home/46_DREAMING_THE_DREAM.jpeg",
     alt: "46_DREAMING_THE_DREAM",
     dominantColor: "#688fa1",
     caption: {
@@ -329,7 +329,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/48_LA_FILLE_ET_LE_PARAPLUIE.jpeg",
+    src: "/assets/photos/home/48_LA_FILLE_ET_LE_PARAPLUIE.jpeg",
     alt: "48_LA_FILLE_ET_LE_PARAPLUIE",
     dominantColor: "#19261d",
     caption: {
@@ -340,7 +340,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/47_LE_PIED_ET_LE_PARASOL.jpeg",
+    src: "/assets/photos/home/47_LE_PIED_ET_LE_PARASOL.jpeg",
     alt: "47_LE_PIED_ET_LE_PARASOL",
     dominantColor: "#decfc0",
     caption: {
@@ -351,7 +351,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/20_LOVE_IN_A_RUBBER_BOAT.jpeg",
+    src: "/assets/photos/home/20_LOVE_IN_A_RUBBER_BOAT.jpeg",
     alt: "20_LOVE_IN_A_RUBBER_BOAT",
     dominantColor: "#244631",
     caption: {
@@ -362,7 +362,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/21_LOVE_AT_THE_STREET_CORNER.jpeg",
+    src: "/assets/photos/home/21_LOVE_AT_THE_STREET_CORNER.jpeg",
     alt: "21_LOVE_AT_THE_STREET_CORNER",
     dominantColor: "#a2a196",
     caption: {
@@ -373,7 +373,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/31_STRANGER.jpeg",
+    src: "/assets/photos/home/31_STRANGER.jpeg",
     alt: "31_STRANGER",
     dominantColor: "#422114",
     caption: {
@@ -384,7 +384,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/32_SHANGLIE.jpeg",
+    src: "/assets/photos/home/32_SHANGLIE.jpeg",
     alt: "32_SHANGLIE",
     dominantColor: "#9dafa8",
     caption: {
@@ -395,7 +395,7 @@ export const photos = [
     },
   },
   {
-    src: "/assets/photos/33_MA_GRAND-MERE.jpeg",
+    src: "/assets/photos/home/33_MA_GRAND-MERE.jpeg",
     alt: "33_MA_GRAND-MERE",
     dominantColor: "#8c543c",
     caption: {
@@ -421,7 +421,7 @@ export default function Home() {
 
       <Container className="pt-6">
         <div className="relative flex flex-col items gap-56 pb-6 bg-light">
-          <HeroHome />
+          {/* <HeroHome /> */}
           <About />
           <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
           <OneWCaption photo={photos[2]}>
