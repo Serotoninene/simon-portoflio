@@ -33,7 +33,7 @@ export const Loader = () => {
             variants={containerAnim}
             exit="exit"
             onAnimationComplete={unMountAfterExitAnim}
-            className="h-[var(--fullScreen)]  w-screen flex justify-center items-center fixed top-0 left-0 bg-[#FFF5F5] z-20 overflow-hidden text-3xl font-black"
+            className="h-[var(--fullScreen)]  w-screen flex justify-center items-center fixed top-0 left-0 bg-light z-20 overflow-hidden text-3xl font-black"
           >
             <svg
               viewBox="0 0 56 10" // Set the viewBox to match the original dimensions

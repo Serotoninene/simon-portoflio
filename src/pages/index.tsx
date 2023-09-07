@@ -41,14 +41,14 @@ import { Loader } from "@/components/organisms";
 // [X] animate loading screen
 // [X] add the trailing with TouchTexture
 // [X] animate the wording in the contact page
-// [] Dates et lieux à corriger sur certaines photos de la home
-// [] inverser les numéros des photos 14 et 15
+// [X] Dates et lieux à corriger sur certaines photos de la home
+// [X] inverser les numéros des photos 14 et 15
+// [] ajouter les nouvelles photos
 // [] Changer la photo pour le outro : Voiture & Tina - Rest Area > Diving in the Blue > White in the Blue
 // [] ajouter majuscule aux noms propres dans les titres des photos dans work(ex: Paris)
 // [] ajouter date et lieu sous les titres des photos dans work ?
 // [] faire une group "ALL PHOTOS" dans work
 // [] ajouter un moyen de revenir en arrière quand dans "See all photos"
-// [] ajouter les nouvelles photos
 // [] groups sometime disappear since added the anim on hover
 
 // [] rearrange the layout on mobile
