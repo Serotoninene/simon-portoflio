@@ -98,6 +98,7 @@ const HeroPhoto = () => {
 
     introTl.current
       .to(shaderRef.current.uniforms.uIntro, {
+        delay: 0.7,
         value: 1,
         duration: 1.5,
         ease: Power4.easeOut,

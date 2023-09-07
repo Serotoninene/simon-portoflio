@@ -6,7 +6,7 @@ export const containerAnim = {
     transition: {
       delay: 0.4,
       duration: 0.3,
-      ease: "easeOut",
+      ease: "easeIn",
     },
   },
 };
