@@ -10,7 +10,7 @@ import { useWindowSize } from "@/utils/hooks";
 import CustomCursor from "./CustomCursor";
 import { LoadingProvider } from "@/context/LoadingContext";
 
-const poppins = Poppins({
+export const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
