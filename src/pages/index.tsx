@@ -41,6 +41,14 @@ import { Loader } from "@/components/organisms";
 // [X] animate loading screen
 // [X] add the trailing with TouchTexture
 // [X] animate the wording in the contact page
+// [] Dates et lieux à corriger sur certaines photos de la home
+// [] inverser les numéros des photos 14 et 15
+// [] Changer la photo pour le outro : Voiture & Tina - Rest Area > Diving in the Blue > White in the Blue
+// [] ajouter majuscule aux noms propres dans les titres des photos dans work(ex: Paris)
+// [] ajouter date et lieu sous les titres des photos dans work ?
+// [] faire une group "ALL PHOTOS" dans work
+// [] ajouter un moyen de revenir en arrière quand dans "See all photos"
+// [] ajouter les nouvelles photos
 // [] groups sometime disappear since added the anim on hover
 
 // [] rearrange the layout on mobile
@@ -99,8 +107,8 @@ export const photos = [
     caption: {
       idx: "5",
       title: "LIVING ON A BOAT",
-      place: "Canary Islands (ES)",
-      date: "2021",
+      place: "Victoria (CA)",
+      date: "2020",
     },
   },
   {
@@ -110,8 +118,8 @@ export const photos = [
     caption: {
       idx: "6",
       title: "CROWDED",
-      place: "Canary Islands (ES)",
-      date: "2021",
+      place: "Honolulu (US)",
+      date: "2020",
     },
   },
   {
@@ -160,7 +168,7 @@ export const photos = [
     caption: {
       idx: "10",
       title: "TIME FOR LAUNDRY",
-      place: "Vancouver (CA)",
+      place: "Vancouver Island (CA",
       date: "2020",
     },
   },
@@ -171,8 +179,8 @@ export const photos = [
     caption: {
       idx: "12",
       title: "LIFE PERSPECTIVES",
-      place: "Vancouver Island (CA)",
-      date: "2020",
+      place: "Mexico City (MX)",
+      date: "2019",
     },
   },
   {
@@ -380,8 +388,8 @@ export const photos = [
     caption: {
       idx: "31",
       title: "STRANGER",
-      place: "Alberta (CA)",
-      date: "2020",
+      place: " Canary Islands (ES)",
+      date: "2023",
     },
   },
   {
@@ -392,7 +400,7 @@ export const photos = [
       idx: "32",
       title: "SHANGLIE",
       place: "Vielsalm (BE)",
-      date: "2022",
+      date: "2021",
     },
   },
   {
