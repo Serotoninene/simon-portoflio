@@ -199,7 +199,7 @@ export const photos = [
     alt: "15_MONUMENT",
     dominantColor: "#b6adb0",
     caption: {
-      idx: "14",
+      idx: "15",
       title: "MONUMENT",
       place: "Whitehorse (CA)",
       date: "2020",
@@ -210,7 +210,7 @@ export const photos = [
     alt: "13_TROPICAL_CHURCH",
     dominantColor: "#aeaab9",
     caption: {
-      idx: "15",
+      idx: "14",
       title: "TROPICAL CHURCH",
       place: "Honolulu (US)",
       date: "2020",
