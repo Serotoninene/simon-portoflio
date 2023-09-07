@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, Variants, motion } from "framer-motion";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 import { useLoadingContext } from "@/context/LoadingContext";
 import { loadingPath } from "./paths";
 
-const drawAnimation = {
+const drawAnimation: Variants = {
   hidden: { pathLength: 0, opacity: 0 },
   visible: (custom: number) => ({
     pathLength: [0, 1, 0],
