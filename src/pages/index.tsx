@@ -409,10 +409,7 @@ export const photos = [
 ];
 
 export default function Home() {
-  if (!photos)
-    return (
-      <div className="bg-red-400 h-[var(--fullScreen)] flex justify-center items-center"></div>
-    );
+  if (!photos) return null;
 
   return (
     <LocomotiveScrollContainer>
