@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLoadingContext } from "@/context/LoadingContext";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
-import { l, o, a, d, i, n, g } from "./paths";
+import { loadingPath } from "./paths";
 
 export const Loader = () => {
   const { isLoaded } = useLoadingContext();
@@ -22,13 +22,9 @@ export const Loader = () => {
         viewBox="0 0 56 10" // Set the viewBox to match the original dimensions
         width="20vw"
       >
-        <path d={l} />
-        <path d={o} />
-        <path d={a} />
-        <path d={d} />
-        <path d={i} />
-        <path d={n} />
-        <path d={g} />
+        {loadingPath.map((letter, idx) => (
+          <path key={letter} d={letter} />
+        ))}
       </svg>
     </div>
   );
