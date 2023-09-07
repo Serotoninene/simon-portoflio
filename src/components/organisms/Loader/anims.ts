@@ -4,7 +4,7 @@ export const containerAnim = {
   exit: {
     y: "100%",
     transition: {
-      delay: 0.4,
+      delay: 0.3,
       duration: 0.3,
       ease: "easeIn",
     },
@@ -32,7 +32,7 @@ export const drawAnimation: Variants = {
     transition: {
       delay: custom * 0.02,
       ease: "easeIn",
-      duration: 0.3,
+      duration: 0.25,
     },
   }),
 };
