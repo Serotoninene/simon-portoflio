@@ -1,21 +1,22 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { spartan } from "../molecules/Layout";
+
 import * as THREE from "three";
-
 import { useFrame, useLoader } from "@react-three/fiber";
-
-import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
-import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
-import { useWindowSize } from "@/utils/hooks";
-
 import { Power4, gsap } from "gsap";
 import { motion } from "framer-motion";
-import AnimatedLetters from "../atoms/AnimLetters";
+
 import { ease } from "@/utils/store";
-import { CustomCanvas } from "@components/three";
+import { useWindowSize } from "@/utils/hooks";
+
+import AnimatedLetters from "../atoms/AnimLetters";
 import { useLoadingContext } from "@/context/LoadingContext";
+
+import { CustomCanvas } from "@components/three";
 import TouchTexture from "../three/TouchTexture";
+import vertexShader from "@shaders/HomePhotoShader/vertex.glsl";
+import fragmentShader from "@shaders/HomePhotoShader/fragment.glsl";
 
 const HeroPhoto = () => {
   // setting up the values

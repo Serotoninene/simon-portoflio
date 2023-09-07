@@ -39,9 +39,9 @@ import { Loader } from "@/components/organisms";
 // [X] kinda lost time over photos management for no real reason
 // [X] contact page
 // [X] animate loading screen
+// [X] add the trailing with TouchTexture
+// [X] animate the wording in the contact page
 // [] groups sometime disappear since added the anim on hover
-// [] add the trailing with TouchTexture
-// [] animate the wording in the contact page
 
 // [] rearrange the layout on mobile
 // [] when overview scroll malfunctions (no bug on live version ...)
