@@ -1,4 +1,5 @@
 uniform float uIntro;
+uniform sampler2D uTouchTexture;
 
 varying vec2 vUv;
 
@@ -13,8 +14,12 @@ vec3 deformationCurve(vec3 position, vec2 uv, vec2 offset){
 void main()
 {
   vUv = uv;
+  float touch = texture2D(uTouchTexture, vUv).r;
+
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);  
   modelPosition.y -= 50. * (1. - uIntro) ;
+
+  modelPosition.z += 100. * touch ;
 
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectedPosition = projectionMatrix * viewPosition;

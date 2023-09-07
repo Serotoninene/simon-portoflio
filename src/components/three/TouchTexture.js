@@ -5,17 +5,17 @@ function outSine(n) {
 }
 
 export default class TouchTexture {
-  constructor() {
-    this.size = 128;
-    this.maxAge = 120;
-    this.radius = 0.2;
+  constructor(isOnScreen = false, size = 128, maxAge = 120, radius = 0.2) {
+    this.size = size;
+    this.maxAge = maxAge;
+    this.radius = radius;
     this.trail = [];
     this.canDraw = true;
 
-    this.initTexture();
+    this.initTexture(isOnScreen);
   }
 
-  initTexture() {
+  initTexture(onScreen) {
     // create a 2D canvas to store the information of the cursor
     this.canvas = document.createElement("canvas");
     this.canvas.width = this.canvas.height = this.size;
@@ -33,7 +33,7 @@ export default class TouchTexture {
     this.canvas.style.zIndex = "10000";
 
     // No need to add it to the body,
-    // document.body.appendChild(this.canvas);
+    onScreen && document.body.appendChild(this.canvas);
   }
 
   update() {

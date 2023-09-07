@@ -4,6 +4,7 @@ uniform float uProgress;
 uniform float uIntro;
 uniform sampler2D uTexture;
 uniform sampler2D uDisplacement;
+
 uniform vec2 uTextureSize;
 uniform vec2 uQuadSize;
 uniform vec2 uMappedMouse;
@@ -45,7 +46,8 @@ float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
 void main() {   
   vec2 correctUv = getUV(vUv, uTextureSize, uQuadSize);
 
-  // // demo 6
+
+  // demo 6
   vec4 disp = texture2D(uDisplacement, correctUv);
   vec2 dispVec = vec2(disp.r, disp.g);
 

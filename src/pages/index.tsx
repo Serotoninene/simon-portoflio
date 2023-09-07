@@ -38,7 +38,7 @@ import { Loader } from "@/components/organisms";
 // [X] improve custom cursor performance
 // [X] kinda lost time over photos management for no real reason
 // [X] contact page
-// [] animate loading screen
+// [X] animate loading screen
 // [] groups sometime disappear since added the anim on hover
 // [] add the trailing with TouchTexture
 // [] animate the wording in the contact page

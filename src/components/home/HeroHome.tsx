@@ -15,6 +15,7 @@ import AnimatedLetters from "../atoms/AnimLetters";
 import { ease } from "@/utils/store";
 import { CustomCanvas } from "@components/three";
 import { useLoadingContext } from "@/context/LoadingContext";
+import TouchTexture from "../three/TouchTexture";
 
 const HeroPhoto = () => {
   // setting up the values
@@ -24,6 +25,11 @@ const HeroPhoto = () => {
     width: 0,
     height: 0,
   });
+
+  const touchTexture = useMemo<any>(
+    () => new TouchTexture(false, 128, 60, 0.2),
+    []
+  );
 
   const { setIsLoaded } = useLoadingContext();
   const introTl = useRef<GSAPTimeline | null>(null);
@@ -52,6 +58,7 @@ const HeroPhoto = () => {
       uQuadSize: {
         value: new THREE.Vector2(photoData.width, photoData.height),
       },
+      uTouchTexture: { value: touchTexture.texture },
       uMappedMouse: { value: new THREE.Vector2(0.5, 0.5) },
       uProgress: { value: 0 },
       uRadius: { value: 0.07 },
@@ -60,6 +67,10 @@ const HeroPhoto = () => {
     }),
     []
   );
+
+  const handleMouseMove = (e: THREE.Vector2) => {
+    touchTexture.addTouch(e);
+  };
 
   // updating the uniforms and photoData
   useFrame(({ mouse }) => {
@@ -90,6 +101,10 @@ const HeroPhoto = () => {
       photoData.width,
       photoData.height
     );
+
+    if (!touchTexture) return;
+    touchTexture.update();
+    handleMouseMove(mappedMouse);
   });
 
   // intro anim - gsap part
@@ -122,7 +137,7 @@ const HeroPhoto = () => {
     <mesh ref={meshRef} position={[photoData.x, photoData.y, 0]}>
       <planeGeometry
         ref={geometryRef}
-        args={[photoData.width, photoData.height, 2, 2]}
+        args={[photoData.width, photoData.height, 32, 32]}
       />
       <shaderMaterial
         ref={shaderRef}
