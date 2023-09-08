@@ -1,23 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
-import AnimatedLetters from "../atoms/AnimLetters";
-import { useOverviewContext } from "../../context/OverviewContext";
-import { useCursorContext } from "../../context/CursorContext";
+import AnimatedLetters from "../../atoms/AnimLetters";
+import { useOverviewContext } from "../../../context/OverviewContext";
+import { useCursorContext } from "../../../context/CursorContext";
 import { MouseEvent, useState } from "react";
-
-const variants = {
-  hidden: {
-    opacity: 0,
-    transition: {
-      ease: "easeOut",
-    },
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      ease: "easeOut",
-    },
-  },
-};
+import { fadeOut, fadeTranslateOut } from "./anims";
 
 const groups = ["summer", "autumn", "winter", "spring"];
 
@@ -32,27 +18,15 @@ export const GroupElement = ({
 
   const groupActive = photoGroup === group;
 
-  const variantsItem = {
-    hidden: {
-      opacity: 0,
-      y: "100%",
-      transition: { ease: "easeOut", duration: 0.2 },
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { ease: "easeOut", duration: 0.2, delay: idx * 0.06 },
-    },
-  };
-
   // show the groupActive all the time and the other when isActive === true
   if (!isActive && !groupActive) return null;
 
   return (
     <motion.li
       key={group}
-      variants={variantsItem}
+      variants={fadeTranslateOut}
       initial={groupActive ? "visible" : "hidden"}
+      custom={idx}
       animate="visible"
       exit={groupActive ? "visible" : "hidden"}
       onMouseEnter={() => setCursorType("hover")}
@@ -73,11 +47,11 @@ export const GroupSelector = ({ photoGroup, setPhotoGroup }: any) => {
 
   const handleClick = (group: string, e: MouseEvent) => {
     e.stopPropagation();
-    if (group === photoGroup) {
-      setIsActive((prev) => !prev);
-    } else {
-      isActive && setPhotoGroup(group);
-      setIsActive(false);
+    if (group !== photoGroup) {
+      if (isActive) {
+        setIsActive(false);
+        setPhotoGroup(group);
+      }
     }
   };
 
@@ -131,7 +105,7 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
         <div className="fixed bottom-4 left-10 right-10 flex justify-between items-end text-light">
           <motion.div
             key={title}
-            variants={variants}
+            variants={fadeOut}
             initial="hidden"
             animate={isOverview ? "hidden" : "visible"}
             exit="hidden"
