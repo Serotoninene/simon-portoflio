@@ -25,7 +25,7 @@ export const OneWCaption = ({ photo, children }: Props) => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 1, ease: "easeIn" }}
-              className="text-right text-2xl sm:w-3/4 sm:text-2xl md:text-3xl md:leading-relaxed lg:w-3/5 lg:text-[40px]"
+              className="text-right text-2xl sm:w-3/4 sm:text-2xl md:text-3xl md:leading-relaxed lg:w-3/5 lg:text-[32px] xl:text-[40px]"
             >
               {children}
             </motion.div>
