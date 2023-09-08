@@ -44,6 +44,8 @@ import { Loader } from "@/components/organisms";
 // [X] Dates et lieux à corriger sur certaines photos de la home
 // [X] inverser les numéros des photos 14 et 15
 // [] ajouter les nouvelles photos
+// [] 1 seconde minimum pour le loader
+// [] enlever l'effet
 // [] Changer la photo pour le outro : Voiture & Tina - Rest Area > Diving in the Blue > White in the Blue
 // [] ajouter majuscule aux noms propres dans les titres des photos dans work(ex: Paris)
 // [] ajouter date et lieu sous les titres des photos dans work ?

@@ -53,7 +53,7 @@ export const About = (props: Props) => {
           fontWeight="font-medium"
           string="Without pretension, I would like to pay tribute here to all objects, all
           bodies, all gestures, all buildings, and all the details that have
-          inspired me at the moment when we crossed paths somewhere."
+          inspired me when we crossed paths somewhere."
         />
       </div>
     </div>
