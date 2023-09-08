@@ -45,16 +45,16 @@ export const GroupElement = ({
     },
   };
 
+  // show the groupActive all the time and the other when isActive === true
   if (!isActive && !groupActive) return null;
 
   return (
     <motion.li
-      layout
       key={group}
       variants={variantsItem}
-      initial={"hidden"}
+      initial={groupActive ? "visible" : "hidden"}
       animate="visible"
-      exit={"hidden"}
+      exit={groupActive ? "visible" : "hidden"}
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("pointer")}
       onClick={(e) => {
@@ -86,10 +86,14 @@ export const GroupSelector = ({ photoGroup, setPhotoGroup }: any) => {
       <ul
         key={isActive.toString()}
         onMouseEnter={() => {
-          setIsActive(true);
+          if (!isActive) {
+            setIsActive(true);
+          }
         }}
         onMouseLeave={() => {
-          setIsActive(false);
+          if (isActive) {
+            setIsActive(false);
+          }
         }}
         className="flex flex-col items-end w-20 gap-1"
       >
@@ -140,10 +144,8 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
             onClick={handleOverview}
           >
             <motion.div
-              variants={variants}
-              initial="hidden"
-              animate={isOverview ? "hidden" : "visible"}
-              exit="hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isOverview ? 0 : 1 }}
             >
               <GroupSelector
                 photoGroup={photoGroup}
