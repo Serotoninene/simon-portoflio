@@ -29,7 +29,9 @@ const Gallery = ({ photos, photoGroup, setTitle }: any) => {
     const photosDisplayed = photos.filter(
       (photo: ExtendedPhoto) => photo.group === photoGroup
     );
+    // go back to the top of the page
     setPhotosDisplayed(photosDisplayed);
+    scroll?.scrollTo(0, 0, 0);
   }, [photoGroup]);
 
   useEffect(() => {
@@ -51,6 +53,7 @@ const Gallery = ({ photos, photoGroup, setTitle }: any) => {
     const target = document.getElementById(photoTarget);
 
     if (!flipState) return;
+
     scroll.update(); // update the locoscroll so it resizes the container
     scroll.scrollTo(0, 0, 0); // scroll to the top of the page if we are in the overview
     Flip.from(flipState, {
