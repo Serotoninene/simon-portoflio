@@ -43,15 +43,16 @@ import { Loader } from "@/components/organisms";
 // [X] animate the wording in the contact page
 // [X] Dates et lieux à corriger sur certaines photos de la home
 // [X] inverser les numéros des photos 14 et 15
-// [] ajouter les nouvelles photos
 // [] 1 seconde minimum pour le loader
-// [] enlever l'effet
+// [] add one media query for the 1000px to 1200px for the one picture with text
 // [] Changer la photo pour le outro : Voiture & Tina - Rest Area > Diving in the Blue > White in the Blue
 // [] ajouter majuscule aux noms propres dans les titres des photos dans work(ex: Paris)
 // [] ajouter date et lieu sous les titres des photos dans work ?
+// [] when changing group -> scroll to top
 // [] faire une group "ALL PHOTOS" dans work
 // [] ajouter un moyen de revenir en arrière quand dans "See all photos"
 // [] groups sometime disappear since added the anim on hover
+// [] ajouter les nouvelles photos
 
 // [] rearrange the layout on mobile
 // [] when overview scroll malfunctions (no bug on live version ...)

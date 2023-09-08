@@ -8,6 +8,7 @@ import { AnimatedLetters } from "@/components/atoms";
 import { Container } from "@/components/molecules";
 import { useCursorContext } from "@/context/CursorContext";
 import simonPortrait from "@public/assets/photos/000_BIO.jpeg";
+import { useMediaQuery } from "@/utils/hooks";
 
 const navLinks = [
   { href: "/", title: "home" },
@@ -16,12 +17,13 @@ const navLinks = [
 ];
 
 export default function Contact() {
+  const isMobile = useMediaQuery(640);
   const { setCursorType } = useCursorContext();
 
   const contactInfo = [
     {
       label: "gram",
-      content: "@uma",
+      content: isMobile ? "@uma" : "@insta",
       href: "#",
     },
     { label: "phone", content: "06 05 03 99 39" },

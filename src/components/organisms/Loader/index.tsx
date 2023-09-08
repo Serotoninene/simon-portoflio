@@ -12,6 +12,7 @@ export const Loader = () => {
   const [isExitAnimationComplete, setIsExitAnimationComplete] = useState(false);
 
   !isLoaded && scroll?.stop();
+
   useEffect(() => {
     if (isLoaded) {
       scroll?.start();

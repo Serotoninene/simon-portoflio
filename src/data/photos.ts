@@ -170,7 +170,7 @@ export const photos = [
   {
     src: "/assets/photos/autumn/111_UN_DIMANCHE_EN_FRANCE.jpeg",
     alt: "11_UN_DIMANCHE_EN_FRANCE",
-    capitalizedTitle: "Un dimanche en france",
+    capitalizedTitle: "Un dimanche en France",
     dominantColor: "#ac9564",
     aspectRatio: 1.4921436588103254,
     group: "autumn",
@@ -722,7 +722,7 @@ export const photos = [
   {
     src: "/assets/photos/winter/65_LA_PLUIE_ET_PARIS.jpeg",
     alt: "5_LA_PLUIE_ET_PARIS",
-    capitalizedTitle: "La pluie et paris",
+    capitalizedTitle: "La pluie et Paris",
     dominantColor: "#c2b7b7",
     aspectRatio: 1.4919690660321236,
     group: "winter",
@@ -882,7 +882,7 @@ export const photos = [
   {
     src: "/assets/photos/winter/88_LA_CHASSE_EN_AMERIQUE.jpeg",
     alt: "8_LA_CHASSE_EN_AMERIQUE",
-    capitalizedTitle: "La chasse en amerique",
+    capitalizedTitle: "La chasse en Amerique",
     dominantColor: "#c4c0cc",
     aspectRatio: 1.481290322580645,
     group: "winter",
@@ -914,7 +914,7 @@ export const photos = [
   {
     src: "/assets/photos/summer/92_L'ETE_EN_FRANCAIS.jpeg",
     alt: "2_L'ETE_EN_FRANCAIS",
-    capitalizedTitle: "L'ete en francais",
+    capitalizedTitle: "L'ete en français",
     dominantColor: "#cebdb4",
     aspectRatio: 1.504201680672269,
     group: "summer",

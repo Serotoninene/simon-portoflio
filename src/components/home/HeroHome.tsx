@@ -44,8 +44,10 @@ const HeroPhoto = () => {
     THREE.TextureLoader,
     ["/assets/photos/home/00_ACCUEIL.jpeg", "/assets/disp/disp1.jpg"],
     () => {
-      // init the animation of the page when texure is loaded
-      setIsLoaded(true);
+      // init the animation of the page when texure is loaded after 1 second
+      setTimeout(() => {
+        setIsLoaded(true);
+      }, 3000);
     }
   );
 
