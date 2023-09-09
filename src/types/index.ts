@@ -6,10 +6,11 @@ export type Photo = {
 };
 
 export type ExtendedPhoto = Photo & {
-  date?: string;
+  date: string;
+  group: string;
   capitalizedTitle: string;
   aspectRatio: number;
-  group: string;
+  place: string;
 };
 
 export type Caption = {

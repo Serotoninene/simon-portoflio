@@ -17,10 +17,17 @@ import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
 import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollContainer";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { ExtendedPhoto } from "@/types";
+import { getAspectRatio } from "@/utils/helpers";
 
-const Gallery = ({ photos, photoGroup, setTitle }: any) => {
+type GalleryProps = {
+  photos: ExtendedPhoto[];
+  photoGroup: "summer" | "autumn" | "winter" | "spring";
+  setTitle: (title: string) => void;
+};
+
+const Gallery = ({ photos, photoGroup, setTitle }: GalleryProps) => {
   const { scroll } = useLocomotiveScroll();
-  const [photosDisplayed, setPhotosDisplayed] = useState([]);
+  const [photosDisplayed, setPhotosDisplayed] = useState<ExtendedPhoto[]>([]);
   const [photoTarget, setPhotoTarget] = useState("");
   const { isOverview, flipState } = useOverviewContext();
 
@@ -105,6 +112,9 @@ export default function Work() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
+
+    getAspectRatio(photos);
+    console.log(photos);
   }, []);
 
   if (!photos) return;

@@ -5,7 +5,9 @@ const directoryPath = path.join(__dirname, "../public/assets/photos"); // Adjust
 
 const fetchPhotoFileNames = () => {
   try {
+    // Get the names of all the files in the directory
     const fileNames = fs.readdirSync(directoryPath);
+    console.log(fileNames);
   } catch (error) {
     console.error("Error fetching photo file names:", error);
   }
