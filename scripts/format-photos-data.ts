@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
-const color = require("dominant-color");
 
 import { capitalizeWord } from "../src/utils/helpers";
 import { photos } from "../src/data/photos";
@@ -63,6 +62,31 @@ folders.forEach((folder: string) => {
           const group = folder;
           // aspect ratio
           const aspectRatio = metadata.width / metadata.height;
+
+          const newPhoto = {
+            src,
+            alt,
+            capitalizedTitle,
+            group,
+            aspectRatio,
+            dominantColor: "#a9a9a9",
+            place: "",
+            date: "",
+          };
+
+          console.log(`${capitalizedTitle} : ${aspectRatio}`);
+
+          // add the new photo to the photos array
+          photos.push(newPhoto);
+          // write it inside the photos.ts file
+          // fs.writeFile(
+          //   "./src/data/photos.ts",
+          //   `export const photos = ${JSON.stringify(photos, null, 2)}`,
+          //   (err: any) => {
+          //     if (err) throw err;
+          //     console.log("Data written to file");
+          //   }
+          // );
         })
         .catch((err: any) => {
           console.error("Error:", err);
