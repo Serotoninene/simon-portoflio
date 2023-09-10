@@ -64,5 +64,5 @@ export const updateDominantColors = async (photos: any) => {
     const color = await getDominantColor(photo.src);
     photos[idx].dominantColor = color;
   }
-  console.log(JSON.stringify(photos));
+  // console.log(JSON.stringify(photos));
 };

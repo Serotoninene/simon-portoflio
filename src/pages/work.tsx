@@ -17,7 +17,8 @@ import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
 import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollContainer";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { ExtendedPhoto } from "@/types";
-import { getAspectRatio } from "@/utils/helpers";
+import { updateAspectRatio } from "@/utils/helpers";
+import { updateDominantColors } from "@/utils/colors";
 
 type GalleryProps = {
   photos: ExtendedPhoto[];
@@ -113,8 +114,10 @@ export default function Work() {
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
 
-    getAspectRatio(photos);
-    console.log(photos);
+    // updateAspectRatio(photos);
+    // updateDominantColors(photos).then((photos) => {
+    //   console.log(JSON.stringify(photos));
+    // });
   }, []);
 
   if (!photos) return;

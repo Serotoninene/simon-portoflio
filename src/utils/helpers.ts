@@ -44,7 +44,7 @@ export const loadImage = (src: string) => {
   return img;
 };
 
-export const getAspectRatio = async (photos: ExtendedPhoto[]) => {
+export const updateAspectRatio = async (photos: ExtendedPhoto[]) => {
   await Promise.all(
     photos.map(async (photo) => {
       const img = new Image();
