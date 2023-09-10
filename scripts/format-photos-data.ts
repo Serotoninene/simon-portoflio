@@ -1,5 +1,7 @@
 const fs = require("fs");
 const path = require("path");
+const sharp = require("sharp");
+const color = require("dominant-color");
 
 import { capitalizeWord } from "../src/utils/helpers";
 import { photos } from "../src/data/photos";
@@ -49,19 +51,22 @@ folders.forEach((folder: string) => {
         (photo: ExtendedPhoto) => photo.src === p || file.includes(".DS_Store")
       )
     ) {
-      // i need the src
-      const src = p;
-      // i need the alt
-      const alt = file.split(".")[0];
-      // i need the capitalizedTitle
-      const capitalizedTitle = capitalizeWord(alt);
-      // i need the group
-      const group = folder;
-      // i need the aspectRatio
-
-      // i need the dominantColor
-
-      console.log({ src, alt, capitalizedTitle, group });
+      sharp(`./public/${p}`)
+        .metadata()
+        .then((metadata: any) => {
+          const src = p;
+          // i need the alt
+          const alt = file.split(".")[0];
+          // i need the capitalizedTitle
+          const capitalizedTitle = capitalizeWord(alt);
+          // i need the group
+          const group = folder;
+          // aspect ratio
+          const aspectRatio = metadata.width / metadata.height;
+        })
+        .catch((err: any) => {
+          console.error("Error:", err);
+        });
     }
   });
 });
