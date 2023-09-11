@@ -32,7 +32,7 @@ const HeroPhoto = () => {
     []
   );
 
-  const { setIsLoaded } = useLoadingContext();
+  const { isLoaded, setIsLoaded } = useLoadingContext();
   const introTl = useRef<GSAPTimeline | null>(null);
   const { height, width } = useWindowSize();
   const meshRef = useRef<any>();
@@ -116,7 +116,7 @@ const HeroPhoto = () => {
 
     introTl.current
       .to(shaderRef.current.uniforms.uIntro, {
-        delay: 0.5,
+        delay: 0.7,
         value: 1,
         duration: 1.5,
         ease: Power4.easeOut,
@@ -129,12 +129,20 @@ const HeroPhoto = () => {
         "<40%"
       );
 
+    introTl.current.pause();
+
     return () => {
       if (introTl.current) {
         introTl.current.kill();
       }
     };
   }, []);
+
+  useEffect(() => {
+    // waiting for the texture to be loaded to trigger the anim
+    if (!isLoaded) return;
+    introTl.current?.play();
+  }, [isLoaded]);
 
   return (
     <mesh ref={meshRef} position={[photoData.x, photoData.y, 0]}>
@@ -200,7 +208,7 @@ export const HeroHome = () => {
           >
             <AnimatedLetters
               string="SIMON EYCHENNE"
-              delay={0.1}
+              delay={0.5}
               start={isLoaded}
               rotate={15}
               duration={1}
