@@ -210,16 +210,6 @@ export const photos = [
     date: "2023",
   },
   {
-    src: "/assets/photos/winter/MERRY CHRISTMAS.jpeg",
-    alt: "MERRY CHRISTMAS",
-    capitalizedTitle: "Merry christmas",
-    dominantColor: "#91a2a7",
-    aspectRatio: 1.57001414427157,
-    group: "winter",
-    place: "",
-    date: "",
-  },
-  {
     src: "/assets/photos/winter/A_NOS_RÊVES_D'ANTAN.jpeg",
     alt: "À NOS RÊVES D'ANTAN",
     capitalizedTitle: "À nos rêves d'antan",

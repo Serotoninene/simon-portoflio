@@ -48,11 +48,11 @@ import { Loader } from "@/components/organisms";
 // [X] ajouter majuscule aux noms propres dans les titres des photos dans work(ex: Paris)
 // [X] when changing group -> scroll to top
 // [X] groups sometime disappear since added the anim on hover
+// [X] ajouter les nouvelles photos
+// [] Changer la photo pour le outro : Voiture & Tina - Rest Area > Diving in the Blue > White in the Blue
+// [] Remplacer "see all photos" pour des icones
 // [] ajouter date et lieu sous les titres des photos dans work ?
 // [] faire une group "ALL PHOTOS" dans work
-// [] Changer la photo pour le outro : Voiture & Tina - Rest Area > Diving in the Blue > White in the Blue
-// [] ajouter un moyen de revenir en arrière quand dans "See all photos"
-// [] ajouter les nouvelles photos
 
 // [] rearrange the layout on mobile
 // [] when overview scroll malfunctions (no bug on live version ...)

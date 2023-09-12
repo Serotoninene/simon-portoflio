@@ -1,33 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 // Context
 import { useCursorContext } from "@/context/CursorContext";
 import AnimatedLetters from "../atoms/AnimLetters";
+import { useWindowSize } from "@/utils/hooks";
+import { gsap } from "gsap";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const { cursorType } = useCursorContext();
-
-  // COMMENTED ALL THE LOGIC ANIMATING THE CURSOR WITH FRAMER MOTION -- TOO DEMANDING IN PERFORMANCE BUT PERHAPS IMPROVABLE
-  // const springConfig = {
-  //   stiffness: 500,
-  //   damping: 15,
-  //   mass: 0.5,
-  // };
-
-  // const mousePosition = {
-  //   x: useSpring(200, springConfig),
-  //   y: useSpring(200, springConfig),
-  // };
-
+  const [mousePosition, setMousePosition] = useState({
+    x: 0,
+    y: 0,
+  });
   const onMouseMove = (event: MouseEvent) => {
     if (!cursorRef.current) return;
+
     const { clientX, clientY } = event;
-    cursorRef.current.style.top = `${clientY - 10}px`;
-    cursorRef.current.style.left = `${clientX - 10}px`;
-    // mousePosition.x.set(clientX - 10);
-    // mousePosition.y.set(clientY - 10);
+
+    // Update the current cursor position
+    setMousePosition({
+      x: clientX - 10,
+      y: clientY - 10,
+    });
   };
 
   useEffect(() => {
@@ -44,9 +40,9 @@ export default function CustomCursor() {
       ref={cursorRef}
       className={cursorType}
       style={{
-        // x: mousePosition.x,
-        // y: mousePosition.y,
         scale: cursorType === "hover" ? 0.5 : 1,
+        x: mousePosition.x,
+        y: mousePosition.y,
       }}
     >
       {cursorType === "cta" && (
