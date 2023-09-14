@@ -63,7 +63,7 @@ export const AnimLink = ({ children, href = "/" }: Props) => {
         whileHover="hovered"
         exit="exit"
         key={children?.toString()}
-        className="overflow-hidden inline-block align-bottom "
+        className="overflow-hidden inline-block align-bottom"
       >
         {words?.map((word) => (
           <span key={word}>

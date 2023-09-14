@@ -95,12 +95,7 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
   };
 
   return (
-    <div
-      className={`flex items-end relative left-0 top-0 h-0 z-10 py-4 px-10 w-full mix-blend-difference ${
-        isOverview ? "pointer-events-none" : "pointer-events-auto"
-      }`}
-    >
-      {" "}
+    <div className="flex items-end relative left-0 top-0 h-0 z-10 px-10 w-full mix-blend-difference">
       <AnimatePresence mode="popLayout">
         <div className="fixed bottom-4 left-10 right-10 flex justify-between items-end text-light">
           <motion.div
@@ -109,17 +104,21 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
             initial="hidden"
             animate={isOverview ? "hidden" : "visible"}
             exit="hidden"
-            className="font-bold w-1/2 leading-[1.1] sm:width-auto"
+            className={`font-bold w-1/2 leading-[1.1] sm:width-auto pointer-events-none
+            ${isOverview ? "pointer-events-none" : "pointer-events-auto"}`}
           >
             <span className="text-light">{title} </span>
           </motion.div>
           <div
-            className="flex items-end gap-8 sm:flex-row sm:gap-40"
+            className="flex items-end  gap-8 sm:flex-row sm:gap-40"
             onClick={handleOverview}
           >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: isOverview ? 0 : 1 }}
+              className={
+                isOverview ? "pointer-events-none" : "pointer-events-auto"
+              }
             >
               <GroupSelector
                 photoGroup={photoGroup}
