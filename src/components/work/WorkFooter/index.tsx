@@ -90,8 +90,9 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
   const { isOverview, handleOverviewSwitch } = useOverviewContext();
   const { setCursorType } = useCursorContext();
 
-  const handleOverview = () => {
-    handleOverviewSwitch(true);
+  const handleOverview = (e: MouseEvent) => {
+    e.stopPropagation();
+    isOverview ? handleOverviewSwitch(false) : handleOverviewSwitch(true);
   };
 
   return (
@@ -109,10 +110,7 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
           >
             <span className="text-light">{title} </span>
           </motion.div>
-          <div
-            className="flex items-end  gap-8 sm:flex-row sm:gap-40"
-            onClick={handleOverview}
-          >
+          <div className="flex items-end gap-8 sm:flex-row sm:gap-40">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: isOverview ? 0 : 1 }}
@@ -126,6 +124,7 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
               />
             </motion.div>
             <div
+              onClick={handleOverview}
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={() => setCursorType("pointer")}
               className="cursor-pointer"
