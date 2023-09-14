@@ -3,26 +3,31 @@ import { rectangle, gridRectangle } from "./paths";
 
 import { animate, useMotionValue } from "framer-motion";
 import { SVGMorph } from "@/components/atoms";
+import { useOverviewContext } from "@/context/OverviewContext";
 
 export const SVGButtons = () => {
   const progress = useMotionValue(0);
+  const { isOverview } = useOverviewContext();
+
+  const rectangleProgress = 0;
+  const gridRectangleProgress = 0.999;
 
   const handleMouseEnter = () => {
-    animate(progress, 0.999, {
+    animate(progress, isOverview ? rectangleProgress : gridRectangleProgress, {
       duration: 0.2,
       ease: "easeOut",
     });
   };
 
   const handleMouseLeave = () => {
-    animate(progress, 0, {
+    animate(progress, isOverview ? gridRectangleProgress : rectangleProgress, {
       duration: 0.2,
       ease: "easeOut",
     });
   };
 
   return (
-    <div className="w-[24px] pb-1">
+    <div className="w-[24px] pb-1 pointer-events-auto">
       <svg
         id="Calque_1"
         data-name="Calque 1"
