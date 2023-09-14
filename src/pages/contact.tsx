@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -18,6 +18,7 @@ const navLinks = [
 
 export default function Contact() {
   const isMobile = useMediaQuery(640);
+  const [isLoaded, setIsLoaded] = useState(false);
   const { setCursorType } = useCursorContext();
 
   const contactInfo = [
@@ -47,13 +48,16 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="relative h-full sm:col-span-3"
+          className="relative h-full sm:col-span-3 bg-[#007E75]"
         >
           <Image
             src={simonPortrait}
-            className="object-cover"
+            className={`object-cover transition-opacity duration-500 ${
+              isLoaded ? "opacity-100" : "opacity-0"
+            } `}
             alt="dans le miroir"
             placeholder="blur"
+            onLoadingComplete={() => setIsLoaded(true)}
             fill
           />
         </motion.div>
