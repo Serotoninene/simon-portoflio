@@ -4,19 +4,18 @@ import { motion } from "framer-motion";
 // Context
 import { useCursorContext } from "@/context/CursorContext";
 import AnimatedLetters from "../atoms/AnimLetters";
-import { useWindowSize } from "@/utils/hooks";
-import { gsap } from "gsap";
+import { useLoadingContext } from "@/context/LoadingContext";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const { cursorType } = useCursorContext();
+  const { isLoaded } = useLoadingContext();
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
   });
   const onMouseMove = (event: MouseEvent) => {
     if (!cursorRef.current) return;
-
     const { clientX, clientY } = event;
 
     // Update the current cursor position
@@ -41,6 +40,7 @@ export default function CustomCursor() {
       className={cursorType}
       style={{
         scale: cursorType === "hover" ? 0.5 : 1,
+        opacity: isLoaded ? 1 : 0,
         x: mousePosition.x,
         y: mousePosition.y,
       }}

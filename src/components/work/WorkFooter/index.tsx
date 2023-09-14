@@ -4,6 +4,7 @@ import { useOverviewContext } from "../../../context/OverviewContext";
 import { useCursorContext } from "../../../context/CursorContext";
 import { MouseEvent, useState } from "react";
 import { fadeOut, fadeTranslateOut } from "./anims";
+import { SVGButtons } from "../SVGButtons";
 
 const groups = ["summer", "autumn", "winter", "spring"];
 
@@ -131,14 +132,7 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
               onMouseLeave={() => setCursorType("pointer")}
               className="cursor-pointer"
             >
-              <AnimatedLetters
-                string="See all photos"
-                stagger={0.01}
-                rotate={15}
-                duration={0.4}
-                y={100}
-                start={!isOverview}
-              />
+              <SVGButtons />
             </div>
           </div>
         </div>

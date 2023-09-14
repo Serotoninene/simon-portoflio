@@ -7,6 +7,7 @@ import { Container } from "../molecules";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useLoadingContext } from "@/context/LoadingContext";
+import { SVGButtons } from "../work";
 
 type NavLink = {
   href: string;
