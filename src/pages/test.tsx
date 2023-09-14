@@ -1,32 +1,10 @@
 import React from "react";
 
-import { interpolate } from "@siluat/flubber";
-
 import { rectangle, gridRectangle } from "@/components/work/SVGButtons/paths";
-import {
-  useMotionValue,
-  motion,
-  useTransform,
-  animate,
-  MotionValue,
-} from "framer-motion";
+import { useMotionValue, animate } from "framer-motion";
+import { SVGMorph } from "@/components/atoms/SVGMorph";
 
-type Props = {
-  progress: MotionValue;
-  paths: string[];
-};
-
-export const SVGMorph = ({ progress, paths }: Props) => {
-  const pathsIndexes = paths.map((_: string, idx: number) => idx);
-
-  const path = useTransform(progress, pathsIndexes, paths, {
-    mixer: (a, b) => interpolate(a, b, { maxSegmentLength: 0.1 }),
-  });
-
-  return <motion.path d={path} />;
-};
-
-export default function Test(props: Props) {
+export default function Test() {
   const progress = useMotionValue(0);
 
   const handleMouseEnter = () => {

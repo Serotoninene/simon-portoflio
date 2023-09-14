@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import AnimatedLetters from "../../atoms/AnimLetters";
 import { useOverviewContext } from "../../../context/OverviewContext";
 import { useCursorContext } from "../../../context/CursorContext";
 import { MouseEvent, useState } from "react";
@@ -115,7 +114,7 @@ export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
             <span className="text-light">{title} </span>
           </motion.div>
           <div
-            className="flex flex-col items-end sm:flex-row sm:gap-40"
+            className="flex items-end gap-8 sm:flex-row sm:gap-40"
             onClick={handleOverview}
           >
             <motion.div

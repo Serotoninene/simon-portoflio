@@ -113,7 +113,6 @@ export default function Work() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
-
     // updateAspectRatio(photos);
     // updateDominantColors(photos).then((photos) => {
     //   console.log(JSON.stringify(photos));
