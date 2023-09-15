@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { rectangle, gridRectangle } from "./paths";
 
 import { animate, useMotionValue } from "framer-motion";
@@ -26,8 +26,16 @@ export const SVGButtons = () => {
     });
   };
 
+  useEffect(() => {
+    if (!isOverview) {
+      progress.set(rectangleProgress);
+    } else {
+      progress.set(gridRectangleProgress);
+    }
+  }, [isOverview]);
+
   return (
-    <div className="w-[24px] pb-1 pointer-events-auto">
+    <div className="w-[20px] pb-1 pointer-events-auto">
       <svg
         id="Calque_1"
         data-name="Calque 1"

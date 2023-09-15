@@ -10,12 +10,6 @@ import { useCursorContext } from "@/context/CursorContext";
 import simonPortrait from "@public/assets/photos/000_BIO.jpeg";
 import { useMediaQuery } from "@/utils/hooks";
 
-const navLinks = [
-  { href: "/", title: "home" },
-  { href: "/work", title: "work" },
-  { href: "/contact", title: "contact" },
-];
-
 export default function Contact() {
   const isMobile = useMediaQuery(640);
   const [isLoaded, setIsLoaded] = useState(false);
