@@ -113,11 +113,11 @@ export const WorkFooter = ({ infos, photoGroup, setPhotoGroup }: any) => {
             initial="hidden"
             animate={isOverview ? "hidden" : "visible"}
             exit="hidden"
-            className={`font-bold w-1/2 leading-[1.1] sm:width-auto pointer-events-none
+            className={`font-bold w-1/2 leading-[1.1] sm:width-auto pointer-events-none flex flex-col sm:block
             ${isOverview ? "pointer-events-none" : "pointer-events-auto"}`}
           >
             <span className="text-light">{infos.title} </span>
-            <span className="font-light text-xs ml-1">
+            <span className="font-light text-xs sm:ml-1">
               {infos.place} - {infos.date}
             </span>
           </motion.div>
