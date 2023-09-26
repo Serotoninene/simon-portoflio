@@ -86,7 +86,12 @@ export const GroupSelector = ({ photoGroup, setPhotoGroup }: any) => {
   );
 };
 
-export const WorkFooter = ({ title, photoGroup, setPhotoGroup }: any) => {
+export const WorkFooter = ({
+  title,
+  infos,
+  photoGroup,
+  setPhotoGroup,
+}: any) => {
   const { isOverview, handleOverviewSwitch } = useOverviewContext();
   const { setCursorType } = useCursorContext();
 

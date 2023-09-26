@@ -17,16 +17,15 @@ import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
 import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollContainer";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { ExtendedPhoto } from "@/types";
-import { updateAspectRatio } from "@/utils/helpers";
-import { updateDominantColors } from "@/utils/colors";
 
 type GalleryProps = {
   photos: ExtendedPhoto[];
   photoGroup: "summer" | "autumn" | "winter" | "spring";
   setTitle: (title: string) => void;
+  setInfos?: (infos: PhotoInfo) => void;
 };
 
-const Gallery = ({ photos, photoGroup, setTitle }: GalleryProps) => {
+const Gallery = ({ photos, photoGroup, setTitle, setInfos }: GalleryProps) => {
   const { scroll } = useLocomotiveScroll();
   const [photosDisplayed, setPhotosDisplayed] = useState<ExtendedPhoto[]>([]);
   const [photoTarget, setPhotoTarget] = useState("");
@@ -51,6 +50,11 @@ const Gallery = ({ photos, photoGroup, setTitle }: GalleryProps) => {
 
       // @ts-ignore
       setTitle(photosDisplayed[idx]?.capitalizedTitle);
+      setInfos?.({
+        title: photosDisplayed[idx]?.capitalizedTitle,
+        place: photosDisplayed[idx]?.place,
+        date: photosDisplayed[idx]?.date,
+      });
     });
 
     // Update the title when the scroll changes
@@ -105,8 +109,20 @@ const Gallery = ({ photos, photoGroup, setTitle }: GalleryProps) => {
   );
 };
 
+type PhotoInfo = {
+  title: string;
+  place: string;
+  date: string;
+};
+
 export default function Work() {
   const [title, setTitle] = useState("");
+  const [infos, setInfos] = useState<PhotoInfo>({
+    title: "",
+    place: "",
+    date: "",
+  });
+
   const [photoGroup, setPhotoGroup] = useState<
     "summer" | "autumn" | "winter" | "spring"
   >("summer");
@@ -131,11 +147,13 @@ export default function Work() {
                 photos={photos}
                 photoGroup={photoGroup}
                 setTitle={setTitle}
+                setInfos={setInfos}
               />
             </Container>
           </LocomotiveScrollContainer>
           <WorkFooter
             title={title}
+            infos={infos}
             photoGroup={photoGroup}
             setPhotoGroup={setPhotoGroup}
           />
