@@ -5,9 +5,11 @@ import { motion } from "framer-motion";
 import { useCursorContext } from "@/context/CursorContext";
 import AnimatedLetters from "../atoms/AnimLetters";
 import { useLoadingContext } from "@/context/LoadingContext";
+import { usePathname } from "next/navigation";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const path = usePathname();
   const { cursorType } = useCursorContext();
   const { isLoaded } = useLoadingContext();
   const [mousePosition, setMousePosition] = useState({
@@ -25,6 +27,8 @@ export default function CustomCursor() {
     });
   };
 
+  console.log(path !== "/");
+
   useEffect(() => {
     document.addEventListener("mousemove", onMouseMove);
 
@@ -40,7 +44,7 @@ export default function CustomCursor() {
       className={cursorType}
       style={{
         scale: cursorType === "hover" ? 0.5 : 1,
-        opacity: isLoaded ? 1 : 0,
+        opacity: isLoaded || path !== "/" ? 1 : 0,
         x: mousePosition.x,
         y: mousePosition.y,
       }}
