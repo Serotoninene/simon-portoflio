@@ -4,6 +4,8 @@ import { useCursorContext } from "../../../context/CursorContext";
 import { MouseEvent, useState } from "react";
 import { fadeOut, fadeTranslateOut } from "./anims";
 import { SVGButtons } from "../SVGButtons";
+import { PhotoInfo } from "@/pages/work";
+import { info } from "console";
 
 const groups = ["summer", "autumn", "winter", "spring"];
 
@@ -86,12 +88,13 @@ export const GroupSelector = ({ photoGroup, setPhotoGroup }: any) => {
   );
 };
 
-export const WorkFooter = ({
-  title,
-  infos,
-  photoGroup,
-  setPhotoGroup,
-}: any) => {
+type WorkFooterProps = {
+  infos: PhotoInfo;
+  photoGroup: string;
+  setPhotoGroup: (group: string) => void;
+};
+
+export const WorkFooter = ({ infos, photoGroup, setPhotoGroup }: any) => {
   const { isOverview, handleOverviewSwitch } = useOverviewContext();
   const { setCursorType } = useCursorContext();
 
@@ -105,7 +108,7 @@ export const WorkFooter = ({
       <AnimatePresence mode="popLayout">
         <div className="fixed bottom-4 left-10 right-10 flex justify-between items-end text-light">
           <motion.div
-            key={title}
+            key={infos.title}
             variants={fadeOut}
             initial="hidden"
             animate={isOverview ? "hidden" : "visible"}
@@ -113,7 +116,10 @@ export const WorkFooter = ({
             className={`font-bold w-1/2 leading-[1.1] sm:width-auto pointer-events-none
             ${isOverview ? "pointer-events-none" : "pointer-events-auto"}`}
           >
-            <span className="text-light">{title} </span>
+            <span className="text-light">{infos.title} </span>
+            <span className="font-light text-xs ml-1">
+              {infos.place} - {infos.date}
+            </span>
           </motion.div>
           <div className="flex items-end gap-8 sm:flex-row sm:gap-40">
             <motion.div

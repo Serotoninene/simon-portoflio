@@ -21,11 +21,16 @@ import { ExtendedPhoto } from "@/types";
 type GalleryProps = {
   photos: ExtendedPhoto[];
   photoGroup: "summer" | "autumn" | "winter" | "spring";
-  setTitle: (title: string) => void;
-  setInfos?: (infos: PhotoInfo) => void;
+  setInfos: (infos: PhotoInfo) => void;
 };
 
-const Gallery = ({ photos, photoGroup, setTitle, setInfos }: GalleryProps) => {
+export type PhotoInfo = {
+  title: string;
+  place: string;
+  date: string;
+};
+
+const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
   const { scroll } = useLocomotiveScroll();
   const [photosDisplayed, setPhotosDisplayed] = useState<ExtendedPhoto[]>([]);
   const [photoTarget, setPhotoTarget] = useState("");
@@ -48,8 +53,6 @@ const Gallery = ({ photos, photoGroup, setTitle, setInfos }: GalleryProps) => {
         (e.scroll.y / e.limit.y) * (photosDisplayed.length - 1)
       );
 
-      // @ts-ignore
-      setTitle(photosDisplayed[idx]?.capitalizedTitle);
       setInfos?.({
         title: photosDisplayed[idx]?.capitalizedTitle,
         place: photosDisplayed[idx]?.place,
@@ -109,14 +112,7 @@ const Gallery = ({ photos, photoGroup, setTitle, setInfos }: GalleryProps) => {
   );
 };
 
-type PhotoInfo = {
-  title: string;
-  place: string;
-  date: string;
-};
-
 export default function Work() {
-  const [title, setTitle] = useState("");
   const [infos, setInfos] = useState<PhotoInfo>({
     title: "",
     place: "",
@@ -146,13 +142,11 @@ export default function Work() {
               <Gallery
                 photos={photos}
                 photoGroup={photoGroup}
-                setTitle={setTitle}
                 setInfos={setInfos}
               />
             </Container>
           </LocomotiveScrollContainer>
           <WorkFooter
-            title={title}
             infos={infos}
             photoGroup={photoGroup}
             setPhotoGroup={setPhotoGroup}
