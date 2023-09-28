@@ -49,7 +49,7 @@ export default function Layout({ children }: Props) {
         <title>Simon Eychenne</title>
         <meta
           name="description"
-          content="Virgile Hasselmann, a video and photo portfolio"
+          content="Simon Eychenne,photographer portfolio"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

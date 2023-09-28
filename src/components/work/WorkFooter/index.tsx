@@ -5,7 +5,6 @@ import { MouseEvent, useState } from "react";
 import { fadeOut, fadeTranslateOut } from "./anims";
 import { SVGButtons } from "../SVGButtons";
 import { PhotoInfo } from "@/pages/work";
-import { info } from "console";
 
 const groups = ["summer", "autumn", "winter", "spring"];
 
