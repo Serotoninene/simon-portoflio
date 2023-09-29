@@ -24,7 +24,7 @@ export default function Contact() {
     { label: "phone", content: "06 26 66 77 56" },
     {
       label: "mail",
-      content: "simeychenne@gmail.fr",
+      content: "simeychenne@gmail.com",
     },
   ];
 
