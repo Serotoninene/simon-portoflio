@@ -19,9 +19,9 @@ export default function Contact() {
     {
       label: "gram",
       content: isMobile ? "@uma" : "@insta",
-      href: "#",
+      href: "https://www.instagram.com/uma__simon/?hl=fr",
     },
-    { label: "phone", content: "06 05 03 99 39" },
+    { label: "phone", content: "06 26 66 77 56" },
     {
       label: "mail",
       content: "simeychenne@gmail.fr",
