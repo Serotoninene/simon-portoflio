@@ -3,6 +3,7 @@ export type Photo = {
   alt: string;
   dominantColor?: string;
   caption?: Caption;
+  aspectRatio?: number;
 };
 
 export type ExtendedPhoto = Photo & {

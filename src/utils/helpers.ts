@@ -1,4 +1,4 @@
-import { ExtendedPhoto } from "@/types";
+import { ExtendedPhoto, Photo } from "@/types";
 
 export const capitalizeWord = (string: string) => {
   const uppercasedString = [string].map(
@@ -59,7 +59,7 @@ export function getAspectRatio(image: HTMLImageElement) {
   return aspectRatio;
 }
 
-export const updateAspectRatio = async (photos: ExtendedPhoto[]) => {
+export const updateAspectRatio = async (photos: ExtendedPhoto[] | Photo[]) => {
   await Promise.all(
     photos.map(async (photo) => {
       const img = new Image();

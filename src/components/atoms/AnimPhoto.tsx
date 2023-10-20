@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { createAlt, getAspectRatio } from "@/utils/helpers";
 import { usePathname } from "next/navigation";
+import { useWindowSize } from "@/utils/hooks";
 
 type Props = {
   alt?: string;
@@ -26,6 +27,7 @@ export const AnimPhoto = ({
   blurDataURL = src,
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
+  const { width } = useWindowSize();
   const [isLoaded, setIsLoaded] = useState(false);
   const path = usePathname();
 
@@ -44,9 +46,13 @@ export const AnimPhoto = ({
   // calculating the aspect ratio of the photo
   useEffect(() => {
     if (!ref) return;
-    const img = ref.current?.querySelector("img");
-    const aspectRatio = img && getAspectRatio(img);
-    console.log(alt, " ", aspectRatio);
+    const img = ref.current?.querySelector("img") || null;
+    if (img) {
+      img.onload = (e) => {
+        const w = img.naturalWidth;
+        const h = img.naturalHeight;
+      };
+    }
   }, []);
 
   useEffect(() => {

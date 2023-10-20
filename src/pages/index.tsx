@@ -12,6 +12,8 @@ import {
 import { OneWoCaption } from "@/components/home/OneWoCaption";
 import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 import { Loader } from "@/components/organisms";
+import { Photo } from "@/types";
+import { useEffect } from "react";
 
 // TO DO
 // [X] changer les photos d'après le figma
@@ -58,7 +60,7 @@ import { Loader } from "@/components/organisms";
 // [] when overview scroll malfunctions (no bug on live version ...)
 // [] try and see if snapping isn't possible
 
-export const photos = [
+export const photos: Photo[] = [
   {
     src: "/assets/photos/home/01_MY_GARDEN_IS_COOL.jpeg",
     alt: "01_MY_GARDEN_IS_COOL",
@@ -69,6 +71,7 @@ export const photos = [
       place: "Canary Islands (ES)",
       date: "2021",
     },
+    aspectRatio: 1.4927113702623906,
   },
   {
     src: "/assets/photos/home/02_MY_HOUSE_IS_A_TRIANGLE.jpeg",
@@ -80,6 +83,7 @@ export const photos = [
       place: "Vancouver (CA)",
       date: "2020",
     },
+    aspectRatio: 0.747557003257329,
   },
   {
     src: "/assets/photos/home/03_GOOGLE_MAPS-ING.jpeg",
@@ -91,6 +95,7 @@ export const photos = [
       place: "Honolulu (US)",
       date: "2020",
     },
+    aspectRatio: 1.480456026058632,
   },
   {
     src: "/assets/photos/home/04_FISHING.jpeg",
@@ -102,6 +107,7 @@ export const photos = [
       place: "Provence-Alpes-Côte d’Azur (FR)",
       date: "2021",
     },
+    aspectRatio: 2.0855855855855854,
   },
   {
     src: "/assets/photos/home/05_LIVING_ON_A_BOAT.jpeg",
@@ -113,6 +119,7 @@ export const photos = [
       place: "Victoria (CA)",
       date: "2020",
     },
+    aspectRatio: 2.005893909626719,
   },
   {
     src: "/assets/photos/home/06_CROWDED.jpeg",
@@ -124,12 +131,14 @@ export const photos = [
       place: "Honolulu (US)",
       date: "2020",
     },
+    aspectRatio: 1.4804979253112034,
   },
   {
     src: "/assets/photos/home/07_SQUARED.jpeg",
     alt: "07_SQUARED",
     dominantColor: "#917b5d",
     caption: { idx: "7", title: "SQUARED", place: "Hawaï (US)", date: "2020" },
+    aspectRatio: 2.1839220462850184,
   },
   {
     src: "/assets/photos/home/08_ALL_ABOUT_CLEANING.jpeg",
@@ -141,6 +150,7 @@ export const photos = [
       place: "Canary Islands (ES)",
       date: "2023",
     },
+    aspectRatio: 1.4808333333333332,
   },
   {
     src: "/assets/photos/home/09_SUPERMARKET.jpeg",
@@ -152,6 +162,7 @@ export const photos = [
       place: "Provence-Alpes-Côte d’Azur (FR)",
       date: "2021",
     },
+    aspectRatio: 1.5086762518591967,
   },
   {
     src: "/assets/photos/home/11_APERITIF.jpeg",
@@ -163,6 +174,7 @@ export const photos = [
       place: "Honolulu (US)",
       date: "2020",
     },
+    aspectRatio: 1.4444444444444444,
   },
   {
     src: "/assets/photos/home/10_TIME_FOR_LAUNDRY.jpeg",
@@ -174,6 +186,7 @@ export const photos = [
       place: "Vancouver Island (CA",
       date: "2020",
     },
+    aspectRatio: 1.4806534823731727,
   },
   {
     src: "/assets/photos/home/31_LIFE_PERSPECTIVES.jpeg",
@@ -185,6 +198,7 @@ export const photos = [
       place: "Mexico City (MX)",
       date: "2019",
     },
+    aspectRatio: 1.4806265457543282,
   },
   {
     src: "/assets/photos/home/14_ROOMS_FOR_ME_&_FOR_MY_CAR.jpeg",
@@ -196,6 +210,7 @@ export const photos = [
       place: "Drumheller (CA)",
       date: "2020",
     },
+    aspectRatio: 2.091025641025641,
   },
   {
     src: "/assets/photos/home/15_MONUMENT.jpeg",
@@ -207,6 +222,7 @@ export const photos = [
       place: "Whitehorse (CA)",
       date: "2020",
     },
+    aspectRatio: 2.3307086614173227,
   },
   {
     src: "/assets/photos/home/13_TROPICAL_CHURCH.jpeg",
@@ -218,6 +234,7 @@ export const photos = [
       place: "Honolulu (US)",
       date: "2020",
     },
+    aspectRatio: 1.4800693240901213,
   },
   {
     src: "/assets/photos/home/19_I_MISSED_THE_TRAIN.jpeg",
@@ -229,6 +246,7 @@ export const photos = [
       place: "Somewhere in Norway (NO)",
       date: "2022",
     },
+    aspectRatio: 2.094364351245085,
   },
   {
     src: "/assets/photos/home/23_GOING_OUT_FOR_DINNER.jpeg",
@@ -240,6 +258,7 @@ export const photos = [
       place: "Alberta (CA)",
       date: "2020",
     },
+    aspectRatio: 1.481636060100167,
   },
   {
     src: "/assets/photos/home/24_DOWN_BY_THE_LAKE.jpeg",
@@ -251,6 +270,7 @@ export const photos = [
       place: "Vancouver Island (CA)",
       date: "2020",
     },
+    aspectRatio: 2.15,
   },
   {
     src: "/assets/photos/home/25_THROUGH_THE_MIRROR.jpeg",
@@ -262,6 +282,7 @@ export const photos = [
       place: "Mexico City (MX)",
       date: "2019",
     },
+    aspectRatio: 1.480456026058632,
   },
   {
     src: "/assets/photos/home/42_TIME_TO_DRY.jpeg",
@@ -273,6 +294,7 @@ export const photos = [
       place: "Saint-Tropez (FR)",
       date: "2022",
     },
+    aspectRatio: 1.5005707762557077,
   },
   {
     src: "/assets/photos/home/43_PRIMAVERA.jpeg",
@@ -284,6 +306,7 @@ export const photos = [
       place: "Bruxelles (BE)",
       date: "2022",
     },
+    aspectRatio: 0.6772463120250335,
   },
   {
     src: "/assets/photos/home/44_LEMONADE.jpeg",
@@ -295,6 +318,7 @@ export const photos = [
       place: "Amsterdam (NL)",
       date: "2022",
     },
+    aspectRatio: 1.4919018972697826,
   },
   {
     src: "/assets/photos/home/72_LA_VIE_ET_SES_PLAISIRS.jpeg",
@@ -306,6 +330,7 @@ export const photos = [
       place: "Saint-Tropez (FR)",
       date: "2022",
     },
+    aspectRatio: 1.5,
   },
   {
     src: "/assets/photos/home/71_THERE_IS_NOTHING_ON_THE_ROOF.jpeg",
@@ -317,6 +342,7 @@ export const photos = [
       place: "Bergen (NO)",
       date: "2022",
     },
+    aspectRatio: 1.5,
   },
   {
     src: "/assets/photos/home/45_LIVING_THE_DREAM.jpeg",
@@ -328,6 +354,7 @@ export const photos = [
       place: "Hawaï (US)",
       date: "2020",
     },
+    aspectRatio: 1.48110599078341,
   },
   {
     src: "/assets/photos/home/46_DREAMING_THE_DREAM.jpeg",
@@ -339,6 +366,7 @@ export const photos = [
       place: "Alberta (CA)",
       date: "2020",
     },
+    aspectRatio: 1.480456026058632,
   },
   {
     src: "/assets/photos/home/48_LA_FILLE_ET_LE_PARAPLUIE.jpeg",
@@ -350,6 +378,7 @@ export const photos = [
       place: "Paris (FR)",
       date: "2022",
     },
+    aspectRatio: 1.507991660875608,
   },
   {
     src: "/assets/photos/home/47_LE_PIED_ET_LE_PARASOL.jpeg",
@@ -361,6 +390,7 @@ export const photos = [
       place: "Victoria (CA)",
       date: "2020",
     },
+    aspectRatio: 1.4806949806949807,
   },
   {
     src: "/assets/photos/home/20_LOVE_IN_A_RUBBER_BOAT.jpeg",
@@ -372,6 +402,7 @@ export const photos = [
       place: "Alberta (CA)",
       date: "2020",
     },
+    aspectRatio: 1.480456026058632,
   },
   {
     src: "/assets/photos/home/21_LOVE_AT_THE_STREET_CORNER.jpeg",
@@ -383,6 +414,7 @@ export const photos = [
       place: "Brussels (BE)",
       date: "2022",
     },
+    aspectRatio: 0.7874175545408422,
   },
   {
     src: "/assets/photos/home/31_STRANGER.jpeg",
@@ -394,6 +426,7 @@ export const photos = [
       place: " Canary Islands (ES)",
       date: "2023",
     },
+    aspectRatio: 0.6675555555555556,
   },
   {
     src: "/assets/photos/home/32_SHANGLIE.jpeg",
@@ -405,6 +438,7 @@ export const photos = [
       place: "Vielsalm (BE)",
       date: "2021",
     },
+    aspectRatio: 0.7008639308855291,
   },
   {
     src: "/assets/photos/home/33_MA_GRAND-MERE.jpeg",
@@ -416,10 +450,30 @@ export const photos = [
       place: "Haute-Garonne (FR)",
       date: "2023",
     },
+    aspectRatio: 0.717391304347826,
   },
 ];
 
 export default function Home() {
+  // to calculate the aspect ratio
+  // useEffect(() => {
+  //   //  getting the aspect ratio of the image sources
+  //   photos.forEach((photo, idx) => {
+  //     const img = new Image();
+  //     img.src = photo.src;
+
+  //     img.onload = () => {
+  //       const w = img.naturalWidth;
+  //       const h = img.naturalHeight;
+  //       photo.aspectRatio = w / h;
+  //     };
+  //   });
+
+  //   setTimeout(() => {
+  //     console.log(JSON.stringify(photos));
+  //   }, 500);
+  // }, []);
+
   if (!photos) return null;
 
   return (
