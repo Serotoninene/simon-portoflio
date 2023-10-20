@@ -13,47 +13,22 @@ type Props = {
   alt?: string;
   src: string;
   dominantColor?: string;
-  fit?: "cover" | "contain";
-  placeholder?: "blur" | "empty";
-  blurDataURL?: string;
+  aspectRatio: number;
 };
 
-export const AnimPhoto = ({
-  alt,
-  src,
-  dominantColor,
-  fit = "cover",
-  placeholder = "blur",
-  blurDataURL = src,
-}: Props) => {
+export const AnimPhoto = ({ alt, src, dominantColor }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { width } = useWindowSize();
   const [isLoaded, setIsLoaded] = useState(false);
   const path = usePathname();
 
   const imageProps = {
     alt: alt ?? createAlt(src),
     src: src ?? "/assets/photos/01_MY_GARDEN_IS_COOL.jpeg",
-    className: `object-${fit || "cover"}`,
-    placeholder: placeholder,
-    blurDataURL: blurDataURL ?? src,
   };
 
   const handleLoad = () => {
     setIsLoaded(true);
   };
-
-  // calculating the aspect ratio of the photo
-  useEffect(() => {
-    if (!ref) return;
-    const img = ref.current?.querySelector("img") || null;
-    if (img) {
-      img.onload = (e) => {
-        const w = img.naturalWidth;
-        const h = img.naturalHeight;
-      };
-    }
-  }, []);
 
   useEffect(() => {
     if (ref.current) {

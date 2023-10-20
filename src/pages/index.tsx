@@ -51,10 +51,10 @@ import { useEffect } from "react";
 // [X] when changing group -> scroll to top
 // [X] groups sometime disappear since added the anim on hover
 // [X] ajouter les nouvelles photos
-// [] Changer la photo pour le outro : Voiture & Tina - Rest Area > Diving in the Blue > White in the Blue
-// [] Remplacer "see all photos" pour des icones
-// [] ajouter date et lieu sous les titres des photos dans work ?
-// [] faire une group "ALL PHOTOS" dans work
+// [X] Changer la photo pour le outro : Voiture & Tina - Rest Area > Diving in the Blue > White in the Blue
+// [X] Remplacer "see all photos" pour des icones
+// [X ajouter date et lieu sous les titres des photos dans work ?
+// [X] faire une group "ALL PHOTOS" dans work
 
 // [] rearrange the layout on mobile
 // [] when overview scroll malfunctions (no bug on live version ...)

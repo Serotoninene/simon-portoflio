@@ -12,6 +12,7 @@ export const PhotoLayout = ({ photo }: Props) => {
       <AnimPhoto
         src={photo?.src}
         alt={photo?.alt}
+        aspectRatio={photo?.aspectRatio ?? 1}
         dominantColor={photo.dominantColor}
       />
       <PhotoCaption {...photo?.caption} />
