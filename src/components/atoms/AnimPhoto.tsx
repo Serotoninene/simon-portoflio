@@ -10,16 +10,19 @@ import { usePathname } from "next/navigation";
 import { useWindowSize } from "@/utils/hooks";
 
 type Props = {
-  alt?: string;
   src: string;
-  dominantColor?: string;
   aspectRatio: number;
+  alt?: string;
+  dominantColor?: string;
 };
 
-export const AnimPhoto = ({ alt, src, dominantColor }: Props) => {
+export const AnimPhoto = ({ alt, src, dominantColor, aspectRatio }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const path = usePathname();
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  // if true the photo is taller than it is wide
+  const portraitAspect = aspectRatio < 1;
 
   const imageProps = {
     alt: alt ?? createAlt(src),
@@ -38,7 +41,13 @@ export const AnimPhoto = ({ alt, src, dominantColor }: Props) => {
 
   return (
     <AnimatePresence mode="wait">
-      <div ref={ref} key={path} className="h-full relative overflow-hidden">
+      <div
+        ref={ref}
+        key={path}
+        className={`${
+          portraitAspect ? "h-[80vh]" : "h-[50vh]"
+        } sm:h-full relative overflow-hidden`}
+      >
         <motion.div
           exit={{ y: "100%" }}
           transition={{

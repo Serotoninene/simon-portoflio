@@ -10,7 +10,7 @@ export type ExtendedPhoto = Photo & {
   date: string;
   group: string;
   capitalizedTitle: string;
-  aspectRatio: number | 1;
+  aspectRatio: number;
   place: string;
 };
 

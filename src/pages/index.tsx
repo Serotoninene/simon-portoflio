@@ -481,7 +481,7 @@ export default function Home() {
       <Loader />
 
       <Container className="pt-6">
-        <div className="relative flex flex-col items gap-56 pb-6 bg-light">
+        <div className="relative flex flex-col items gap-24 sm:gap-56 pb-6 bg-light">
           <HeroHome />
           <About />
           <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
