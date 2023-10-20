@@ -19,14 +19,12 @@ export const GridThree = ({
 }: Props) => {
   return (
     <HomeContainer fit>
-      <div className="pt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 h-full md:grid-cols-11">
-        <div
-          className={`flex flex-col  md:col-span-5 ${inverted && "order-1"}`}
-        >
+      <div className="pt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-11">
+        <div className={`flex flex-col md:col-span-5 ${inverted && "order-1"}`}>
           <div
             data-scroll
-            data-scroll-speed="2"
-            className="h-[100vh] sm:h-full"
+            data-scroll-speed="1.3"
+            className="h-[30vh] sm:h-full"
           >
             <AnimPhoto src={firstPhoto?.src} alt={firstPhoto?.alt} />
             <div className="block sm:hidden mt-4">

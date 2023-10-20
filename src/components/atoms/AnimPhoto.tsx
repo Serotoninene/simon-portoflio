@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { createAlt } from "@/utils/helpers";
+import { createAlt, getAspectRatio } from "@/utils/helpers";
 import { usePathname } from "next/navigation";
 
 type Props = {
@@ -15,7 +15,6 @@ type Props = {
   fit?: "cover" | "contain";
   placeholder?: "blur" | "empty";
   blurDataURL?: string;
-  sizes?: string;
 };
 
 export const AnimPhoto = ({
@@ -25,7 +24,6 @@ export const AnimPhoto = ({
   fit = "cover",
   placeholder = "blur",
   blurDataURL = src,
-  sizes,
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -34,7 +32,6 @@ export const AnimPhoto = ({
   const imageProps = {
     alt: alt ?? createAlt(src),
     src: src ?? "/assets/photos/01_MY_GARDEN_IS_COOL.jpeg",
-    sizes: sizes,
     className: `object-${fit || "cover"}`,
     placeholder: placeholder,
     blurDataURL: blurDataURL ?? src,
@@ -43,6 +40,14 @@ export const AnimPhoto = ({
   const handleLoad = () => {
     setIsLoaded(true);
   };
+
+  // calculating the aspect ratio of the photo
+  useEffect(() => {
+    if (!ref) return;
+    const img = ref.current?.querySelector("img");
+    const aspectRatio = img && getAspectRatio(img);
+    console.log(alt, " ", aspectRatio);
+  }, []);
 
   useEffect(() => {
     if (ref.current) {

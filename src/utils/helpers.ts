@@ -44,6 +44,21 @@ export const loadImage = (src: string) => {
   return img;
 };
 
+export function getAspectRatio(image: HTMLImageElement) {
+  const w = image.naturalWidth;
+  const h = image.naturalHeight;
+
+  let aspectRatio;
+
+  if (w > h) {
+    aspectRatio = w / h;
+  } else {
+    aspectRatio = h / w;
+  }
+
+  return aspectRatio;
+}
+
 export const updateAspectRatio = async (photos: ExtendedPhoto[]) => {
   await Promise.all(
     photos.map(async (photo) => {
