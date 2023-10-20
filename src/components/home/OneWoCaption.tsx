@@ -12,7 +12,12 @@ export const OneWoCaption = ({ photo }: Props) => {
     <HomeContainer>
       <div className="grid sm:grid-cols-3 h-full gap-4 sm:gap-6">
         <div className="sm:col-span-2">
-          <AnimPhoto {...photo} />
+          <AnimPhoto
+            src={photo?.src}
+            alt={photo?.alt}
+            aspectRatio={photo?.aspectRatio!}
+            dominantColor={photo.dominantColor}
+          />
         </div>
         <div>
           <PhotoCaption {...photo.caption} />

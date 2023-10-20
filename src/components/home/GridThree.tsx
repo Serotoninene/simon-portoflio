@@ -19,24 +19,21 @@ export const GridThree = ({
 }: Props) => {
   return (
     <HomeContainer fit>
-      <div className="pt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-6 md:grid-cols-11">
-        <div className={`flex flex-col md:col-span-5 ${inverted && "order-1"}`}>
-          <div
-            data-scroll
-            data-scroll-speed="1.3"
-            className="h-[30vh] sm:h-full"
-          >
-            <AnimPhoto src={firstPhoto?.src} alt={firstPhoto?.alt} />
+      <div className="pt-10 grid grid-cols-1 gap-24 sm:grid-cols-2 sm:gap-6 md:grid-cols-11">
+        <div className={`flex flex-col md:col-span-5 ${inverted ?? "order-1"}`}>
+          <div data-scroll data-scroll-speed="1.3">
+            <AnimPhoto
+              src={firstPhoto?.src}
+              alt={firstPhoto?.alt}
+              aspectRatio={firstPhoto?.aspectRatio!}
+              dominantColor={firstPhoto.dominantColor}
+            />
             <div className="block sm:hidden mt-4">
               <PhotoCaption {...firstPhoto?.caption} />
             </div>
           </div>
 
-          <div
-            data-scroll
-            data-scroll-speed="1"
-            className="h-[100vh] sm:h-[125%]"
-          >
+          <div data-scroll data-scroll-speed="1" className="sm:h-[125%]">
             <PhotoLayout photo={secondPhoto} />
           </div>
         </div>

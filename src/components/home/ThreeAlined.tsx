@@ -11,7 +11,7 @@ type Props = {
 export const ThreeAlined = ({ firstPhoto, secondPhoto, thirdPhoto }: Props) => {
   return (
     <HomeContainer>
-      <div className="h-full grid sm:grid-cols-3 sm:gap-6">
+      <div className="h-full grid gap-24 sm:grid-cols-3 sm:gap-6">
         <PhotoLayout photo={firstPhoto} />
         <PhotoLayout photo={secondPhoto} />
         <PhotoLayout photo={thirdPhoto} />

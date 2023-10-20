@@ -36,7 +36,12 @@ export const OneWCaption = ({ photo, children }: Props) => {
         </div>
 
         <div className="h-[50vh] sm:h-auto sm:col-span-3">
-          <AnimPhoto {...photo} />
+          <AnimPhoto
+            src={photo?.src}
+            alt={photo?.alt}
+            aspectRatio={photo?.aspectRatio!}
+            dominantColor={photo.dominantColor}
+          />
           <div className="block mt-4 sm:hidden">
             <PhotoCaption {...photo.caption} />
           </div>
