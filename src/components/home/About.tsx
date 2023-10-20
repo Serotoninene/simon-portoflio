@@ -30,7 +30,7 @@ export const About = (props: Props) => {
       <div
         data-scroll
         data-scroll-speed="0.5"
-        className="md:col-span-2 text-justify flex items-end sm:text-lg"
+        className="mt-8 md:mt-0 md:col-span-2 text-justify flex items-end text-sm sm:text-lg"
       >
         <AnimatedWords
           delay={0}

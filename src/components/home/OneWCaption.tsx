@@ -35,9 +35,9 @@ export const OneWCaption = ({ photo, children }: Props) => {
           </div>
         </div>
 
-        <div className="sm:col-span-3">
+        <div className="h-[50vh] sm:h-auto sm:col-span-3">
           <AnimPhoto {...photo} />
-          <div className="block sm:hidden">
+          <div className="block mt-4 sm:hidden">
             <PhotoCaption {...photo.caption} />
           </div>
         </div>

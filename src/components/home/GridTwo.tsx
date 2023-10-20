@@ -12,10 +12,18 @@ export const GridTwo = ({ firstPhoto, secondPhoto }: Props) => {
   return (
     <HomeContainer>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 sm:gap-6 h-full">
-        <div data-scroll data-scroll-speed="3" className="md:col-span-2">
+        <div
+          data-scroll
+          data-scroll-speed="3"
+          className="h-screen md:h-auto md:col-span-2"
+        >
           <PhotoLayout photo={firstPhoto} />
         </div>
-        <div data-scroll data-scroll-speed="2">
+        <div
+          data-scroll
+          data-scroll-speed="2"
+          className="h-screen md:h-auto md:h-auto"
+        >
           <PhotoLayout photo={secondPhoto} />
         </div>
       </div>

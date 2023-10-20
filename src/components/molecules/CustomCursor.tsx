@@ -27,8 +27,6 @@ export default function CustomCursor() {
     });
   };
 
-  console.log(path !== "/");
-
   useEffect(() => {
     document.addEventListener("mousemove", onMouseMove);
 
