@@ -20,15 +20,17 @@ export const GridThree = ({
   return (
     <HomeContainer fit>
       <div className="pt-10 grid grid-cols-1 gap-24 sm:grid-cols-2 sm:gap-6 md:grid-cols-11">
-        <div className={`flex flex-col md:col-span-5 ${inverted ?? "order-1"}`}>
-          <div data-scroll data-scroll-speed="1.3">
+        <div
+          className={`flex flex-col md:col-span-5 ${inverted ? "order-1" : ""}`}
+        >
+          <div data-scroll data-scroll-speed="1.3" className="sm:h-[100%]">
             <AnimPhoto
               src={firstPhoto?.src}
               alt={firstPhoto?.alt}
               aspectRatio={firstPhoto?.aspectRatio!}
               dominantColor={firstPhoto.dominantColor}
             />
-            <div className="block sm:hidden mt-4">
+            <div className="block sm:hidden mt-4 opacity-50 bg-red-400">
               <PhotoCaption {...firstPhoto?.caption} />
             </div>
           </div>
