@@ -45,9 +45,9 @@ const HeroPhoto = () => {
     ["/assets/photos/home/00_ACCUEIL.jpeg", "/assets/disp/disp1.jpg"],
     () => {
       // init the animation of the page when texure is loaded after 1 second
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 2000);
+      // setTimeout(() => {
+      setIsLoaded(true);
+      // }, 2000);
     }
   );
 

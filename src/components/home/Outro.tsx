@@ -27,7 +27,7 @@ const OutroScene = ({ footerSize }: Props) => {
   const meshRef = useRef<any>();
   const shaderRef = useRef<any>(null);
   const router = useRouter();
-  const touchTexture = useMemo<any>(() => new TouchTexture(), []);
+  const touchTexture = useMemo<any>(() => new TouchTexture(false, 128, 60), []);
 
   const { setCursorType } = useCursorContext();
 
