@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { motion } from "framer-motion";
 import { useCursorContext } from "../../context/CursorContext";
+import { usePathname } from "next/navigation";
 
 type Props = {
   children: React.ReactNode;
@@ -42,8 +43,10 @@ const hiddenLetterAnim = {
 };
 
 export const AnimLink = ({ children, href = "/" }: Props) => {
+  const pathname = usePathname();
   const { setCursorType } = useCursorContext();
   const words = children?.toString().split(" ");
+  const isCurrent = pathname === href;
 
   return (
     <Link
@@ -63,7 +66,9 @@ export const AnimLink = ({ children, href = "/" }: Props) => {
         whileHover="hovered"
         exit="exit"
         key={children?.toString()}
-        className="overflow-hidden inline-block align-bottom"
+        className={`overflow-hidden inline-block align-bottom ${
+          isCurrent ? "font-bold" : ""
+        }`}
       >
         {words?.map((word) => (
           <span key={word}>
