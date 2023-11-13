@@ -230,7 +230,7 @@ export const photos = [
     date: "2022",
   },
   {
-    src: "/assets/photos/autumn/113_GREEN_&_GRAY.jpeg",
+    src: "/assets/photos/spring/113_GREEN_&_GRAY.jpeg",
     alt: "13_GREEN_&_GRAY",
     capitalizedTitle: "Green & gray",
     dominantColor: "#1c362f",
@@ -280,7 +280,7 @@ export const photos = [
     date: "2022",
   },
   {
-    src: "/assets/photos/autumn/118_FLOWERS_&_OCEAN.jpeg",
+    src: "/assets/photos/spring/118_FLOWERS_&_OCEAN.jpeg",
     alt: "18_FLOWERS_&_OCEAN",
     capitalizedTitle: "Flowers & ocean",
     dominantColor: "#b5a9ab",
@@ -1130,7 +1130,7 @@ export const photos = [
     date: "2020",
   },
   {
-    src: "/assets/photos/autumn/91_EXCLUSION.jpeg",
+    src: "/assets/photos/spring/91_EXCLUSION.jpeg",
     alt: "1_EXCLUSION",
     capitalizedTitle: "Exclusion",
     dominantColor: "#baab98",
