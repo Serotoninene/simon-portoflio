@@ -121,13 +121,7 @@ export const WorkFooter = ({ infos, photoGroup, setPhotoGroup }: any) => {
             </span>
           </motion.div>
           <div className="flex items-end gap-8 sm:flex-row sm:gap-40">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isOverview ? 0 : 1 }}
-              className={
-                isOverview ? "pointer-events-none" : "pointer-events-auto"
-              }
-            >
+            <motion.div>
               <GroupSelector
                 photoGroup={photoGroup}
                 setPhotoGroup={setPhotoGroup}

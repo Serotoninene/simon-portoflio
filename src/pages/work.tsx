@@ -64,6 +64,7 @@ const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
   }, [scroll, photosDisplayed]);
 
   useEffect(() => {
+    // Flip the photos when we change the photo group
     gsap.registerPlugin(Flip);
     const target = document.getElementById(photoTarget);
 
