@@ -38,7 +38,11 @@ const OutroScene = ({ footerSize }: Props) => {
   };
 
   const texture = useTexture(
-    "/assets/photos/spring/37_LAYING_ON_THE_FIELD.jpeg"
+    "/assets/photos/spring/26_REST_AREA.jpeg"
+    // "/assets/photos/spring/23_GOING_OUT_FOR_DINNER.jpeg"
+    // "/assets/photos/autumn/64_WHAT'S_UP.jpeg"
+    // "/assets/photos/summer/106_RUNNING_TRACK.jpeg"
+    // "/assets/photos/summer/104_FAITH.jpeg"
   );
 
   const uniforms = useMemo(
