@@ -75,30 +75,28 @@ const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
     // Update the title when the scroll changes
   }, [scroll, photosDisplayed]);
 
-  // useEffect(() => {
-  //   // Flip the photos when we change the photo group
-  //   if (width && width < 768) return; // Skip the animation for small screens
+  useEffect(() => {
+    // Flip the photos when we change the photo group
+    const target = document.getElementById(photoTarget);
 
-  //   const target = document.getElementById(photoTarget);
+    if (!flipState) return;
 
-  //   if (!flipState) return;
-
-  //   scroll.update(); // update the locoscroll so it resizes the container
-  //   scroll.scrollTo(0, 0, 0); // scroll to the top of the page if we are in the overview
-  //   Flip.from(flipState, {
-  //     duration: 1.5,
-  //     ease: Power4.easeInOut,
-  //     absolute: true,
-  //     stagger: {
-  //       amount: 0.1,
-  //       from: isOverview ? "start" : "end",
-  //     },
-  //     onComplete: () => {
-  //       if (isOverview) return;
-  //       scroll.scrollTo(target);
-  //     },
-  //   });
-  // }, [isOverview, flipState, width]);
+    scroll.update(); // update the locoscroll so it resizes the container
+    scroll.scrollTo(0, 0, 0); // scroll to the top of the page if we are in the overview
+    Flip.from(flipState, {
+      duration: 1.5,
+      ease: Power4.easeInOut,
+      absolute: true,
+      stagger: {
+        amount: 0.1,
+        from: isOverview ? "start" : "end",
+      },
+      onComplete: () => {
+        if (isOverview) return;
+        scroll.scrollTo(target);
+      },
+    });
+  }, [isOverview, flipState]);
 
   return (
     <AnimatePresence mode="popLayout">
@@ -148,25 +146,23 @@ export default function Work() {
   if (!photos) return;
 
   return (
-    <>
-      <Container className="pt-0 bg-light relative">
-        <OverviewProvider>
-          <LocomotiveScrollContainer>
-            <Container>
-              <Gallery
-                photos={photos}
-                photoGroup={photoGroup}
-                setInfos={setInfos}
-              />
-            </Container>
-          </LocomotiveScrollContainer>
-          <WorkFooter
-            infos={infos}
-            photoGroup={photoGroup}
-            setPhotoGroup={setPhotoGroup}
-          />
-        </OverviewProvider>
-      </Container>
-    </>
+    <Container className="pt-0 bg-light relative">
+      <OverviewProvider>
+        <LocomotiveScrollContainer>
+          <Container>
+            <Gallery
+              photos={photos}
+              photoGroup={photoGroup}
+              setInfos={setInfos}
+            />
+          </Container>
+        </LocomotiveScrollContainer>
+        <WorkFooter
+          infos={infos}
+          photoGroup={photoGroup}
+          setPhotoGroup={setPhotoGroup}
+        />
+      </OverviewProvider>
+    </Container>
   );
 }

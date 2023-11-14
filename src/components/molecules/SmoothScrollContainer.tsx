@@ -5,7 +5,6 @@ import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { useScroll, useSpring, useTransform, motion } from "framer-motion";
 
 import { useWindowSize } from "@/utils/hooks";
-import { useLoadingContext } from "@/context/LoadingContext";
 
 type Props = {
   children: React.ReactNode;
