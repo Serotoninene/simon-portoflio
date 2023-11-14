@@ -17,6 +17,7 @@ import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
 import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollContainer";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { ExtendedPhoto } from "@/types";
+import { useWindowSize } from "@/utils/hooks";
 
 type GalleryProps = {
   photos: ExtendedPhoto[];
@@ -32,9 +33,18 @@ export type PhotoInfo = {
 
 const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
   const { scroll } = useLocomotiveScroll();
+  const { width } = useWindowSize();
   const [photosDisplayed, setPhotosDisplayed] = useState<ExtendedPhoto[]>([]);
   const [photoTarget, setPhotoTarget] = useState("");
   const { isOverview, flipState } = useOverviewContext();
+
+  useEffect(() => {
+    if (width && width < 768) {
+      scroll.update({
+        smooth: false,
+      });
+    }
+  }, [width]);
 
   useEffect(() => {
     if (!photos) return;
