@@ -55,7 +55,7 @@ export const AnimPhoto = ({ alt, src, dominantColor, aspectRatio }: Props) => {
           }}
           data-scroll
           data-scroll-speed="-0.5"
-          className="relative h-full translate-y-10"
+          className="relative h-full"
         >
           <Image
             onLoad={handleLoad}
