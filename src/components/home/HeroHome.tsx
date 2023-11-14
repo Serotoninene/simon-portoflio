@@ -173,7 +173,7 @@ export const HeroHome = () => {
 
   return (
     <>
-      <div className="h-[var(--fullScreen)] z-10 fixed top-0 left-0 right-0 ">
+      <div className="hidden sm:block h-[var(--fullScreen)] z-10 fixed top-0 left-0 right-0 ">
         <Scene />
       </div>
       <div className="h-[var(--fullScreen)] flex flex-col justify-between gap-6 pt-10 pb-10">
@@ -181,7 +181,7 @@ export const HeroHome = () => {
           data-scroll
           data-scroll-speed="0.2"
           id="hero-photo"
-          className="h-full relative opacity-0 cursor-none pointer-events-auto"
+          className="h-full relative opacity-100 cursor-none pointer-events-auto sm:opacity-0"
         >
           <Image
             alt="house in a green field"
