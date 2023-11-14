@@ -41,14 +41,6 @@ const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
   const { isOverview, flipState } = useOverviewContext();
 
   useEffect(() => {
-    if (scroll && width && width < 768) {
-      scroll.update({
-        smooth: false,
-      });
-    }
-  }, [width, scroll]);
-
-  useEffect(() => {
     if (!photos) return;
     const photosDisplayed = photos.filter(
       (photo: ExtendedPhoto) => photo.group === photoGroup
@@ -100,25 +92,31 @@ const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
 
   return (
     <AnimatePresence mode="popLayout">
-      <div
-        id="gallery-container"
-        className={
-          isOverview ? "grid-gallery" : "flex-gallery relative bg-light"
-        }
-      >
-        {photosDisplayed.map((photo: ExtendedPhoto, idx: number) => (
-          <div id={photo.alt} key={photo.alt}>
-            <motion.div
-              key={photoGroup}
-              initial={{ opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ opacity: 0, y: "-150%" }}
-              transition={{ duration: 0.2, delay: 0.5, ease: "easeOut" }}
-            >
-              <Photo idx={idx} photo={photo} setPhotoTarget={setPhotoTarget} />
-            </motion.div>
-          </div>
-        ))}
+      <div className="px-5">
+        <div
+          id="gallery-container"
+          className={
+            isOverview ? "grid-gallery" : "flex-gallery relative bg-light"
+          }
+        >
+          {photosDisplayed.map((photo: ExtendedPhoto, idx: number) => (
+            <div id={photo.alt} key={photo.alt}>
+              <motion.div
+                key={photoGroup}
+                initial={{ opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ opacity: 0, y: "-150%" }}
+                transition={{ duration: 0.2, delay: 0.5, ease: "easeOut" }}
+              >
+                <Photo
+                  idx={idx}
+                  photo={photo}
+                  setPhotoTarget={setPhotoTarget}
+                />
+              </motion.div>
+            </div>
+          ))}
+        </div>
       </div>
     </AnimatePresence>
   );
@@ -148,15 +146,13 @@ export default function Work() {
   return (
     <Container className="pt-0 bg-light relative">
       <OverviewProvider>
-        {/* <LocomotiveScrollContainer> */}
-        <Container>
+        <LocomotiveScrollContainer>
           <Gallery
             photos={photos}
             photoGroup={photoGroup}
             setInfos={setInfos}
           />
-        </Container>
-        {/* </LocomotiveScrollContainer> */}
+        </LocomotiveScrollContainer>
         <WorkFooter
           infos={infos}
           photoGroup={photoGroup}

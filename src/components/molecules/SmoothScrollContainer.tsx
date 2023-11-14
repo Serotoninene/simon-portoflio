@@ -12,6 +12,8 @@ type Props = {
 
 export const LocomotiveScrollContainer = ({ children }: Props) => {
   const path = usePathname();
+  const { width } = useWindowSize();
+  const isMobile = width && width < 768;
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -19,19 +21,13 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
       options={{
         smooth: true,
         inertia: 0.8,
-        mobile: {
-          breakpoint: 0,
-          smooth: true,
-          multiplier: 5,
-          class: "is-reveal",
-        },
-        tablet: {
-          breakpoint: 0,
-          smooth: true,
-          multiplier: 1,
-          class: "is-reveal",
-        },
-        multiplier: 0.75,
+        multiplier: 75,
+      }}
+      mobile={{
+        breakpoint: 768,
+        smooth: false,
+        inertia: 1,
+        multiplier: 1,
       }}
       watch={[path]}
       location={path}
@@ -40,7 +36,7 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
         id="scroll-container"
         data-scroll-container
         ref={containerRef}
-        className="fixed top-0 left-0 bg-light w-full"
+        className={`${!isMobile && "fixed"} top-0 left-0 bg-light w-full`}
       >
         {children}
       </div>
@@ -50,6 +46,7 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
 
 export default function FramerSmoothScroll({ children }: Props) {
   const { width } = useWindowSize();
+
   const scrollContainer = useRef() as RefObject<HTMLDivElement>;
   const [pageHeight, setPageHeight] = useState(0);
 
