@@ -136,7 +136,7 @@ export const WorkFooter = ({
               onClick={handleOverview}
               onMouseEnter={() => setCursorType("hover")}
               onMouseLeave={() => setCursorType("pointer")}
-              className="cursor-pointe ml-8"
+              className="cursor-pointer ml-8 sm:ml-0"
             >
               <SVGButtons />
             </div>
