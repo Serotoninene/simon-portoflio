@@ -31,6 +31,8 @@ export type PhotoInfo = {
   date: string;
 };
 
+gsap.registerPlugin(Flip);
+
 const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
   const { scroll } = useLocomotiveScroll();
   const { width } = useWindowSize();
@@ -39,12 +41,12 @@ const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
   const { isOverview, flipState } = useOverviewContext();
 
   useEffect(() => {
-    if (width && width < 768) {
+    if (scroll && width && width < 768) {
       scroll.update({
         smooth: false,
       });
     }
-  }, [width]);
+  }, [width, scroll]);
 
   useEffect(() => {
     if (!photos) return;
@@ -73,29 +75,30 @@ const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
     // Update the title when the scroll changes
   }, [scroll, photosDisplayed]);
 
-  useEffect(() => {
-    // Flip the photos when we change the photo group
-    gsap.registerPlugin(Flip);
-    const target = document.getElementById(photoTarget);
+  // useEffect(() => {
+  //   // Flip the photos when we change the photo group
+  //   if (width && width < 768) return; // Skip the animation for small screens
 
-    if (!flipState) return;
+  //   const target = document.getElementById(photoTarget);
 
-    scroll.update(); // update the locoscroll so it resizes the container
-    scroll.scrollTo(0, 0, 0); // scroll to the top of the page if we are in the overview
-    Flip.from(flipState, {
-      duration: 1.5,
-      ease: Power4.easeInOut,
-      absolute: true,
-      stagger: {
-        amount: 0.1,
-        from: isOverview ? "start" : "end",
-      },
-      onComplete: () => {
-        if (isOverview) return;
-        scroll.scrollTo(target);
-      },
-    });
-  }, [isOverview, flipState]);
+  //   if (!flipState) return;
+
+  //   scroll.update(); // update the locoscroll so it resizes the container
+  //   scroll.scrollTo(0, 0, 0); // scroll to the top of the page if we are in the overview
+  //   Flip.from(flipState, {
+  //     duration: 1.5,
+  //     ease: Power4.easeInOut,
+  //     absolute: true,
+  //     stagger: {
+  //       amount: 0.1,
+  //       from: isOverview ? "start" : "end",
+  //     },
+  //     onComplete: () => {
+  //       if (isOverview) return;
+  //       scroll.scrollTo(target);
+  //     },
+  //   });
+  // }, [isOverview, flipState, width]);
 
   return (
     <AnimatePresence mode="popLayout">
