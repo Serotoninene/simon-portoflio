@@ -18,9 +18,9 @@ import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollCo
 import { ExtendedPhoto } from "@/types";
 
 import { PhotoInfo } from "@/types";
-import usePhotosDisplayed from "./hooks/usePhotosDisplayed";
-import useUpdateTitle from "./hooks/useUpdateTitle";
-import useFlipAnimation from "./hooks/useFlipAnimation";
+import usePhotosDisplayed from "../utils/hooks/usePhotosDisplayed";
+import useUpdateTitle from "../utils/hooks/useUpdateTitle";
+import useFlipAnimation from "../utils/hooks/useFlipAnimation";
 
 gsap.registerPlugin(Flip);
 
