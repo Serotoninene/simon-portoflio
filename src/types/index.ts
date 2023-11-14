@@ -20,3 +20,9 @@ export type Caption = {
   place?: string;
   date?: string;
 };
+
+export type PhotoInfo = {
+  title: string;
+  place: string;
+  date: string;
+};

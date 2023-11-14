@@ -4,11 +4,8 @@ import { useCursorContext } from "../../../context/CursorContext";
 import { MouseEvent, useState } from "react";
 import { fadeOut, fadeTranslateOut } from "./anims";
 import { SVGButtons } from "../SVGButtons";
-import useUpdateTitle from "@/pages/work/hooks/useUpdateTitle";
-import { PhotoInfo } from "@/pages/work/types/types";
-import usePhotosDisplayed from "@/pages/work/hooks/usePhotosDisplayed";
-import { info } from "console";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
+
+import { PhotoInfo } from "@/types";
 
 const groups = ["summer", "autumn", "winter", "spring"];
 

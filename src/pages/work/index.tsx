@@ -17,7 +17,7 @@ import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
 import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollContainer";
 import { ExtendedPhoto } from "@/types";
 
-import { PhotoInfo } from "./types/types";
+import { PhotoInfo } from "@/types";
 import usePhotosDisplayed from "./hooks/usePhotosDisplayed";
 import useUpdateTitle from "./hooks/useUpdateTitle";
 import useFlipAnimation from "./hooks/useFlipAnimation";

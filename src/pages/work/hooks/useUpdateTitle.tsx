@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
-import { PhotoInfo } from "../types/types";
-import { ExtendedPhoto } from "@/types";
+
+import { ExtendedPhoto, PhotoInfo } from "@/types";
 import { useWindowSize } from "@/utils/hooks";
 
 type Props = {
