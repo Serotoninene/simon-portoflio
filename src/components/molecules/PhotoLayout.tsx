@@ -12,6 +12,7 @@ export const PhotoLayout = ({ photo }: Props) => {
       <AnimPhoto
         src={photo?.src}
         alt={photo?.alt}
+        mobileSrc={photo?.mobileSrc}
         aspectRatio={photo?.aspectRatio!}
         dominantColor={photo.dominantColor}
       />

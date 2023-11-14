@@ -156,7 +156,7 @@ export const Outro = () => {
 
   return (
     <div ref={ref} className="relative h-[75vh] mt-10 sm:mt-40">
-      <div className="absolute z-10 top-0 left-0 w-full h-full flex justify-center items-center">
+      <div className="absolute z-10 top-0 left-0 w-full h-full flex justify-center items-center sm:hidden">
         <Link href="/work" id="OutroCta" className="rounded-full">
           {" "}
           SEE ALL

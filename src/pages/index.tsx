@@ -2,12 +2,11 @@ import {
   HeroHome,
   GridTwo,
   OneWCaption,
-  OneCentered,
   TwoShifted,
   Outro,
   About,
 } from "@/components/home";
-import { OneWoCaption } from "@/components/home/OneWoCaption";
+
 import { Container, LocomotiveScrollContainer } from "@/components/molecules";
 import { Loader } from "@/components/organisms";
 import { Photo } from "@/types";
@@ -20,6 +19,7 @@ import { Photo } from "@/types";
 export const photos: Photo[] = [
   {
     src: "/assets/photos/home/01_MY_GARDEN_IS_COOL.jpeg",
+    mobileSrc: "/assets/photos/summer/01_MY_GARDEN_IS_COOL.jpeg",
     alt: "01_MY_GARDEN_IS_COOL",
     dominantColor: "#282515",
     caption: {
@@ -32,6 +32,7 @@ export const photos: Photo[] = [
   },
   {
     src: "/assets/photos/home/02_MY_HOUSE_IS_A_TRIANGLE.jpeg",
+    mobileSrc: "/assets/photos/autumn/02_MY_HOUSE_IS_A_TRIANGLE.jpeg",
     alt: "02_MY_HOUSE_IS_A_TRIANGLE",
     dominantColor: "#a29c9d",
     caption: {
@@ -44,6 +45,7 @@ export const photos: Photo[] = [
   },
   {
     src: "/assets/photos/home/03_GOOGLE_MAPS-ING.jpeg",
+    mobileSrc: "/assets/photos/autumn/03_GOOGLE_MAPS-ING.jpeg",
     alt: "03_GOOGLE_MAPS-ING",
     dominantColor: "#413722",
     caption: {
@@ -56,6 +58,7 @@ export const photos: Photo[] = [
   },
   {
     src: "/assets/photos/home/72_LA_VIE_ET_SES_PLAISIRS.jpeg",
+    mobileSrc: "/assets/photos/summer/72_LA_VIE_ET_SES_PLAISIRS.jpeg",
     alt: "72_LA_VIE_ET_SES_PLAISIRS",
     dominantColor: "#789aa8",
     caption: {
@@ -68,6 +71,7 @@ export const photos: Photo[] = [
   },
   {
     src: "/assets/photos/home/09_SUPERMARKET.jpeg",
+    mobileSrc: "/assets/photos/summer/09_SUPERMARKET.jpeg",
     alt: "09_SUPERMARKET",
     dominantColor: "#9e382f",
     caption: {
@@ -80,6 +84,7 @@ export const photos: Photo[] = [
   },
   {
     src: "/assets/photos/home/47_LE_PIED_ET_LE_PARASOL.jpeg",
+    mobileSrc: "/assets/photos/summer/47_LE_PIED_ET_LE_PARASOL.jpeg",
     alt: "47_LE_PIED_ET_LE_PARASOL",
     dominantColor: "#decfc0",
     caption: {
@@ -92,6 +97,7 @@ export const photos: Photo[] = [
   },
   {
     src: "/assets/photos/home/48_LA_FILLE_ET_LE_PARAPLUIE.jpeg",
+    mobileSrc: "/assets/photos/winter/48_LA_FILLE_ET_LE_PARAPLUIE.jpeg",
     alt: "48_LA_FILLE_ET_LE_PARAPLUIE",
     dominantColor: "#19261d",
     caption: {
@@ -133,7 +139,6 @@ export const photos: Photo[] = [
     caption: { idx: "10", title: "SQUARED", place: "Hawaï (US)", date: "2020" },
     aspectRatio: 2.1839220462850184,
   },
-  // ======= HERE THE TWO LAST =======
   {
     src: "/assets/photos/winter/30_DIVING_IN_THE_BLUE.jpeg",
     alt: "30_DIVING IN THE BLUE",
@@ -158,8 +163,6 @@ export const photos: Photo[] = [
     },
     aspectRatio: 1.5078125,
   },
-
-  // ======= HERE THE TWO LAST =======
 
   {
     src: "/assets/photos/home/31_LIFE_PERSPECTIVES.jpeg",
@@ -205,6 +208,7 @@ export default function Home() {
         <div className="relative flex flex-col items gap-24 sm:gap-56 pb-6 bg-light">
           <HeroHome />
           <About />
+
           <GridTwo firstPhoto={photos[0]} secondPhoto={photos[1]} />
           <OneWCaption photo={photos[2]}>
             <>

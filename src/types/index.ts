@@ -1,5 +1,6 @@
 export type Photo = {
   src: string;
+  mobileSrc?: string;
   alt: string;
   dominantColor?: string;
   caption?: Caption;

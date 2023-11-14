@@ -5,13 +5,23 @@ import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { useLoadingContext } from "@/context/LoadingContext";
 import { loadingPath } from "./paths";
 import { containerAnim, drawAnimation } from "./anims";
+import { useWindowSize } from "@/utils/hooks";
 
 export const Loader = () => {
   const { scroll } = useLocomotiveScroll();
-  const { isLoaded } = useLoadingContext();
+  const { width } = useWindowSize();
+  const { isLoaded, setIsLoaded } = useLoadingContext();
   const [isExitAnimationComplete, setIsExitAnimationComplete] = useState(false);
 
   !isLoaded && scroll?.stop();
+
+  useEffect(() => {
+    if (width && width < 640) {
+      setTimeout(() => {
+        setIsLoaded(true);
+      }, 2000);
+    }
+  }, [width]);
 
   useEffect(() => {
     if (isLoaded) {
@@ -22,9 +32,6 @@ export const Loader = () => {
   const unMountAfterExitAnim = () => {
     setIsExitAnimationComplete(true);
   };
-
-  // if the exit animation is complete or if the loading has already been done, return null
-  // if (isExitAnimationComplete || isLoaded) return null;
 
   return (
     <AnimatePresence mode="wait">

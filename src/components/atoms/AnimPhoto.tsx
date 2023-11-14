@@ -13,20 +13,21 @@ type Props = {
   src: string;
   aspectRatio: number;
   alt?: string;
+  mobileSrc?: string;
   dominantColor?: string;
 };
 
-export const AnimPhoto = ({ alt, src, dominantColor, aspectRatio }: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
+export const AnimPhoto = ({ alt, src, dominantColor, mobileSrc }: Props) => {
   const path = usePathname();
+  const ref = useRef<HTMLDivElement>(null);
+  const { width } = useWindowSize();
+  const isMobile = width && width < 640;
 
   const [isLoaded, setIsLoaded] = useState(false);
-  // if true the photo is taller than it is wide
-  const portraitAspect = aspectRatio < 1;
 
   const imageProps = {
     alt: alt ?? createAlt(src),
-    src: src ?? "/assets/photos/01_MY_GARDEN_IS_COOL.jpeg",
+    src: isMobile ? mobileSrc : src,
   };
 
   const handleLoad = () => {
@@ -44,9 +45,7 @@ export const AnimPhoto = ({ alt, src, dominantColor, aspectRatio }: Props) => {
       <div
         ref={ref}
         key={path}
-        className={`${
-          portraitAspect ? "h-[80vh]" : "h-[50vh]"
-        } sm:h-full relative overflow-hidden`}
+        className={`h-full flex justify-center items-center relative overflow-hidden sm:h-full sm:block`}
       >
         <motion.div
           exit={{ y: "100%" }}
