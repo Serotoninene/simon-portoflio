@@ -148,15 +148,15 @@ export default function Work() {
   return (
     <Container className="pt-0 bg-light relative">
       <OverviewProvider>
-        <LocomotiveScrollContainer>
-          <Container>
-            <Gallery
-              photos={photos}
-              photoGroup={photoGroup}
-              setInfos={setInfos}
-            />
-          </Container>
-        </LocomotiveScrollContainer>
+        {/* <LocomotiveScrollContainer> */}
+        <Container>
+          <Gallery
+            photos={photos}
+            photoGroup={photoGroup}
+            setInfos={setInfos}
+          />
+        </Container>
+        {/* </LocomotiveScrollContainer> */}
         <WorkFooter
           infos={infos}
           photoGroup={photoGroup}
