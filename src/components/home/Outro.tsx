@@ -15,6 +15,7 @@ import { useWindowSize } from "@/utils/hooks";
 import { useCursorContext } from "../../context/CursorContext";
 import { useRouter } from "next/router";
 import { useLoadingContext } from "@/context/LoadingContext";
+import Link from "next/link";
 
 type Props = {
   footerSize: {
@@ -154,7 +155,13 @@ export const Outro = () => {
   }, [width, height]);
 
   return (
-    <div ref={ref} className="h-[75vh] mt-10 sm:mt-40">
+    <div ref={ref} className="relative h-[75vh] mt-10 sm:mt-40">
+      <div className="absolute z-10 top-0 left-0 w-full h-full flex justify-center items-center">
+        <Link href="/work" id="OutroCta" className="rounded-full">
+          {" "}
+          SEE ALL
+        </Link>
+      </div>
       <CustomCanvas>
         <OutroScene footerSize={footerSize} />
       </CustomCanvas>

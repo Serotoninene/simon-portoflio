@@ -108,7 +108,8 @@ body {
     backdrop-filter;
 }
 
-#CustomCursor.cta {
+#CustomCursor.cta,
+#OutroCta {
   width: 120px;
   height: 120px;
   background-color: rgba(7, 23, 50, 0.2);
@@ -143,6 +144,10 @@ body {
 @media screen and (min-width: 640px) {
   #CustomCursor {
     display: block;
+  }
+
+  #OutroCta {
+    display: none;
   }
 
   .grid-gallery {
