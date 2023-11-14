@@ -11,14 +11,16 @@ import { photos } from "@/data/photos";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { gsap, Power4 } from "gsap";
+import { gsap } from "gsap";
 import { Flip } from "gsap/dist/Flip";
 import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
 import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollContainer";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { ExtendedPhoto } from "@/types";
-import { useWindowSize } from "@/utils/hooks";
+
 import { PhotoInfo } from "./types/types";
+import usePhotosDisplayed from "./hooks/usePhotosDisplayed";
+import useUpdateTitle from "./hooks/useUpdateTitle";
+import useFlipAnimation from "./hooks/useFlipAnimation";
 
 gsap.registerPlugin(Flip);
 
@@ -28,61 +30,13 @@ export type Props = {
   setInfos: (infos: PhotoInfo) => void;
 };
 
-const Gallery = ({ photos, photoGroup, setInfos }: Props) => {
-  const { scroll } = useLocomotiveScroll();
-  const [photosDisplayed, setPhotosDisplayed] = useState<ExtendedPhoto[]>([]);
-  const [photoTarget, setPhotoTarget] = useState("");
-  const { isOverview, flipState } = useOverviewContext();
+const Gallery = ({ photoGroup, setInfos }: Props) => {
+  const { isOverview } = useOverviewContext();
 
-  useEffect(() => {
-    if (!photos) return;
-    const photosDisplayed = photos.filter(
-      (photo: ExtendedPhoto) => photo.group === photoGroup
-    );
-    // go back to the top of the page
-    setPhotosDisplayed(photosDisplayed);
-    scroll?.scrollTo(0, 0, 0);
-  }, [photoGroup]);
+  const photosDisplayed = usePhotosDisplayed({ photoGroup });
+  setInfos(useUpdateTitle({ photosDisplayed }));
 
-  // useEffect(() => {
-  //   // Update the title when the scroll changes
-  //   scroll?.on("scroll", (e: any) => {
-  //     const idx = Math.round(
-  //       (e.scroll.y / e.limit.y) * (photosDisplayed.length - 1)
-  //     );
-
-  //     setInfos?.({
-  //       title: photosDisplayed[idx]?.capitalizedTitle,
-  //       place: photosDisplayed[idx]?.place,
-  //       date: photosDisplayed[idx]?.date,
-  //     });
-  //   });
-
-  //   // Update the title when the scroll changes
-  // }, [scroll, photosDisplayed]);
-
-  useEffect(() => {
-    // Flip the photos when we change the photo group
-    const target = document.getElementById(photoTarget);
-
-    if (!flipState) return;
-
-    scroll.update(); // update the locoscroll so it resizes the container
-    scroll.scrollTo(0, 0, 0); // scroll to the top of the page if we are in the overview
-    Flip.from(flipState, {
-      duration: 1.5,
-      ease: Power4.easeInOut,
-      absolute: true,
-      stagger: {
-        amount: 0.1,
-        from: isOverview ? "start" : "end",
-      },
-      onComplete: () => {
-        if (isOverview) return;
-        scroll.scrollTo(target);
-      },
-    });
-  }, [isOverview, flipState]);
+  const { setPhotoTarget } = useFlipAnimation();
 
   return (
     <AnimatePresence mode="popLayout">

@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { PhotoInfo } from "../types/types";
-import { photos } from "@/data/photos";
 import { ExtendedPhoto } from "@/types";
+import { useWindowSize } from "@/utils/hooks";
 
 type Props = {
-  photoGroup: "summer" | "autumn" | "winter" | "spring";
+  photosDisplayed: ExtendedPhoto[];
 };
 
-const useUpdateTitle = ({ photoGroup }: Props) => {
-  const [photosDisplayed, setPhotosDisplayed] = useState<ExtendedPhoto[]>([]);
+const useUpdateTitle = ({ photosDisplayed }: Props) => {
+  const { width } = useWindowSize();
+  const isMobile = width && width < 640;
+  const { scroll } = useLocomotiveScroll();
 
   const [infos, setInfos] = useState<PhotoInfo>({
     title: "",
@@ -17,35 +19,60 @@ const useUpdateTitle = ({ photoGroup }: Props) => {
     date: "",
   });
 
-  const { scroll } = useLocomotiveScroll();
-
-  useEffect(() => {
-    if (!photos) return;
-    const photosDisplayed = photos.filter(
-      (photo: ExtendedPhoto) => photo.group === photoGroup
+  const handleSmoothScroll = (e: any) => {
+    const idx = Math.round(
+      (e.scroll.y / e.limit.y) * (photosDisplayed.length - 1)
     );
-    // go back to the top of the page
-    setPhotosDisplayed(photosDisplayed);
-    scroll?.scrollTo(0, 0, 0);
-  }, [photoGroup]);
+
+    setInfos?.({
+      title: photosDisplayed[idx]?.capitalizedTitle,
+      place: photosDisplayed[idx]?.place,
+      date: photosDisplayed[idx]?.date,
+    });
+  };
+
+  const handleWindowScroll = () => {
+    const idx = Math.round(
+      (window.scrollY / document.body.scrollHeight) *
+        (photosDisplayed.length - 1)
+    );
+
+    setInfos?.({
+      title: photosDisplayed[idx]?.capitalizedTitle,
+      place: photosDisplayed[idx]?.place,
+      date: photosDisplayed[idx]?.date,
+    });
+  };
 
   useEffect(() => {
-    // Update the title when the scroll changes
-    scroll?.on("scroll", (e: any) => {
-      const idx = Math.round(
-        (e.scroll.y / e.limit.y) * (photosDisplayed.length - 1)
-      );
-
-      setInfos?.({
-        title: photosDisplayed[idx]?.capitalizedTitle,
-        place: photosDisplayed[idx]?.place,
-        date: photosDisplayed[idx]?.date,
-      });
+    setInfos({
+      title: photosDisplayed[0]?.capitalizedTitle,
+      place: photosDisplayed[0]?.place,
+      date: photosDisplayed[0]?.date,
     });
+  }, [photosDisplayed]);
 
-    // Update the title when the scroll changes
-  }, [scroll, photos]);
-  console.log(infos);
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      window.addEventListener("scroll", handleWindowScroll);
+    } else if (scroll) {
+      scroll.on("scroll", handleSmoothScroll);
+    }
+
+    return () => {
+      if (scroll) {
+        scroll.off("scroll", handleSmoothScroll);
+      }
+      window.removeEventListener("scroll", handleWindowScroll);
+    };
+    // Clean up the event listener when the component unmounts or photosDisplayed changes
+    return () => {
+      if (scroll) {
+        scroll.off("scroll", handleSmoothScroll);
+      }
+    };
+  }, [scroll, photosDisplayed]);
+
   return infos;
 };
 

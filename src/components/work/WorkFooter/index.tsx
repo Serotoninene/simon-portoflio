@@ -6,6 +6,9 @@ import { fadeOut, fadeTranslateOut } from "./anims";
 import { SVGButtons } from "../SVGButtons";
 import useUpdateTitle from "@/pages/work/hooks/useUpdateTitle";
 import { PhotoInfo } from "@/pages/work/types/types";
+import usePhotosDisplayed from "@/pages/work/hooks/usePhotosDisplayed";
+import { info } from "console";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 const groups = ["summer", "autumn", "winter", "spring"];
 
@@ -99,10 +102,8 @@ export const WorkFooter = ({
   photoGroup,
   setPhotoGroup,
 }: WorkFooterProps) => {
-  const { isOverview, handleOverviewSwitch } = useOverviewContext();
   const { setCursorType } = useCursorContext();
-
-  useUpdateTitle({ photoGroup });
+  const { isOverview, handleOverviewSwitch } = useOverviewContext();
 
   const handleOverview = (e: MouseEvent) => {
     e.stopPropagation();
