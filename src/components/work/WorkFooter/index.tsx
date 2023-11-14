@@ -4,7 +4,8 @@ import { useCursorContext } from "../../../context/CursorContext";
 import { MouseEvent, useState } from "react";
 import { fadeOut, fadeTranslateOut } from "./anims";
 import { SVGButtons } from "../SVGButtons";
-import { PhotoInfo } from "@/pages/work";
+import useUpdateTitle from "@/pages/work/hooks/useUpdateTitle";
+import { PhotoInfo } from "@/pages/work/types/types";
 
 const groups = ["summer", "autumn", "winter", "spring"];
 
@@ -89,13 +90,19 @@ export const GroupSelector = ({ photoGroup, setPhotoGroup }: any) => {
 
 type WorkFooterProps = {
   infos: PhotoInfo;
-  photoGroup: string;
-  setPhotoGroup: (group: string) => void;
+  photoGroup: "summer" | "autumn" | "winter" | "spring";
+  setPhotoGroup: (group: "summer" | "autumn" | "winter" | "spring") => void;
 };
 
-export const WorkFooter = ({ infos, photoGroup, setPhotoGroup }: any) => {
+export const WorkFooter = ({
+  infos,
+  photoGroup,
+  setPhotoGroup,
+}: WorkFooterProps) => {
   const { isOverview, handleOverviewSwitch } = useOverviewContext();
   const { setCursorType } = useCursorContext();
+
+  useUpdateTitle({ photoGroup });
 
   const handleOverview = (e: MouseEvent) => {
     e.stopPropagation();
@@ -103,7 +110,7 @@ export const WorkFooter = ({ infos, photoGroup, setPhotoGroup }: any) => {
   };
 
   return (
-    <div className="flex items-end relative left-0 top-0 h-0 z-10 px-10 w-full mix-blend-difference">
+    <div className="flex items-end relative left-0 top-0 h-0 z-[1] px-10 w-full mix-blend-difference">
       <AnimatePresence mode="popLayout">
         <div className="fixed bottom-4 left-10 right-10 flex justify-between items-end text-light">
           <motion.div

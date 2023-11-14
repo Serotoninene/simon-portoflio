@@ -18,24 +18,18 @@ import { LocomotiveScrollContainer } from "@/components/molecules/SmoothScrollCo
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { ExtendedPhoto } from "@/types";
 import { useWindowSize } from "@/utils/hooks";
+import { PhotoInfo } from "./types/types";
 
-type GalleryProps = {
+gsap.registerPlugin(Flip);
+
+export type Props = {
   photos: ExtendedPhoto[];
   photoGroup: "summer" | "autumn" | "winter" | "spring";
   setInfos: (infos: PhotoInfo) => void;
 };
 
-export type PhotoInfo = {
-  title: string;
-  place: string;
-  date: string;
-};
-
-gsap.registerPlugin(Flip);
-
-const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
+const Gallery = ({ photos, photoGroup, setInfos }: Props) => {
   const { scroll } = useLocomotiveScroll();
-  const { width } = useWindowSize();
   const [photosDisplayed, setPhotosDisplayed] = useState<ExtendedPhoto[]>([]);
   const [photoTarget, setPhotoTarget] = useState("");
   const { isOverview, flipState } = useOverviewContext();
@@ -50,22 +44,22 @@ const Gallery = ({ photos, photoGroup, setInfos }: GalleryProps) => {
     scroll?.scrollTo(0, 0, 0);
   }, [photoGroup]);
 
-  useEffect(() => {
-    // Update the title when the scroll changes
-    scroll?.on("scroll", (e: any) => {
-      const idx = Math.round(
-        (e.scroll.y / e.limit.y) * (photosDisplayed.length - 1)
-      );
+  // useEffect(() => {
+  //   // Update the title when the scroll changes
+  //   scroll?.on("scroll", (e: any) => {
+  //     const idx = Math.round(
+  //       (e.scroll.y / e.limit.y) * (photosDisplayed.length - 1)
+  //     );
 
-      setInfos?.({
-        title: photosDisplayed[idx]?.capitalizedTitle,
-        place: photosDisplayed[idx]?.place,
-        date: photosDisplayed[idx]?.date,
-      });
-    });
+  //     setInfos?.({
+  //       title: photosDisplayed[idx]?.capitalizedTitle,
+  //       place: photosDisplayed[idx]?.place,
+  //       date: photosDisplayed[idx]?.date,
+  //     });
+  //   });
 
-    // Update the title when the scroll changes
-  }, [scroll, photosDisplayed]);
+  //   // Update the title when the scroll changes
+  // }, [scroll, photosDisplayed]);
 
   useEffect(() => {
     // Flip the photos when we change the photo group

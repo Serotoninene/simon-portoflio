@@ -61,7 +61,7 @@ const BurgerButton = ({ isMenuOpen }: BurgerButtonProps) => {
   };
 
   return (
-    <div>
+    <div className="z-10">
       <motion.div
         custom={1}
         variants={burgerButtonAnim}
@@ -90,7 +90,7 @@ export const Menu = ({ navLinks, isMenuOpen, setIsMenuOpen }: Props) => {
       initial={{ y: "-100%" }}
       animate={{ y: isMenuOpen ? 0 : "-100%" }}
       transition={{ ease: "easeOut" }}
-      className="fixed sm:hidden top-0 left-0 right-0 bottom-0 bg-light"
+      className="fixed sm:hidden top-0 left-0 right-0 bottom-0 bg-light z-30"
     >
       <Container className="py-10 flex flex-col justify-between h-full">
         <div
