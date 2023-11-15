@@ -29,6 +29,7 @@ const useFlipAnimation = () => {
       },
       onComplete: () => {
         if (isOverview) return;
+        scroll.update(); // update the locoscroll so it resizes the container
         scroll.scrollTo(target);
       },
     });
