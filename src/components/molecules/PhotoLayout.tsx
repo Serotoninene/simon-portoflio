@@ -8,7 +8,7 @@ type Props = {
 
 export const PhotoLayout = ({ photo }: Props) => {
   return (
-    <div className="flex flex-col justify-center h-[100dvh] sm:h-full gap-4">
+    <div className="flex flex-col justify-center h-[100vh] sm:h-full gap-4">
       <AnimPhoto
         src={photo?.src}
         alt={photo?.alt}

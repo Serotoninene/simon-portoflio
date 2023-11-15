@@ -40,7 +40,7 @@ export const AnimPhoto = ({ alt, src, dominantColor, mobileSrc }: Props) => {
       <div
         ref={ref}
         key={path}
-        className={`h-[50dvh] flex justify-center items-center relative overflow-hidden sm:h-full sm:block`}
+        className={`h-[50vh] flex justify-center items-center relative overflow-hidden sm:h-full sm:block`}
       >
         <motion.div
           exit={{ y: "100%" }}
@@ -55,7 +55,7 @@ export const AnimPhoto = ({ alt, src, dominantColor, mobileSrc }: Props) => {
             onLoad={handleLoad}
             fill
             alt={alt ?? createAlt(src)}
-            src={src}
+            src={isMobile ? mobileSrc || src : src}
             className={`transition-opacity h-full w-full duration-1000 scale-105 object-cover ${
               isLoaded ? "opacity-100" : "opacity-0"
             }`}
