@@ -55,7 +55,7 @@ export const AnimPhoto = ({ alt, src, dominantColor, mobileSrc }: Props) => {
             onLoad={handleLoad}
             fill
             alt={alt ?? createAlt(src)}
-            src={isMobile ? mobileSrc || src : src}
+            src={src}
             className={`transition-opacity h-full w-full duration-1000 scale-105 object-cover ${
               isLoaded ? "opacity-100" : "opacity-0"
             }`}
