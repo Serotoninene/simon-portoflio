@@ -1,10 +1,11 @@
-import React, { RefObject, use, useEffect, useRef, useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { useScroll, useSpring, useTransform, motion } from "framer-motion";
 
 import { useWindowSize } from "@/hooks";
+import useIsMobile from "@/hooks/useIsMobile";
 
 type Props = {
   children: React.ReactNode;
@@ -12,8 +13,7 @@ type Props = {
 
 export const LocomotiveScrollContainer = ({ children }: Props) => {
   const path = usePathname();
-  const { width } = useWindowSize();
-  const isMobile = width && width < 768;
+  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -22,15 +22,18 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
         smooth: true,
         inertia: 0.8,
         multiplier: 0.75,
+        mobile: {
+          breakpoint: 640,
+          smooth: false,
+          multiplier: 5,
+        },
+        tablet: {
+          breakpoint: 641,
+          smooth: true,
+          inertia: 0.8,
+          multiplier: 0.75,
+        },
       }}
-      mobile={{
-        breakpoint: 768,
-        smooth: path.includes("work") ? false : true,
-        inertia: 1,
-        multiplier: 1,
-      }}
-      watch={[path]}
-      location={path}
     >
       <div
         id="scroll-container"

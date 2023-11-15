@@ -6,16 +6,17 @@ import { useLoadingContext } from "@/context/LoadingContext";
 import { loadingPath } from "./paths";
 import { containerAnim, drawAnimation } from "./anims";
 import { useWindowSize } from "@/hooks";
+import useIsMobile from "@/hooks/useIsMobile";
 
 export const Loader = () => {
   const { scroll } = useLocomotiveScroll();
-  const { width } = useWindowSize();
+  const isMobile = useIsMobile();
   const { isLoaded, setIsLoaded } = useLoadingContext();
   const [isExitAnimationComplete, setIsExitAnimationComplete] = useState(false);
 
   !isLoaded && scroll?.stop();
 
-  if (width && width < 640) {
+  if (isMobile) {
     setTimeout(() => {
       setIsLoaded(true);
     }, 2000);
