@@ -44,7 +44,9 @@ const HeroPhoto = () => {
     THREE.TextureLoader,
     ["/assets/photos/home/00_ACCUEIL.jpeg", "/assets/disp/disp1.jpg"],
     () => {
-      setLoadedRatio((prev) => prev + 0.5);
+      setTimeout(() => {
+        setLoadedRatio((prev) => prev + 0.5);
+      }, 2000);
     }
   );
 
