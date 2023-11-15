@@ -34,6 +34,8 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
           multiplier: 0.75,
         },
       }}
+      watch={[path]}
+      containerRef={containerRef}
     >
       <div
         id="scroll-container"

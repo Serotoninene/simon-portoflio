@@ -32,7 +32,7 @@ const HeroPhoto = () => {
     []
   );
 
-  const { isLoaded, setIsLoaded } = useLoadingContext();
+  const { isLoaded, setLoadedRatio } = useLoadingContext();
   const introTl = useRef<GSAPTimeline | null>(null);
   const { height, width } = useWindowSize();
   const meshRef = useRef<any>();
@@ -44,10 +44,7 @@ const HeroPhoto = () => {
     THREE.TextureLoader,
     ["/assets/photos/home/00_ACCUEIL.jpeg", "/assets/disp/disp1.jpg"],
     () => {
-      // init the animation of the page when texure is loaded after 1 second
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 2000);
+      setLoadedRatio((prev) => prev + 0.5);
     }
   );
 

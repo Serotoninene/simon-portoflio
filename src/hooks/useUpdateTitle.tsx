@@ -9,8 +9,6 @@ type Props = {
 };
 
 const useUpdateTitle = ({ photosDisplayed }: Props) => {
-  const { width } = useWindowSize();
-  const isMobile = width && width < 640;
   const { scroll } = useLocomotiveScroll();
 
   const [infos, setInfos] = useState<PhotoInfo>({

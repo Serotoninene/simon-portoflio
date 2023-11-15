@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { createAlt, getAspectRatio } from "@/utils/helpers";
+import { createAlt } from "@/utils/helpers";
 import { usePathname } from "next/navigation";
 import { useWindowSize } from "@/hooks";
 

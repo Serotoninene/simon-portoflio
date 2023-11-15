@@ -1,11 +1,17 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 export const LoadingContext = createContext<{
   isLoaded: boolean;
-  setIsLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoadedRatio: React.Dispatch<React.SetStateAction<number>>;
 }>({
   isLoaded: false,
-  setIsLoaded: () => {},
+  setLoadedRatio: () => {},
 });
 
 export const LoadingProvider = ({
@@ -13,12 +19,17 @@ export const LoadingProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const [loadedRatio, setLoadedRatio] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (loadedRatio === 1) setIsLoaded(true);
+  }, [loadedRatio]);
 
   const value = useMemo(
     () => ({
       isLoaded,
-      setIsLoaded,
+      setLoadedRatio,
     }),
     [isLoaded]
   );

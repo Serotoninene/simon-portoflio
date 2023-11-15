@@ -11,14 +11,14 @@ import useIsMobile from "@/hooks/useIsMobile";
 export const Loader = () => {
   const { scroll } = useLocomotiveScroll();
   const isMobile = useIsMobile();
-  const { isLoaded, setIsLoaded } = useLoadingContext();
+  const { isLoaded, setLoadedRatio } = useLoadingContext();
   const [isExitAnimationComplete, setIsExitAnimationComplete] = useState(false);
 
   !isLoaded && scroll?.stop();
 
   if (isMobile) {
     setTimeout(() => {
-      setIsLoaded(true);
+      setLoadedRatio(1);
     }, 2000);
   }
 

@@ -31,6 +31,7 @@ const OutroScene = ({ footerSize }: Props) => {
   const touchTexture = useMemo<any>(() => new TouchTexture(false, 128, 60), []);
 
   const { setCursorType } = useCursorContext();
+  const { setLoadedRatio } = useLoadingContext();
 
   const [hovered, setHovered] = useState(false);
 
@@ -38,14 +39,9 @@ const OutroScene = ({ footerSize }: Props) => {
     touchTexture.addTouch(e);
   };
 
-  const texture = useTexture(
-    "/assets/photos/spring/26_REST_AREA.jpeg"
-    // "/assets/photos/summer/84_PLANET.jpeg"
-    // "/assets/photos/spring/23_GOING_OUT_FOR_DINNER.jpeg"
-    // "/assets/photos/autumn/64_WHAT'S_UP.jpeg"
-    // "/assets/photos/summer/106_RUNNING_TRACK.jpeg"
-    // "/assets/photos/summer/104_FAITH.jpeg"
-  );
+  const texture = useTexture("/assets/photos/spring/26_REST_AREA.jpeg", () => {
+    setLoadedRatio((prev) => prev + 0.5);
+  });
 
   const uniforms = useMemo(
     () => ({

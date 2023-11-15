@@ -62,7 +62,7 @@ export const Photo = ({ idx, photo, setPhotoTarget }: Props) => {
     <div
       ref={ref}
       data-flip-id={photo.alt}
-      className="gallery-photo h-[calc(100vh-32px)] my-4 relative "
+      className="gallery-photo  h-[calc(100vh)] sm:h-[calc(100vh-32px)] my-4 relative "
     >
       <LazyPhoto
         priority={idx < 9}
