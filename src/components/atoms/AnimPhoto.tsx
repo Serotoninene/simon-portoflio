@@ -55,7 +55,7 @@ export const AnimPhoto = ({ alt, src, dominantColor, mobileSrc }: Props) => {
             ease: "easeOut",
           }}
           data-scroll
-          data-scroll-speed="-0.5"
+          // data-scroll-speed="-0.5"
           className="relative h-full w-full translate-y-0"
         >
           <Image
