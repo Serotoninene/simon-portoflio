@@ -6,7 +6,7 @@ import Head from "next/head";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { useWindowSize } from "@/utils/hooks";
+import { useWindowSize } from "@/hooks";
 import CustomCursor from "./CustomCursor";
 import { LoadingProvider } from "@/context/LoadingContext";
 

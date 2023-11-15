@@ -8,7 +8,7 @@ import { Power4, gsap } from "gsap";
 import { motion } from "framer-motion";
 
 import { ease } from "@/utils/store";
-import { useWindowSize } from "@/utils/hooks";
+import { useWindowSize } from "@/hooks";
 
 import AnimatedLetters from "../atoms/AnimLetters";
 import { useLoadingContext } from "@/context/LoadingContext";

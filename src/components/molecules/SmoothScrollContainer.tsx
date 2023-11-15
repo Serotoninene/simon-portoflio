@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { useScroll, useSpring, useTransform, motion } from "framer-motion";
 
-import { useWindowSize } from "@/utils/hooks";
+import { useWindowSize } from "@/hooks";
 
 type Props = {
   children: React.ReactNode;

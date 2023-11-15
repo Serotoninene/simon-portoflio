@@ -5,7 +5,7 @@ import { useLocomotiveScroll } from "react-locomotive-scroll";
 import { useLoadingContext } from "@/context/LoadingContext";
 import { loadingPath } from "./paths";
 import { containerAnim, drawAnimation } from "./anims";
-import { useWindowSize } from "@/utils/hooks";
+import { useWindowSize } from "@/hooks";
 
 export const Loader = () => {
   const { scroll } = useLocomotiveScroll();
@@ -15,13 +15,11 @@ export const Loader = () => {
 
   !isLoaded && scroll?.stop();
 
-  useEffect(() => {
-    if (width && width < 640) {
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 2000);
-    }
-  }, [width]);
+  if (width && width < 640) {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 2000);
+  }
 
   useEffect(() => {
     if (isLoaded) {

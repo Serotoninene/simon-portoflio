@@ -10,7 +10,7 @@ import TouchTexture from "../three/TouchTexture";
 import vertexShader from "@shaders/HomeFooterShader/vertex.glsl";
 import fragmentShader from "@shaders/HomeFooterShader/fragment.glsl";
 
-import { useWindowSize } from "@/utils/hooks";
+import { useWindowSize } from "@/hooks";
 
 import { useCursorContext } from "../../context/CursorContext";
 import { useRouter } from "next/router";

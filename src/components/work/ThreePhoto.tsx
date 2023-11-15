@@ -1,4 +1,4 @@
-import { useWindowSize } from "@/utils/hooks";
+import { useWindowSize } from "@/hooks";
 
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";

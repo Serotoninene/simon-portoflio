@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { createAlt, getAspectRatio } from "@/utils/helpers";
 import { usePathname } from "next/navigation";
-import { useWindowSize } from "@/utils/hooks";
+import { useWindowSize } from "@/hooks";
 
 type Props = {
   src: string;
@@ -25,11 +25,6 @@ export const AnimPhoto = ({ alt, src, dominantColor, mobileSrc }: Props) => {
 
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const imageProps = {
-    alt: alt ?? createAlt(src),
-    src: isMobile ? mobileSrc : src,
-  };
-
   const handleLoad = () => {
     setIsLoaded(true);
   };
@@ -45,7 +40,7 @@ export const AnimPhoto = ({ alt, src, dominantColor, mobileSrc }: Props) => {
       <div
         ref={ref}
         key={path}
-        className={`h-full flex justify-center items-center relative overflow-hidden sm:h-full sm:block`}
+        className={`h-[50dvh] flex justify-center items-center relative overflow-hidden sm:h-full sm:block`}
       >
         <motion.div
           exit={{ y: "100%" }}
@@ -54,13 +49,14 @@ export const AnimPhoto = ({ alt, src, dominantColor, mobileSrc }: Props) => {
           }}
           data-scroll
           data-scroll-speed="-0.5"
-          className="relative h-full"
+          className="relative h-full w-full"
         >
           <Image
             onLoad={handleLoad}
             fill
-            {...imageProps}
-            className={`transition-opacity duration-1000 scale-105 object-cover ${
+            alt={alt ?? createAlt(src)}
+            src={isMobile ? mobileSrc || src : src}
+            className={`transition-opacity h-full w-full duration-1000 scale-105 object-cover ${
               isLoaded ? "opacity-100" : "opacity-0"
             }`}
           />

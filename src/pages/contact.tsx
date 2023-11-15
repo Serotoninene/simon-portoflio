@@ -8,7 +8,7 @@ import { AnimatedLetters } from "@/components/atoms";
 import { Container } from "@/components/molecules";
 import { useCursorContext } from "@/context/CursorContext";
 import simonPortrait from "@public/assets/photos/000_BIO.jpeg";
-import { useMediaQuery } from "@/utils/hooks";
+import { useMediaQuery } from "@/hooks";
 
 export default function Contact() {
   const isMobile = useMediaQuery(640);
