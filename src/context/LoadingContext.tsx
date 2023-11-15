@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 
 export const LoadingContext = createContext<{
   isLoaded: boolean;
@@ -19,12 +20,21 @@ export const LoadingProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const { scroll } = useLocomotiveScroll();
   const [loadedRatio, setLoadedRatio] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (loadedRatio === 1) setIsLoaded(true);
   }, [loadedRatio]);
+
+  useEffect(() => {
+    if (!scroll) return;
+
+    // Scroll to the bottom of the page
+    scroll.scrollTo("#IndexOutro");
+    scroll.scrollTo(0);
+  }, [scroll]);
 
   const value = useMemo(
     () => ({

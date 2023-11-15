@@ -3,7 +3,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  MotionValue,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 
 import { createAlt } from "@/utils/helpers";
 import { usePathname } from "next/navigation";
@@ -21,6 +27,7 @@ export const AnimPhoto = ({ alt, src, dominantColor, mobileSrc }: Props) => {
   const path = usePathname();
   const ref = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
+
   const isMobile = width && width < 640;
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -49,14 +56,14 @@ export const AnimPhoto = ({ alt, src, dominantColor, mobileSrc }: Props) => {
           }}
           data-scroll
           data-scroll-speed="-0.5"
-          className="relative h-full w-full"
+          className="relative h-full w-full translate-y-0"
         >
           <Image
             onLoad={handleLoad}
             fill
             alt={alt ?? createAlt(src)}
             src={isMobile ? mobileSrc || src : src}
-            className={`transition-opacity h-full w-full duration-1000 scale-105 object-cover ${
+            className={`transition-opacity h-full w-full duration-1000 scale-110 object-cover sm:translate-y-4 ${
               isLoaded ? "opacity-100" : "opacity-0"
             }`}
           />

@@ -21,11 +21,10 @@ export const LocomotiveScrollContainer = ({ children }: Props) => {
       options={{
         smooth: true,
         inertia: 0.8,
-        multiplier: 0.75,
+        multiplier: 0.5,
         mobile: {
           breakpoint: 640,
           smooth: false,
-          multiplier: 5,
         },
         tablet: {
           breakpoint: 641,

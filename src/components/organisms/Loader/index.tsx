@@ -14,7 +14,7 @@ export const Loader = () => {
   const { isLoaded, setLoadedRatio } = useLoadingContext();
   const [isExitAnimationComplete, setIsExitAnimationComplete] = useState(false);
 
-  !isLoaded && scroll?.stop();
+  // !isLoaded && scroll?.stop();
 
   if (isMobile) {
     setTimeout(() => {
