@@ -108,14 +108,15 @@ export const photos: Photo[] = [
     },
     aspectRatio: 1.507991660875608,
   },
+
   {
-    src: "/assets/photos/home/42_TIME_TO_DRY.jpeg",
-    alt: "42_TIME_TO_DRY",
-    dominantColor: "",
+    src: "/assets/photos/summer/44_LEMONADE.jpeg",
+    alt: "4_LEMONADE",
+    dominantColor: "#d2ac55",
     caption: {
       idx: "8",
-      title: "TIME TO DRY",
-      place: "Saint-Tropez (FR)",
+      title: "LEMONADE",
+      place: "Amsterdam (NL)",
       date: "2022",
     },
     aspectRatio: 1.5005707762557077,
@@ -219,6 +220,12 @@ export default function Home() {
           </OneWCaption>
           <TwoShifted firstPhoto={photos[3]} secondPhoto={photos[4]} />
           <TwoShifted firstPhoto={photos[6]} secondPhoto={photos[5]} inverted />
+          <OneWCaption photo={photos[7]}>
+            <>
+              <span className="font-bold">The couch</span> waits all day for you{" "}
+              <span className="font-bold">to come home</span>.
+            </>
+          </OneWCaption>
         </div>
       </Container>
       <Outro />

@@ -55,7 +55,7 @@ export default function Contact() {
             fill
           />
         </motion.div>
-        <div className="flex justify-center items-center sm:col-span-2">
+        <div className="relative flex justify-center items-center sm:col-span-2">
           <ul className="w-full font-normal px-4 sm:w-auto">
             {contactInfo.map((item, idx) => (
               <li
@@ -77,6 +77,20 @@ export default function Contact() {
               </li>
             ))}
           </ul>
+          <div className="absolute bottom-0 left-0 text-xs italic">
+            Made by{" "}
+            <a
+              href="https://alexandrepujol.com/"
+              onMouseOver={() => {
+                setCursorType("hover");
+              }}
+              onMouseLeave={() => {
+                setCursorType("pointer");
+              }}
+            >
+              <span className="font-bold not-italic">@Alexandre Pujol</span>
+            </a>
+          </div>
         </div>
       </div>
     </Container>

@@ -42,7 +42,7 @@ const linkAnim = {
 
 const navLinks = [
   { href: "/", title: "home" },
-  { href: "/work", title: "work" },
+  { href: "/work", title: "gallery" },
   { href: "/contact", title: "contact" },
 ];
 

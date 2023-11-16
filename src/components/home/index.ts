@@ -3,6 +3,7 @@ export * from "./About";
 export * from "./GridTwo";
 export * from "./GridThree";
 export * from "./OneWCaption";
+export * from "./OneWoCaption";
 export * from "./OneCentered";
 export * from "./TwoShifted";
 export * from "./ThreeAlined";
