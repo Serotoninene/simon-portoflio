@@ -77,7 +77,7 @@ export default function Contact() {
               </li>
             ))}
           </ul>
-          <div className="absolute bottom-0 left-0 text-xs italic">
+          <div className="hidden sm:block absolute bottom-0 left-0 text-xs">
             Made by{" "}
             <a
               href="https://alexandrepujol.com/"
@@ -88,7 +88,7 @@ export default function Contact() {
                 setCursorType("pointer");
               }}
             >
-              <span className="font-bold not-italic">@Alexandre Pujol</span>
+              <span className="font-bold">@Alexandre Pujol</span>
             </a>
           </div>
         </div>

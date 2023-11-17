@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import { Linear, Power0, gsap } from "gsap";
+import { Linear, Power0, Power3, gsap } from "gsap";
 
 import * as THREE from "three";
 import { CustomCanvas } from "../three";
@@ -135,9 +135,29 @@ const OutroScene = ({ footerSize }: Props) => {
   );
 };
 
+type ArrowProps = {
+  size?: number;
+};
+
+const ArrowRight = ({ size = 24 }: ArrowProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height={size}
+      width={size}
+      fill="#FFFEF8"
+      viewBox="0 0 24 24"
+    >
+      <path d="M11.293 4.707 17.586 11H4v2h13.586l-6.293 6.293 1.414 1.414L21.414 12l-8.707-8.707-1.414 1.414z" />
+    </svg>
+  );
+};
+
 export const Outro = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { isLoaded } = useLoadingContext();
+  const arrowRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
+
   const { width, height } = useWindowSize();
   const [footerSize, setFooterSize] = useState({
     width: 0,
@@ -150,14 +170,63 @@ export const Outro = () => {
     setFooterSize({ width, height });
   }, [width, height]);
 
+  const handleMouseEnter = () => {
+    gsap.to(arrowRef.current, {
+      xPercent: 100,
+      ease: Power3.easeIn,
+    });
+
+    gsap.to(galleryRef.current, {
+      xPercent: -2,
+      ease: Power3.easeIn,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(arrowRef.current, {
+      xPercent: 0,
+      ease: Power3.easeOut,
+    });
+    gsap.to(galleryRef.current, {
+      xPercent: 0,
+      ease: Power3.easeOut,
+    });
+  };
+
   return (
-    <div ref={ref} id="IndexOutro" className="relative h-[75vh] mt-10 sm:mt-40">
-      <div className="absolute z-10 top-0 left-0 w-full h-full flex justify-center items-center sm:hidden">
-        <Link href="/work" id="OutroCta" className="rounded-full">
-          {" "}
-          SEE ALL
-        </Link>
+    <div
+      ref={ref}
+      id="IndexOutro"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="relative h-[75vh] mt-10 sm:mt-40"
+    >
+      <div className="absolute z-10 top-0 left-0 w-full h-full flex justify-center items-center sm:justify-end sm:items-end  pointer-events-none ">
+        <div className="sm:hidden">
+          <Link href="/work" id="OutroCta" className="rounded-full">
+            SEE ALL
+          </Link>
+        </div>
+        <div className="hidden sm:flex items-center mt-10">
+          <div className="relative overflow-hidden">
+            <div ref={arrowRef}>
+              <div className="absolute right-full">
+                <ArrowRight size={96} />
+              </div>
+              <ArrowRight size={96} />
+            </div>
+          </div>
+          <div ref={galleryRef}>
+            <Link
+              href="/work"
+              className="rounded-full ml-8 lg:ml-12 text-light font-medium lg:text-8xl"
+            >
+              GALLERY
+            </Link>
+          </div>
+        </div>
       </div>
+
       <CustomCanvas>
         <OutroScene footerSize={footerSize} />
       </CustomCanvas>
