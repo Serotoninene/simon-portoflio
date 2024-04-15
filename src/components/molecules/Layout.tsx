@@ -51,6 +51,10 @@ export default function Layout({ children }: Props) {
           name="description"
           content="Simon Eychenne,photographer portfolio"
         />
+        <meta
+          name="google-site-verification"
+          content="Ve9FBLb0RALbz5JPjrEWjYLnPbwVI7qZPvsOOvJbSd8"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
